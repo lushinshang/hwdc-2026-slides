@@ -1,0 +1,1381 @@
+{
+  "event": "Hello World Dev Conference 2026",
+  "total_sessions": 55,
+  "pdf_sessions": 43,
+  "external_sessions": 12,
+  "sessions": [
+    {
+      "index": 1,
+      "id": "5031",
+      "date": "2026-10-14",
+      "start_time": "10:10",
+      "end_time": "12:10",
+      "classroom": "607+608 會議室",
+      "title": "AI 驅動架構實戰：Structurizr × OpenCode",
+      "speaker_display": "郭孟坤 (Mansun Kuo)",
+      "company_display": "外商 Staff Solution Architect",
+      "speakers": [
+        {
+          "name": "郭孟坤 (Mansun Kuo)",
+          "photo": "https://ccmsassets.ithome.com.tw/2024/3/28/11e4ef25-c78a-465d-b24c-a4f9fab0b93f.jpg",
+          "company": "外商 Staff Solution Architect"
+        }
+      ],
+      "cover_url": "https://s.itho.me/ccms_slides/2026/10/19/3da04f7d-007b-4337-9817-cce532fa5d0e.jpg",
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2630/click?l=https%3A%2F%2Fs.itho.me%2Fccms_slides%2F2026%2F10%2F19%2F4b445759-e1a4-4cb8-8b5b-f6c2321003e1.pdf",
+      "is_pdf": true,
+      "local_filename": "20261014_1010_郭孟坤 (Mansun Kuo)_AI 驅動架構實戰：Structurizr × OpenCode.pdf",
+      "local_path": "slides/20261014_1010_郭孟坤 (Mansun Kuo)_AI 驅動架構實戰：Structurizr × OpenCode.pdf",
+      "filesize_str": "2.74 MB",
+      "filesize_bytes": 2874675
+    },
+    {
+      "index": 2,
+      "id": "4958",
+      "date": "2026-10-14",
+      "start_time": "10:10",
+      "end_time": "10:55",
+      "classroom": "ABCDEF 會議室",
+      "title": "以一些範例來討論AI Coding新時代的團隊開發",
+      "speaker_display": "陳宜昌 (YC Chen)",
+      "company_display": "Noopher AI CEO and Founder",
+      "speakers": [
+        {
+          "name": "陳宜昌 (YC Chen)",
+          "photo": "https://ccmsassets.ithome.com.tw/2026/8/12/283e26f1-95a1-4467-a57b-7b65fb7a692e.png",
+          "company": "Noopher AI CEO and Founder"
+        }
+      ],
+      "cover_url": "https://s.itho.me/ccms_slides/2026/10/22/fee39cc6-ebfe-4dc7-ba8c-317f2aab923d.jpg",
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2524/click?l=https%3A%2F%2Fs.itho.me%2Fccms_slides%2F2026%2F10%2F22%2F2642d5ac-1e97-43b9-898c-e54b7c353fa1.pdf",
+      "is_pdf": true,
+      "local_filename": "20261014_1010_陳宜昌 (YC Chen)_以一些範例來討論AI Coding新時代的團隊開發.pdf",
+      "local_path": "slides/20261014_1010_陳宜昌 (YC Chen)_以一些範例來討論AI Coding新時代的團隊開發.pdf",
+      "filesize_str": "2.91 MB",
+      "filesize_bytes": 3051578
+    },
+    {
+      "index": 3,
+      "id": "4989",
+      "date": "2026-10-14",
+      "start_time": "10:10",
+      "end_time": "12:10",
+      "classroom": "603+604 會議室",
+      "title": "為 Agentic AI 設計前端狀態機與即時回饋介面",
+      "speaker_display": "何剛 (Michael Ho)、Sunny Wu",
+      "company_display": "鈦創軟體資訊有限公司 full stack engineer；Senior Full-Stack Engineer",
+      "speakers": [
+        {
+          "name": "何剛 (Michael Ho)",
+          "photo": "https://ccmsassets.ithome.com.tw/2026/4/21/07be9dca-a949-426d-b217-db82b9729c2a.jpg",
+          "company": "鈦創軟體資訊有限公司 full stack engineer"
+        },
+        {
+          "name": "Sunny Wu",
+          "photo": "https://ccmsassets.ithome.com.tw/2026/4/28/ff31773b-5034-4e96-99c3-1d58750db52e.jpg",
+          "company": "Senior Full-Stack Engineer"
+        }
+      ],
+      "cover_url": null,
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2638/click?l=https%3A%2F%2Fdocs.google.com%2Fpresentation%2Fd%2F1BsRICqoyCiwbfOTRPqnYhtRjAvrxhwq2brUSkMWq6x0%2Fpreview%3Fslide%3Did.p3",
+      "is_pdf": false,
+      "local_filename": null,
+      "local_path": null,
+      "filesize_str": "外部連結"
+    },
+    {
+      "index": 4,
+      "id": "4962",
+      "date": "2026-10-14",
+      "start_time": "11:15",
+      "end_time": "12:00",
+      "classroom": "DE 會議室",
+      "title": "AI 工具爆發時代的企業身分認證治理實戰",
+      "speaker_display": "吳柏毅 (appleboy)",
+      "company_display": "Mediatek 工程師",
+      "speakers": [
+        {
+          "name": "吳柏毅 (appleboy)",
+          "photo": "https://ccmsassets.ithome.com.tw/2026/4/29/664f7ab7-4f00-4af3-8f4c-751379da4171.jpg",
+          "company": "Mediatek 工程師"
+        }
+      ],
+      "cover_url": null,
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2656/click?l=https%3A%2F%2Fblog.wu-boy.com%2F2026%2F10%2Fai-identity-auth-governance-zh-tw%2F",
+      "is_pdf": false,
+      "local_filename": null,
+      "local_path": null,
+      "filesize_str": "外部連結"
+    },
+    {
+      "index": 5,
+      "id": "5014",
+      "date": "2026-10-14",
+      "start_time": "11:15",
+      "end_time": "12:00",
+      "classroom": "A 會議室",
+      "title": "產出的人不能驗自己：AI 時代的驗收設計",
+      "speaker_display": "楊騏 (Ci)",
+      "company_display": "WaCare 數位健康 Tech Lead",
+      "speakers": [
+        {
+          "name": "楊騏 (Ci)",
+          "photo": "https://ccmsassets.ithome.com.tw/2026/4/20/be88e035-d7d6-4e5e-94cb-2ab7350031bb.jpg",
+          "company": "WaCare 數位健康 Tech Lead"
+        }
+      ],
+      "cover_url": "https://s.itho.me/ccms_slides/2026/10/19/7a95a291-53a8-4187-9b09-dcc3e7c7869f.jpg",
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2598/click?l=https%3A%2F%2Fs.itho.me%2Fccms_slides%2F2026%2F10%2F19%2Fc7b8607f-d08e-4e0f-89ce-f7e14d8dabb0.pdf",
+      "is_pdf": true,
+      "local_filename": "20261014_1115_楊騏 (Ci)_產出的人不能驗自己：AI 時代的驗收設計.pdf",
+      "local_path": "slides/20261014_1115_楊騏 (Ci)_產出的人不能驗自己：AI 時代的驗收設計.pdf",
+      "filesize_str": "6.24 MB",
+      "filesize_bytes": 6538291
+    },
+    {
+      "index": 6,
+      "id": "5012",
+      "date": "2026-10-14",
+      "start_time": "11:15",
+      "end_time": "12:00",
+      "classroom": "F 會議室",
+      "title": "當網站客群不再是人類：WebMCP 的前端新革命",
+      "speaker_display": "黃銘 (Mike Huang)",
+      "company_display": "Angular Taiwan 打雜義工",
+      "speakers": [
+        {
+          "name": "黃銘 (Mike Huang)",
+          "photo": "https://ccmsassets.ithome.com.tw/2025/7/29/da8d03d1-5cd3-4198-bd58-580243547c86.jpg",
+          "company": "Angular Taiwan 打雜義工"
+        }
+      ],
+      "cover_url": "https://s.itho.me/ccms_slides/2026/10/27/bec2e86d-562c-4c60-a855-2d9a97a18ba3.jpg",
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2655/click?l=https%3A%2F%2Fs.itho.me%2Fccms_slides%2F2026%2F10%2F27%2Fc7c490f0-dc2d-41e0-a40e-e9d3bb94f0b5.pdf",
+      "is_pdf": true,
+      "local_filename": "20261014_1115_黃銘 (Mike Huang)_當網站客群不再是人類：WebMCP 的前端新革命.pdf",
+      "local_path": "slides/20261014_1115_黃銘 (Mike Huang)_當網站客群不再是人類：WebMCP 的前端新革命.pdf",
+      "filesize_str": "10.91 MB",
+      "filesize_bytes": 11443082
+    },
+    {
+      "index": 7,
+      "id": "5002",
+      "date": "2026-10-14",
+      "start_time": "11:15",
+      "end_time": "12:00",
+      "classroom": "BC 會議室",
+      "title": "自己刻 Agent 框架：最難的不是呼叫 LLM",
+      "speaker_display": "Jamis Liao",
+      "company_display": "街口支付 (JKOPay) 平台工程師",
+      "speakers": [
+        {
+          "name": "Jamis Liao",
+          "photo": "https://ccmsassets.ithome.com.tw/2026/8/12/e971e32b-bc4a-4432-89c1-cd341e4b3337.png",
+          "company": "街口支付 (JKOPay) 平台工程師"
+        }
+      ],
+      "cover_url": "https://s.itho.me/ccms_slides/2026/10/19/3f07d735-ce1d-44c0-8754-c89f8007dd4b.jpg",
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2609/click?l=https%3A%2F%2Fs.itho.me%2Fccms_slides%2F2026%2F10%2F19%2F341985ff-a7d4-4580-8215-65735054c34c.pdf",
+      "is_pdf": true,
+      "local_filename": "20261014_1115_Jamis Liao_自己刻 Agent 框架：最難的不是呼叫 LLM.pdf",
+      "local_path": "slides/20261014_1115_Jamis Liao_自己刻 Agent 框架：最難的不是呼叫 LLM.pdf",
+      "filesize_str": "11.54 MB",
+      "filesize_bytes": 12101708
+    },
+    {
+      "index": 8,
+      "id": "4993",
+      "date": "2026-10-14",
+      "start_time": "13:00",
+      "end_time": "15:00",
+      "classroom": "605+606 會議室",
+      "title": "讓 AI Agent、MCP Server、CLI 安全登入的實作工作坊",
+      "speaker_display": "吳柏毅 (appleboy)",
+      "company_display": "Mediatek 工程師",
+      "speakers": [
+        {
+          "name": "吳柏毅 (appleboy)",
+          "photo": "https://ccmsassets.ithome.com.tw/2026/4/29/664f7ab7-4f00-4af3-8f4c-751379da4171.jpg",
+          "company": "Mediatek 工程師"
+        }
+      ],
+      "cover_url": null,
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2657/click?l=https%3A%2F%2Fblog.wu-boy.com%2F2026%2F10%2Fai-agent-mcp-cli-secure-login-workshop-zh-tw%2F",
+      "is_pdf": false,
+      "local_filename": null,
+      "local_path": null,
+      "filesize_str": "外部連結"
+    },
+    {
+      "index": 9,
+      "id": "4991",
+      "date": "2026-10-14",
+      "start_time": "13:00",
+      "end_time": "15:00",
+      "classroom": "607+608 會議室",
+      "title": "讓 AI 讀懂你的系統 with knowledge graph",
+      "speaker_display": "Neo Hsu",
+      "company_display": "TXOne Networks Staff Software Engineer",
+      "speakers": [
+        {
+          "name": "Neo Hsu",
+          "photo": "https://ccmsassets.ithome.com.tw/2026/8/12/0cabfaa8-d5ff-4865-afc2-3a11526d0a5d.png",
+          "company": "TXOne Networks Staff Software Engineer"
+        }
+      ],
+      "cover_url": null,
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2637/click?l=https%3A%2F%2Fshare.neohsu.dev%2Fgraphify-workshop",
+      "is_pdf": false,
+      "local_filename": null,
+      "local_path": null,
+      "filesize_str": "外部連結"
+    },
+    {
+      "index": 10,
+      "id": "5017",
+      "date": "2026-10-14",
+      "start_time": "13:30",
+      "end_time": "14:00",
+      "classroom": "DE 會議室",
+      "title": "AI 時代下的另類多工與心流 ：碎片化工作中的「動態專注」法則",
+      "speaker_display": "Ruddy 老師",
+      "company_display": "集英信誠 顧問",
+      "speakers": [
+        {
+          "name": "Ruddy 老師",
+          "photo": "https://ccmsassets.ithome.com.tw/2026/8/26/58ed0b10-8dae-4504-955a-f1cd136c0c40.png",
+          "company": "集英信誠 顧問"
+        }
+      ],
+      "cover_url": "https://s.itho.me/ccms_slides/2026/10/19/8665d20e-762a-46b9-bd0d-25478aa00f89.jpg",
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2615/click?l=https%3A%2F%2Fs.itho.me%2Fccms_slides%2F2026%2F10%2F19%2F2751c773-df53-4987-838f-e4da27d56710.pdf",
+      "is_pdf": true,
+      "local_filename": "20261014_1330_Ruddy 老師_AI 時代下的另類多工與心流 ：碎片化工作中的「動態專注」法則.pdf",
+      "local_path": "slides/20261014_1330_Ruddy 老師_AI 時代下的另類多工與心流 ：碎片化工作中的「動態專注」法則.pdf",
+      "filesize_str": "6.26 MB",
+      "filesize_bytes": 6568979
+    },
+    {
+      "index": 11,
+      "id": "5018",
+      "date": "2026-10-14",
+      "start_time": "13:30",
+      "end_time": "14:00",
+      "classroom": "A 會議室",
+      "title": "LLM Wiki：企業內部知識問答系統的架構演進",
+      "speaker_display": "張維峻 (Justin)",
+      "company_display": "國泰金控 助理架構師",
+      "speakers": [
+        {
+          "name": "張維峻 (Justin)",
+          "photo": "https://ccmsassets.ithome.com.tw/2026/4/29/fc5575d3-b087-4376-9e50-9c6b814d5c89.jpg",
+          "company": "國泰金控 助理架構師"
+        }
+      ],
+      "cover_url": "https://s.itho.me/ccms_slides/2026/10/19/efbd2511-b2d6-4934-a831-7dbdf656aa92.jpg",
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2599/click?l=https%3A%2F%2Fs.itho.me%2Fccms_slides%2F2026%2F10%2F19%2Fca4893ff-47fe-471c-965b-73e96961462b.pdf",
+      "is_pdf": true,
+      "local_filename": "20261014_1330_張維峻 (Justin)_LLM Wiki：企業內部知識問答系統的架構演進.pdf",
+      "local_path": "slides/20261014_1330_張維峻 (Justin)_LLM Wiki：企業內部知識問答系統的架構演進.pdf",
+      "filesize_str": "3.10 MB",
+      "filesize_bytes": 3255042
+    },
+    {
+      "index": 12,
+      "id": "4987",
+      "date": "2026-10-14",
+      "start_time": "13:30",
+      "end_time": "14:00",
+      "classroom": "BC 會議室",
+      "title": "用 AI 工作流重整事件驅動交易系統的一致性、效能與監測",
+      "speaker_display": "蔡宜庭 (ET)",
+      "company_display": "國泰金控 工程師",
+      "speakers": [
+        {
+          "name": "蔡宜庭 (ET)",
+          "photo": "https://ccmsassets.ithome.com.tw/2026/8/31/20fa0f5b-8bbb-4a06-a7b6-ded79e1c2803.jpg",
+          "company": "國泰金控 工程師"
+        }
+      ],
+      "cover_url": "https://s.itho.me/ccms_slides/2026/10/22/9bac930f-7f5e-4137-9e7d-1d62939cd294.jpg",
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2644/click?l=https%3A%2F%2Fs.itho.me%2Fccms_slides%2F2026%2F10%2F22%2F0bb9ed19-23f2-4e77-87d5-751d7426b997.pdf",
+      "is_pdf": true,
+      "local_filename": "20261014_1330_蔡宜庭 (ET)_用 AI 工作流重整事件驅動交易系統的一致性、效能與監測.pdf",
+      "local_path": "slides/20261014_1330_蔡宜庭 (ET)_用 AI 工作流重整事件驅動交易系統的一致性、效能與監測.pdf",
+      "filesize_str": "362.4 KB",
+      "filesize_bytes": 371117
+    },
+    {
+      "index": 13,
+      "id": "5021",
+      "date": "2026-10-14",
+      "start_time": "14:15",
+      "end_time": "15:00",
+      "classroom": "A 會議室",
+      "title": "從寫得快到交付可信的 AI Coding 工程戰場",
+      "speaker_display": "陳葵懋 (Ian Chen)",
+      "company_display": "一等一科技 研發部主任工程師",
+      "speakers": [
+        {
+          "name": "陳葵懋 (Ian Chen)",
+          "photo": "https://ccmsassets.ithome.com.tw/2026/8/27/01232b1a-3bc5-4d51-ab1d-0c1a316d70fa.jpg",
+          "company": "一等一科技 研發部主任工程師"
+        }
+      ],
+      "cover_url": "https://s.itho.me/ccms_slides/2026/10/19/96ed94dd-3edb-47ba-ac73-5a4ea6110dab.jpg",
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2600/click?l=https%3A%2F%2Fs.itho.me%2Fccms_slides%2F2026%2F10%2F19%2F06b2e530-b2cb-4c2d-afad-05c9aa6fb5ca.pdf",
+      "is_pdf": true,
+      "local_filename": "20261014_1415_陳葵懋 (Ian Chen)_從寫得快到交付可信的 AI Coding 工程戰場.pdf",
+      "local_path": "slides/20261014_1415_陳葵懋 (Ian Chen)_從寫得快到交付可信的 AI Coding 工程戰場.pdf",
+      "filesize_str": "2.63 MB",
+      "filesize_bytes": 2754039
+    },
+    {
+      "index": 14,
+      "id": "5023",
+      "date": "2026-10-14",
+      "start_time": "14:15",
+      "end_time": "15:00",
+      "classroom": "F 會議室",
+      "title": "讓IT主管睡不著的課題，台灣企業Agent規模化的聖杯考驗",
+      "speaker_display": "王宏仁",
+      "company_display": "iThome 副總編輯",
+      "speakers": [
+        {
+          "name": "王宏仁",
+          "photo": "https://ccmsassets.ithome.com.tw/2021/8/4/af03da75-4df6-4e72-a43a-304026c17fd0.jpg",
+          "company": "iThome 副總編輯"
+        }
+      ],
+      "cover_url": "https://s.itho.me/ccms_slides/2026/10/19/3dfb3c45-8a9e-4c7c-b6e9-24b20c0849c3.jpg",
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2619/click?l=https%3A%2F%2Fs.itho.me%2Fccms_slides%2F2026%2F10%2F19%2F70967f99-e213-49bc-b336-7d982fda16d6.pdf",
+      "is_pdf": true,
+      "local_filename": "20261014_1415_王宏仁_讓IT主管睡不著的課題，台灣企業Agent規模化的聖杯考驗.pdf",
+      "local_path": "slides/20261014_1415_王宏仁_讓IT主管睡不著的課題，台灣企業Agent規模化的聖杯考驗.pdf",
+      "filesize_str": "8.51 MB",
+      "filesize_bytes": 8923856
+    },
+    {
+      "index": 15,
+      "id": "4972",
+      "date": "2026-10-14",
+      "start_time": "14:15",
+      "end_time": "15:00",
+      "classroom": "DE 會議室",
+      "title": "讓工程師失業的 N + 1 道陰影",
+      "speaker_display": "高見龍",
+      "company_display": "五倍學院 負責人",
+      "speakers": [
+        {
+          "name": "高見龍",
+          "photo": "https://ccmsassets.ithome.com.tw/2026/4/20/48162367-c638-4942-9db8-f8763bd5641f.jpg",
+          "company": "五倍學院 負責人"
+        }
+      ],
+      "cover_url": "https://s.itho.me/ccms_slides/2026/10/19/b4c47d6d-4d66-4c10-b1d8-638bc0defbee.jpg",
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2616/click?l=https%3A%2F%2Fs.itho.me%2Fccms_slides%2F2026%2F10%2F19%2Fdf64a9fe-19b8-433b-922b-e531bc761c63.pdf",
+      "is_pdf": true,
+      "local_filename": "20261014_1415_高見龍_讓工程師失業的 N + 1 道陰影.pdf",
+      "local_path": "slides/20261014_1415_高見龍_讓工程師失業的 N + 1 道陰影.pdf",
+      "filesize_str": "16.76 MB",
+      "filesize_bytes": 17573889
+    },
+    {
+      "index": 16,
+      "id": "4986",
+      "date": "2026-10-14",
+      "start_time": "15:15",
+      "end_time": "15:45",
+      "classroom": "A 會議室",
+      "title": "AI 導入之後：傳統開發團隊的角色鬆動與開發新節奏",
+      "speaker_display": "陳仁傑",
+      "company_display": "國泰金控 資深工程師",
+      "speakers": [
+        {
+          "name": "陳仁傑",
+          "photo": "https://ccmsassets.ithome.com.tw/2026/8/12/e4685bf1-b132-4b1c-bd70-9b67f6b88dd2.png",
+          "company": "國泰金控 資深工程師"
+        }
+      ],
+      "cover_url": "https://s.itho.me/ccms_slides/2026/10/22/10b80238-3bc9-48d7-b30f-2aeb4a4ecf05.jpg",
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2645/click?l=https%3A%2F%2Fs.itho.me%2Fccms_slides%2F2026%2F10%2F22%2F0ff233b4-3bd2-4f01-a5f1-00888b693f3e.pdf",
+      "is_pdf": true,
+      "local_filename": "20261014_1515_陳仁傑_AI 導入之後：傳統開發團隊的角色鬆動與開發新節奏.pdf",
+      "local_path": "slides/20261014_1515_陳仁傑_AI 導入之後：傳統開發團隊的角色鬆動與開發新節奏.pdf",
+      "filesize_str": "896.2 KB",
+      "filesize_bytes": 917708
+    },
+    {
+      "index": 17,
+      "id": "5009",
+      "date": "2026-10-14",
+      "start_time": "15:15",
+      "end_time": "15:45",
+      "classroom": "DE 會議室",
+      "title": "從 Hello World 看懂 AI 開發工具的計費結構——如何省得到錢",
+      "speaker_display": "謝政廷 (Duran Hsieh)",
+      "company_display": "GitHub Star TSMC 副理",
+      "speakers": [
+        {
+          "name": "謝政廷 (Duran Hsieh)",
+          "photo": "https://ccmsassets.ithome.com.tw/2026/4/21/4c55db19-6f5a-4d63-b05c-81e3d756d06a.jpg",
+          "company": "GitHub Star TSMC 副理"
+        }
+      ],
+      "cover_url": "https://s.itho.me/ccms_slides/2026/10/19/f9eec7b0-5670-49c9-9c18-2f0f5f3bb4d9.jpg",
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2617/click?l=https%3A%2F%2Fs.itho.me%2Fccms_slides%2F2026%2F10%2F19%2F2a80a036-da06-4ade-8b42-7f5f10f1af3f.pdf",
+      "is_pdf": true,
+      "local_filename": "20261014_1515_謝政廷 (Duran Hsieh)_從 Hello World 看懂 AI 開發工具的計費結構——如何省得到錢.pdf",
+      "local_path": "slides/20261014_1515_謝政廷 (Duran Hsieh)_從 Hello World 看懂 AI 開發工具的計費結構——如何省得到錢.pdf",
+      "filesize_str": "3.64 MB",
+      "filesize_bytes": 3821684
+    },
+    {
+      "index": 18,
+      "id": "4968",
+      "date": "2026-10-14",
+      "start_time": "15:15",
+      "end_time": "15:45",
+      "classroom": "BC 會議室",
+      "title": "穩才是快 ～ 以 OKF 打造 Agentic AIOps 治理閉環",
+      "speaker_display": "許庭魁 (Jerry Hsu)",
+      "company_display": "華碩電腦 infra Lead",
+      "speakers": [
+        {
+          "name": "許庭魁 (Jerry Hsu)",
+          "photo": "https://ccmsassets.ithome.com.tw/2026/4/29/00d2800a-7bd7-4e71-8d8f-1f5889b29074.jpg",
+          "company": "華碩電腦 infra Lead"
+        }
+      ],
+      "cover_url": "https://s.itho.me/ccms_slides/2026/10/19/986dedc0-2730-43b7-a35b-972d13ac7a03.jpg",
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2608/click?l=https%3A%2F%2Fs.itho.me%2Fccms_slides%2F2026%2F10%2F19%2Fe7d1050e-59d1-4ea5-aa78-e0b722bc0ea0.pdf",
+      "is_pdf": true,
+      "local_filename": "20261014_1515_許庭魁 (Jerry Hsu)_穩才是快 ～ 以 OKF 打造 Agentic AIOps 治理閉環.pdf",
+      "local_path": "slides/20261014_1515_許庭魁 (Jerry Hsu)_穩才是快 ～ 以 OKF 打造 Agentic AIOps 治理閉環.pdf",
+      "filesize_str": "4.64 MB",
+      "filesize_bytes": 4868905
+    },
+    {
+      "index": 19,
+      "id": "4965",
+      "date": "2026-10-14",
+      "start_time": "15:15",
+      "end_time": "15:45",
+      "classroom": "F 會議室",
+      "title": "雲端把花錢的權力交給了工程師，然後呢？",
+      "speaker_display": "林宗穎 (Kater)",
+      "company_display": "玉山金控 副主任工程師",
+      "speakers": [
+        {
+          "name": "林宗穎 (Kater)",
+          "photo": "https://ccmsassets.ithome.com.tw/2026/8/24/14dfb991-5085-460d-a977-c4d66994093e.jpg",
+          "company": "玉山金控 副主任工程師"
+        }
+      ],
+      "cover_url": "https://s.itho.me/ccms_slides/2026/10/27/561afa69-9c7e-4b64-8236-14cd0d65a637.jpg",
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2654/click?l=https%3A%2F%2Fs.itho.me%2Fccms_slides%2F2026%2F10%2F27%2Fd510bfb1-9407-49d0-bfc1-3e12804b4d55.pdf",
+      "is_pdf": true,
+      "local_filename": "20261014_1515_林宗穎 (Kater)_雲端把花錢的權力交給了工程師，然後呢？.pdf",
+      "local_path": "slides/20261014_1515_林宗穎 (Kater)_雲端把花錢的權力交給了工程師，然後呢？.pdf",
+      "filesize_str": "5.11 MB",
+      "filesize_bytes": 5359687
+    },
+    {
+      "index": 20,
+      "id": "4997",
+      "date": "2026-10-14",
+      "start_time": "15:30",
+      "end_time": "17:30",
+      "classroom": "607+608 會議室",
+      "title": "在解決跟AI的溝通之前先解決人和人之間的溝通",
+      "speaker_display": "范育銘 (老范)",
+      "company_display": "台灣敏捷協會 常務理事",
+      "speakers": [
+        {
+          "name": "范育銘 (老范)",
+          "photo": "https://ccmsassets.ithome.com.tw/2026/8/27/a995a0ae-1886-4560-9fa6-cfc97d461591.png",
+          "company": "台灣敏捷協會 常務理事"
+        }
+      ],
+      "cover_url": "https://s.itho.me/ccms_slides/2026/10/27/05286a5f-c2f7-4e64-8417-5f1c90c5efb3.jpg",
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2646/click?l=https%3A%2F%2Fs.itho.me%2Fccms_slides%2F2026%2F10%2F27%2F0a7e6f2b-1a07-43ba-80cb-dca30d160d3e.pdf",
+      "is_pdf": true,
+      "local_filename": "20261014_1530_范育銘 (老范)_在解決跟AI的溝通之前先解決人和人之間的溝通.pdf",
+      "local_path": "slides/20261014_1530_范育銘 (老范)_在解決跟AI的溝通之前先解決人和人之間的溝通.pdf",
+      "filesize_str": "1.78 MB",
+      "filesize_bytes": 1864744
+    },
+    {
+      "index": 21,
+      "id": "5030",
+      "date": "2026-10-14",
+      "start_time": "15:30",
+      "end_time": "17:30",
+      "classroom": "603+604 會議室",
+      "title": "把「做完了」寫下來：90 分鐘做出一份機器能檢查的驗收清單",
+      "speaker_display": "楊騏 (Ci)",
+      "company_display": "WaCare 數位健康 Tech Lead",
+      "speakers": [
+        {
+          "name": "楊騏 (Ci)",
+          "photo": "https://ccmsassets.ithome.com.tw/2026/4/20/be88e035-d7d6-4e5e-94cb-2ab7350031bb.jpg",
+          "company": "WaCare 數位健康 Tech Lead"
+        }
+      ],
+      "cover_url": "https://s.itho.me/ccms_slides/2026/10/19/06400c06-46a3-40fd-9caf-85ca031a978d.jpg",
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2631/click?l=https%3A%2F%2Fs.itho.me%2Fccms_slides%2F2026%2F10%2F19%2F32ef6358-fd95-4dd5-8904-eb125d32ea1e.pdf",
+      "is_pdf": true,
+      "local_filename": "20261014_1530_楊騏 (Ci)_把「做完了」寫下來：90 分鐘做出一份機器能檢查的驗收清單.pdf",
+      "local_path": "slides/20261014_1530_楊騏 (Ci)_把「做完了」寫下來：90 分鐘做出一份機器能檢查的驗收清單.pdf",
+      "filesize_str": "5.17 MB",
+      "filesize_bytes": 5425826
+    },
+    {
+      "index": 22,
+      "id": "4960",
+      "date": "2026-10-14",
+      "start_time": "16:00",
+      "end_time": "16:45",
+      "classroom": "A 會議室",
+      "title": "當 Secret 不再是秘密",
+      "speaker_display": "邱繼平 (山姆大叔)",
+      "company_display": "架構師",
+      "speakers": [
+        {
+          "name": "邱繼平 (山姆大叔)",
+          "photo": "https://ccmsassets.ithome.com.tw/2026/8/12/34cfb4d6-bf89-416f-896d-5aa2aad228eb.png",
+          "company": "架構師"
+        }
+      ],
+      "cover_url": "https://s.itho.me/ccms_slides/2026/10/19/00cf19b3-f9a0-436b-9889-acd33a6eac40.jpg",
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2601/click?l=https%3A%2F%2Fs.itho.me%2Fccms_slides%2F2026%2F10%2F19%2F509a3e3a-6e8c-4eef-894a-d17ea94fcd1d.pdf",
+      "is_pdf": true,
+      "local_filename": "20261014_1600_邱繼平 (山姆大叔)_當 Secret 不再是秘密.pdf",
+      "local_path": "slides/20261014_1600_邱繼平 (山姆大叔)_當 Secret 不再是秘密.pdf",
+      "filesize_str": "7.93 MB",
+      "filesize_bytes": 8319703
+    },
+    {
+      "index": 23,
+      "id": "5013",
+      "date": "2026-10-14",
+      "start_time": "16:00",
+      "end_time": "16:45",
+      "classroom": "F 會議室",
+      "title": "解構 Agentic AI 時代的系統架構：A2A、x402、AP2",
+      "speaker_display": "蕭兆洋 (Charles Hsiao)",
+      "company_display": "NVIDIA Senior DGX Cloud Automation Engineer",
+      "speakers": [
+        {
+          "name": "蕭兆洋 (Charles Hsiao)",
+          "photo": "https://ccmsassets.ithome.com.tw/2026/9/9/b28df8ad-3d13-4977-a2eb-ef88236e8790.jpg",
+          "company": "NVIDIA Senior DGX Cloud Automation Engineer"
+        }
+      ],
+      "cover_url": null,
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2639/click?l=https%3A%2F%2Fwww.charles-hsiao.com%2Ftalks%2F202610-hwdc-2026-a2a-x402-ap2",
+      "is_pdf": false,
+      "local_filename": null,
+      "local_path": null,
+      "filesize_str": "外部連結"
+    },
+    {
+      "index": 24,
+      "id": "4959",
+      "date": "2026-10-14",
+      "start_time": "16:00",
+      "end_time": "16:45",
+      "classroom": "BC 會議室",
+      "title": "讓 Agent Skills 介入你的軟體開發的工作流",
+      "speaker_display": "吳俊毅 (Gelis)",
+      "company_display": "Gelis 的程式設計訓練營 資深. NET技術顧問",
+      "speakers": [
+        {
+          "name": "吳俊毅 (Gelis)",
+          "photo": "https://ccmsassets.ithome.com.tw/2026/8/12/bdf319c7-942b-4090-b148-0176e706f3e6.png",
+          "company": "Gelis 的程式設計訓練營 資深. NET技術顧問"
+        }
+      ],
+      "cover_url": "https://s.itho.me/ccms_slides/2026/10/19/336f37db-1cdd-4905-9014-8220ff2cca5c.jpg",
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2612/click?l=https%3A%2F%2Fs.itho.me%2Fccms_slides%2F2026%2F10%2F19%2F63f53132-52bf-45f0-afc5-9d7765ff7714.pdf",
+      "is_pdf": true,
+      "local_filename": "20261014_1600_吳俊毅 (Gelis)_讓 Agent Skills 介入你的軟體開發的工作流.pdf",
+      "local_path": "slides/20261014_1600_吳俊毅 (Gelis)_讓 Agent Skills 介入你的軟體開發的工作流.pdf",
+      "filesize_str": "7.61 MB",
+      "filesize_bytes": 7981883
+    },
+    {
+      "index": 25,
+      "id": "5029",
+      "date": "2026-10-14",
+      "start_time": "17:00",
+      "end_time": "17:30",
+      "classroom": "F 會議室",
+      "title": "AI Agent 時代：當人人都能快速上手，什麼才是真正的專業？",
+      "speaker_display": "江佳佳",
+      "company_display": "台中敏捷社群 現任組織者",
+      "speakers": [
+        {
+          "name": "江佳佳",
+          "photo": "https://ccmsassets.ithome.com.tw/2021/5/13/33e8b00a-7529-454e-a8c2-76d9f3d8fcd4.jpg",
+          "company": "台中敏捷社群 現任組織者"
+        }
+      ],
+      "cover_url": "https://s.itho.me/ccms_slides/2026/10/19/e8f66b56-51f5-4779-8450-564a4b910b09.jpg",
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2620/click?l=https%3A%2F%2Fs.itho.me%2Fccms_slides%2F2026%2F10%2F19%2F3486a157-3a32-4408-9ad1-3994cfa4d82e.pdf",
+      "is_pdf": true,
+      "local_filename": "20261014_1700_江佳佳_AI Agent 時代：當人人都能快速上手，什麼才是真正的專業？.pdf",
+      "local_path": "slides/20261014_1700_江佳佳_AI Agent 時代：當人人都能快速上手，什麼才是真正的專業？.pdf",
+      "filesize_str": "2.59 MB",
+      "filesize_bytes": 2713867
+    },
+    {
+      "index": 26,
+      "id": "5028",
+      "date": "2026-10-14",
+      "start_time": "17:00",
+      "end_time": "17:30",
+      "classroom": "DE 會議室",
+      "title": "「開發效能提升實戰」：Claude Design 搭配自建 Skill，團隊達到提升四倍產出",
+      "speaker_display": "吳品毅 (阿咪 A-mi)、林杰伶 (Jennifer Lin)",
+      "company_display": "敦謙國際 經理 / Scrum Master；敦謙國際 資深 UI/UX 設計師",
+      "speakers": [
+        {
+          "name": "吳品毅 (阿咪 A-mi)",
+          "photo": "https://ccmsassets.ithome.com.tw/2026/4/29/43c470e9-fa16-4027-a74d-b704a4acf635.jpg",
+          "company": "敦謙國際 經理 / Scrum Master"
+        },
+        {
+          "name": "林杰伶 (Jennifer Lin)",
+          "photo": "https://ccmsassets.ithome.com.tw/2026/9/3/fb561bf4-5fdd-4656-95bf-9e54176f835c.jpg",
+          "company": "敦謙國際 資深 UI/UX 設計師"
+        }
+      ],
+      "cover_url": "https://s.itho.me/ccms_slides/2026/10/19/e0f694e2-0a7b-43cc-936b-3e509b6ea370.jpg",
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2614/click?l=https%3A%2F%2Fs.itho.me%2Fccms_slides%2F2026%2F10%2F19%2Fcc586b84-880e-4129-89dc-12b012ee4e89.pdf",
+      "is_pdf": true,
+      "local_filename": "20261014_1700_吳品毅 (阿咪 A-mi)、林杰伶 (Jennifer Lin)_「開發效能提升實戰」：Claude Design 搭配自建 Skill，團隊達到提升四倍產出.pdf",
+      "local_path": "slides/20261014_1700_吳品毅 (阿咪 A-mi)、林杰伶 (Jennifer Lin)_「開發效能提升實戰」：Claude Design 搭配自建 Skill，團隊達到提升四倍產出.pdf",
+      "filesize_str": "4.92 MB",
+      "filesize_bytes": 5158975
+    },
+    {
+      "index": 27,
+      "id": "4976",
+      "date": "2026-10-14",
+      "start_time": "17:00",
+      "end_time": "17:30",
+      "classroom": "A 會議室",
+      "title": "可製造的 AI：讓 AI 成為工廠的第二大腦",
+      "speaker_display": "戚務漢 (Caesar)",
+      "company_display": "正美科技 數位部",
+      "speakers": [
+        {
+          "name": "戚務漢 (Caesar)",
+          "photo": "https://ccmsassets.ithome.com.tw/2026/8/12/176180c9-8e0b-4dd7-9de6-8e7ae97e4f4a.png",
+          "company": "正美科技 數位部"
+        }
+      ],
+      "cover_url": "https://s.itho.me/ccms_slides/2026/10/19/5cc6b50b-a54a-407c-bf49-66fc364f43da.jpg",
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2602/click?l=https%3A%2F%2Fs.itho.me%2Fccms_slides%2F2026%2F10%2F19%2F9093fbfb-2d05-4e6a-b353-4644d42a3af8.pdf",
+      "is_pdf": true,
+      "local_filename": "20261014_1700_戚務漢 (Caesar)_可製造的 AI：讓 AI 成為工廠的第二大腦.pdf",
+      "local_path": "slides/20261014_1700_戚務漢 (Caesar)_可製造的 AI：讓 AI 成為工廠的第二大腦.pdf",
+      "filesize_str": "3.13 MB",
+      "filesize_bytes": 3284653
+    },
+    {
+      "index": 28,
+      "id": "4967",
+      "date": "2026-10-14",
+      "start_time": "17:00",
+      "end_time": "17:30",
+      "classroom": "BC 會議室",
+      "title": "當架構設計被 AI 加速後，工程判斷力的養成與傳承該怎麼辦？",
+      "speaker_display": "林承毅 (Jed)",
+      "company_display": "躍準科技有限公司 Founder",
+      "speakers": [
+        {
+          "name": "林承毅 (Jed)",
+          "photo": "https://ccmsassets.ithome.com.tw/2026/8/27/ad69061b-d827-4503-9de1-56129ecb769e.png",
+          "company": "躍準科技有限公司 Founder"
+        }
+      ],
+      "cover_url": "https://s.itho.me/ccms_slides/2026/10/19/8608d43c-1df1-4162-b2f4-e0d5c3814b12.jpg",
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2611/click?l=https%3A%2F%2Fs.itho.me%2Fccms_slides%2F2026%2F10%2F19%2F6b6e0565-40e4-4efd-96b2-99c2d87b26b1.pdf",
+      "is_pdf": true,
+      "local_filename": "20261014_1700_林承毅 (Jed)_當架構設計被 AI 加速後，工程判斷力的養成與傳承該怎麼辦？.pdf",
+      "local_path": "slides/20261014_1700_林承毅 (Jed)_當架構設計被 AI 加速後，工程判斷力的養成與傳承該怎麼辦？.pdf",
+      "filesize_str": "11.89 MB",
+      "filesize_bytes": 12462814
+    },
+    {
+      "index": 29,
+      "id": "5035",
+      "date": "2026-10-15",
+      "start_time": "10:10",
+      "end_time": "12:10",
+      "classroom": "603+604 會議室",
+      "title": "AI Coding 治理實戰：從開發到交付的Harness工程",
+      "speaker_display": "陳葵懋 (Ian Chen)",
+      "company_display": "一等一科技 研發部主任工程師",
+      "speakers": [
+        {
+          "name": "陳葵懋 (Ian Chen)",
+          "photo": "https://ccmsassets.ithome.com.tw/2026/8/27/01232b1a-3bc5-4d51-ab1d-0c1a316d70fa.jpg",
+          "company": "一等一科技 研發部主任工程師"
+        }
+      ],
+      "cover_url": null,
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2640/click?l=https%3A%2F%2Fgithub.com%2Fiangithub%2FHWDC-2026",
+      "is_pdf": false,
+      "local_filename": null,
+      "local_path": null,
+      "filesize_str": "外部連結"
+    },
+    {
+      "index": 30,
+      "id": "4994",
+      "date": "2026-10-15",
+      "start_time": "10:10",
+      "end_time": "12:10",
+      "classroom": "605+606 會議室",
+      "title": "AI 時代下,軟體團隊要怎麼設計?",
+      "speaker_display": "柯仁傑 (David Ko/敏捷三叔公)",
+      "company_display": "Odd-e Technical Coach",
+      "speakers": [
+        {
+          "name": "柯仁傑 (David Ko/敏捷三叔公)",
+          "photo": "https://ccmsassets.ithome.com.tw/2026/8/17/86bc24d8-5a8c-4d3a-9287-a2f1fbde4c31.png",
+          "company": "Odd-e Technical Coach"
+        }
+      ],
+      "cover_url": "https://s.itho.me/ccms_slides/2026/10/22/fdc03691-9d32-4d93-ab09-82adc8e325aa.jpg",
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2632/click?l=https%3A%2F%2Fs.itho.me%2Fccms_slides%2F2026%2F10%2F22%2Fe429d7df-57ca-45c6-850e-b2bdbe0f1a7a.pdf",
+      "is_pdf": true,
+      "local_filename": "20261015_1010_柯仁傑 (David Ko敏捷三叔公)_AI 時代下,軟體團隊要怎麼設計.pdf",
+      "local_path": "slides/20261015_1010_柯仁傑 (David Ko敏捷三叔公)_AI 時代下,軟體團隊要怎麼設計.pdf",
+      "filesize_str": "5.06 MB",
+      "filesize_bytes": 5305161
+    },
+    {
+      "index": 31,
+      "id": "4995",
+      "date": "2026-10-15",
+      "start_time": "10:10",
+      "end_time": "12:10",
+      "classroom": "607+608 會議室",
+      "title": "Google AI Studio X Antigravity 驗收實戰",
+      "speaker_display": "陳佳新 (佳新哥)",
+      "company_display": "奇步應用 執行長",
+      "speakers": [
+        {
+          "name": "陳佳新 (佳新哥)",
+          "photo": "https://ccmsassets.ithome.com.tw/2026/8/17/2b95ab9c-02e3-46e1-b612-3ae42cd119e7.jpg",
+          "company": "奇步應用 執行長"
+        }
+      ],
+      "cover_url": null,
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2661/click?l=https%3A%2F%2Fspeakerdeck.com%2Fjarsing%2Fgoogle-ai-studio-x-antigravity-yan-shou-shi-zhan-2026-hwdc",
+      "is_pdf": false,
+      "local_filename": null,
+      "local_path": null,
+      "filesize_str": "外部連結"
+    },
+    {
+      "index": 32,
+      "id": "4999",
+      "date": "2026-10-15",
+      "start_time": "10:10",
+      "end_time": "10:55",
+      "classroom": "ABCDEF 會議室",
+      "title": "從一人 AI 工作流到團隊工程系統",
+      "speaker_display": "謝浩哲 (HAO)",
+      "company_display": "TSMC Senior IT Engineer",
+      "speakers": [
+        {
+          "name": "謝浩哲 (HAO)",
+          "photo": "https://ccmsassets.ithome.com.tw/2026/8/27/5e7647c3-f584-4ee1-b9f9-1a831d0799e1.jpg",
+          "company": "TSMC Senior IT Engineer"
+        }
+      ],
+      "cover_url": "https://s.itho.me/ccms_slides/2026/10/19/5889b3ad-eca7-4d7d-a027-524ec1801e4c.jpg",
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2634/click?l=https%3A%2F%2Fs.itho.me%2Fccms_slides%2F2026%2F10%2F19%2F44a68224-e7f9-4f89-9ccd-506f69bea62b.pdf",
+      "is_pdf": true,
+      "local_filename": "20261015_1010_謝浩哲 (HAO)_從一人 AI 工作流到團隊工程系統.pdf",
+      "local_path": "slides/20261015_1010_謝浩哲 (HAO)_從一人 AI 工作流到團隊工程系統.pdf",
+      "filesize_str": "580.8 KB",
+      "filesize_bytes": 594728
+    },
+    {
+      "index": 33,
+      "id": "4970",
+      "date": "2026-10-15",
+      "start_time": "11:15",
+      "end_time": "12:00",
+      "classroom": "F 會議室",
+      "title": "MCP 時代的 AI Agent 資安攻防",
+      "speaker_display": "吳勝繙 (Chris)",
+      "company_display": "數位發展部 科長",
+      "speakers": [
+        {
+          "name": "吳勝繙 (Chris)",
+          "photo": "https://ccmsassets.ithome.com.tw/2026/8/12/0ac817e6-6037-44f5-909c-fc7a3c895aea.png",
+          "company": "數位發展部 科長"
+        }
+      ],
+      "cover_url": "https://s.itho.me/ccms_slides/2026/10/19/ab0e1cf7-7cff-4ab8-bfb1-9ca867aa1618.jpg",
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2621/click?l=https%3A%2F%2Fs.itho.me%2Fccms_slides%2F2026%2F10%2F19%2F599042a1-ef21-4ba6-b491-9f3c2e66397f.pdf",
+      "is_pdf": true,
+      "local_filename": "20261015_1115_吳勝繙 (Chris)_MCP 時代的 AI Agent 資安攻防.pdf",
+      "local_path": "slides/20261015_1115_吳勝繙 (Chris)_MCP 時代的 AI Agent 資安攻防.pdf",
+      "filesize_str": "436.4 KB",
+      "filesize_bytes": 446890
+    },
+    {
+      "index": 34,
+      "id": "4992",
+      "date": "2026-10-15",
+      "start_time": "13:00",
+      "end_time": "15:00",
+      "classroom": "603+604 會議室",
+      "title": "打造跨模型 AI Agent 的 CI/CD 管線：從本地開發到雲端部署",
+      "speaker_display": "Jimmy Liao",
+      "company_display": "LeapDesign Co-founder / CTO",
+      "speakers": [
+        {
+          "name": "Jimmy Liao",
+          "photo": "https://ccmsassets.ithome.com.tw/2026/8/12/9529542c-1243-40e6-a5bd-3fa8acfe52eb.png",
+          "company": "LeapDesign Co-founder / CTO"
+        }
+      ],
+      "cover_url": "https://s.itho.me/ccms_slides/2026/10/19/de18b338-ced7-49aa-b938-a233e084690b.jpg",
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2636/click?l=https%3A%2F%2Fs.itho.me%2Fccms_slides%2F2026%2F10%2F19%2F026eedaf-0a78-431a-9ae3-0d5569f19d96.pdf",
+      "is_pdf": true,
+      "local_filename": "20261015_1300_Jimmy Liao_打造跨模型 AI Agent 的 CICD 管線：從本地開發到雲端部署.pdf",
+      "local_path": "slides/20261015_1300_Jimmy Liao_打造跨模型 AI Agent 的 CICD 管線：從本地開發到雲端部署.pdf",
+      "filesize_str": "7.28 MB",
+      "filesize_bytes": 7637204
+    },
+    {
+      "index": 35,
+      "id": "5034",
+      "date": "2026-10-15",
+      "start_time": "13:00",
+      "end_time": "15:00",
+      "classroom": "605+606 會議室",
+      "title": "讓 AI Agent、MCP Server、CLI 安全登入的實作工作坊",
+      "speaker_display": "吳柏毅 (appleboy)",
+      "company_display": "Mediatek 工程師",
+      "speakers": [
+        {
+          "name": "吳柏毅 (appleboy)",
+          "photo": "https://ccmsassets.ithome.com.tw/2026/4/29/664f7ab7-4f00-4af3-8f4c-751379da4171.jpg",
+          "company": "Mediatek 工程師"
+        }
+      ],
+      "cover_url": null,
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2658/click?l=https%3A%2F%2Fblog.wu-boy.com%2F2026%2F10%2Fai-agent-mcp-cli-secure-login-workshop-zh-tw%2F",
+      "is_pdf": false,
+      "local_filename": null,
+      "local_path": null,
+      "filesize_str": "外部連結"
+    },
+    {
+      "index": 36,
+      "id": "5007",
+      "date": "2026-10-15",
+      "start_time": "13:30",
+      "end_time": "14:00",
+      "classroom": "F 會議室",
+      "title": "使用過狩野分析與NPS嗎？讓我們一起務實的簡化它",
+      "speaker_display": "陳啟彰 (Nor)",
+      "company_display": "領潮創意設計 服務設計研究顧問",
+      "speakers": [
+        {
+          "name": "陳啟彰 (Nor)",
+          "photo": "https://ccmsassets.ithome.com.tw/2023/5/9/111556dc-9812-43cc-b583-b28ef07e6d7d.jpg",
+          "company": "領潮創意設計 服務設計研究顧問"
+        }
+      ],
+      "cover_url": "https://s.itho.me/ccms_slides/2026/10/19/18a1d9af-199d-4c4b-ad14-1858498bcb23.jpg",
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2605/click?l=https%3A%2F%2Fs.itho.me%2Fccms_slides%2F2026%2F10%2F19%2Fdc8c0869-8f47-42ef-b9ef-b85c73ed7b7b.pdf",
+      "is_pdf": true,
+      "local_filename": "20261015_1330_陳啟彰 (Nor)_使用過狩野分析與NPS嗎？讓我們一起務實的簡化它.pdf",
+      "local_path": "slides/20261015_1330_陳啟彰 (Nor)_使用過狩野分析與NPS嗎？讓我們一起務實的簡化它.pdf",
+      "filesize_str": "4.00 MB",
+      "filesize_bytes": 4189400
+    },
+    {
+      "index": 37,
+      "id": "5008",
+      "date": "2026-10-15",
+      "start_time": "13:30",
+      "end_time": "14:00",
+      "classroom": "A 會議室",
+      "title": "初級工程師如何 AI 賦能的翻寫一個跟自己年紀差不多大的框架",
+      "speaker_display": "Maple Kuo",
+      "company_display": "Claude Taiwan 社群管理員 現職網站開發工程師",
+      "speakers": [
+        {
+          "name": "Maple Kuo",
+          "photo": "https://ccmsassets.ithome.com.tw/2026/8/27/dadbffff-8900-4a33-9848-2c7e70ee4ae1.jpg",
+          "company": "Claude Taiwan 社群管理員 現職網站開發工程師"
+        }
+      ],
+      "cover_url": "https://s.itho.me/ccms_slides/2026/10/19/ccc4ac99-6020-422f-bf84-8694cff4d2e3.jpg",
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2603/click?l=https%3A%2F%2Fs.itho.me%2Fccms_slides%2F2026%2F10%2F19%2F9e8d08dd-7a22-4ef5-b262-76f89bb5a9a8.pdf",
+      "is_pdf": true,
+      "local_filename": "20261015_1330_Maple Kuo_初級工程師如何 AI 賦能的翻寫一個跟自己年紀差不多大的框架.pdf",
+      "local_path": "slides/20261015_1330_Maple Kuo_初級工程師如何 AI 賦能的翻寫一個跟自己年紀差不多大的框架.pdf",
+      "filesize_str": "3.05 MB",
+      "filesize_bytes": 3197992
+    },
+    {
+      "index": 38,
+      "id": "4961",
+      "date": "2026-10-15",
+      "start_time": "14:15",
+      "end_time": "15:00",
+      "classroom": "A 會議室",
+      "title": "AI O11y：數據決策到技術選型",
+      "speaker_display": "張哲嘉 (Che Chia Chang)",
+      "company_display": "MaiCoin SRE",
+      "speakers": [
+        {
+          "name": "張哲嘉 (Che Chia Chang)",
+          "photo": "https://ccmsassets.ithome.com.tw/2026/4/29/aa5052df-9df9-4e77-9607-1f27ed597dd1.jpg",
+          "company": "MaiCoin SRE"
+        }
+      ],
+      "cover_url": "https://s.itho.me/ccms_slides/2026/10/19/722378ef-d60e-4b7b-a1c4-017eb2f95f26.jpg",
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2522/click?l=https%3A%2F%2Fs.itho.me%2Fccms_slides%2F2026%2F10%2F19%2F2b283308-9956-4437-9b07-f60355499d8f.pdf",
+      "is_pdf": true,
+      "local_filename": "20261015_1415_張哲嘉 (Che Chia Chang)_AI O11y：數據決策到技術選型.pdf",
+      "local_path": "slides/20261015_1415_張哲嘉 (Che Chia Chang)_AI O11y：數據決策到技術選型.pdf",
+      "filesize_str": "3.48 MB",
+      "filesize_bytes": 3652873
+    },
+    {
+      "index": 39,
+      "id": "4981",
+      "date": "2026-10-15",
+      "start_time": "14:15",
+      "end_time": "15:00",
+      "classroom": "DE 會議室",
+      "title": "AI 時代下測試的迷思——為什麼綠燈越多，品質卻沒有變好",
+      "speaker_display": "柯仁傑 (David Ko/敏捷三叔公)",
+      "company_display": "Odd-e Technical Coach",
+      "speakers": [
+        {
+          "name": "柯仁傑 (David Ko/敏捷三叔公)",
+          "photo": "https://ccmsassets.ithome.com.tw/2026/4/20/52cb210c-23d2-49a7-afac-045ff3436ab5.jpg",
+          "company": "Odd-e Technical Coach"
+        }
+      ],
+      "cover_url": "https://s.itho.me/ccms_slides/2026/10/27/4aa37b4e-862e-475b-9629-56c53c86834b.jpg",
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2652/click?l=https%3A%2F%2Fs.itho.me%2Fccms_slides%2F2026%2F10%2F27%2Fdd2659c5-376b-4a29-a67b-965088ef4cd0.pdf",
+      "is_pdf": true,
+      "local_filename": "20261015_1415_柯仁傑 (David Ko敏捷三叔公)_AI 時代下測試的迷思——為什麼綠燈越多，品質卻沒有變好.pdf",
+      "local_path": "slides/20261015_1415_柯仁傑 (David Ko敏捷三叔公)_AI 時代下測試的迷思——為什麼綠燈越多，品質卻沒有變好.pdf",
+      "filesize_str": "5.06 MB",
+      "filesize_bytes": 5305161
+    },
+    {
+      "index": 40,
+      "id": "4980",
+      "date": "2026-10-15",
+      "start_time": "14:15",
+      "end_time": "15:00",
+      "classroom": "F 會議室",
+      "title": "別讓 Agent 瞎掰：用 Semantic Layer 打造可信賴的企業 AI",
+      "speaker_display": "林士凱 (Danny)",
+      "company_display": "Amazon Web Services Solutions Architect",
+      "speakers": [
+        {
+          "name": "林士凱 (Danny)",
+          "photo": "https://ccmsassets.ithome.com.tw/2026/8/12/0e164a0c-b1dd-4d82-9010-1452d6f3fd09.png",
+          "company": "Amazon Web Services Solutions Architect"
+        }
+      ],
+      "cover_url": "https://s.itho.me/ccms_slides/2026/10/27/2c31b571-af91-44e1-adbf-ddced4234c33.jpg",
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2653/click?l=https%3A%2F%2Fs.itho.me%2Fccms_slides%2F2026%2F10%2F27%2F3b1d3b50-b8a4-4a73-8d52-42c4672e5fef.pdf",
+      "is_pdf": true,
+      "local_filename": "20261015_1415_林士凱 (Danny)_別讓 Agent 瞎掰：用 Semantic Layer 打造可信賴的企業 AI.pdf",
+      "local_path": "slides/20261015_1415_林士凱 (Danny)_別讓 Agent 瞎掰：用 Semantic Layer 打造可信賴的企業 AI.pdf",
+      "filesize_str": "1.71 MB",
+      "filesize_bytes": 1797127
+    },
+    {
+      "index": 41,
+      "id": "5004",
+      "date": "2026-10-15",
+      "start_time": "14:15",
+      "end_time": "15:00",
+      "classroom": "BC 會議室",
+      "title": "當 AI 加入團隊：打造可審查、可驗證、會自我改善的 AI 開發工作流",
+      "speaker_display": "蔡景翔 (James Tsai)",
+      "company_display": "骨架資訊有限公司 Microsoft MVP",
+      "speakers": [
+        {
+          "name": "蔡景翔 (James Tsai)",
+          "photo": "https://ccmsassets.ithome.com.tw/2026/8/12/f7abcb26-de81-4b62-8b0f-b562e3bb2a6d.png",
+          "company": "骨架資訊有限公司 Microsoft MVP"
+        }
+      ],
+      "cover_url": "https://s.itho.me/ccms_slides/2026/10/19/f06e8d04-2a31-429c-90fa-57f51512e540.jpg",
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2610/click?l=https%3A%2F%2Fs.itho.me%2Fccms_slides%2F2026%2F10%2F19%2F4eb00c7e-938e-4521-9cfd-d1a6425003b7.pdf",
+      "is_pdf": true,
+      "local_filename": "20261015_1415_蔡景翔 (James Tsai)_當 AI 加入團隊：打造可審查、可驗證、會自我改善的 AI 開發工作流.pdf",
+      "local_path": "slides/20261015_1415_蔡景翔 (James Tsai)_當 AI 加入團隊：打造可審查、可驗證、會自我改善的 AI 開發工作流.pdf",
+      "filesize_str": "1.22 MB",
+      "filesize_bytes": 1281377
+    },
+    {
+      "index": 42,
+      "id": "5016",
+      "date": "2026-10-15",
+      "start_time": "15:15",
+      "end_time": "15:45",
+      "classroom": "BC 會議室",
+      "title": "從一本旅遊書到 LINE OMO 服務：一個很殘酷的真實漏斗教會我的事",
+      "speaker_display": "陳佳新 (佳新哥)",
+      "company_display": "奇步應用 執行長",
+      "speakers": [
+        {
+          "name": "陳佳新 (佳新哥)",
+          "photo": "https://ccmsassets.ithome.com.tw/2026/8/17/2b95ab9c-02e3-46e1-b612-3ae42cd119e7.jpg",
+          "company": "奇步應用 執行長"
+        }
+      ],
+      "cover_url": null,
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2662/click?l=https%3A%2F%2Fspeakerdeck.com%2Fjarsing%2Fcong-ben-lu-you-shu-dao-line-omo-fu-wu-ge-hen-can-ku-de-zhen-shi-lou-dou-jiao-hui-wo-de-shi-2026-hwdc",
+      "is_pdf": false,
+      "local_filename": null,
+      "local_path": null,
+      "filesize_str": "外部連結"
+    },
+    {
+      "index": 43,
+      "id": "5019",
+      "date": "2026-10-15",
+      "start_time": "15:15",
+      "end_time": "15:45",
+      "classroom": "DE 會議室",
+      "title": "每個人都有 AI，為什麼團隊還是這麼慢？",
+      "speaker_display": "薛良斌 (hlb/布丁)",
+      "company_display": "MeetAndy AI 共同創辦人",
+      "speakers": [
+        {
+          "name": "薛良斌 (hlb/布丁)",
+          "photo": "https://ccmsassets.ithome.com.tw/2026/9/11/a1f30c9a-5c9c-483b-9ecd-f898cfef6612.png",
+          "company": "MeetAndy AI 共同創辦人"
+        }
+      ],
+      "cover_url": null,
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2647/click?l=https%3A%2F%2Fwww.papermark.com%2Fview%2Fcmv9m9vd10001ku06zpgnpe1c",
+      "is_pdf": false,
+      "local_filename": null,
+      "local_path": null,
+      "filesize_str": "外部連結"
+    },
+    {
+      "index": 44,
+      "id": "4988",
+      "date": "2026-10-15",
+      "start_time": "15:15",
+      "end_time": "15:45",
+      "classroom": "A 會議室",
+      "title": "讓 AI Agent 記住你：從零打造仿生長期記憶系統的設計決策",
+      "speaker_display": "吳勝繙 (Chris)",
+      "company_display": "數位發展部 科長",
+      "speakers": [
+        {
+          "name": "吳勝繙 (Chris)",
+          "photo": "https://ccmsassets.ithome.com.tw/2026/8/12/0ac817e6-6037-44f5-909c-fc7a3c895aea.png",
+          "company": "數位發展部 科長"
+        }
+      ],
+      "cover_url": "https://s.itho.me/ccms_slides/2026/10/19/180220db-0389-4cc7-8423-b30475091d7c.jpg",
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2606/click?l=https%3A%2F%2Fs.itho.me%2Fccms_slides%2F2026%2F10%2F19%2F865bea22-11b5-428b-9afe-a7b31f521056.pdf",
+      "is_pdf": true,
+      "local_filename": "20261015_1515_吳勝繙 (Chris)_讓 AI Agent 記住你：從零打造仿生長期記憶系統的設計決策.pdf",
+      "local_path": "slides/20261015_1515_吳勝繙 (Chris)_讓 AI Agent 記住你：從零打造仿生長期記憶系統的設計決策.pdf",
+      "filesize_str": "246.9 KB",
+      "filesize_bytes": 252833
+    },
+    {
+      "index": 45,
+      "id": "4985",
+      "date": "2026-10-15",
+      "start_time": "15:15",
+      "end_time": "15:45",
+      "classroom": "F 會議室",
+      "title": "透過 ACP 解放 Terminal：打造 Coding Agent 的協作模式",
+      "speaker_display": "Neo Hsu",
+      "company_display": "TXOne Networks Staff Software Engineer",
+      "speakers": [
+        {
+          "name": "Neo Hsu",
+          "photo": "https://ccmsassets.ithome.com.tw/2026/8/12/0cabfaa8-d5ff-4865-afc2-3a11526d0a5d.png",
+          "company": "TXOne Networks Staff Software Engineer"
+        }
+      ],
+      "cover_url": "https://s.itho.me/ccms_slides/2026/10/27/e2fe87ec-4da8-4668-af37-5e5bcc4de496.jpg",
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2650/click?l=https%3A%2F%2Fs.itho.me%2Fccms_slides%2F2026%2F10%2F27%2F348fd984-cd39-46fb-9a56-2de5d238bbf3.pdf",
+      "is_pdf": true,
+      "local_filename": "20261015_1515_Neo Hsu_透過 ACP 解放 Terminal：打造 Coding Agent 的協作模式.pdf",
+      "local_path": "slides/20261015_1515_Neo Hsu_透過 ACP 解放 Terminal：打造 Coding Agent 的協作模式.pdf",
+      "filesize_str": "990.0 KB",
+      "filesize_bytes": 1013744
+    },
+    {
+      "index": 46,
+      "id": "5038",
+      "date": "2026-10-15",
+      "start_time": "15:30",
+      "end_time": "17:30",
+      "classroom": "603+604 會議室",
+      "title": "AI 驅動架構實戰：Structurizr × OpenCode",
+      "speaker_display": "郭孟坤 (Mansun Kuo)",
+      "company_display": "外商 Staff Solution Architect",
+      "speakers": [
+        {
+          "name": "郭孟坤 (Mansun Kuo)",
+          "photo": "https://ccmsassets.ithome.com.tw/2024/3/28/11e4ef25-c78a-465d-b24c-a4f9fab0b93f.jpg",
+          "company": "外商 Staff Solution Architect"
+        }
+      ],
+      "cover_url": "https://s.itho.me/ccms_slides/2026/10/19/6c1cf668-e2d6-4912-9890-9f23df7149c7.jpg",
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2635/click?l=https%3A%2F%2Fs.itho.me%2Fccms_slides%2F2026%2F10%2F19%2F26ae070b-52c3-4408-8b5d-a03982c987ac.pdf",
+      "is_pdf": true,
+      "local_filename": "20261015_1530_郭孟坤 (Mansun Kuo)_AI 驅動架構實戰：Structurizr × OpenCode.pdf",
+      "local_path": "slides/20261015_1530_郭孟坤 (Mansun Kuo)_AI 驅動架構實戰：Structurizr × OpenCode.pdf",
+      "filesize_str": "2.74 MB",
+      "filesize_bytes": 2874675
+    },
+    {
+      "index": 47,
+      "id": "5036",
+      "date": "2026-10-15",
+      "start_time": "15:30",
+      "end_time": "17:30",
+      "classroom": "607+608 會議室",
+      "title": "從瀑布式的崩潰到 AI 的拯救：用積木與 AI 助手重塑敏捷協作",
+      "speaker_display": "葉承宇 (丁哥Dean Yeh)",
+      "company_display": "LITEON Principal engineer",
+      "speakers": [
+        {
+          "name": "葉承宇 (丁哥Dean Yeh)",
+          "photo": "https://ccmsassets.ithome.com.tw/2026/8/12/552247c4-5502-4d3a-bc71-28c642861889.png",
+          "company": "LITEON Principal engineer"
+        }
+      ],
+      "cover_url": "https://s.itho.me/ccms_slides/2026/10/27/a2735c46-f1cd-497a-8719-13d243c28a1d.jpg",
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2642/click?l=https%3A%2F%2Fs.itho.me%2Fccms_slides%2F2026%2F10%2F27%2F146c3206-efd9-42f4-b4cb-61c794c5a21a.pdf",
+      "is_pdf": true,
+      "local_filename": "20261015_1530_葉承宇 (丁哥Dean Yeh)_從瀑布式的崩潰到 AI 的拯救：用積木與 AI 助手重塑敏捷協作.pdf",
+      "local_path": "slides/20261015_1530_葉承宇 (丁哥Dean Yeh)_從瀑布式的崩潰到 AI 的拯救：用積木與 AI 助手重塑敏捷協作.pdf",
+      "filesize_str": "1.90 MB",
+      "filesize_bytes": 1990215
+    },
+    {
+      "index": 48,
+      "id": "4982",
+      "date": "2026-10-15",
+      "start_time": "16:00",
+      "end_time": "16:45",
+      "classroom": "DE 會議室",
+      "title": "AI Gateway：AI 治理的第一步",
+      "speaker_display": "張哲嘉 (Che Chia Chang)",
+      "company_display": "MaiCoin SRE",
+      "speakers": [
+        {
+          "name": "張哲嘉 (Che Chia Chang)",
+          "photo": "https://ccmsassets.ithome.com.tw/2026/4/29/aa5052df-9df9-4e77-9607-1f27ed597dd1.jpg",
+          "company": "MaiCoin SRE"
+        }
+      ],
+      "cover_url": null,
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2618/click?l=https%3A%2F%2Fchechia.net%2Fslides%2F2026-10-15-hwdc-ai-gateway%2F%23%2F",
+      "is_pdf": false,
+      "local_filename": null,
+      "local_path": null,
+      "filesize_str": "外部連結"
+    },
+    {
+      "index": 49,
+      "id": "5011",
+      "date": "2026-10-15",
+      "start_time": "16:00",
+      "end_time": "16:45",
+      "classroom": "F 會議室",
+      "title": "AI 把寫程式變便宜了，那開發者還剩下什麼？",
+      "speaker_display": "鄭重男 (Nickle)",
+      "company_display": "國軍高雄總醫院 資訊室主任",
+      "speakers": [
+        {
+          "name": "鄭重男 (Nickle)",
+          "photo": "https://ccmsassets.ithome.com.tw/2026/8/12/27cf58cc-bce7-491e-a8c6-79a9694a25f9.png",
+          "company": "國軍高雄總醫院 資訊室主任"
+        }
+      ],
+      "cover_url": "https://s.itho.me/ccms_slides/2026/10/22/c05d8b79-0645-40a5-8aac-29492c3a103e.jpg",
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2649/click?l=https%3A%2F%2Fs.itho.me%2Fccms_slides%2F2026%2F10%2F22%2Fcb8b60a7-083f-4532-be1f-dc7472e11e80.pdf",
+      "is_pdf": true,
+      "local_filename": "20261015_1600_鄭重男 (Nickle)_AI 把寫程式變便宜了，那開發者還剩下什麼？.pdf",
+      "local_path": "slides/20261015_1600_鄭重男 (Nickle)_AI 把寫程式變便宜了，那開發者還剩下什麼？.pdf",
+      "filesize_str": "1.76 MB",
+      "filesize_bytes": 1849826
+    },
+    {
+      "index": 50,
+      "id": "4973",
+      "date": "2026-10-15",
+      "start_time": "16:00",
+      "end_time": "16:45",
+      "classroom": "A 會議室",
+      "title": "同一個 Prompt 為什麼差這麼多？——從踩坑到 Harness Engineering",
+      "speaker_display": "許舜雯 (Olivia Shiu)",
+      "company_display": "Amazon Web Services Solutions Architect",
+      "speakers": [
+        {
+          "name": "許舜雯 (Olivia Shiu)",
+          "photo": "https://ccmsassets.ithome.com.tw/2026/8/31/ab003ca4-592c-4cd7-acd6-a5c93a4bdd2f.jpg",
+          "company": "Amazon Web Services Solutions Architect"
+        }
+      ],
+      "cover_url": "https://s.itho.me/ccms_slides/2026/10/19/701caba0-c7fe-4a66-8cec-b4f3a41d4158.jpg",
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2607/click?l=https%3A%2F%2Fs.itho.me%2Fccms_slides%2F2026%2F10%2F19%2Fc7f11e18-1aac-482e-af94-ec1ad485a457.pdf",
+      "is_pdf": true,
+      "local_filename": "20261015_1600_許舜雯 (Olivia Shiu)_同一個 Prompt 為什麼差這麼多？——從踩坑到 Harness Engineering.pdf",
+      "local_path": "slides/20261015_1600_許舜雯 (Olivia Shiu)_同一個 Prompt 為什麼差這麼多？——從踩坑到 Harness Engineering.pdf",
+      "filesize_str": "6.69 MB",
+      "filesize_bytes": 7012286
+    },
+    {
+      "index": 51,
+      "id": "5024",
+      "date": "2026-10-15",
+      "start_time": "16:00",
+      "end_time": "16:45",
+      "classroom": "BC 會議室",
+      "title": "都用AI寫Code了，工程師若再往前一步：Product Builder",
+      "speaker_display": "劉兆恭 (JUGG)",
+      "company_display": "ProdSence 校長兼撞鐘",
+      "speakers": [
+        {
+          "name": "劉兆恭 (JUGG)",
+          "photo": "https://ccmsassets.ithome.com.tw/2026/8/12/ecfe0702-db04-400d-a9d8-8d0034d8ffb8.png",
+          "company": "ProdSence 校長兼撞鐘"
+        }
+      ],
+      "cover_url": null,
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2613/click?l=https%3A%2F%2Fgamma.app%2Fdocs%2FAI-Code--u0unw46qfsyxfot%3Fmode%3Ddoc",
+      "is_pdf": false,
+      "local_filename": null,
+      "local_path": null,
+      "filesize_str": "外部連結"
+    },
+    {
+      "index": 52,
+      "id": "4978",
+      "date": "2026-10-15",
+      "start_time": "17:00",
+      "end_time": "17:30",
+      "classroom": "BC 會議室",
+      "title": "光靠 Prompt 守不住架構：用 Lint 與 Architecture Test 打造 Agentic Coding 防護牆",
+      "speaker_display": "Neo Hsu",
+      "company_display": "TXOne Networks Staff Software Engineer",
+      "speakers": [
+        {
+          "name": "Neo Hsu",
+          "photo": "https://ccmsassets.ithome.com.tw/2026/8/12/0cabfaa8-d5ff-4865-afc2-3a11526d0a5d.png",
+          "company": "TXOne Networks Staff Software Engineer"
+        }
+      ],
+      "cover_url": "https://s.itho.me/ccms_slides/2026/10/27/df4c58cd-8b76-4df7-8959-b871c6bfc758.jpg",
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2651/click?l=https%3A%2F%2Fs.itho.me%2Fccms_slides%2F2026%2F10%2F27%2F7950849e-dfee-4038-b2c9-e57ae2ffb137.pdf",
+      "is_pdf": true,
+      "local_filename": "20261015_1700_Neo Hsu_光靠 Prompt 守不住架構：用 Lint 與 Architecture Test 打造 Agentic Coding 防護牆.pdf",
+      "local_path": "slides/20261015_1700_Neo Hsu_光靠 Prompt 守不住架構：用 Lint 與 Architecture Test 打造 Agentic Coding 防護牆.pdf",
+      "filesize_str": "461.1 KB",
+      "filesize_bytes": 472206
+    },
+    {
+      "index": 53,
+      "id": "5027",
+      "date": "2026-10-15",
+      "start_time": "17:00",
+      "end_time": "17:30",
+      "classroom": "F 會議室",
+      "title": "從 Sprint 到 Prompt：用 AIDD 從 0 打造 LINE Bot",
+      "speaker_display": "Zona Wang",
+      "company_display": "LINE 台灣 Tech Evangelist",
+      "speakers": [
+        {
+          "name": "Zona Wang",
+          "photo": "https://ccmsassets.ithome.com.tw/2026/9/10/8e11fa82-0137-4381-98c7-ecfd7a3e8e97.jpg",
+          "company": "LINE 台灣 Tech Evangelist"
+        }
+      ],
+      "cover_url": "https://s.itho.me/ccms_slides/2026/10/27/60dd2c08-a4bb-45cd-9f6a-3844348652ec.jpg",
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2643/click?l=https%3A%2F%2Fs.itho.me%2Fccms_slides%2F2026%2F10%2F27%2F10273851-c431-4c99-9118-99c943b14dbb.pdf",
+      "is_pdf": true,
+      "local_filename": "20261015_1700_Zona Wang_從 Sprint 到 Prompt：用 AIDD 從 0 打造 LINE Bot.pdf",
+      "local_path": "slides/20261015_1700_Zona Wang_從 Sprint 到 Prompt：用 AIDD 從 0 打造 LINE Bot.pdf",
+      "filesize_str": "7.23 MB",
+      "filesize_bytes": 7580854
+    },
+    {
+      "index": 54,
+      "id": "4977",
+      "date": "2026-10-15",
+      "start_time": "17:00",
+      "end_time": "17:30",
+      "classroom": "A 會議室",
+      "title": "從痛點到產品：用資料與 AI 重新定義產品的規劃邏輯",
+      "speaker_display": "孫甫璋 (udothemath)",
+      "company_display": "玉山銀行 主任工程師",
+      "speakers": [
+        {
+          "name": "孫甫璋 (udothemath)",
+          "photo": "https://ccmsassets.ithome.com.tw/2026/8/12/dd2e4eff-a339-49cd-92f9-b92616892c56.png",
+          "company": "玉山銀行 主任工程師"
+        }
+      ],
+      "cover_url": "https://s.itho.me/ccms_slides/2026/10/29/e59011c3-71cf-45f1-a961-8d26d5679a6f.jpg",
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2660/click?l=https%3A%2F%2Fs.itho.me%2Fccms_slides%2F2026%2F10%2F29%2F21e363b3-9671-449d-8bc6-a16505f5b101.pdf",
+      "is_pdf": true,
+      "local_filename": "20261015_1700_孫甫璋 (udothemath)_從痛點到產品：用資料與 AI 重新定義產品的規劃邏輯.pdf",
+      "local_path": "slides/20261015_1700_孫甫璋 (udothemath)_從痛點到產品：用資料與 AI 重新定義產品的規劃邏輯.pdf",
+      "filesize_str": "3.72 MB",
+      "filesize_bytes": 3897262
+    },
+    {
+      "index": 55,
+      "id": "5026",
+      "date": "2026-10-15",
+      "start_time": "17:00",
+      "end_time": "17:30",
+      "classroom": "DE 會議室",
+      "title": "挖掘技能的全新可能性",
+      "speaker_display": "尹相志",
+      "company_display": "數據決策股份有限公司 技術長",
+      "speakers": [
+        {
+          "name": "尹相志",
+          "photo": "https://ccmsassets.ithome.com.tw/2026/9/29/221bf28f-a189-4e02-939f-8b4806415a1b.png",
+          "company": "數據決策股份有限公司 技術長"
+        }
+      ],
+      "cover_url": "https://s.itho.me/ccms_slides/2026/10/22/930de17c-a527-48b1-b375-104c2e6d2df5.jpg",
+      "orig_slide_url": "https://ccms.ithome.com.tw/api/slideapi/2648/click?l=https%3A%2F%2Fs.itho.me%2Fccms_slides%2F2026%2F10%2F22%2Ff7156b28-f9a8-44ae-92a2-60503c89d236.pdf",
+      "is_pdf": true,
+      "local_filename": "20261015_1700_尹相志_挖掘技能的全新可能性.pdf",
+      "local_path": "slides/20261015_1700_尹相志_挖掘技能的全新可能性.pdf",
+      "filesize_str": "1.60 MB",
+      "filesize_bytes": 1673547
+    }
+  ]
+}
