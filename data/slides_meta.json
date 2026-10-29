@@ -11,7 +11,7 @@
       "start_time": "10:10",
       "end_time": "12:10",
       "classroom": "607+608 會議室",
-      "title": "AI 驅動架構實戰：Structurizr × OpenCode",
+      "title": "AI 驅動架構實戰：Structurizr × OpenCode (10/14 上午場)",
       "speaker_display": "郭孟坤 (Mansun Kuo)",
       "company_display": "外商 Staff Solution Architect",
       "speakers": [
@@ -98,13 +98,13 @@
       "local_filename": null,
       "local_path": null,
       "filesize_str": "外部連結",
-      "summary": "前端別再把 Agent 當純打字機，用 Fetch Stream 狀態機與 Abort 信號打造可取消、可續傳的即時介面。",
+      "summary": "前端別再把 Agent 當純打字機，用 Fetch Stream 狀態機與 Abort 信號建立可取消、可續傳的即時介面。",
       "pain_point": "傳統 EventSource 僅支援 GET 且事件格式死板；Agent 執行多步驟工具調用時間漫長，前端若只當字串傾倒，容易畫面卡頓，且使用者取消時後端依然空轉浪費昂貴 Token。",
       "solution": "前端以 Vue3 搭配 Fetch API（ReadableStream）取代 EventSource 處理自訂 POST 串流，並透過 AbortController 雙向貫穿前端與後端 Go 的 r.Context()；建立 AgentTimeline 狀態機管理 Step 進度與中斷續跑（Resume）。",
       "takeaways": [
         "放棄原生 EventSource：改用 Fetch Stream 處理自訂結構化 Payload，兼顧傳輸彈性與即時事件分流。",
-        "嚴格落實 Abort 取消鏈：前端觸發中斷時不視為錯誤，後端 Go 立即監聽 ctx.Done() 停止模型推論，避免無謂開銷。",
-        "時間軸狀態機（AgentTimeline）：把 Agent 思考、工具調用與回傳拆解為獨立 Step，支援失敗節點精準重試（Retry）。"
+        "執行 Abort 取消鏈：前端觸發中斷時不視為錯誤，後端 Go 立即監聽 ctx.Done() 停止模型推論，避免無謂開銷。",
+        "時間軸狀態機（AgentTimeline）：把 Agent 思考、工具調用與回傳拆解為獨立 Step，支援失敗節點重試（Retry）。"
       ]
     },
     {
@@ -130,11 +130,11 @@
       "local_filename": null,
       "local_path": null,
       "filesize_str": "外部連結",
-      "summary": "杜絕長期 Token 裸奔，以 AuthGate 集中認證、MCP Gateway 驗證憑證、GAISF 管控模型流量。",
+      "summary": "避免長期 Token 裸奔，以 AuthGate 集中認證、MCP Gateway 驗證憑證、GAISF 管控模型流量。",
       "pain_point": "AI 工具暴發導致每個 MCP/CLI 各自接 LDAP 或把 API Key、長期 Token 寫死在專案設定檔與 Shell History，憑證外洩時無法全面盤點，更無法即時撤銷特定工具權限。",
-      "solution": "打造企業級三層治理架構：AuthGate 統一整合企業身份（LDAP/Entra ID/Gitea）並簽發 OAuth/OIDC 權杖；MCP Gateway（Kong + mcp-oauth2）集中驗證 JWT 與 Scope；GAISF 作為單一流量出口進行用量分析與模型稽核；CLI 則透過 Device Flow 或 PKCE 安全取得短期憑證存放於 OS Keyring。",
+      "solution": "建立企業級三層治理架構：AuthGate 統一整合企業身份（LDAP/Entra ID/Gitea）並簽發 OAuth/OIDC 權杖；MCP Gateway（Kong + mcp-oauth2）集中驗證 JWT 與 Scope；GAISF 作為單一流量出口進行用量分析與模型稽核；CLI 則透過 Device Flow 或 PKCE 安全取得短期憑證存放於 OS Keyring。",
       "takeaways": [
-        "工作流程與授權分離：安裝 Skill 不等於擁有系統權限，所有操作必須回溯到明確的執行身份與短期憑證。",
+        "工作流程與授權分離：安裝 Skill 不等於擁有系統權限，所有操作回溯到明確的執行身份與短期憑證。",
         "集中探索與驗證：MCP Gateway 透過 401 與 Protected Resource Metadata（PRM）指引授權端點，後端只專注工具邏輯。",
         "全生命週期視覺化：提供自服務管理後台讓使用者能看清授權期限、調用 Scope，並能在外洩時一鍵撤銷存取。"
       ]
@@ -163,13 +163,13 @@
       "local_path": "slides/20261014_1115_楊騏 (Ci)_產出的人不能驗自己：AI 時代的驗收設計.pdf",
       "filesize_str": "6.24 MB",
       "filesize_bytes": 6538291,
-      "summary": "同一個 AI Session 不能自己驗收自己，以 SDD 規格先行結合全新獨立 Reviewer 打造防護網。",
+      "summary": "同一個 AI Session 不能自己驗收自己，以 SDD 規格先行結合全新獨立 Reviewer 建立防護網。",
       "pain_point": "讓寫 Code 的同一個 AI Session 自己跑審查或驗收，必然產生「球員兼裁判」的確認偏差（把 Bug 視為預期行為）；跨 Repo 前後端規格不一致，AI 經常自創不存在的元件與欄位。",
       "solution": "實施 SDD（Specification-Driven Development）× Test Harness 責任鏈架構：定義最多 7 條的具體 AC（驗收標準，堅持「先紅後綠」），以 Constitution 強制沒來源就標註 not_found；透過 Storybook × MCP 讓 AI 只能引用真實元件庫；並調度未看過實作過程的「全新獨立 Reviewer」嚴格執行 E2E 與代碼審查。",
       "takeaways": [
-        "產出與驗收嚴格解耦：禁止同一個上下文自審，必須由無偏見的獨立 Reviewer 或自動化測試 Harness 進行驗證。",
-        "先紅後綠的驗收邊界：在 AI 動工寫功能前，必須先有能證明「當前會失敗」的測試案例，杜絕無效代碼放行。",
-        "精準是一條管線而非單一 Prompt：透過規範契約（AR）、隔離環境驗證與自檢報告，建立錯了收得回來的安全放手藍圖。"
+        "產出與驗收解耦：禁止同一個上下文自審，由無偏見的獨立 Reviewer 或自動化測試 Harness 進行驗證。",
+        "先紅後綠的驗收邊界：在 AI 動工寫功能前，先有能證明「當前會失敗」的測試案例，避免無效代碼放行。",
+        "是一條管線而非單一 Prompt：透過規範契約（AR）、隔離環境驗證與自檢報告，建立錯了收得回來的安全放手藍圖。"
       ]
     },
     {
@@ -231,11 +231,11 @@
       "filesize_bytes": 12101708,
       "summary": "刻 Agent 框架最難的不是跑 Loop，而是用軌跡評估、Context 精算與確定性規則鎖死出錯邊界。",
       "pain_point": "幾行代碼就能串起 LLM Tool Loop，但上線後卻頻繁遭遇：模型跳過關鍵步驟自己捏造報告、Context 塞滿原始日誌觸發「迷失在中間」迫使更換昂貴大模型、金流扣款等關鍵操作失控且難以追查重現。",
-      "solution": "打造工程級 Agent 框架防線：Context 精準裁剪（工具完整結果留在 Runtime，只傳引用或摘要給模型）；實施雙軌評測（軌跡評估 Trajectory 驗證 Tool 是否按順序調用，結果評估 Outcome 驗收輸出品質）；不可接受的錯誤（如日期、金額）以硬性代碼檢查取代 LLM 自由發揮；高風險操作強制導入 HITL（Human-in-the-Loop）。",
+      "solution": "建立工程級 Agent 框架防線：Context 精準裁剪（工具完整結果留在 Runtime，只傳引用或摘要給模型）；實施雙軌評測（軌跡評估 Trajectory 驗證 Tool 是否按順序調用，結果評估 Outcome 驗收輸出品質）；不可接受的錯誤（如日期、金額）以硬性代碼檢查取代 LLM 自由發揮；高風險操作強制導入 HITL（Human-in-the-Loop）。",
       "takeaways": [
         "Context 控制關乎模型選型與穩定度：日誌先過濾再進 Prompt，避免 Context 膨脹引發注意力渙散與成本失控。",
         "評測不是打分數，而是驅動迭代：踩過的坑轉為凍結回歸測試集，以 Eval 驗證 Skill 修改，不靠人肉憑感覺改 Prompt。",
-        "把不可接受的錯誤做成代碼檢查：零容忍的業務限制嚴禁仰賴模型自律，必須由 Runtime 外部邏輯或工具強行鎖死。"
+        "把不可接受的錯誤做成代碼檢查：零容忍的業務限制嚴禁仰賴模型自律，由 Runtime 外部邏輯或工具強行鎖死。"
       ]
     },
     {
@@ -245,7 +245,7 @@
       "start_time": "13:00",
       "end_time": "15:00",
       "classroom": "605+606 會議室",
-      "title": "讓 AI Agent、MCP Server、CLI 安全登入的實作工作坊",
+      "title": "讓 AI Agent、MCP Server、CLI 安全登入的實作工作坊 (10/14 工作坊)",
       "speaker_display": "吳柏毅 (appleboy)",
       "company_display": "Mediatek 工程師",
       "speakers": [
@@ -266,7 +266,7 @@
       "solution": "實作標準 OAuth 2.0 / OIDC 授權流程於 MCP：當 Client 未帶 Token 呼叫時，MCP 回應 401 並附帶 Protected Resource Metadata（PRM）；Client 依此至 Signet 授權伺服器透過 Authorization Code + PKCE 取得短期 Access Token；MCP Server 或 Gateway 透過 JWKS 公鑰驗證簽章與 Scope 後方可執行底層工具。",
       "takeaways": [
         "401 是安全交握的起點：透過 WWW-Authenticate 與 PRM 建立動態元資料探索，不需在 Client 寫死驗證伺服器資訊。",
-        "PKCE 保護公開客戶端：CLI 與本機 Agent 無法安全保管 Client Secret，必須採用 PKCE 防止授權碼中途攔截。",
+        "PKCE 保護公開客戶端：CLI 與本機 Agent 無法安全保管 Client Secret，採用 PKCE 防止授權碼中途攔截。",
         "雙層權限控管：通過 Gateway 的 Scope 驗證僅代表具備進入資格，後端仍需針對特定工單與資源進行細部權限檢查。"
       ]
     },
@@ -330,7 +330,7 @@
       "pain_point": "引入 AI 後工程師誤以為能同時推進多個任務，結果頻繁在不同工作間切換（Context Switching），冰山之下堆積大量 WIP（未完成工作），注意力被撕裂且難以重回深度思考心流。",
       "solution": "建立「動態專注循環」（AI 平行工作，人類單點專注）：導入布魯姆認知分層，將目標從看懂代碼提升至「能預測行為與定位證據」；任務中斷或切換時填寫「脈絡重啟卡」（記錄 Where 目前進度、Why 當前假設、Next 下一步驗證），取代粗淺的文字摘要，確保切換回來時秒速恢復情境。",
       "takeaways": [
-        "拒絕偽多工陷阱：人腦無法平行處理高注意力工作，應維持單一主焦點（Main Focus），嚴格限制 WIP 數量。",
+        "拒絕偽多工陷阱：人腦無法平行處理高注意力工作，應維持單一主焦點（Main Focus），限制 WIP 數量。",
         "脈絡重啟卡取代純摘要：摘要只交代發生什麼，重啟卡則凍結「思考方向與當前假設」，讓大腦無痛接軌。",
         "追求高階理解（第 4~5 層）：不僅要看懂 AI 寫了什麼，更要能在系統出事時說出底層因果並知道上哪找證據。"
       ]
@@ -359,13 +359,13 @@
       "local_path": "slides/20261014_1330_張維峻 (Justin)_LLM Wiki：企業內部知識問答系統的架構演進.pdf",
       "filesize_str": "3.10 MB",
       "filesize_bytes": 3255042,
-      "summary": "規範更新不再引發問答災難，用知識編譯與 Blast Radius PR 機制打造可回歸驗證的 LLM Wiki。",
+      "summary": "規範更新不再引發問答災難，用知識編譯與 Blast Radius PR 機制建立可回歸驗證的 LLM Wiki。",
       "pain_point": "企業知識庫一更新，傳統 RAG 常因直接 Chunking 導致新舊規範並存衝突、生效日期與前置條件脫鉤，且缺乏代碼級的回歸測試機制，改動一處卻暗中破壞其他問答品質。",
       "solution": "建構「LLM Wiki」與知識編譯（Knowledge Compilation）架構：將知識庫拆為 RAW（來源證據層）與 WIKI（知識產物層，Concepts 與 Claims）；每次法規或規範異動均開立「Knowledge Change PR」，透過模型推導出 Blast Radius Map（衝擊影響範圍地圖），並在合併前跑凍結 Golden Test Set 進行自動化回歸評測與 Judge 偏誤審查。",
       "takeaways": [
         "知識即代碼（Knowledge as Code）：以 PR 流程管理規範變更，清楚界定變更範圍與 Blast Radius 影響面。",
         "RAW 與 WIKI 分層：原始規章不直接暴露給檢索，需先編譯為具有確切適用條件、主詞與日期的實體知識頁面。",
-        "凍結評測集防禦回歸：每次知識庫更新必須驗證歷史金牌題庫（Golden Set），防止修正新法規卻搞砸既有業務答覆。"
+        "凍結評測集防禦回歸：每次知識庫更新驗證歷史金牌題庫（Golden Set），防止修正新法規卻搞砸既有業務答覆。"
       ]
     },
     {
@@ -396,8 +396,8 @@
       "pain_point": "電力交易分散式系統（Order/Wallet/MatchEngine）結構複雜，AI 生成的代碼表面看似跑通，但暗藏冪等性破綻與資料不一致；盲目調高平行度（Consumer）反而因鎖爭奪導致撮合效率腰斬，缺乏科學驗收標準。",
       "solution": "建立角色化 AI 工作流（Role-based AI Workflow）：透過 SKILL.md 明確定義架構審查（eap-architect-review）、效能分析（eap-performance-review，嚴禁直接動代碼）、實作與 QA 專責角色；效能調校堅持「數據假設 → 瓶頸量測 → 批次優化（如完成狀態批次寫回使 SQL 次數從 3 萬次降至 32 次）」；並由人類把關加入真實買賣交錯到達的混合壓測情境。",
       "takeaways": [
-        "限制角色職責：嚴格要求分析角色只提假設與量測方案，禁止擅自修改代碼，防止「頭痛醫頭」的惡性改動。",
-        "數字說話拒絕直覺：多開 Worker 不等於效能提升，必須依據監控鏈路指標定位資料庫與 Redis 的熱點鎖爭用。",
+        "限制角色職責：要求分析角色只提假設與量測方案，禁止擅自修改代碼，防止「頭痛醫頭」的惡性改動。",
+        "數字說話拒絕直覺：多開 Worker 不等於效能提升，依據監控鏈路指標定位資料庫與 Redis 的熱點鎖爭用。",
         "人類掌舵真實業務邊界：AI 擅長跑測試與寫代碼，但只有人類工程師能洞察測試盲點（如補充非對稱撮合情境）。"
       ]
     },
@@ -408,7 +408,7 @@
       "start_time": "14:15",
       "end_time": "15:00",
       "classroom": "A 會議室",
-      "title": "從寫得快到交付可信的 AI Coding 工程戰場",
+      "title": "從寫得快到交付可信的 AI Coding 工程戰場 (10/14 演講)",
       "speaker_display": "陳葵懋 (Ian Chen)",
       "company_display": "一等一科技 研發部主任工程師",
       "speakers": [
@@ -427,7 +427,7 @@
       "filesize_bytes": 2754039,
       "summary": "把真人團隊的開工與防線翻譯成 Agent Team，用 OpenSpec 定規格、Harness 管卡攔截違規交付。",
       "pain_point": "AI 兩週產出 5.3 萬行代碼造成「審查塞車」，交付瓶頸轉移至人類驗收；單一 Agent 包辦寫、測、審淪為球員兼裁判；Prompt 祈求式規範（「請遵守」）屢屢被模型無視，架構腐蝕與資安弱點失控。",
-      "solution": "打造「有依據的 Spec + 會擋人的 Harness」Agent Team 體系：以 OpenSpec 撰寫 RFC 2119 規範詞（SHALL/WHEN/THEN）的結構化 tasks.md，人確認後才準開工；主協調 Agent（team-pipeline）按最小權限依序派工 Coding、Verify、Code Reviewer（唯讀、上下文隔離、嚴禁自發呼叫，依據 ARCH 團隊架構條款查核）、Fortify 資安掃描，全數通過方可交付。",
+      "solution": "建立「有依據的 Spec + 會擋人的 Harness」Agent Team 體系：以 OpenSpec 撰寫 RFC 2119 規範詞（SHALL/WHEN/THEN）的結構化 tasks.md，人確認後才準開工；主協調 Agent（team-pipeline）按最小權限依序派工 Coding、Verify、Code Reviewer（唯讀、上下文隔離、嚴禁自發呼叫，依據 ARCH 團隊架構條款查核）、Fortify 資安掃描，全數通過方可交付。",
       "takeaways": [
         "把「請你遵守」變成「沒做到就擋下」：放棄 Prompt 祈禱，改用 Hook 與 Harness 在 Pipeline 實施確定性卡控。",
         "上下文完全隔離：Reviewer Agent 絕不能共享 Coding 的記憶與對話脈絡，以確保以客觀第三方標準核對 Spec。",
@@ -458,7 +458,7 @@
       "local_path": "slides/20261014_1415_王宏仁_讓IT主管睡不著的課題，台灣企業Agent規模化的聖杯考驗.pdf",
       "filesize_str": "8.51 MB",
       "filesize_bytes": 8923856,
-      "summary": "臺灣企業 Agent 規模化不是拚酷炫而是拚治理，從雲原生轉向 AI 原生架構以撐住組織韌性。",
+      "summary": "臺灣企業 Agent 規模化以拚治理取代拚酷炫，從雲原生轉向 AI 原生架構以撐住組織韌性。",
       "pain_point": "iThome 2026 大調查顯示：企業 AI 預算翻倍暴增（占 IT 預算比重創歷史新高 6.4%），但 93% 以上資源仍卡在既有維運；當 AI 從個人助手走向多 Agent 跨流程自動化，面臨資安合規、失控衝擊、醫療等產業法規限制，以及缺乏數位勞動力治理體系的聖杯考驗。",
       "solution": "推動企業級 AI 原生轉型與全面治理架構：由上而下（Top-Down）制定 Agentic AI 戰略；架構從純雲原生跨向 AI 原生（情境工程 Context Engineering 崛起、17% 企業導入 MCP 協定）；由 IT 部門帶頭建立企業內部 AI Agent 平台（如 JPMorgan LLM Suite / Ask David 模式），並將治理範疇擴展至 SecOps、財會風控與跨系統流程自動化。",
       "takeaways": [
@@ -526,7 +526,7 @@
       "filesize_bytes": 917708,
       "summary": "非工程師靠小步迭代與 AI 導師跨界開發，團隊用 Harness 與輕量文件取代厚重規格書。",
       "pain_point": "金融團隊讓非工程同仁（BA/PM/UX）全員開發時，面臨「不知道自己在幹嘛、出事無法維護」的迷航；工程師則面臨每人架構寫法各自為政、程式碼風格破碎的混亂。",
-      "solution": "採用 Claude Code 與 AI 隊友（Agent），推動「小步推進、把 AI 當導師」；為團隊建立 CLAUDE.md 與 Harness 機制收斂開發慣性；需求探索左移、規格與需求脫鉤，落實「AI 給建議、人覆核、人決定、人負責」。",
+      "solution": "採用 Claude Code 與 AI 隊友（Agent），推動「小步推進、把 AI 當導師」；為團隊建立 CLAUDE.md 與 Harness 機制收斂開發慣性；需求探索左移、規格與需求脫鉤，執行「AI 給建議、人覆核、人決定、人負責」。",
       "takeaways": [
         "從盲目 Vibe Coding 走向 Harness 治理：踩過的坑轉化為 CLAUDE.md 規範與檢查機制，收斂全團隊的開發慣性。",
         "需求探索與驗證左移：先用 AI 草稿原型釐清業務意圖，需求與規格脫鉤，規格可換、螺絲別過早鎖死。",
@@ -557,9 +557,9 @@
       "local_path": "slides/20261014_1515_謝政廷 (Duran Hsieh)_從 Hello World 看懂 AI 開發工具的計費結構——如何省得到錢.pdf",
       "filesize_str": "3.64 MB",
       "filesize_bytes": 3821684,
-      "summary": "看懂無狀態與 KV Cache 機制，靠前綴命中、延遲載入與 TOON 格式斬斷 Agent 帳單暴增。",
+      "summary": "看懂無狀態與 KV Cache 機制，靠前綴命中、延遲載入與 TOON 格式阻斷 Agent 帳單暴增。",
       "pain_point": "Agent 迴圈與多輪對話導致請求呈平方級膨脹，62% 成本浪費在重送系統提示、工具 schema 與歷史紀錄，簡單任務兩分鐘燒掉數百萬 Token。",
-      "solution": "剖析輸入、快取、輸出與推理四種計價結構；以前綴錨定提高 KV 快取命中（靜態指令放前、變動放後、會話中不換模型）；啟用 Tool Search 延遲載入工具（token 降 85%）；表格資料改用 TOON 格式取代 JSON（省 30~60%）；落實「大象規劃、金魚執行」分離架構。",
+      "solution": "剖析輸入、快取、輸出與推理四種計價結構；以前綴錨定提高 KV 快取命中（靜態指令放前、變動放後、會話中不換模型）；啟用 Tool Search 延遲載入工具（token 降 85%）；表格資料改用 TOON 格式取代 JSON（省 30~60%）；執行「大象規劃、金魚執行」分離架構。",
       "takeaways": [
         "善用 KV Cache 命中規則：靜態指令與工具定義放最前，動態變數放最後，會話中絕不隨意換模型或工具，享受一折快取價。",
         "工具與 Context 輕量化：關閉閒置 MCP，超過 10 個工具啟用 Tool Search 延遲載入，表格日誌改用 TOON 取代 JSON。",
@@ -590,9 +590,9 @@
       "local_path": "slides/20261014_1515_許庭魁 (Jerry Hsu)_穩才是快 ～ 以 OKF 打造 Agentic AIOps 治理閉環.pdf",
       "filesize_str": "4.64 MB",
       "filesize_bytes": 4868905,
-      "summary": "以 OKF 知識格式與 USF 安全邊界，透過三份產出物與三道 Gate 打造可回滾的維運閉環。",
+      "summary": "以 OKF 知識格式與 USF 安全邊界，透過三份產出物與三道 Gate 建立可回滾的維運閉環。",
       "pain_point": "AI Agent 缺乏企業系統歷史脈絡，容易自行越權選錯工具執行危險指令；維運異動缺乏不可竄改的審核證據與回滾手段，企業不敢讓 Agent 接管正式環境。",
-      "solution": "打造 Agentic AIOps 治理架構：採用 Google OKF (Open Knowledge Format) 標準化 Agent 跨輪知識與記憶；採用 OWASP USF (Universal Skill Format) 進行工具權限最小化與風險分級 (L0~L3) 簽章校驗；建立三份 Artifact 與三道 Gate（todo.md 決策門 -> workitem.md 執行門 -> worklog.md 結案門）；實施身分隔離，變更僅由 Outbound-only Zone Worker 執行。",
+      "solution": "建立 Agentic AIOps 治理架構：採用 Google OKF (Open Knowledge Format) 標準化 Agent 跨輪知識與記憶；採用 OWASP USF (Universal Skill Format) 進行工具權限最小化與風險分級 (L0~L3) 簽章校驗；建立三份 Artifact 與三道 Gate（todo.md 決策門 -> workitem.md 執行門 -> worklog.md 結案門）；實施身分隔離，變更僅由 Outbound-only Zone Worker 執行。",
       "takeaways": [
         "Workflow First，Agent 只是可替換 Worker：以 todo.md / workitem.md / worklog.md 三道 Gate 固化流程，狀態機才是唯一真相。",
         "OKF 知識標準化 ＋ USF 技能邊界：用 OKF 讓 Agent 記憶有版控可追溯，用 OWASP USF 透過 hash 與最小權限規範 Agent 行為。",
@@ -661,7 +661,7 @@
       "solution": "藉由敏捷工作坊體驗遊戲（背對背積木還原、CEO-秘書-觀察員紙條傳遞），具體暴露單向溝通與多層轉譯帶來的認知失真；推動現場雙向確認、即時回饋與扁平化對齊機制，在動用 AI 前先把真實需求與驗收共識梳理清楚。",
       "takeaways": [
         "溝通的本質是建立「雙向回饋迴圈」：單向拋出指令（如同背對背拼積木）只會產生巨大偏差，驗證理解才能確保一致。",
-        "減少組織轉譯層次：層層轉發（如 CEO 經秘書轉譯給職員）會嚴重衰減意圖，跟 AI 協作前，團隊必須先在源頭釐清真實需求。"
+        "減少組織轉譯層次：層層轉發（如 CEO 經秘書轉譯給職員）會嚴重衰減意圖，跟 AI 協作前，團隊先在源頭釐清真實需求。"
       ]
     },
     {
@@ -688,12 +688,12 @@
       "local_path": "slides/20261014_1530_楊騏 (Ci)_把「做完了」寫下來：90 分鐘做出一份機器能檢查的驗收清單.pdf",
       "filesize_str": "5.17 MB",
       "filesize_bytes": 5425826,
-      "summary": "落實「產出的人不能驗自己」，用具體邊界 AC 與獨立盲測 Agent 打造機器可驗收的責任鏈。",
+      "summary": "執行「產出的人不能驗自己」，用具體邊界 AC 與獨立盲測 Agent 建立機器可驗收的責任鏈。",
       "pain_point": "AI 開發常陷入「同一個 Agent 自己寫 code 自己說測試全過」的偽綠假象，甚至在通過測試的背後藏著覆寫配置檔的嚴重 bug；「看起來做完了」成為唯一訊號，工程師被迫當肉眼抓漏工。",
       "solution": "提出 SDD + Harness 實作框架（開源 ci-yang/sdd-harness），貫徹「產出的人不能驗自己」原則。將驗收分層為規格 AC（具備具體邊界值、外部可見結果、標註機器驗/人看指令，先紅再綠 TDD）與 E2E 情境；引入「沒看過過程的第三方 Agent」進行獨立盲測與自檢報告，建立三層責任鏈與人閘控制。",
       "takeaways": [
-        "產出者不能驗自己：同一個 Agent 寫完 code 測自己的 code 容易串通盲目 Pass，必須派一個沒看過過程的全新 Agent 複驗。",
-        "可核對的 AC 寫法：AC 必須包含「具體邊界值、外部可見結果、標註機器驗/人看指令」，不留模糊空間。",
+        "產出者不能驗自己：同一個 Agent 寫完 code 測自己的 code 容易串通盲目 Pass，派一個沒看過過程的全新 Agent 複驗。",
+        "可核對的 AC 寫法：AC 包含「具體邊界值、外部可見結果、標註機器驗/人看指令」，不留模糊空間。",
         "責任鏈與人閘控制：不可逆/高風險變更人一定在迴圈（Human-in-the-loop），低風險可逆任務才放手交給自動化 Harness。"
       ]
     },
@@ -723,7 +723,7 @@
       "filesize_bytes": 8319703,
       "summary": "以宣告需求取代手動交接密碼，透過 Key Vault 容器先好與系統自動注入實現機敏資訊自助化。",
       "pain_point": "機敏資訊散落在開發者 Repo、SRE Repo、CI/CD 變數與通訊軟體各處；建立一組連線需跨多部門人工傳遞，「密碼不進 Repo」最後變成「進了維運人員的 Repo」，管理員淪為人工審批瓶頸。",
-      "solution": "重塑機敏資訊治理角色拓樸，落實「開發者不需要知道密碼，但仍能完成工作」與「系統取得，不是人取得」。設計五步 Secret Workflow：1. 宣告需求（以 IaC 宣告連線需求而非密碼）-> 2. PR 審查變更 -> 3. Pipeline 先建 Key Vault 容器 -> 4. 合規持密者填入 Secret -> 5. 部署時由系統憑證（Managed Identity）自動讀取；搭配 AI Skill 降低 PR 理解成本，打造全自助 Golden Path。",
+      "solution": "重塑機敏資訊治理角色拓樸，執行「開發者不需要知道密碼，但仍能完成工作」與「系統取得，不是人取得」。設計五步 Secret Workflow：1. 宣告需求（以 IaC 宣告連線需求而非密碼）-> 2. PR 審查變更 -> 3. Pipeline 先建 Key Vault 容器 -> 4. 合規持密者填入 Secret -> 5. 部署時由系統憑證（Managed Identity）自動讀取；搭配 AI Skill 降低 PR 理解成本，建立全自助 Golden Path。",
       "takeaways": [
         "開發者不需要知道密碼：將關注點從「密碼內容」轉向「需求宣告（IaC）」，開發者只要在架構中宣告需要什麼連線。",
         "容器先好、持密者填值、系統自行讀取：分階段治理，Pipeline 先建好 Key Vault 容器，再由合規持密者填入，運行時由系統憑證自動掛載，人手不碰 Secret。",
@@ -890,9 +890,9 @@
       "local_path": "slides/20261014_1700_戚務漢 (Caesar)_可製造的 AI：讓 AI 成為工廠的第二大腦.pdf",
       "filesize_str": "3.13 MB",
       "filesize_bytes": 3284653,
-      "summary": "將製造 Know-how 參數化為可驗證的資料流，以刀模工程與三角協作打造工廠第二大腦。",
+      "summary": "將製造 Know-how 參數化為可驗證的資料流，以刀模工程與三角協作建立工廠第二大腦。",
       "pain_point": "包裝製造流程繁瑣，多樣客製需求溝通成本極高（需求散落 Excel/聊天記錄、尺寸頻繁修改、工廠與業務脫節）；一般 AI Agent 只能聊天打字，無法直接承接工業級物理規格、材料公差與量產條件。",
-      "solution": "打造「可製造的 AI（AI Manufacturing）」交付系統 Cympack AI。將工廠製造 Know-how（刀模、紙厚、公差、BOM、設備限制）工程化；建立「AI Agent × 製造校正師 × 工程師」三角協作體系；利用資料流驅動（Spec Snapshot、參數化刀模、3D 預覽、工單組裝），結合 UID 串聯從接單、自動生成 DXF/PDF 刀模、生產到售後數位產品流（ProductFlow）。",
+      "solution": "建立「可製造的 AI（AI Manufacturing）」交付系統 Cympack AI。將工廠製造 Know-how（刀模、紙厚、公差、BOM、設備限制）工程化；建立「AI Agent × 製造校正師 × 工程師」三角協作體系；利用資料流驅動（Spec Snapshot、參數化刀模、3D 預覽、工單組裝），結合 UID 串聯從接單、自動生成 DXF/PDF 刀模、生產到售後數位產品流（ProductFlow）。",
       "takeaways": [
         "Agent 不是產品，受產業約束的「資料流」才是產品：製造 Agent 專注在端到端交付（BOM、刀模、報價、工單），而非單純聊天。",
         "製造 Know-how 參數化與工程化：把紙材厚度、糊邊、折線干涉與公差變成 AI 可驗證執行的規則，消除物理無法生產的風險。",
@@ -939,7 +939,7 @@
       "start_time": "10:10",
       "end_time": "12:10",
       "classroom": "603+604 會議室",
-      "title": "AI Coding 治理實戰：從開發到交付的Harness工程",
+      "title": "AI Coding 治理實戰：從開發到交付的Harness工程 (10/15 演講)",
       "speaker_display": "陳葵懋 (Ian Chen)",
       "company_display": "一等一科技 研發部主任工程師",
       "speakers": [
@@ -955,12 +955,12 @@
       "local_filename": null,
       "local_path": null,
       "filesize_str": "外部連結",
-      "summary": "從『寫得快』邁向『交付可信』：以 OpenSpec 規格驅動開發，並用 Harness 關卡與唯讀權限隔離真人團隊角色，落實能用工具判定就不靠模型盲猜的工程防線。",
-      "pain_point": "AI 生成代碼速度極快（兩週可產 5.3 萬行），人工逐行 Review 完全跟不上；若由單一 Agent 自寫、自測、自審形成『球員兼裁判』，易產生盲點與規格偏離，純靠提示詞叮嚀毫無硬性約束力。",
-      "solution": "導入 OpenSpec 定義可驗證情境（WHEN/THEN）並及時 archive 沉澱現況；設計 team-pipeline 協調 Coding、Code Reviewer（唯讀工具權限隔離）與 Fortify Preverify 專職 Agent；搭配 PreToolUse/Stop Hook 與架構測試（ArchUnit/NetArchTest）進行確定性卡關，最終合併權限保留在人類手中。",
+      "summary": "AI 兩週寫了 5.3 萬行，人審不完。用 OpenSpec 定規格，用唯讀權限和 Harness 把違規交付擋在門外。",
+      "pain_point": "AI Coding 產出暴增，但程式碼隱含規格漂移與架構污染，人類 Reviewer 根本無法逐行審查 5 萬行代碼。",
+      "solution": "導入 OpenSpec RFC 2119 驗收邊界，配合 team-pipeline 角色權限隔離與 Hook 硬防線，違規代碼直接在 CI 阻斷。",
       "takeaways": [
         "能用工具判定，就不要交給模型判斷：以 Hook、編譯警告與架構測試把關規範，硬性攔截不合格代碼，而非寄望模型自律。",
-        "職責與上下文嚴格隔離：拆分 Coding 與 Reviewer 角色，Reviewer 僅給予唯讀權限並從已確認的 Spec 獨立比對，避免球員兼裁判。",
+        "職責與上下文隔離：拆分 Coding 與 Reviewer 角色，Reviewer 僅給予唯讀權限並從已確認的 Spec 獨立比對，避免球員兼裁判。",
         "方法（Skill）、標準（Team Rules）與需求（Spec）三分開：需求與規則變更不影響執行方法，確保工程流程具備高度可重用性。"
       ]
     },
@@ -988,9 +988,9 @@
       "local_path": "slides/20261015_1010_柯仁傑 (David Ko敏捷三叔公)_AI 時代下,軟體團隊要怎麼設計.pdf",
       "filesize_str": "5.06 MB",
       "filesize_bytes": 5305161,
-      "summary": "AI 時代的研發瓶頸已從『產出代碼』轉移至『下游驗證』：面對暴增 72% 的 PR 與膨脹 300% 的 QA 負擔，軟體團隊必須重構分工，從先寫程式轉向實例化需求共識與多道工程門檻。",
-      "pain_point": "團隊掉入 Speed Trap（速度陷阱）：工程師用 AI 大量產出功能，導致 PR 體積暴增、76% PR 未經審查即合併，下游 QA 與線上事故激增；團隊在產出速度假象中疲於奔命，反而陷入嚴重的審查與維護黑洞。",
-      "solution": "重塑團隊協作流程：開工前推行 Example Mapping（PO、Dev、QA 共同定義具體實例），落實實例化需求先行；借鑑 Uncle Bob 的專責 Agent 分工（Specifier、Coder、Cleaner、Hardener、QA）；讓 AI 產出與人類代碼通過相同的自動化品質門檻。",
+      "summary": "AI 讓 PR 多了 72%，QA 負擔漲 300%，瓶頸從寫程式換成驗證。作法是先用實例化需求對齊，再加多道工程門檻。",
+      "pain_point": "團隊以為寫程式變快就是敏捷，結果下游 QA 被暴增 300% 的測試淹沒，綠燈很多但系統品質卻沒有變好。",
+      "solution": "避開 Speed Trap 速度陷阱，在寫代碼前以實例化需求（Example Mapping）對齊邊界，並建立多層防線。",
       "takeaways": [
         "警惕 Speed Trap 陷阱：RD 省下的時間往往變成 QA 的回歸負擔；單純加速實作若無相應驗收防線，只會加速累積技術債。",
         "團隊以『對齊意圖』為核心：在 AI 動工前先用具體範例定義什麼是『對』，讓後續實作與測試都有客觀且可回溯的依據。",
@@ -1020,13 +1020,13 @@
       "local_filename": null,
       "local_path": null,
       "filesize_str": "外部連結",
-      "summary": "拆解 Vibe Coding 的虛與實：用 Google AI Studio Build 模式免信用卡極速打造雲端原型，並透過 Antigravity 建立 Human-in-the-loop 三問驗收法，確保生成的應用真正可用。",
+      "summary": "拆解 Vibe Coding 的虛與實：用 Google AI Studio Build 模式免信用卡極速建立雲端原型，並透過 Antigravity 建立 Human-in-the-loop 三問驗收法，確保生成的應用真正可用。",
       "pain_point": "初學者與工程師嘗試 Vibe Coding 時，常面臨繁重環境建置（IDE、資料庫、Token 計費）的心理門檻；且往往誤信 AI 口頭宣告的『已完成』，導致部署上線後介面假死、邏輯缺漏卻無從排查。",
       "solution": "以 Google AI Studio Build 模式作為零門檻起點，快速生成 Web 原型並一鍵免費部署至 Cloud Run；串聯 Antigravity（2.0、IDE、CLI、SDK）執行 Human-in-the-loop 閉環，透過三問驗收法要求提出客觀運作證據，再交由 AI 迭代修正。",
       "takeaways": [
-        "Vibe Coding 的界線：人負責掌舵與驗收、AI 負責改 Code；不能盡信模型說法，人必須親自測試可見行為。",
+        "Vibe Coding 的界線：人負責掌舵與驗收、AI 負責改 Code；不能盡信模型說法，人親自測試可見行為。",
         "零環境負擔的敏捷原型：善用 Google AI Studio 免信用卡與免費部署 2 個 Apps 的特性，先做出最小可行產品（MVP）再談架構複雜度。",
-        "三問驗收回饋法：不以 AI 說完成為依據，透過提問索取實體執行證據，將驗收發現的缺陷精準轉化為下一輪修改提示詞。"
+        "三問驗收回饋法：不以 AI 說完成為依據，透過提問索取實體執行證據，將驗收發現的缺陷轉化為下一輪修改提示詞。"
       ]
     },
     {
@@ -1057,7 +1057,7 @@
       "pain_point": "只追求當下功能做完，容易引發單檔職責膨脹、重複代碼拷貝（如多套分頁編解碼）及模組反向依賴（如 Service 逆向 import Controller）；個人摸索出的有效 Prompt 與修復經驗無法在團隊跨專案沉澱重用。",
       "solution": "建立三層工程體系：事前對齊 Domain 語言、ADR 與 Given/When/Then 驗收工單；事中推行 Atomic Implementation Loop（拆成可驗證增量，搭配 Policy Reviewer 與確定性工具檢查）；事後透過 Team Skill Library 與 CLI 分發共用規則與能力。",
       "takeaways": [
-        "三維度診斷工作環境：全面檢視 AI 是否清楚要做什麼（Context）、不能怎麼做（Constraints）、以及何時偏離（Feedback）。",
+        "三維度診斷工作環境：檢視 AI 是否清楚要做什麼（Context）、不能怎麼做（Constraints）、以及何時偏離（Feedback）。",
         "載體職責分明：確定性規則交給 Tool（Linter/依賴圖），重複方法交給 Skill，角色邊界交給 Agent，避免用模型語意硬猜明確規則。",
         "資產共享與專案延伸：集中維護通用團隊能力（如 Dependency Checker），各 Repo 保留特有規則，實現標準持續演進。"
       ]
@@ -1086,13 +1086,13 @@
       "local_path": "slides/20261015_1115_吳勝繙 (Chris)_MCP 時代的 AI Agent 資安攻防.pdf",
       "filesize_str": "436.4 KB",
       "filesize_bytes": 446890,
-      "summary": "模型調用工具時，安全防線必須移至架構層：解析 MCP 工具描述投毒（Tool Poisoning）、Prompt 注入與行為層供應鏈攻擊，從 Zeabur 邊界橫移事件剖析憑證隔離與 Harness 硬防護。",
-      "pain_point": "傳統資安工具（SBOM、代碼掃描）只能檢查靜態程式碼，管不到自然語言撰寫的 MCP Tool Description；外部工具『載入即曝險』，且將 LLM 語意判斷當作唯一安全防線易遭條件繞過（如蔓蔓攻擊），導致環境變數與高權限金鑰外洩。",
-      "solution": "落實三大防禦守則：Token 永不進 LLM Context 與明文環境變數；工具執行層落實最小權限原則（PoLP）並與內網機敏資料嚴格隔離；建立 Harness-level 邊界，將決策層與執行層徹底解耦，並對 MCP Tool Description 的 diff 建立審查機制。",
+      "summary": "MCP 工具描述本身就能下毒。SBOM 和代碼掃描管不到，防線得放在架構層：憑證隔離加 Harness 硬防護。",
+      "pain_point": "第三方 MCP Server 具備執行與網路權限，工具提示詞注入（Tool Poisoning）可在載入瞬間發起攻擊並橫向移動。",
+      "solution": "憑證與金鑰永不進入 LLM Context，在 Gateway 層做 Audience / Scope 隔離，以確定性 Harness 攔截異常指令。",
       "takeaways": [
         "載入即曝險新型威脅：MCP Server 的工具描述在連線初始化時即進入 Context，惡意指令能在工具被選取前就劫持模型。",
         "模型不是最後防線，架構才是：前沿 LLM 面對提示詞注入攻擊成功率高達 40-75%，依賴模型自覺拒絕惡意請求等同裸奔。",
-        "憑證嚴禁沿執行鏈流動：金鑰必須存放在隔離的安全存儲中，工具調用不應持有超越該次操作所需的長期或過度權限。"
+        "憑證嚴禁沿執行鏈流動：金鑰存放在隔離的安全存儲中，工具調用不應持有超越該次操作所需的長期或過度權限。"
       ]
     },
     {
@@ -1124,8 +1124,8 @@
       "solution": "構建生產級 CI/CD 管線：引入 AI Gateway（如 LiteLLM/Cloudflare AI Gateway）抽換模型別名與 Provider；CI 管線全程 Mock-First 離線測試與故障注入；請求記錄多租戶標籤至 usage.jsonl 產出可觀測報表，並整合 Secret Manager 容器化部署至 Cloud Run。",
       "takeaways": [
         "換模型不改程式：透過 AI Gateway 解耦模型供應商，一處配置即可在本地 Mock、課堂 Gateway 與真實模型間無縫切換。",
-        "CI 堅持 Mock-First：測試管線必須穩定、離線且不花真實 Token，才能精確區分是業務邏輯錯誤還是上游模型波動。",
-        "「失敗會叫」與成本可觀測：嚴禁吞掉例外回傳空字串，錯誤必須明確中斷並記錄；每筆請求標註租戶以落實預算控管。"
+        "CI 堅持 Mock-First：測試管線穩定、離線且不花真實 Token，才能精確區分是業務邏輯錯誤還是上游模型波動。",
+        "「失敗會叫」與成本可觀測：嚴禁吞掉例外回傳空字串，錯誤明確中斷並記錄；每筆請求標註租戶以執行預算控管。"
       ]
     },
     {
@@ -1135,7 +1135,7 @@
       "start_time": "13:00",
       "end_time": "15:00",
       "classroom": "605+606 會議室",
-      "title": "讓 AI Agent、MCP Server、CLI 安全登入的實作工作坊",
+      "title": "讓 AI Agent、MCP Server、CLI 安全登入的實作工作坊 (10/15 工作坊)",
       "speaker_display": "吳柏毅 (appleboy)",
       "company_display": "Mediatek 工程師",
       "speakers": [
@@ -1151,12 +1151,12 @@
       "local_filename": null,
       "local_path": null,
       "filesize_str": "外部連結",
-      "summary": "為 HTTP MCP 與 CLI 打造企業級安全授權：結合 OAuth 2.0 PKCE、動態 Protected Resource Metadata (PRM) 與 JWT 驗簽，劃清 Scope、Audience 與 Subject 三條防線，並剖析離線撤銷盲點。",
-      "pain_point": "開發者常誤將『連線成功』當成『使用者已取得資源授權』；本地 CLI 無法妥善保管 Client Secret；Token 跨服務任意挪用（未綁定 Audience）；以及誤以為在認證中心按『撤銷』，離線驗簽的 MCP Server 就會立即阻斷存取。",
-      "solution": "標準化授權架構：Client 遭遇 401 透過 PRM 自動發現授權端點，利用 PKCE（S256）安全交換 Access Token；MCP Server 嚴格驗簽（RS256/JWKS/iss/aud/exp/sub）；在 Gateway（Kong）集中處理入口驗證，後端保留工具 Scope 與多租戶 Subject 隔離。",
+      "summary": "別把『連線成功』當成『已授權』。PKCE、PRM、JWT 驗簽，加上三道檢查與離線撤銷補強。",
+      "pain_point": "許多團隊直接把靜態 API Key 寫進 Agent 設定檔，只要連線成功就放行所有權限，缺乏動態授權與撤銷機制。",
+      "solution": "實作 HTTP MCP OAuth 2.0 PKCE 流程，配合 PRM 動態探索與 JWKS 驗簽，嚴格切分 Scope 與有效期限。",
       "takeaways": [
-        "解碼不等於驗證：JWT 必須嚴格驗證數位簽章、頒發者、過期時間與 Audience，絕不可只用 base64 解開 payload 即放行。",
-        "三維邊界互不混淆：Scope 限制可讀不代表可寫、Audience 限制 A 的 Token 不能打 B、Subject 確保不同帳號間資料嚴格隔離。",
+        "解碼不等於驗證：JWT 驗證數位簽章、頒發者、過期時間與 Audience，絕不可只用 base64 解開 payload 即放行。",
+        "三維邊界互不混淆：Scope 限制可讀不代表可寫、Audience 限制 A 的 Token 不能打 B、Subject 確保不同帳號間資料隔離。",
         "離線 JWT 撤銷延遲警訊：撤銷不會改變已簽發 Token 的簽章；若要求即時阻斷，需額外設計 Introspection 機制或妥善縮短 Token 壽命。"
       ]
     },
@@ -1188,7 +1188,7 @@
       "pain_point": "傳統狩野問卷題目成對且選項冗長（正反向各 5 個選項，填寫負擔極大、受訪者易疲乏亂填）；而傳統 NPS 問卷依賴 0-10 分主觀承諾，常落入『說是一回事、做是一回事』的意向偏差，難以指導真實產品資源配置。",
       "solution": "雙軌務實簡化：將 Kano 選項精簡為正向（喜歡/應該的/無所謂）與反向（不喜歡/能忍受/無所謂），透過 3x3 矩陣快速篩出魅力型 (A)、期望型 (O)、基本型 (M) 與無差異型 (I)；將 NPS 改由真實行為驅動（如主動公開分享體驗以換取折扣券），用實際行動人數計算忠誠度。",
       "takeaways": [
-        "3x3 矩陣快速決策：大幅降低問卷填答摩擦力，快速識別『一定要有』（基本型）與『不急著優化』（無差異），精準分配研發預算。",
+        "3x3 矩陣快速決策：大幅降低問卷填答摩擦力，快速識別『一定要有』（基本型）與『不急著優化』（無差異），分配研發預算。",
         "真實行動勝過主觀承諾：用戶是否願意付出社交成本或實際操作，比在問卷上勾選推薦分數更能如實反映品牌忠誠度。",
         "用研服務於營運權衡：研究工具的核心不是追求花俏的統計圖表，而是為了在有限團隊資源下做出清晰的先後排序與取捨。"
       ]
@@ -1250,11 +1250,11 @@
       "local_path": "slides/20261015_1415_張哲嘉 (Che Chia Chang)_AI O11y：數據決策到技術選型.pdf",
       "filesize_str": "3.48 MB",
       "filesize_bytes": 3652873,
-      "summary": "拒絕跟風盲目導入工具的 FOMO 焦慮：以 AI Gateway 與 Langfuse 建立 Token / Latency / Error Rate 可觀測性基準線，透過 LLM-as-a-Judge 拆解評估，並將日常 Tracing 沉澱為實驗題庫做科學選型。",
-      "pain_point": "AI 工具推陳出新速度遠大於團隊研究速度，盲目試用易引發效能劣化與成本失控；Coding Agent 預設加載 50+ 個無用工具造成開局狂吃 20,000+ Tokens；上游模型 API 波動（如 Claude API 僅 99.4% Uptime）缺乏監控預警與 SLA 依據。",
-      "solution": "打造數據驅動決策系統：透過 AI Gateway 關閉 40+ 個無用 Tools，Token Overhead 立即驟降 95%；對多輪 Agent 的單一步驟（Plan/Apply Patch）採用 LLM-as-a-Judge 評估品質；將日常 Tracing 提煉為 Dataset 題庫，控制變因對比不同模型與 Prompt，以綜合效率公式（產出量×品質 / 成本×時間）量化選型。",
+      "summary": "Coding Agent 開局就吃掉 2 萬 Token，只因載了 50 個無用工具。用 AI Gateway 加 Langfuse 量出基準線，再用日常 Tracing 做選型。",
+      "pain_point": "跟風導入工具卻缺乏成本與延遲數據，Agent 預設掛載過多工具導致 Token 成本爆炸且回應延遲嚴重。",
+      "solution": "透過 Langfuse 建立 Token / Latency 基準線，關閉未用工具直接省下 95% 浪費，以真實 Tracing 數據指導技術選型。",
       "takeaways": [
-        "缺的不是更快研究，而是量化評估系統：先建立可觀測性（O11y）才有 Baseline，用數據驅動技術選型，杜絕 FOMO 與猜測。",
+        "缺的不是更快研究，而是量化評估系統：先建立可觀測性（O11y）才有 Baseline，用數據驅動技術選型，避免 FOMO 與猜測。",
         "關閉無用 Tools 是最高投報優化：停用 Coding Agent 內建用不到的大量工具，能立即砍掉 95% 初始 Token 開銷，釋放 Context Window。",
         "Tracing 沉澱為真實評測題庫：將團隊真實遇到的工作任務整理成 Dataset，在 Langfuse 進行控制變因實驗，讓預算與技術選型建立在客觀證據上。"
       ]
@@ -1316,11 +1316,11 @@
       "local_path": "slides/20261015_1415_林士凱 (Danny)_別讓 Agent 瞎掰：用 Semantic Layer 打造可信賴的企業 AI.pdf",
       "filesize_str": "1.71 MB",
       "filesize_bytes": 1797127,
-      "summary": "解決 Text-to-SQL 準確率在企業落地暴跌的致命傷：企業依賴確定性規則而非機率生成，透過語意層（Semantic Layer / AWS Context / 知識圖譜 / 形式本體論與 SHACL 約束）為 Agent 構築 ACE 可信回答。",
-      "pain_point": "模型在學術 SQL 跑分可達 86%，但面對真實企業 Schema 暴跌至 40~59%；企業資料存在 Schema 模稜兩可（數百張表同名欄位）、指標計算定義分歧（各部門對營收定義不同）以及業務規則隱性化（老員工才知道的例外），導致 Agent 憑機率瞎掰。",
-      "solution": "建立企業語意層（Semantic Layer）：以形式本體論（Formal Ontology, OWL/RDF）與知識圖譜串聯異質資料源（ERP、Data Lake、BI）；引入 SHACL 定義業務約束與標準指標（如 promo_roi_v3）；透過 AWS Context / MCP 介面提供圖譜遍歷與資料血緣（Lineage），實現精準且具備身份感知治理的查詢。",
+      "summary": "企業需要確定性而非機率猜測。用 OWL / RDF 語意圖譜加 SHACL 規則，給 Agent 一個不能胡說的商業名詞標準。",
+      "pain_point": "LLM 缺乏企業領域知識，遇到同名異義或專業商業邏輯時容易產生幻覺，直接生成錯誤決策。",
+      "solution": "以 OWL / RDF 知識圖譜建立形式本體論，透過 SHACL 宣告商業約束規則，讓 Agent 生成前必須通過語意驗證。",
       "takeaways": [
-        "商業運作是確定性鏈條，不是機率分布：當決策出錯代價高昂時，『流暢的瞎猜』毫無價值，必須用語意層把機率輸出錨定到確定性模型。",
+        "商業運作是確定性鏈條，不是機率分布：當決策出錯代價高昂時，『流暢的瞎猜』毫無價值，用語意層把機率輸出錨定到確定性模型。",
         "語意層是 GenAI 的核心基礎設施：統一管理企業指標與本體論，避免各個 Agent 應用各自重複進行脆弱的 Prompt Context Engineering。",
         "堅持 ACE 三大標準：追求 Accurate（準確）、Consistent（一致）與 Explainable（具備血緣與圖譜路徑可解釋），建立企業對 AI 的信任。"
       ]
@@ -1349,12 +1349,12 @@
       "local_path": "slides/20261015_1415_蔡景翔 (James Tsai)_當 AI 加入團隊：打造可審查、可驗證、會自我改善的 AI 開發工作流.pdf",
       "filesize_str": "1.22 MB",
       "filesize_bytes": 1281377,
-      "summary": "只用團隊已熟悉的 Git、Markdown 與腳本，打造可審查、可驗證、會自我改善的 AIOrchestrations 治理框架：透過分層路由省 Token、五大行為契約杜絕假完成，並以腳本作為安全防禦邊界。",
-      "pain_point": "團隊導入 AI 的三大痛點：個人技巧難以複製（貝爾塔週一 Prompt 解決問題，阿爾法週二無法重現）；完成由 AI 口頭宣告（說『已完成』卻沒跑檢查，Headless 模式下動畫沒跑卻宣稱無記憶體洩漏）；權限與敏感金鑰散落各處造成誤操作風險。",
-      "solution": "推行四大治理機制：①分層與路由（manifest 最小按需載入，Token 降低 37%）；②行為契約（先定完成條件、沒跑過的不可宣稱驗證、查不到標記 Unverified、失敗兩次換方法並寫出因果證據）；③安全邊界（腳本為執行邊界，禁止 AI 任意拼接指令，Runtime 資料隔離）；④自我改善閉環（回顧提案由人審核後升級）。",
+      "summary": "貝爾塔週一寫好的 Prompt，阿爾法週二無法重現。把工作流沉澱進 Git 與 Markdown，用契約化閉環取代隨意對話。",
+      "pain_point": "團隊每個人各自摸索 Prompt，解法留在個人對話紀錄裡；換個人或換個模型就失效，缺乏團隊工程積累。",
+      "solution": "建立『執行-驗證-反思-提案-審核』五大行為契約，將流程資產以最小 manifest 路由納入 Git 版本控管。",
       "takeaways": [
-        "輕量且可審查的工程資產：不引入複雜的向量資料庫或常駐平台，將 AI 協作資產納入 Git，每一次演進皆透過 Pull Request 嚴格審查。",
-        "行為契約約束虛報：嚴格要求指令成功不等於問題解決；查不到必須標記 Unverified，不可回報為『無錯誤』；同一做法失敗兩次必須停手。",
+        "輕量且可審查的工程資產：不引入複雜的向量資料庫或常駐平台，將 AI 協作資產納入 Git，每一次演進皆透過 Pull Request 審查。",
+        "行為契約約束虛報：要求指令成功不等於問題解決；查不到標記 Unverified，不可回報為『無錯誤』；同一做法失敗兩次停手。",
         "腳本做邊界、人進迴圈把關：讓 AI 調用確定性腳本而非盲目拼裝 Shell 指令；經驗沉澱閉環中 AI 僅能提案，最終由人類決定是否升級為團隊標準。"
       ]
     },
@@ -1386,7 +1386,7 @@
       "solution": "重新設計 OMO 體驗漏斗：從推銷『12 張優惠券』轉向『規劃一趟值得出發的旅行』；在書中加入護照體驗預覽與第一站示範；開通後不只跳出成功訊息，而是直接引導查看第一張券並推薦附近半日路線；提供一鍵導航與清晰營業時間，大幅降低進店摩擦力。",
       "takeaways": [
         "買書不等於用服務、開通不等於核銷：實體跨入數位的每一步都有摩擦力，即使是付費鐵粉，若無即時的情境引導也會在第一步流失。",
-        "核銷次數不等於新增顧客：112 次核銷不代表 112 位新顧客或新增 112 筆生意，資料判讀必須結合現場店家訪談，了解兌換冷熱不均的原因。",
+        "核銷次數不等於新增顧客：112 次核銷不代表 112 位新顧客或新增 112 筆生意，資料判讀結合現場店家訪談，了解兌換冷熱不均的原因。",
         "優化使用者走向下一步的體驗：旅客是出來遊玩放鬆的，不是來完成產品經理設計的 12 項打卡作業；先協助他輕鬆完成第一家，再推薦下一家。"
       ]
     },
@@ -1413,13 +1413,13 @@
       "local_filename": null,
       "local_path": null,
       "filesize_str": "外部連結",
-      "summary": "個人用 AI 效率翻倍不等於團隊交付變快；唯有打破私聊工具的 Context 孤島、沉澱共用的組織脈絡（第三大腦），才能真正加速團隊價值交付。",
-      "pain_point": "團隊各成員各自用 AI 工具提高個人生產力，但決策、假設與討論分散在各人的私聊視窗中，缺乏共用 Context（上下文），跨角色交接與溝通摩擦劇增。",
-      "solution": "從個人『第二大腦』升級為團隊共用的『第三大腦』，以產品協作工具（如 MeetAndy AI）將需求洞察、討論串、架構決策到 PR 串聯在同一處，讓團隊具備共用記憶。",
+      "summary": "每個人都有 AI，團隊反而更慢？問題在 Context 孤島。建立共享的團隊第三大腦，讓經驗不再重複踩坑。",
+      "pain_point": "個別成員用 AI 產出變快，但決策脈絡各自鎖在個人對話框中，團隊整合同步成本反而不減反增。",
+      "solution": "打破個人對話框邊界，將除錯軌跡、決策條件與業務限制結構化沉澱為團隊共用知識庫。",
       "takeaways": [
         "個人效率提高無法自動解決跨角色協調與交接瓶頸，交接環節才是真正痛點。",
         "團隊協作的核心在於維護共用的 Context（組織脈絡與決策依據），避免私聊資訊孤島。",
-        "打造能留存決策脈絡並串聯需求到 PR 的共用 AI 隊友，才能真正加速團隊交付。"
+        "建立能留存決策脈絡並串聯需求到 PR 的共用 AI 隊友，才能真正加速團隊交付。"
       ]
     },
     {
@@ -1446,9 +1446,9 @@
       "local_path": "slides/20261015_1515_吳勝繙 (Chris)_讓 AI Agent 記住你：從零打造仿生長期記憶系統的設計決策.pdf",
       "filesize_str": "246.9 KB",
       "filesize_bytes": 252833,
-      "summary": "借鏡神經科學打造『能判斷、會遺忘、重反思』的仿生記憶系統，徹底克服傳統 RAG 知識無法累積且缺乏生命週期的硬傷。",
-      "pain_point": "傳統 RAG 覆蓋不到 Agent 需求：語意相似不等於真正相關（重大踩坑記憶語意距離常很遠）、資料寫入後缺乏過期衰退機制、且無『認知閉環』無法追蹤哪些知識真正被用過。",
-      "solution": "仿生長期記憶架構四大決策：1. 依來源差異化遺忘（Write Gate 攔截低信來源，外部快衰、自產慢衰）；2. 從錯誤中強化記憶（踩坑經驗/Anti-pattern 跳過壓縮直接進耐久記憶，採 OKF 蒸餾防膨脹）；3. 使用價值驅動晉升（Hebbian 突觸強化機制，按使用頻率而非時間晉升）；4. 寫入前新穎性判斷（海馬體 pattern separation，入口即攔截重複或標記衝突）。",
+      "summary": "長期記憶不能什麼都記。模仿人類海馬迴，用來源衰退、遺忘機制與模式分離，避免舊雜訊污染新決策。",
+      "pain_point": "對話紀錄無差別全部存進向量庫，時間一久雜訊暴增，檢索命中率直線下滑且檢索費用高昂。",
+      "solution": "模仿大腦記憶生理學，設計時間衰減係數與 Pattern Separation，高頻且被驗證有效的決策才強化留存。",
       "takeaways": [
         "記憶系統不是靜態儲存庫，而是有判斷力的吸收機制；記憶壽命應由信任與使用頻率決定。",
         "踩過的坑永遠比成功經驗更關鍵：Anti-pattern 應永存並以高密度蒸餾避免長期膨脹。",
@@ -1479,13 +1479,13 @@
       "local_path": "slides/20261015_1515_Neo Hsu_透過 ACP 解放 Terminal：打造 Coding Agent 的協作模式.pdf",
       "filesize_str": "990.0 KB",
       "filesize_bytes": 1013744,
-      "summary": "藉由 ACP（Agent Client Protocol）建立共用互動契約，結合 OpenAB 中介層將 Coding Agent 從本機命令列無縫接入 Discord/Slack 等團隊協作現場。",
-      "pain_point": "開發者常自己寫 adapter 將聊天入口接至 CLI，但面臨對話無法連續（one-shot 限制）、執行過程即時串流與權限決策難以表達、以及中斷恢復與例外處理各家 CLI 行為不一的龐大整合負擔。",
-      "solution": "採用開放標準 ACP（Agent Client Protocol）作為互動契約，並導入開源專案 OpenAB（Open Agent Broker）作為入口中介層：以 Thread 對應 Session 管理連線 pool、即時轉換文字與工具事件串流、規範 Allowlist 與 Turn Cap 控制 Bot-to-bot 互動邊界。",
+      "summary": "Terminal 跑指令太容易越界。用 ACP 協定簽約，搭 OpenAB Broker 限制執行權限與 Session 連線池。",
+      "pain_point": "直接把本機 Bash 授權給 Coding Agent 風險極高，缺乏審查邊界與多 Agent 並行連線池隔離。",
+      "solution": "透過 ACP 協定建立機器人間的通訊契約，以 OpenAB Broker 控管指令白名單並管理 Session 生命週期。",
       "takeaways": [
         "解放 Terminal 不只是在手機敲指令，而是做到工作可隨時交代、進度即時可見、對話可接續。",
         "管理、恢復與隔離是三件獨立的事：協調器管連線，Agent runtime 管內部記憶，Container/K8s 管環境隔離。",
-        "多 Bot 協作（Bot-to-bot）需嚴格定義輸入、產物、版本、交接時機與失敗責任五大邊界，避免迴圈死結。"
+        "多 Bot 協作（Bot-to-bot）需定義輸入、產物、版本、交接時機與失敗責任五大邊界，避免迴圈死結。"
       ]
     },
     {
@@ -1495,7 +1495,7 @@
       "start_time": "15:30",
       "end_time": "17:30",
       "classroom": "603+604 會議室",
-      "title": "AI 驅動架構實戰：Structurizr × OpenCode",
+      "title": "AI 驅動架構實戰：Structurizr × OpenCode (10/15 下午場)",
       "speaker_display": "郭孟坤 (Mansun Kuo)",
       "company_display": "外商 Staff Solution Architect",
       "speakers": [
@@ -1512,7 +1512,7 @@
       "local_path": "slides/20261015_1530_郭孟坤 (Mansun Kuo)_AI 驅動架構實戰：Structurizr × OpenCode.pdf",
       "filesize_str": "2.74 MB",
       "filesize_bytes": 2874675,
-      "summary": "運用 Structurizr 的 C4 Model 與 ADR 決策紀錄，配合 OpenCode 等開源 Agent 打造版本化、可演進且透明對齊的架構工程。",
+      "summary": "運用 Structurizr 的 C4 Model 與 ADR 決策紀錄，配合 OpenCode 等開源 Agent 建立版本化、可演進且透明對齊的架構工程。",
       "pain_point": "軟體架構決策缺乏版本控管與文字紀錄，隨著人員流動與時間推移產生溝通斷層（Undocumented Silo），導致團隊陷入反覆無效討論、意外破壞架構與不敢改動系統的恐懼。",
       "solution": "實作 Diagram as Code 與 C4 Model（從 System Context、Container、Component 到 Code），結合 Structurizr DSL 將架構圖程式碼化；搭配結構化 ADR（Architectural Decision Records）將決策脈絡、替代方案權衡與後果明確留痕，並透過 OpenCode 驅動架構迭代與檢核。",
       "takeaways": [
@@ -1547,11 +1547,11 @@
       "filesize_bytes": 1990215,
       "summary": "以實體積木工作坊具象化敏捷精神，釐清『AI 協助起草、團隊負責驗收』的邊界，透過短週期回饋與明確 DoD 抵禦需求變更衝擊。",
       "pain_point": "瀑布式開發在簽核後禁止變更，一旦外部需求改變便導致前段產出全部報廢；而盲目引入 AI 起草規格時，若團隊缺乏驗證機制，便會把 AI 的猜想與假設當成已確認的需求。",
-      "solution": "導入 Scrum 與敏捷回饋迴圈：由 AI 扮演草擬角色（起草 Story、拆解 Task、草擬 DoD 表格、整理 ORID 回顧），團隊成員（PO、SM、Dev）嚴格落實人工查核；以跨元件的『共同 DoD（完成定義）』作為硬性整合標準，每輪固定節奏持續檢視與調適。",
+      "solution": "導入 Scrum 與敏捷回饋迴圈：由 AI 扮演草擬角色（起草 Story、拆解 Task、草擬 DoD 表格、整理 ORID 回顧），團隊成員（PO、SM、Dev）嚴格執行人工查核；以跨元件的『共同 DoD（完成定義）』作為硬性整合標準，每輪固定節奏持續檢視與調適。",
       "takeaways": [
         "敏捷核心三支柱：透明（狀態公開）、檢視（對照目標）、調適（依新資訊調整行動）。",
         "AI 起草不等於已確認需求：AI 負責加速文字與規格草稿，人類負責價值判斷、優先級排序與可測試性驗收。",
-        "增量必須符合共同 DoD（Definition of Done），持續小步整合遠勝過最後階段的巨型合併。"
+        "增量符合共同 DoD（Definition of Done），持續小步整合遠勝過最後階段的巨型合併。"
       ]
     },
     {
@@ -1577,9 +1577,9 @@
       "local_filename": null,
       "local_path": null,
       "filesize_str": "外部連結",
-      "summary": "在應用程式與 LLM Provider 間築起統一的 AI Gateway，集中治理金鑰、預算配額、內容安全與流量路由，避免各團隊各自為政踩坑。",
-      "pain_point": "團隊各專案各自串接不同 LLM Provider：API Key 散落缺乏控管、無預算限制導致單人燒光公司額度、模型故障或變慢時無自動容錯，且缺乏統一稽核軌跡難以向管理層證明成效。",
-      "solution": "建立集中式 AI Gateway（如 Agentgateway 等架構）：統一身分驗證（SSO）與權限控管、實施組織層級 Budget 與 Rate Limit 配額、設定多 Provider 智慧路由與 Failover 容錯重試，並串接 Langfuse 等可觀測性工具留存 Traces 與評測數據。",
+      "summary": "AI 治理從網關開始。集中管理 SSO、Token 預算與 Rate Limit，外加模型自動故障轉移（Failover）。",
+      "pain_point": "各專案各自串接不同大模型，帳單四散無法對帳，遇到單一供應商當機時整套服務停擺。",
+      "solution": "架設統一 AI Gateway，集中身份驗證與用量限額，並設定多模型智慧路由與斷線即時備援。",
       "takeaways": [
         "多團隊、多 Provider 採用 AI Gateway 是必然架構選擇，用集中管理層換取成本可視與安全合規。",
         "治理的第一步是成本：透過 Chargeback（費用分攤）與用量指標，讓工程團隊與管理階層對成本及績效達成共識。",
@@ -1610,13 +1610,13 @@
       "local_path": "slides/20261015_1600_鄭重男 (Nickle)_AI 把寫程式變便宜了，那開發者還剩下什麼？.pdf",
       "filesize_str": "1.76 MB",
       "filesize_bytes": 1849826,
-      "summary": "寫程式成本趨近於零後，瓶頸轉移至『現場問題定義』與『審查責任』；開發者應化身 Maker，依出錯後果分級放手，打造可交接的系統。",
-      "pain_point": "AI 產出極快且排版精美，極易讓人誤信其內容真實性（如醫療官網搬遷自動捏造文章）；若工程師缺乏場景深度而盲目依賴 AI，將陷入『寫得出程式卻審查不動代碼』的失控風險。",
-      "solution": "建立開發者的新價值座標：1. 想法來自現場（懂業務與現場痛點，決定不做什麼）；2. 打造 T 型審查半徑（以專業深度作為把關底線，結合廣度跨域整合）；3. 後果光譜分級放手（低風險原型全放手，高風險/醫療/資安嚴格人工把關與稽核留痕）；4. 產品化與交得出去（將單一解法模組化，留存決策脈絡讓下個人接手）。",
+      "summary": "寫代碼變便宜了，工程師還剩下什麼？題目來自現場的洞察力、出錯後果分級放手，以及最後的架構交接。",
+      "pain_point": "以為會下 Prompt 就能取代工程師，忽略了最核心的架構權衡、業務現場摩擦與非功能性需求。",
+      "solution": "工程師轉型為具備 T 型審查半徑的架構把關者，依出錯衝擊光譜分級委託 Agent，專注高價值邊界決策。",
       "takeaways": [
         "便宜的東西不是瓶頸，瓶頸永遠往還很貴的地方移動：現在最貴的是『問題定義』與『審查負責』。",
         "審查半徑決定 AI 效益：AI 是乘法不是加法，你自己審查不動的代碼，就絕對不能交給 AI 自由發揮。",
-        "依『錯誤代價、可逆性、決策影響』劃分放手光譜，關鍵不是全面禁止或全面放手，而是把關強度必須對齊後果。"
+        "依『錯誤代價、可逆性、決策影響』劃分放手光譜，關鍵不是禁止或放手，而是把關強度對齊後果。"
       ]
     },
     {
@@ -1643,13 +1643,13 @@
       "local_path": "slides/20261015_1600_許舜雯 (Olivia Shiu)_同一個 Prompt 為什麼差這麼多？——從踩坑到 Harness Engineering.pdf",
       "filesize_str": "6.69 MB",
       "filesize_bytes": 7012286,
-      "summary": "剖析 AI 工程三層演進：從 Prompt Engineering（怎麼問）到 Context Engineering（看對的資料），最終走向 Harness Engineering（建立控管防護網）。",
-      "pain_point": "寫得再好的 Prompt 遇到未見知識依舊產生幻覺；而就算做好了 Context 檢索，單純給足資訊依然會因模型不確定性導致『同一個輸入三次跑出不同結果』，缺乏出錯時的診斷與恢復機制。",
-      "solution": "構建完整的 AI Engineering 三層心智模型，核心在於 Agent = Model + Harness：Layer 1 Prompt（以 IPO 結構化輸入、邏輯與輸出）；Layer 2 Context（透過 MCP 統一資料標準、Skill 動態載入流程，避免 Token 爆炸與 Lost-in-the-middle）；Layer 3 Harness（六大核心：上下文工程、工具系統、執行編排、狀態記憶、可觀測性、驗證恢復）。",
+      "summary": "同一個 Prompt 為何差這麼多？別怪模型，問題在缺乏外圍工程腳手架（Harness）。",
+      "pain_point": "反覆修改 Prompt 形容詞無法提升穩定度，遇到長 Context 時模型容易患上『迷失在中間（Lost-in-the-middle）』。",
+      "solution": "從 Prompt 提升到 Harness 工程，建立輸入過濾、狀態邊界、自動化驗收與錯誤恢復四大外圍防護。",
       "takeaways": [
         "Prompt 決定 AI 怎麼說，Context 決定 AI 看到什麼，Harness 決定 AI 能做什麼、做錯了怎麼辦。",
         "Context 不是越多越好：注意 attention 的 lost-in-the-middle 現象，過多無關資訊反而讓準確率比不給文件更低。",
-        "生產環境不能只靠模型自律，必須依靠外部 Harness 控制系統（重試熔斷、可觀測追蹤、測試驗收）實現確定性交付。"
+        "生產環境不能只靠模型自律，依靠外部 Harness 控制系統（重試熔斷、可觀測追蹤、測試驗收）實現確定性交付。"
       ]
     },
     {
@@ -1675,13 +1675,13 @@
       "local_filename": null,
       "local_path": null,
       "filesize_str": "外部連結",
-      "summary": "當 AI 將編程邊際成本降至最低，工程師應往前跨足成為 Product Builder，用敏捷工法掌控需求與驗收標準，把 AI 當成敏捷開發團隊。",
-      "pain_point": "Vibe Coding 讓每個人都能快速產出玩具與原型，但工程師若僅停留在『等規格轉譯成代碼』的執行層，將迅速喪失稀缺性；而單純快速產出的程式碼若缺乏真實價值與邊界約束，往往淪為脆弱無用的技術堆疊。",
-      "solution": "轉型為 Product Builder（產品建造者）：將 AI 視為隨傳隨到的開發團隊，由工程師自己擔任 PO（Product Owner）；掌握上游工法（痛點分析、機會探索樹 OST、User Story 拆解、驗收條件 AC 制定），並結合自身對底層架構邊界的了解，驅動 AI 產出具備商業價值的真實產品。",
+      "summary": "用 AI 寫程式只是基本功。工程師往前走一步當 Product Builder，自己定義價值、痛點與驗收條件。",
+      "pain_point": "工程師只等著接 Spec 做執行，當 AI 讓產出變便宜時，缺乏產品定位與商業判斷者最先被邊緣化。",
+      "solution": "結合 Opportunity Solution Tree 與 User Story Mapping，工程師自己下場做價值切分與驗收標準設計。",
       "takeaways": [
         "軟體開發瓶頸已從『如何實作（How）』轉移至『該做什麼與驗證價值（What/Why）』。",
         "工程師轉型 Product Builder 具備天生優勢：懂技術邊界的人結合產品思維，能防止 AI 產出空中樓閣與架構漏洞。",
-        "敏捷工法是 AI 時代的槓桿：以精準的 User Story 與可測試的 AC 駕馭 AI，才能在快速迭代中不偏離核心價值。"
+        "敏捷工法是 AI 時代的槓桿：以的 User Story 與可測試的 AC 駕馭 AI，才能在快速迭代中不偏離核心價值。"
       ]
     },
     {
@@ -1708,12 +1708,12 @@
       "local_path": "slides/20261015_1700_Neo Hsu_光靠 Prompt 守不住架構：用 Lint 與 Architecture Test 打造 Agentic Coding 防護牆.pdf",
       "filesize_str": "461.1 KB",
       "filesize_bytes": 472206,
-      "summary": "告別脆弱的 Prompt 提醒，利用 Linter、Architecture Test 與嚴格的 Exit code 診斷打造確定性防護牆，驅動 Agent 反覆修正至通過架構驗收。",
-      "pain_point": "團隊在 Prompt、註解或 PR Template 中反覆叮嚀架構規範與 Style，但 AI 依舊經常違規（如 Application 層直接或間接 import Infrastructure、破壞 Clean Architecture 方向）；靠提醒會被模型遺忘，人工 Review 疲於奔命。",
-      "solution": "四階段工具化防禦路線：1. Style 交給 Formatter 與帶修正說明的 Linter（如 forbidigo）；2. 模組意圖與邊界在 AGENTS.md 指明架構地圖入口；3. 架構邊界用工具硬性判定（depguard 擋直接依賴，自訂 Go Architecture Test 分析 import graph 抓出穿過共用套件的間接依賴）；4. 接成修正迴圈：診斷包含規則、違規路徑與修正入口，配合 Git hook 與 CI 強制執行 make verify。",
+      "summary": "Prompt 守不住架構界線。把架構規則寫成 Lint 與 Architecture Test，代碼違規直接編譯報錯。",
+      "pain_point": "在 Prompt 裡千叮嚀萬囑咐『不要跨層依賴』，Agent 下一輪還是會寫出循環引用與髒依賴。",
+      "solution": "改用 forbidigo 與 depguard 撰寫架構單元測試，將分層邊界固化為靜態分析檢查，逼 Agent 自動修正。",
       "takeaways": [
-        "提醒會被忘記，檢查不會：架構約束不能依賴 Prompt 措辭或特定 Agent 外掛，要靠工具的 exit code 與精準診斷。",
-        "每一段單獨看都合法，不代表整條路徑合法：防止 Agent 把違規依賴藏進共用套件，檢查必須遍歷完整依賴圖。",
+        "提醒會被忘記，檢查不會：架構約束不能依賴 Prompt 措辭或特定 Agent 外掛，要靠工具的 exit code 與診斷。",
+        "每一段單獨看都合法，不代表整條路徑合法：防止 Agent 把違規依賴藏進共用套件，檢查遍歷完整依賴圖。",
         "好的診斷訊息就是下一輪的 Prompt：錯誤訊息清楚指出規則、路徑、理由與修正入口，Agent 才能自動化收斂修復。"
       ]
     },
@@ -1743,11 +1743,11 @@
       "filesize_bytes": 7580854,
       "summary": "融合 Scrum Master 思維導入 AIDD，以人機分工（人定 Intent 與 DoD、AI 負責 How）搭配 MVP-First 紀律，避免被 AI 生成速度帶入過度設計的兔子洞。",
       "pain_point": "開發者常陷入『AI 產 Code 太快』的兔子洞（Rabbit Hole），不自覺過度工程化（如為簡單抽籤 Bot 搭建複雜 DB 與容器持久化）；且容易把『代碼完成、測試通過（Completed）』誤認為已經具備『生產環境就緒（Production Ready）』。",
-      "solution": "實踐 AIDD（AI-Driven Development）與 AIDLC 流程：落實嚴格人機分工——人類負責 Intent、決策與 DoD 門檻，AI 負責分析、撰寫程式碼與測試；採用 MVP-First 剪枝，設定 Timebox（如卡住 15 分鐘立即降級為技術債），優先打通端到端使用者價值，並建立包含需求、測試、CI 的 Evidence 產出鏈。",
+      "solution": "實踐 AIDD（AI-Driven Development）與 AIDLC 流程：執行嚴格人機分工——人類負責 Intent、決策與 DoD 門檻，AI 負責分析、撰寫程式碼與測試；採用 MVP-First 剪枝，設定 Timebox（如卡住 15 分鐘立即降級為技術債），優先打通端到端使用者價值，並建立包含需求、測試、CI 的 Evidence 產出鏈。",
       "takeaways": [
-        "Completed 不等於 Production Ready：測試全過不代表滿足生產環境要求（如法遵、SLO、線上 CI），工程師必須守住發布底線。",
+        "Completed 不等於 Production Ready：測試全過不代表滿足生產環境要求（如法遵、SLO、線上 CI），工程師守住發布底線。",
         "守護核心價值而非流程工件：Process 和 Code 不是目的，使用者真實旅程才是核心，警惕 AI 催生的過度工程化。",
-        "AIDD 落地三大心法：明確書寫 Intent、精準定義 Done、先做架構規劃再動手寫代碼（Plan Before Code）。"
+        "AIDD 落地三大心法：明確書寫 Intent、定義 Done、先做架構規劃再動手寫代碼（Plan Before Code）。"
       ]
     },
     {
@@ -1774,7 +1774,7 @@
       "local_path": "slides/20261015_1700_孫甫璋 (udothemath)_從痛點到產品：用資料與 AI 重新定義產品的規劃邏輯.pdf",
       "filesize_str": "3.72 MB",
       "filesize_bytes": 3897262,
-      "summary": "以車用售後防禦客群流失為例，展示如何用場景驅動、grill-me 決策辯證、減法思維與快取優化，將資料洞察落實為決策者協作系統。",
+      "summary": "以車用售後防禦客群流失為例，展示如何用場景驅動、grill-me 決策辯證、減法思維與快取優化，將資料洞察執行為決策者協作系統。",
       "pain_point": "傳統資料專案常陷入『交付斷層』：資料團隊算出流失預測分數，業務部門卻只會無效發券；同時 AI 降低了『多做一個版本』的成本，反而讓團隊迷失在大量原型中，不知真正該交付什麼給誰。",
       "solution": "建立完整落地四部曲：1. 場景驅動（以決策者與專員實際接觸情境反推產品規格）；2. 使用 grill-me 在動手前把隱性決策問完，沉澱於 CONTEXT.md（一詞一義）與 ADR 紀錄；3. 輿情與洞察技術（主題分類、情感分析與量化風險）；4. 減法思維收斂為內部『服務策略協作台』，並以實測揭示 Prompt Router 切換模型的快取失效成本（Cache miss penalty）。",
       "takeaways": [
@@ -1807,13 +1807,13 @@
       "local_path": "slides/20261015_1700_尹相志_挖掘技能的全新可能性.pdf",
       "filesize_str": "1.60 MB",
       "filesize_bytes": 1673547,
-      "summary": "全面解析 Agent Skill 的生命週期管理，以『閉合六大決策點』的高控制規則、能力選擇性融合與回歸評估，確保 SkillOps 持續進化不脫軌。",
-      "pain_point": "Agent Skill（技能手冊）寫好後若缺乏生命週期維護，常面臨指令鬆散被 Agent 跳過、能力擴充時互相衝突，以及改動後破壞原有表現等脫軌問題，難以可靠用於生產環境。",
-      "solution": "建立完整的 SkillOps 治理架構：1. 高控制規則閉合六決策點（Condition 觸發、Action 行動、Constraint 禁止、Failure 失敗處理、Precedence 衝突優先級、Evidence 輸出證據）；2. 選擇性融合（僅吸取必要能力，避免無謂膨脹與衝突）；3. 錯誤驅動進化（將執行失敗轉化為可重跑的負案例 Negative examples 作為回歸測試，並通過指令稽核、中央評估、安全檢查三層把關後才准予發布）。",
+      "summary": "Agent Skill 也有生命週期。透過六大決策點與負案例測試，避免能力互相污染與記憶爆炸。",
+      "pain_point": "團隊把所有功能一股腦寫成 Skill 塞給 Agent，導致工具描述打架、觸發混亂且執行成功率驟降。",
+      "solution": "導入 Skill 生命週期治理，區分高頻核心與按需掛載能力，並以負案例測試驗證邊界乾淨。",
       "takeaways": [
         "『閉合』規則不是把文字寫長，而是堵死所有讓 Agent 自行猜測或跳過步驟的漏洞出口。",
-        "技能改進必須靠負案例（Negative examples）驅動：先重現錯誤並固化為回歸測試，確保修復新問題的同時不退化舊能力。",
-        "結構正確與模擬通過不等於實際有效：技能發布必須依賴真實執行紀錄與安全合規審查。"
+        "技能改進靠負案例（Negative examples）驅動：先重現錯誤並固化為回歸測試，確保修復新問題的同時不退化舊能力。",
+        "結構正確與模擬通過不等於實際有效：技能發布依賴真實執行紀錄與安全合規審查。"
       ]
     }
   ]

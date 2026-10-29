@@ -5,7 +5,7 @@ import os
 META_FILE = "data/slides_meta.json"
 OUTPUT_HTML = "index.html"
 
-def generate_awwwards_html_v4():
+def generate_polished_html():
     with open(META_FILE, "r", encoding="utf-8") as f:
         meta = json.load(f)
 
@@ -53,7 +53,7 @@ def generate_awwwards_html_v4():
         topic_tags = []
         t_lower = title_raw.lower()
         if any(k in t_lower for k in ["agent", "agentic", "skill", "mcp"]):
-            topic_tags.append('<span class="topic-tag tag-agent">🤖 Agentic AI</span>')
+            topic_tags.append('<span class="topic-tag tag-agent">🤖 Agentic</span>')
         if any(k in t_lower for k in ["coding", "架構", "架構師", "架構設計", "structurizr"]):
             topic_tags.append('<span class="topic-tag tag-arch">📐 Architecture</span>')
         if any(k in t_lower for k in ["治理", "security", "secret", "防護", "認證", "harness"]):
@@ -123,7 +123,7 @@ def generate_awwwards_html_v4():
                     {speakers_markup}
                 </div>
 
-                <!-- 內容精華說明區塊 -->
+                <!-- 內容精華區塊：總編精修版 (去除核心/關鍵贅字) -->
                 <div class="digest-box">
                     <div class="digest-summary">
                         <span class="digest-icon">📌</span>
@@ -132,15 +132,15 @@ def generate_awwwards_html_v4():
 
                     <div class="digest-details">
                         <div class="digest-section">
-                            <span class="digest-label label-pain">🎯 核心痛點</span>
+                            <span class="digest-label label-pain">痛點</span>
                             <p class="digest-desc">{pain_point}</p>
                         </div>
                         <div class="digest-section">
-                            <span class="digest-label label-sol">🛠️ 關鍵解法</span>
+                            <span class="digest-label label-sol">解法</span>
                             <p class="digest-desc">{solution}</p>
                         </div>
                         <div class="digest-section">
-                            <span class="digest-label label-takeaway">💡 關鍵帶走</span>
+                            <span class="digest-label label-takeaway">帶走</span>
                             <ul class="digest-list">
                                 {takeaways_li}
                             </ul>
@@ -148,7 +148,7 @@ def generate_awwwards_html_v4():
                     </div>
                 </div>
                 
-                <!-- 底部按鈕區：單一官方下載主按鈕 + 複製分享 -->
+                <!-- 底部操作區：純粹單一主下載點 + 複製分享 -->
                 <div class="card-footer">
                     <div class="actions-grid">
                         <a href="{html.escape(orig_url)}" target="_blank" rel="noopener noreferrer" class="card-btn btn-primary" title="直連大會官方原始檔案來源">
@@ -174,12 +174,12 @@ def generate_awwwards_html_v4():
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>HWDC 2026 演講簡報精華庫 | 官方原網址直連下載</title>
-    <meta name="description" content="收錄 55 場 Hello World Dev Conference 2026 簡報內容深度精華（核心痛點、架構解法與帶走清單），直連官方原網址下載。">
+    <meta name="description" content="55 場 HWDC 2026 簡報的痛點、解法、帶走清單，附官方下載連結。">
     <meta name="theme-color" content="#080c14">
     
     <!-- Open Graph Metadata -->
     <meta property="og:title" content="HWDC 2026 演講簡報精華庫 | 官方原網址直連下載">
-    <meta property="og:description" content="全會期 55 場前瞻架構、AI Coding、Agentic 治理演講投影片深度精華，提供直連大會官方原網址下載。">
+    <meta property="og:description" content="55 場演講，每場整理成三件事：卡在哪、怎麼解、帶走什麼。簡報 PDF 一律連回 iThome 官方來源。">
     <meta property="og:type" content="website">
 
     <!-- Fonts: Inter + JetBrains Mono -->
@@ -288,7 +288,7 @@ def generate_awwwards_html_v4():
         .hero {{
             position: relative;
             z-index: 1;
-            padding: 60px 24px 36px;
+            padding: 56px 24px 32px;
             text-align: center;
             border-bottom: 1px solid var(--border-subtle);
             background: linear-gradient(180deg, rgba(14, 20, 34, 0.6) 0%, rgba(8, 12, 20, 0.95) 100%);
@@ -312,12 +312,10 @@ def generate_awwwards_html_v4():
             background: rgba(99, 102, 241, 0.12);
             border: 1px solid rgba(99, 102, 241, 0.35);
             border-radius: 9999px;
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
+            font-size: 0.82rem;
             font-weight: 600;
             color: #818cf8;
-            margin-bottom: 20px;
-            box-shadow: 0 0 20px rgba(99, 102, 241, 0.2);
+            margin-bottom: 18px;
         }}
 
         .brand-dot {{
@@ -329,12 +327,12 @@ def generate_awwwards_html_v4():
         }}
 
         .hero-title {{
-            font-size: clamp(2rem, 4.5vw, 3.4rem);
+            font-size: clamp(2rem, 4.2vw, 3.2rem);
             font-weight: 800;
             color: var(--text-heading);
             letter-spacing: -0.03em;
-            line-height: 1.15;
-            margin-bottom: 16px;
+            line-height: 1.18;
+            margin-bottom: 14px;
         }}
 
         .gradient-text {{
@@ -350,18 +348,19 @@ def generate_awwwards_html_v4():
         }}
 
         .hero-desc {{
-            font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+            font-size: clamp(0.95rem, 1.8vw, 1.12rem);
             color: var(--text-muted);
-            max-width: 780px;
-            margin: 0 auto 24px;
-            line-height: 1.7;
+            max-width: 760px;
+            margin: 0 auto 20px;
+            line-height: 1.65;
         }}
 
+        /* 總編修訂：去行銷腔、直述事實的橫幅 */
         .origin-banner {{
-            max-width: 820px;
-            margin: 0 auto 30px;
-            background: rgba(59, 130, 246, 0.1);
-            border: 1px solid rgba(59, 130, 246, 0.3);
+            max-width: 760px;
+            margin: 0 auto 28px;
+            background: rgba(59, 130, 246, 0.08);
+            border: 1px solid rgba(59, 130, 246, 0.25);
             border-radius: var(--radius-md);
             padding: 12px 18px;
             display: flex;
@@ -377,11 +376,6 @@ def generate_awwwards_html_v4():
             background: #eff6ff;
             border-color: #bfdbfe;
             color: #1e40af;
-        }}
-
-        .origin-banner-icon {{
-            font-size: 1.2rem;
-            flex-shrink: 0;
         }}
 
         .origin-banner strong {{
@@ -878,7 +872,7 @@ def generate_awwwards_html_v4():
             text-overflow: ellipsis;
         }}
 
-        /* =================== 內容精華說明區塊 =================== */
+        /* =================== 內容精華區塊 (總編乾淨版) =================== */
         .digest-box {{
             background: var(--bg-digest);
             border: 1px solid var(--border-subtle);
@@ -899,7 +893,7 @@ def generate_awwwards_html_v4():
         }}
 
         .digest-icon {{
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             flex-shrink: 0;
             line-height: 1.4;
         }}
@@ -969,7 +963,7 @@ def generate_awwwards_html_v4():
             font-weight: bold;
         }}
 
-        /* 卡片底部按鈕區 */
+        /* 卡片底部操作區 */
         .card-footer {{
             margin-top: auto;
             padding-top: 14px;
@@ -1004,7 +998,6 @@ def generate_awwwards_html_v4():
             flex-shrink: 0;
         }}
 
-        /* 唯一主按鈕：直連官方原網址下載 */
         .btn-primary {{
             background: linear-gradient(135deg, #4338ca 0%, #6366f1 100%);
             color: #ffffff;
@@ -1137,7 +1130,7 @@ def generate_awwwards_html_v4():
             z-index: 1;
             border-top: 1px solid var(--border-subtle);
             background: var(--bg-surface);
-            padding: 48px 24px;
+            padding: 44px 24px;
             text-align: center;
             color: var(--text-muted);
             font-size: 0.85rem;
@@ -1147,7 +1140,7 @@ def generate_awwwards_html_v4():
             display: flex;
             justify-content: center;
             gap: 20px;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
             flex-wrap: wrap;
         }}
 
@@ -1165,10 +1158,10 @@ def generate_awwwards_html_v4():
         /* =================== MOBILE RESPONSIVE =================== */
         @media (max-width: 640px) {{
             .hero {{
-                padding: 40px 16px 28px;
+                padding: 38px 16px 24px;
             }}
             .hero-title {{
-                font-size: 1.75rem;
+                font-size: 1.7rem;
             }}
             .origin-banner {{
                 flex-direction: column;
@@ -1211,28 +1204,26 @@ def generate_awwwards_html_v4():
 
 <div id="scrollProgress"></div>
 
-<!-- HERO HEADER -->
+<!-- HERO HEADER (總編修訂版) -->
 <header class="hero">
     <div class="hero-inner">
         <div class="brand-pill">
             <span class="brand-dot"></span>
-            <span>HWDC 2026 ARCHIVE · 55 SESSIONS EXECUTIVE SUMMARY</span>
+            <span>HWDC 2026 · 55 場演講精華與官方簡報</span>
         </div>
         <h1 class="hero-title">
             <span class="gradient-text">Hello World Dev Conference 2026</span><br>
-            演講簡報精華庫與官方原網址直連
+            演講簡報精華庫
         </h1>
         <p class="hero-desc">
-            全會期完整收錄 55 場前瞻架構、AI Coding、Agentic 治理與效能監測之深度內容精華。
-            每場皆解析<strong>核心痛點、關鍵解法與實踐結論</strong>，直連 iThome 大會官方原網址下載。
+            55 場演講，每場整理成三件事：卡在哪、怎麼解、帶走什麼。簡報 PDF 一律連回 iThome 官方來源。
         </p>
 
-        <!-- 官方原始網址聲明橫幅 -->
+        <!-- 總編直述橫幅 -->
         <div class="origin-banner">
-            <span class="origin-banner-icon">📌</span>
+            <span>📌</span>
             <div>
-                <strong>官方原網址直連保證：</strong>
-                本站所有卡片的主按鈕<strong>「官方原網址下載」</strong>均 100% 直連 iThome HWDC 2026 大會伺服器或講者原始教材，絕非第三方修改檔；精華說明供讀者在下載前快速掌握技術乾貨。
+                下載連結直接指向 iThome 官方伺服器與講者原始教材，本站不轉存任何檔案。
             </div>
         </div>
 
@@ -1319,15 +1310,15 @@ def generate_awwwards_html_v4():
     <span id="toastText">已複製分享資訊！</span>
 </div>
 
-<!-- FOOTER -->
+<!-- FOOTER (總編修訂：誠實人機協作說明) -->
 <footer>
     <div class="footer-links">
         <a href="https://hwdc.ithome.com.tw/2026/slide" target="_blank" rel="noopener noreferrer" class="footer-link">大會官方簡報下載頁</a>
         <a href="https://hwdc.ithome.com.tw/2026/agenda" target="_blank" rel="noopener noreferrer" class="footer-link">官方議程總表</a>
         <a href="https://hwdc.ithome.com.tw/2026/speaker" target="_blank" rel="noopener noreferrer" class="footer-link">官方講者名單</a>
     </div>
-    <p>© 2026 iThome 電週文化事業股份有限公司 · 簡報與專案著作權全數歸講者與原著所有</p>
-    <p style="margin-top: 6px; color: var(--text-dim);">本站主按鈕 100% 直連官方原網址；精華整理供社群技術研討與快速索引之用。</p>
+    <p>© 2026 iThome · 簡報著作權屬講者與原著所有。</p>
+    <p style="margin-top: 6px; color: var(--text-dim);">精華摘要為人機協作整理，可能有誤，請以原簡報為準。下載連結均直連官方來源。</p>
 </footer>
 
 <script>
@@ -1439,9 +1430,9 @@ def generate_awwwards_html_v4():
 
     // 複製分享功能
     function copyInfo(title, speaker, url) {{
-        const text = `【HWDC 2026 演講簡報精華】\\n題目：${{title}}\\n講者：${{speaker}}\\n官方原網址：${{url}}`;
+        const text = `【HWDC 2026 演講簡報精華】\\n題目：${{title}}\\n講者：${{speaker}}\\n官方下載：${{url}}`;
         navigator.clipboard.writeText(text).then(() => {{
-            showToast('已複製議程與官方原網址！');
+            showToast('已複製議程與官方下載連結！');
         }}).catch(() => {{
             showToast('複製失敗，請手動選取');
         }});
@@ -1463,7 +1454,7 @@ def generate_awwwards_html_v4():
     with open(OUTPUT_HTML, "w", encoding="utf-8") as f:
         f.write(full_html)
 
-    print(f"Successfully generated V4 Awwwards-grade {OUTPUT_HTML} (Total {total_count} sessions with full executive digests)")
+    print(f"Successfully generated Polished V5 {OUTPUT_HTML} (Total {total_count} sessions)")
 
 if __name__ == "__main__":
-    generate_awwwards_html_v4()
+    generate_polished_html()
