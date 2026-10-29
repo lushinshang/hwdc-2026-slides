@@ -5,7 +5,17 @@ import os
 META_FILE = "data/slides_meta.json"
 OUTPUT_HTML = "index.html"
 
-def generate_polished_html():
+# 精緻極簡 SVG 幾何圖示（零 Emoji，符合 Awwwards / Editorial 設計規範）
+SVG_CLOCK = '<svg class="icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6.5"/><path d="M8 4.5v3.8l2.5 1.5"/></svg>'
+SVG_LOCATION = '<svg class="icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 1.5c-2.8 0-5 2.2-5 5 0 3.8 5 8 5 8s5-4.2 5-8c0-2.8-2.2-5-5-5z"/><circle cx="8" cy="6.5" r="1.8"/></svg>'
+SVG_DOWNLOAD = '<svg class="icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.5v8m0 0l-3-3m3 3l3-3M2.5 13.5h11"/></svg>'
+SVG_EXTERNAL = '<svg class="icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8.5v4.5H3.5V4.5H8M10 2.5h4v4M7 9.5l7-7"/></svg>'
+SVG_SHARE = '<svg class="icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5.5" y="5.5" width="7" height="7" rx="1.5"/><path d="M3.5 10.5V3.5h7"/></svg>'
+SVG_CHEVRON = '<svg class="icon chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>'
+SVG_SEARCH = '<svg class="icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7" r="5"/><path d="M11 11l3.5 3.5"/></svg>'
+SVG_THEME = '<svg class="icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="3.5"/><path d="M8 1.5v1.5M8 13v1.5M1.5 8h1.5M13 8h1.5M3.4 3.4l1.1 1.1M11.5 11.5l1.1 1.1M3.4 12.6l1.1-1.1M11.5 4.5l1.1-1.1"/></svg>'
+
+def generate_warm_editorial_html():
     with open(META_FILE, "r", encoding="utf-8") as f:
         meta = json.load(f)
 
@@ -13,23 +23,22 @@ def generate_polished_html():
     total_count = len(sessions)
     pdf_sessions = [s for s in sessions if s.get("is_pdf")]
     ext_sessions = [s for s in sessions if not s.get("is_pdf")]
-    
-    total_size_bytes = sum(s.get("filesize_bytes", 0) for s in pdf_sessions)
-    total_size_mb = total_size_bytes / (1024 * 1024)
+    total_size_mb = sum(s.get("filesize_bytes", 0) for s in pdf_sessions) / (1024 * 1024)
 
-    day1_count = sum(1 for s in sessions if "10-14" in s.get("date", ""))
-    day2_count = sum(1 for s in sessions if "10-15" in s.get("date", ""))
+    day1_sessions = [s for s in sessions if "10-14" in s.get("date", "")]
+    day2_sessions = [s for s in sessions if "10-15" in s.get("date", "")]
 
-    cards_html = []
+    items_html = []
     for s in sessions:
         idx = s.get("index")
         date = s.get("date", "")
         is_day1 = "10-14" in date
-        date_short = "10/14" if is_day1 else "10/15"
-        day_badge_text = "DAY 1 · 10/14 (三)" if is_day1 else "DAY 2 · 10/15 (四)"
+        day_tag = "day1" if is_day1 else "day2"
+        date_label = "10/14 (三)" if is_day1 else "10/15 (四)"
         
         start_time = s.get("start_time", "")
         end_time = s.get("end_time", "")
+        time_display = f"{start_time}–{end_time}" if start_time and end_time else date_label
         classroom = s.get("classroom", "主會場")
         
         title_raw = s.get("title", "")
@@ -42,1419 +51,887 @@ def generate_polished_html():
         is_pdf = s.get("is_pdf", False)
         filesize_str = s.get("filesize_str", "")
 
-        # 內容精華摘要
         summary = html.escape(s.get("summary", ""))
         pain_point = html.escape(s.get("pain_point", ""))
         solution = html.escape(s.get("solution", ""))
         takeaways = s.get("takeaways", [])
         takeaways_li = "".join([f"<li>{html.escape(t)}</li>" for t in takeaways])
 
-        # 主題標籤
-        topic_tags = []
+        # 主題分類（單色線條標記，無刺眼糖果色）
         t_lower = title_raw.lower()
         if any(k in t_lower for k in ["agent", "agentic", "skill", "mcp"]):
-            topic_tags.append('<span class="topic-tag tag-agent">🤖 Agentic</span>')
-        if any(k in t_lower for k in ["coding", "架構", "架構師", "架構設計", "structurizr"]):
-            topic_tags.append('<span class="topic-tag tag-arch">📐 Architecture</span>')
-        if any(k in t_lower for k in ["治理", "security", "secret", "防護", "認證", "harness"]):
-            topic_tags.append('<span class="topic-tag tag-sec">🛡️ Governance</span>')
-        if any(k in t_lower for k in ["測試", "o11y", "aiops", "團隊", "工作流", "敏捷", "計費"]):
-            topic_tags.append('<span class="topic-tag tag-ops">⚡ Workflow</span>')
-        if not topic_tags:
-            topic_tags.append('<span class="topic-tag tag-general">💡 Innovation</span>')
-        topic_tags_html = " ".join(topic_tags)
-
-        # 講者資訊區塊
-        speaker_chips = []
-        for sp in s.get("speakers", []):
-            sp_name = html.escape(sp.get("name", ""))
-            sp_comp = html.escape(sp.get("company", ""))
-            sp_photo = sp.get("photo") or ""
-            photo_tag = f'<img src="{sp_photo}" alt="{sp_name}" class="avatar" loading="lazy">' if sp_photo else '<div class="avatar-fallback">👤</div>'
-            speaker_chips.append(f"""
-                <div class="speaker-chip">
-                    {photo_tag}
-                    <div class="speaker-info">
-                        <span class="speaker-name">{sp_name}</span>
-                        {f'<span class="speaker-dept">{sp_comp}</span>' if sp_comp else ''}
-                    </div>
-                </div>
-            """)
-        speakers_markup = "".join(speaker_chips)
-
-        # 格式徽章與主下載按鈕
-        if is_pdf:
-            format_badge = f'<span class="badge badge-pdf"><span class="badge-dot"></span>PDF · {filesize_str}</span>'
-            btn_text = "官方原網址下載 PDF"
-            btn_icon = '''<svg class="btn-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>'''
+            category = "agent"
+            category_name = "Agentic AI"
+        elif any(k in t_lower for k in ["coding", "架構", "架構師", "架構設計", "structurizr"]):
+            category = "arch"
+            category_name = "架構工程"
+        elif any(k in t_lower for k in ["治理", "security", "secret", "防護", "認證", "harness"]):
+            category = "sec"
+            category_name = "治理與安全"
+        elif any(k in t_lower for k in ["測試", "o11y", "aiops", "團隊", "工作流", "敏捷", "計費"]):
+            category = "ops"
+            category_name = "團隊與工作流"
         else:
-            format_badge = '<span class="badge badge-ext"><span class="badge-dot"></span>講者線上專題</span>'
-            btn_text = "開啟講者原網址專文"
-            btn_icon = '''<svg class="btn-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>'''
+            category = "general"
+            category_name = "前瞻技術"
 
-        card = f"""
-        <article class="slide-card {'day1' if is_day1 else 'day2'} {'type-pdf' if is_pdf else 'type-ext'}" 
-                 data-date="{date_short}" 
-                 data-type="{'pdf' if is_pdf else 'ext'}" 
-                 data-title="{title}" 
-                 data-speaker="{speaker_display}"
-                 data-id="{idx}">
-            <div class="card-glow"></div>
-            <div class="card-cover-container">
-                <img src="{cover_url}" alt="{title}" class="card-cover-img" loading="lazy" onerror="this.src='https://hwdc.ithome.com.tw/2026/img/slides.jpg'">
-                <div class="cover-overlay"></div>
-                <div class="cover-top-bar">
-                    <span class="day-chip">{day_badge_text}</span>
-                    {format_badge}
-                </div>
-                <div class="cover-bottom-bar">
-                    <span class="time-chip">⏱️ {start_time} - {end_time}</span>
-                    <span class="room-chip">📍 {classroom}</span>
-                </div>
-            </div>
+        # 下載主要按鈕文字與圖示
+        if is_pdf:
+            dl_text = f"官方原網址下載 PDF"
+            if filesize_str:
+                dl_text += f" ({filesize_str})"
+            dl_icon = SVG_DOWNLOAD
+        else:
+            dl_text = "前往講者原教材"
+            dl_icon = SVG_EXTERNAL
+
+        item = f"""
+        <article class="session-entry" data-day="{day_tag}" data-type="{'pdf' if is_pdf else 'ext'}" data-cat="{category}" data-idx="{idx}">
+            <div class="entry-index">{idx:02d}</div>
             
-            <div class="card-content">
-                <div class="tags-container">
-                    {topic_tags_html}
-                </div>
-                <h3 class="card-title" title="{title}">{title}</h3>
-                
-                <div class="speakers-container">
-                    {speakers_markup}
+            <div class="entry-main">
+                <header class="entry-header">
+                    <div class="entry-meta-line">
+                        <span class="meta-badge day-badge">{date_label}</span>
+                        <span class="meta-item">{SVG_CLOCK} {time_display}</span>
+                        <span class="meta-item">{SVG_LOCATION} {classroom}</span>
+                        <span class="meta-badge cat-badge">{category_name}</span>
+                    </div>
+                    <h3 class="entry-title">{title}</h3>
+                    <div class="entry-speaker">
+                        <span class="speaker-name">{speaker_display}</span>
+                        {f'<span class="speaker-title">{company_display}</span>' if company_display else ''}
+                    </div>
+                </header>
+
+                <div class="entry-preview">
+                    <p class="summary-lead">{summary}</p>
                 </div>
 
-                <!-- 內容精華區塊：總編精修版 (去除核心/關鍵贅字) -->
-                <div class="digest-box">
-                    <div class="digest-summary">
-                        <span class="digest-icon">📌</span>
-                        <p class="digest-text">{summary}</p>
+                <details class="editorial-drawer" id="details-{idx}">
+                    <summary class="drawer-trigger" aria-label="展開詳細痛點與解法">
+                        <span class="drawer-trigger-text">閱讀深度剖析（痛點 / 解法 / 帶走）</span>
+                        {SVG_CHEVRON}
+                    </summary>
+                    <div class="drawer-content">
+                        <div class="drawer-grid">
+                            <div class="drawer-block block-pain">
+                                <div class="drawer-label">核心痛點</div>
+                                <div class="drawer-text">{pain_point}</div>
+                            </div>
+                            <div class="drawer-block block-sol">
+                                <div class="drawer-label">架構解法</div>
+                                <div class="drawer-text">{solution}</div>
+                            </div>
+                            <div class="drawer-block block-takeaway">
+                                <div class="drawer-label">關鍵帶走</div>
+                                <ul class="takeaway-list">{takeaways_li}</ul>
+                            </div>
+                        </div>
                     </div>
+                </details>
 
-                    <div class="digest-details">
-                        <div class="digest-section">
-                            <span class="digest-label label-pain">痛點</span>
-                            <p class="digest-desc">{pain_point}</p>
-                        </div>
-                        <div class="digest-section">
-                            <span class="digest-label label-sol">解法</span>
-                            <p class="digest-desc">{solution}</p>
-                        </div>
-                        <div class="digest-section">
-                            <span class="digest-label label-takeaway">帶走</span>
-                            <ul class="digest-list">
-                                {takeaways_li}
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 底部操作區：純粹單一主下載點 + 複製分享 -->
-                <div class="card-footer">
-                    <div class="actions-grid">
-                        <a href="{html.escape(orig_url)}" target="_blank" rel="noopener noreferrer" class="card-btn btn-primary" title="直連大會官方原始檔案來源">
-                            {btn_icon}
-                            <span>{btn_text}</span>
+                <footer class="entry-footer">
+                    <div class="action-cluster">
+                        <a href="{orig_url}" target="_blank" rel="noopener noreferrer" class="action-btn btn-primary" title="直連大會官方原始檔案來源">
+                            {dl_icon}
+                            <span>{dl_text}</span>
                         </a>
-                        <button type="button" class="card-btn btn-share" onclick="copyInfo('{title}', '{speaker_display}', '{orig_url}')" title="複製標題、講者與官方原網址">
-                            <svg class="btn-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"/><path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z"/></svg>
+                        <button type="button" class="action-btn btn-secondary" onclick="copySessionInfo('{html.escape(title_raw)}', '{speaker_display}', '{orig_url}')" title="複製標題與官方原網址">
+                            {SVG_SHARE}
                             <span>複製分享</span>
                         </button>
                     </div>
-                </div>
+                </footer>
             </div>
         </article>
         """
-        cards_html.append(card)
+        items_html.append(item)
 
-    cards_rendered = "\n".join(cards_html)
+    all_items_markup = "\n".join(items_html)
 
-    full_html = f"""<!DOCTYPE html>
-<html lang="zh-TW" data-theme="dark">
+    html_content = f"""<!DOCTYPE html>
+<html lang="zh-TW" data-theme="warm">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>HWDC 2026 演講簡報精華庫 | 官方原網址直連下載</title>
-    <meta name="description" content="55 場 HWDC 2026 簡報的痛點、解法、帶走清單，附官方下載連結。">
-    <meta name="theme-color" content="#080c14">
+    <title>HWDC 2026 演講簡報編年紀要 | 官方原網址直連下載</title>
+    <meta name="description" content="55 場 Hello World Dev Conference 2026 簡報深度精要（痛點、解法與帶走清單），直連 iThome 官方原網址下載。">
+    <meta name="theme-color" content="#FBF9F5">
     
     <!-- Open Graph Metadata -->
-    <meta property="og:title" content="HWDC 2026 演講簡報精華庫 | 官方原網址直連下載">
+    <meta property="og:title" content="HWDC 2026 演講簡報編年紀要 | 官方原網址直連下載">
     <meta property="og:description" content="55 場演講，每場整理成三件事：卡在哪、怎麼解、帶走什麼。簡報 PDF 一律連回 iThome 官方來源。">
     <meta property="og:type" content="website">
 
-    <!-- Fonts: Inter + JetBrains Mono -->
+    <!-- Fonts: Newsreader (Editorial Serif) + Plus Jakarta Sans + JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&family=Noto+Sans+TC:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
         :root {{
-            --bg-base: #080c14;
-            --bg-surface: #0e1422;
-            --bg-card: rgba(18, 26, 43, 0.75);
-            --bg-card-hover: rgba(24, 35, 58, 0.95);
-            --bg-digest: rgba(10, 16, 28, 0.6);
-            --border-subtle: rgba(255, 255, 255, 0.08);
-            --border-hover: rgba(99, 102, 241, 0.45);
-            --border-active: #6366f1;
-
-            --primary: #4f46e5;
-            --primary-glow: rgba(79, 70, 229, 0.4);
-            --accent-cyan: #06b6d4;
-            --accent-emerald: #10b981;
-            --accent-amber: #f59e0b;
-            --accent-purple: #a855f7;
-
-            --text-heading: #f8fafc;
-            --text-body: #cbd5e1;
-            --text-muted: #64748b;
-            --text-dim: #475569;
-
-            --radius-xl: 20px;
-            --radius-lg: 14px;
-            --radius-md: 10px;
-            --radius-sm: 6px;
-
-            --font-sans: 'Inter', 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-serif: 'Newsreader', 'Songti TC', 'Noto Serif TC', serif;
+            --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "PingFang TC", "Microsoft JhengHei", sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
+
+            /* Warm Paper Editorial Palette (Default) */
+            --bg-page: #FBF9F5;
+            --bg-surface: #FFFFFF;
+            --bg-subtle: #F4EFEA;
+            --bg-hover: #ECE6DE;
+            --text-primary: #18181B;
+            --text-secondary: #52525B;
+            --text-muted: #71717A;
+            --border-subtle: rgba(24, 24, 27, 0.08);
+            --border-strong: rgba(24, 24, 27, 0.2);
+            --accent: #C2410C; /* Terracotta Rust */
+            --accent-hover: #9A3412;
+            --accent-subtle: rgba(194, 65, 12, 0.08);
+            --shadow-paper: 0 1px 3px rgba(24, 24, 27, 0.04), 0 6px 16px rgba(24, 24, 27, 0.03);
+            --radius-editorial: 4px;
+            --line-height-body: 1.7;
         }}
 
-        [data-theme="light"] {{
-            --bg-base: #f8fafc;
-            --bg-surface: #ffffff;
-            --bg-card: rgba(255, 255, 255, 0.95);
-            --bg-card-hover: #ffffff;
-            --bg-digest: #f1f5f9;
-            --border-subtle: #e2e8f0;
-            --border-hover: #6366f1;
-            --border-active: #4f46e5;
-
-            --text-heading: #0f172a;
-            --text-body: #334155;
-            --text-muted: #64748b;
-            --text-dim: #94a3b8;
+        [data-theme="dark"] {{
+            /* Deep Charcoal Editorial Palette */
+            --bg-page: #101216;
+            --bg-surface: #181A20;
+            --bg-subtle: #20232B;
+            --bg-hover: #282C37;
+            --text-primary: #F4F4F5;
+            --text-secondary: #A1A1AA;
+            --text-muted: #71717A;
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-strong: rgba(255, 255, 255, 0.2);
+            --accent: #FB923C;
+            --accent-hover: #F97316;
+            --accent-subtle: rgba(251, 146, 60, 0.12);
+            --shadow-paper: 0 1px 3px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.2);
         }}
 
-        * {{
+        *, *::before, *::after {{
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            -webkit-tap-highlight-color: transparent;
-        }}
-
-        #scrollProgress {{
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #4f46e5 0%, #06b6d4 50%, #10b981 100%);
-            z-index: 9999;
-            width: 0%;
-            transition: width 0.1s ease-out;
         }}
 
         body {{
-            background-color: var(--bg-base);
-            color: var(--text-body);
+            background-color: var(--bg-page);
+            color: var(--text-primary);
             font-family: var(--font-sans);
-            line-height: 1.6;
-            overflow-x: hidden;
-            min-height: 100vh;
-            transition: background-color 0.3s, color 0.3s;
-            background-image: 
-                radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.12) 0%, transparent 60%),
-                radial-gradient(circle at 10% 25%, rgba(6, 182, 212, 0.06) 0%, transparent 40%),
-                radial-gradient(circle at 90% 45%, rgba(168, 85, 247, 0.06) 0%, transparent 45%);
-            background-attachment: fixed;
+            font-size: 15px;
+            line-height: var(--line-height-body);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            transition: background-color 0.25s ease, color 0.25s ease;
         }}
 
-        body::before {{
-            content: "";
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-            background-size: 40px 40px;
-            pointer-events: none;
-            z-index: 0;
+        a {{
+            color: inherit;
+            text-decoration: none;
         }}
 
-        [data-theme="light"] body::before {{
-            background-image: linear-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
-        }}
-
-        /* =================== HERO SECTION =================== */
-        .hero {{
-            position: relative;
-            z-index: 1;
-            padding: 56px 24px 32px;
-            text-align: center;
-            border-bottom: 1px solid var(--border-subtle);
-            background: linear-gradient(180deg, rgba(14, 20, 34, 0.6) 0%, rgba(8, 12, 20, 0.95) 100%);
-            backdrop-filter: blur(12px);
-        }}
-
-        [data-theme="light"] .hero {{
-            background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%);
-        }}
-
-        .hero-inner {{
-            max-width: 1080px;
-            margin: 0 auto;
-        }}
-
-        .brand-pill {{
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 6px 16px;
-            background: rgba(99, 102, 241, 0.12);
-            border: 1px solid rgba(99, 102, 241, 0.35);
-            border-radius: 9999px;
-            font-size: 0.82rem;
-            font-weight: 600;
-            color: #818cf8;
-            margin-bottom: 18px;
-        }}
-
-        .brand-dot {{
-            width: 8px;
-            height: 8px;
-            background-color: #38bdf8;
-            border-radius: 50%;
-            box-shadow: 0 0 8px #38bdf8;
-        }}
-
-        .hero-title {{
-            font-size: clamp(2rem, 4.2vw, 3.2rem);
-            font-weight: 800;
-            color: var(--text-heading);
-            letter-spacing: -0.03em;
-            line-height: 1.18;
-            margin-bottom: 14px;
-        }}
-
-        .gradient-text {{
-            background: linear-gradient(135deg, #ffffff 30%, #a5b4fc 70%, #38bdf8 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }}
-
-        [data-theme="light"] .gradient-text {{
-            background: linear-gradient(135deg, #1e1b4b 30%, #4338ca 70%, #0284c7 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }}
-
-        .hero-desc {{
-            font-size: clamp(0.95rem, 1.8vw, 1.12rem);
-            color: var(--text-muted);
-            max-width: 760px;
-            margin: 0 auto 20px;
-            line-height: 1.65;
-        }}
-
-        /* 總編修訂：去行銷腔、直述事實的橫幅 */
-        .origin-banner {{
-            max-width: 760px;
-            margin: 0 auto 28px;
-            background: rgba(59, 130, 246, 0.08);
-            border: 1px solid rgba(59, 130, 246, 0.25);
-            border-radius: var(--radius-md);
-            padding: 12px 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            font-size: 0.88rem;
-            color: #93c5fd;
-            text-align: left;
-        }}
-
-        [data-theme="light"] .origin-banner {{
-            background: #eff6ff;
-            border-color: #bfdbfe;
-            color: #1e40af;
-        }}
-
-        .origin-banner strong {{
-            color: #ffffff;
-            font-weight: 700;
-        }}
-
-        [data-theme="light"] .origin-banner strong {{
-            color: #1e3a8a;
-        }}
-
-        .stats-dashboard {{
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 16px;
-            max-width: 880px;
-            margin: 0 auto;
-        }}
-
-        .stat-card {{
-            background: var(--bg-surface);
-            border: 1px solid var(--border-subtle);
-            padding: 16px 20px;
-            border-radius: var(--radius-lg);
-            backdrop-filter: blur(8px);
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            transition: border-color 0.2s, transform 0.2s;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }}
-
-        .stat-card:hover {{
-            border-color: rgba(99, 102, 241, 0.4);
-            transform: translateY(-2px);
-        }}
-
-        .stat-num {{
-            font-family: var(--font-mono);
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--text-heading);
-        }}
-
-        .stat-label {{
-            font-size: 0.82rem;
-            color: var(--text-muted);
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }}
-
-        /* =================== STICKY TOOLBAR =================== */
-        .sticky-toolbar {{
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(8, 12, 20, 0.85);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid var(--border-subtle);
-            padding: 16px 24px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            transition: background 0.3s;
-        }}
-
-        [data-theme="light"] .sticky-toolbar {{
-            background: rgba(255, 255, 255, 0.9);
-        }}
-
-        .toolbar-inner {{
-            max-width: 1280px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-        }}
-
-        .search-row {{
-            display: flex;
-            gap: 12px;
-            align-items: center;
-        }}
-
-        .search-wrapper {{
-            position: relative;
-            flex-grow: 1;
-        }}
-
-        .search-icon {{
-            position: absolute;
-            left: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 18px;
-            height: 18px;
-            color: var(--text-muted);
-            pointer-events: none;
-        }}
-
-        .search-input {{
-            width: 100%;
-            padding: 13px 48px 13px 46px;
-            background: var(--bg-surface);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-md);
-            color: var(--text-heading);
-            font-size: 0.95rem;
-            font-family: inherit;
-            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-        }}
-
-        .search-input:focus {{
-            outline: none;
-            border-color: #6366f1;
-            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2);
-        }}
-
-        .shortcut-badge {{
-            position: absolute;
-            right: 14px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: var(--text-muted);
-            padding: 2px 7px;
-            border-radius: 4px;
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            pointer-events: none;
-        }}
-
-        [data-theme="light"] .shortcut-badge {{
-            background: #e2e8f0;
-            border-color: #cbd5e1;
-        }}
-
-        .theme-toggle-btn {{
-            background: var(--bg-surface);
-            border: 1px solid var(--border-subtle);
-            color: var(--text-heading);
-            width: 44px;
-            height: 44px;
-            border-radius: var(--radius-md);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            transition: all 0.2s;
+        .icon {{
+            width: 14px;
+            height: 14px;
+            display: inline-block;
+            vertical-align: middle;
             flex-shrink: 0;
         }}
 
-        .theme-toggle-btn:hover {{
-            border-color: var(--primary);
-            transform: scale(1.05);
+        /* Page Layout */
+        .page-container {{
+            max-width: 1040px;
+            margin: 0 auto;
+            padding: 0 24px 80px;
         }}
 
-        .results-count-chip {{
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            white-space: nowrap;
-            padding: 0 4px;
+        /* Editorial Header / Masthead */
+        .masthead {{
+            padding: 60px 0 32px;
+            border-bottom: 2px solid var(--text-primary);
+            margin-bottom: 32px;
         }}
 
-        .results-count-chip strong {{
-            color: #38bdf8;
-        }}
-
-        .filter-row {{
+        .masthead-meta {{
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 16px;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }}
+
+        .theme-toggle-btn {{
+            background: none;
+            border: 1px solid var(--border-subtle);
+            padding: 5px 10px;
+            border-radius: var(--radius-editorial);
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.15s ease;
+        }}
+        .theme-toggle-btn:hover {{
+            background-color: var(--bg-subtle);
+            color: var(--text-primary);
+        }}
+
+        .masthead-grid {{
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 32px;
+            align-items: end;
+        }}
+
+        .masthead-number {{
+            font-family: var(--font-serif);
+            font-size: clamp(4.5rem, 12vw, 8.5rem);
+            line-height: 0.85;
+            font-weight: 400;
+            letter-spacing: -0.04em;
+            color: var(--accent);
+        }}
+
+        .masthead-content {{
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }}
+
+        .masthead-title {{
+            font-family: var(--font-serif);
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 600;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+        }}
+
+        .masthead-desc {{
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            max-width: 680px;
+            line-height: 1.6;
+        }}
+
+        /* Origin Notice Banner */
+        .origin-notice {{
+            margin-top: 24px;
+            padding: 12px 16px;
+            background-color: var(--bg-subtle);
+            border-left: 3px solid var(--accent);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            border-radius: 0 var(--radius-editorial) var(--radius-editorial) 0;
+        }}
+        .origin-notice strong {{
+            color: var(--text-primary);
+        }}
+
+        /* Navigation & Filtering Strip */
+        .control-strip {{
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: var(--bg-page);
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
             flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+            backdrop-filter: blur(12px);
         }}
 
         .filter-group {{
             display: flex;
-            align-items: center;
-            gap: 6px;
             flex-wrap: wrap;
+            gap: 6px;
         }}
 
-        .pill-btn {{
-            background: rgba(255, 255, 255, 0.04);
+        .filter-pill {{
+            background: none;
             border: 1px solid var(--border-subtle);
-            color: var(--text-body);
-            padding: 7px 14px;
-            border-radius: 9999px;
+            padding: 6px 12px;
+            border-radius: var(--radius-editorial);
             font-size: 0.82rem;
             font-weight: 500;
+            color: var(--text-secondary);
             cursor: pointer;
-            transition: all 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
+            transition: all 0.15s ease;
         }}
 
-        [data-theme="light"] .pill-btn {{
-            background: #f1f5f9;
+        .filter-pill:hover {{
+            background-color: var(--bg-subtle);
+            color: var(--text-primary);
         }}
 
-        .pill-btn:hover {{
-            background: rgba(255, 255, 255, 0.08);
-            color: var(--text-heading);
-            border-color: rgba(255, 255, 255, 0.2);
+        .filter-pill.active {{
+            background-color: var(--text-primary);
+            border-color: var(--text-primary);
+            color: var(--bg-page);
+            font-weight: 600;
         }}
 
-        [data-theme="light"] .pill-btn:hover {{
-            background: #e2e8f0;
-        }}
-
-        .pill-btn.active {{
-            background: var(--primary);
-            border-color: var(--primary);
-            color: #ffffff;
-            box-shadow: 0 0 16px var(--primary-glow);
-        }}
-
-        /* =================== MAIN CONTENT & BENTO GRID =================== */
-        .main-container {{
+        .search-box {{
             position: relative;
-            z-index: 1;
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 32px 24px 80px;
-        }}
-
-        .grid-layout {{
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-            gap: 24px;
-        }}
-
-        /* =================== CARD =================== */
-        .slide-card {{
-            position: relative;
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-xl);
-            overflow: hidden;
             display: flex;
-            flex-direction: column;
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
-                        border-color 0.25s, 
-                        box-shadow 0.25s;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            align-items: center;
+            min-width: 220px;
         }}
 
-        .slide-card:hover {{
-            transform: translateY(-4px);
-            border-color: var(--border-hover);
-            box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.4), 0 0 24px -5px rgba(99, 102, 241, 0.25);
-        }}
-
-        .card-cover-container {{
-            position: relative;
+        .search-box input {{
             width: 100%;
-            aspect-ratio: 16 / 9;
-            background: #090e17;
-            overflow: hidden;
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-editorial);
+            padding: 6px 10px 6px 30px;
+            font-size: 0.82rem;
+            color: var(--text-primary);
+            outline: none;
+            transition: border-color 0.15s ease;
         }}
-
-        .card-cover-img {{
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        .search-box input:focus {{
+            border-color: var(--accent);
         }}
-
-        .slide-card:hover .card-cover-img {{
-            transform: scale(1.04);
-        }}
-
-        .cover-overlay {{
+        .search-box .icon {{
             position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, rgba(8, 12, 20, 0.2) 0%, rgba(8, 12, 20, 0.85) 100%);
+            left: 10px;
+            color: var(--text-muted);
             pointer-events: none;
         }}
 
-        .cover-top-bar {{
-            position: absolute;
-            top: 12px;
-            left: 12px;
-            right: 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 2;
-        }}
-
-        .day-chip {{
+        .results-summary {{
             font-family: var(--font-mono);
-            font-size: 0.72rem;
-            font-weight: 600;
-            padding: 4px 10px;
-            border-radius: 9999px;
-            background: rgba(0, 0, 0, 0.65);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            color: #e2e8f0;
-            backdrop-filter: blur(8px);
-        }}
-
-        .badge {{
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            font-family: var(--font-mono);
-            font-size: 0.72rem;
-            font-weight: 600;
-            padding: 4px 10px;
-            border-radius: 9999px;
-            backdrop-filter: blur(8px);
-        }}
-
-        .badge-dot {{
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-        }}
-
-        .badge-pdf {{
-            background: rgba(79, 70, 229, 0.3);
-            border: 1px solid rgba(99, 102, 241, 0.5);
-            color: #a5b4fc;
-        }}
-
-        [data-theme="light"] .badge-pdf {{
-            background: rgba(79, 70, 229, 0.12);
-            color: #4338ca;
-            border-color: rgba(99, 102, 241, 0.3);
-        }}
-
-        .badge-pdf .badge-dot {{
-            background-color: #818cf8;
-            box-shadow: 0 0 6px #818cf8;
-        }}
-
-        .badge-ext {{
-            background: rgba(16, 185, 129, 0.25);
-            border: 1px solid rgba(16, 185, 129, 0.5);
-            color: #6ee7b7;
-        }}
-
-        [data-theme="light"] .badge-ext {{
-            background: rgba(16, 185, 129, 0.12);
-            color: #047857;
-            border-color: rgba(16, 185, 129, 0.3);
-        }}
-
-        .badge-ext .badge-dot {{
-            background-color: #34d399;
-            box-shadow: 0 0 6px #34d399;
-        }}
-
-        .cover-bottom-bar {{
-            position: absolute;
-            bottom: 12px;
-            left: 14px;
-            right: 14px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 2;
             font-size: 0.78rem;
-            color: #e2e8f0;
+            color: var(--text-muted);
+            margin-bottom: 20px;
         }}
 
-        .time-chip, .room-chip {{
-            background: rgba(8, 12, 20, 0.75);
-            padding: 3px 8px;
-            border-radius: var(--radius-sm);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(6px);
-        }}
-
-        /* 卡片主體 */
-        .card-content {{
-            padding: 20px;
+        /* Timeline Editorial List */
+        .timeline-list {{
             display: flex;
             flex-direction: column;
-            flex-grow: 1;
+            gap: 16px;
         }}
 
-        .tags-container {{
+        .session-entry {{
+            display: grid;
+            grid-template-columns: 48px 1fr;
+            gap: 20px;
+            padding: 24px 20px;
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-editorial);
+            box-shadow: var(--shadow-paper);
+            transition: border-color 0.2s ease, transform 0.15s ease;
+        }}
+
+        .session-entry:hover {{
+            border-color: var(--border-strong);
+        }}
+
+        .entry-index {{
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--accent);
+            opacity: 0.85;
+            padding-top: 2px;
+        }}
+
+        .entry-main {{
             display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
-            margin-bottom: 10px;
+            flex-direction: column;
+            gap: 12px;
         }}
 
-        .topic-tag {{
+        .entry-header {{
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }}
+
+        .entry-meta-line {{
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }}
+
+        .meta-badge {{
+            padding: 2px 7px;
+            border-radius: 2px;
+            font-family: var(--font-mono);
             font-size: 0.72rem;
             font-weight: 600;
-            padding: 2px 8px;
-            border-radius: 4px;
             letter-spacing: 0.02em;
         }}
 
-        .tag-agent {{ background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.25); }}
-        .tag-arch {{ background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.25); }}
-        .tag-sec {{ background: rgba(244, 63, 94, 0.15); color: #fb7185; border: 1px solid rgba(244, 63, 94, 0.25); }}
-        .tag-ops {{ background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.25); }}
-        .tag-general {{ background: rgba(148, 163, 184, 0.15); color: #94a3b8; border: 1px solid rgba(148, 163, 184, 0.25); }}
-
-        [data-theme="light"] .tag-agent {{ background: #e0f2fe; color: #0284c7; border-color: #bae6fd; }}
-        [data-theme="light"] .tag-arch {{ background: #f3e8ff; color: #7e22ce; border-color: #e9d5ff; }}
-        [data-theme="light"] .tag-sec {{ background: #ffe4e6; color: #e11d48; border-color: #fecdd3; }}
-        [data-theme="light"] .tag-ops {{ background: #fef3c7; color: #b45309; border-color: #fde68a; }}
-        [data-theme="light"] .tag-general {{ background: #f1f5f9; color: #475569; border-color: #e2e8f0; }}
-
-        .card-title {{
-            font-size: 1.15rem;
-            font-weight: 700;
-            line-height: 1.45;
-            color: var(--text-heading);
-            margin-bottom: 12px;
-            letter-spacing: -0.015em;
+        .day-badge {{
+            background-color: var(--bg-subtle);
+            color: var(--text-secondary);
         }}
 
-        .speakers-container {{
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-bottom: 16px;
+        .cat-badge {{
+            border: 1px solid var(--border-subtle);
+            color: var(--text-secondary);
         }}
 
-        .speaker-chip {{
-            display: flex;
+        .meta-item {{
+            display: inline-flex;
             align-items: center;
-            gap: 12px;
+            gap: 4px;
         }}
 
-        .avatar {{
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 1.5px solid rgba(255, 255, 255, 0.15);
-            background: #182338;
-            flex-shrink: 0;
+        .entry-title {{
+            font-family: var(--font-serif);
+            font-size: clamp(1.25rem, 2.2vw, 1.55rem);
+            font-weight: 600;
+            line-height: 1.35;
+            color: var(--text-primary);
+            letter-spacing: -0.01em;
         }}
 
-        [data-theme="light"] .avatar {{
-            border-color: #cbd5e1;
-            background: #e2e8f0;
-        }}
-
-        .avatar-fallback {{
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: #182338;
-            border: 1.5px solid rgba(255, 255, 255, 0.1);
+        .entry-speaker {{
             display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-            flex-shrink: 0;
-        }}
-
-        [data-theme="light"] .avatar-fallback {{
-            background: #e2e8f0;
-            border-color: #cbd5e1;
-        }}
-
-        .speaker-info {{
-            display: flex;
-            flex-direction: column;
-            min-width: 0;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 8px;
+            font-size: 0.88rem;
         }}
 
         .speaker-name {{
-            font-size: 0.9rem;
-            font-weight: 700;
-            color: var(--text-heading);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }}
-
-        .speaker-dept {{
-            font-size: 0.78rem;
-            color: var(--text-muted);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }}
-
-        /* =================== 內容精華區塊 (總編乾淨版) =================== */
-        .digest-box {{
-            background: var(--bg-digest);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-md);
-            padding: 14px;
-            margin-bottom: 18px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }}
-
-        .digest-summary {{
-            display: flex;
-            align-items: flex-start;
-            gap: 8px;
-            padding-bottom: 10px;
-            border-bottom: 1px dashed var(--border-subtle);
-        }}
-
-        .digest-icon {{
-            font-size: 1.05rem;
-            flex-shrink: 0;
-            line-height: 1.4;
-        }}
-
-        .digest-text {{
-            font-size: 0.88rem;
             font-weight: 600;
-            color: var(--text-heading);
-            line-height: 1.5;
+            color: var(--text-primary);
         }}
 
-        .digest-details {{
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
+        .speaker-title {{
+            color: var(--text-muted);
+            font-size: 0.82rem;
         }}
 
-        .digest-section {{
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
+        .entry-preview {{
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.65;
         }}
 
-        .digest-label {{
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 0.03em;
+        /* Progressive Disclosure Drawer */
+        .editorial-drawer {{
+            margin-top: 4px;
+            border-top: 1px dashed var(--border-subtle);
+            padding-top: 10px;
+        }}
+
+        .drawer-trigger {{
+            list-style: none;
+            cursor: pointer;
             display: inline-flex;
             align-items: center;
-            width: fit-content;
-            padding: 1px 6px;
-            border-radius: 4px;
-        }}
-
-        .label-pain {{ color: #f87171; background: rgba(239, 68, 68, 0.12); }}
-        .label-sol {{ color: #38bdf8; background: rgba(56, 189, 248, 0.12); }}
-        .label-takeaway {{ color: #34d399; background: rgba(16, 185, 129, 0.12); }}
-
-        .digest-desc {{
+            gap: 8px;
             font-size: 0.82rem;
-            color: var(--text-body);
-            line-height: 1.55;
+            font-weight: 600;
+            color: var(--accent);
+            padding: 4px 0;
+            user-select: none;
+            transition: color 0.15s ease;
+        }}
+        .drawer-trigger::-webkit-details-marker {{
+            display: none;
+        }}
+        .drawer-trigger:hover {{
+            color: var(--accent-hover);
         }}
 
-        .digest-list {{
-            list-style: none;
-            padding: 0;
+        .drawer-trigger .chevron {{
+            transition: transform 0.2s ease;
+        }}
+        details[open] .drawer-trigger .chevron {{
+            transform: rotate(180deg);
+        }}
+
+        :focus-visible {{
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }}
+
+        .drawer-content {{
+            padding-top: 14px;
+        }}
+
+        details[open] .drawer-content {{
+            animation: drawerSlideDown 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+        }}
+
+        @keyframes drawerSlideDown {{
+            from {{
+                opacity: 0;
+                transform: translateY(-4px);
+            }}
+            to {{
+                opacity: 1;
+                transform: translateY(0);
+            }}
+        }}
+
+        .drawer-grid {{
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            background-color: var(--bg-subtle);
+            padding: 16px;
+            border-radius: var(--radius-editorial);
+            border-left: 3px solid var(--accent);
+        }}
+
+        .drawer-block {{
             display: flex;
             flex-direction: column;
             gap: 4px;
-            margin-top: 2px;
         }}
 
-        .digest-list li {{
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            line-height: 1.5;
-            position: relative;
-            padding-left: 14px;
+        .drawer-label {{
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-primary);
         }}
 
-        .digest-list li::before {{
-            content: "•";
-            position: absolute;
-            left: 2px;
-            color: #34d399;
-            font-weight: bold;
+        .drawer-text {{
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
         }}
 
-        /* 卡片底部操作區 */
-        .card-footer {{
-            margin-top: auto;
-            padding-top: 14px;
-            border-top: 1px solid var(--border-subtle);
+        .takeaway-list {{
+            margin-left: 18px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
         }}
 
-        .actions-grid {{
-            display: grid;
-            grid-template-columns: 2fr 1fr;
+        .takeaway-list li {{
+            margin-bottom: 4px;
+        }}
+
+        /* Action Cluster */
+        .entry-footer {{
+            padding-top: 12px;
+            margin-top: 4px;
+        }}
+
+        .action-cluster {{
+            display: flex;
+            flex-wrap: wrap;
             gap: 8px;
         }}
 
-        .card-btn {{
+        .action-btn {{
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 6px;
-            padding: 11px 14px;
-            border-radius: var(--radius-md);
-            font-size: 0.85rem;
+            padding: 8px 16px;
+            min-height: 40px;
+            font-size: 0.82rem;
             font-weight: 600;
-            text-decoration: none;
+            border-radius: var(--radius-editorial);
             cursor: pointer;
-            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-            border: 1px solid transparent;
-            white-space: nowrap;
-        }}
-
-        .btn-icon {{
-            width: 16px;
-            height: 16px;
-            flex-shrink: 0;
+            transition: all 0.15s ease;
+            text-decoration: none;
         }}
 
         .btn-primary {{
-            background: linear-gradient(135deg, #4338ca 0%, #6366f1 100%);
-            color: #ffffff;
-            box-shadow: 0 2px 10px rgba(79, 70, 229, 0.35);
+            background-color: var(--accent);
+            color: #FFFFFF;
+            border: 1px solid var(--accent);
         }}
-
         .btn-primary:hover {{
-            background: linear-gradient(135deg, #3730a3 0%, #4f46e5 100%);
-            box-shadow: 0 4px 16px rgba(79, 70, 229, 0.55);
-            transform: translateY(-1px);
+            background-color: var(--accent-hover);
+            border-color: var(--accent-hover);
+            color: #FFFFFF;
         }}
 
-        .btn-share {{
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--text-body);
-            border-color: var(--border-subtle);
-        }}
-
-        [data-theme="light"] .btn-share {{
-            background: #f1f5f9;
-        }}
-
-        .btn-share:hover {{
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--text-heading);
-            border-color: rgba(255, 255, 255, 0.2);
-            transform: translateY(-1px);
-        }}
-
-        [data-theme="light"] .btn-share:hover {{
-            background: #e2e8f0;
-        }}
-
-        /* =================== TOAST NOTIFICATION =================== */
-        .toast {{
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: #1e293b;
-            color: #ffffff;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 12px 20px;
-            border-radius: var(--radius-md);
-            font-size: 0.85rem;
-            font-weight: 600;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transform: translateY(100px);
-            opacity: 0;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            pointer-events: none;
-        }}
-
-        .toast.show {{
-            transform: translateY(0);
-            opacity: 1;
-        }}
-
-        .toast-icon {{
-            color: #10b981;
-            font-size: 1.1rem;
-        }}
-
-        /* =================== BACK TO TOP BUTTON =================== */
-        .back-to-top {{
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            background: var(--bg-surface);
+        .btn-secondary {{
+            background: none;
+            color: var(--text-secondary);
             border: 1px solid var(--border-subtle);
-            color: var(--text-heading);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 6px 16px rgba(0,0,0,0.3);
-            z-index: 90;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.3s;
-            pointer-events: none;
+        }}
+        .btn-secondary:hover {{
+            background-color: var(--bg-subtle);
+            color: var(--text-primary);
+            border-color: var(--border-strong);
         }}
 
-        .back-to-top.visible {{
-            opacity: 1;
-            transform: translateY(0);
-            pointer-events: auto;
-        }}
-
-        .back-to-top:hover {{
-            border-color: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(79, 70, 229, 0.3);
-        }}
-
-        /* =================== NO RESULT =================== */
-        .no-result {{
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 80px 20px;
-            display: none;
-        }}
-
-        .no-result-icon {{
-            font-size: 3rem;
-            margin-bottom: 12px;
-        }}
-
-        .no-result-title {{
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--text-heading);
-            margin-bottom: 8px;
-        }}
-
-        .no-result-desc {{
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }}
-
-        /* =================== FOOTER =================== */
-        footer {{
-            position: relative;
-            z-index: 1;
+        /* Colophon / Footer */
+        .colophon {{
+            margin-top: 60px;
+            padding-top: 32px;
             border-top: 1px solid var(--border-subtle);
-            background: var(--bg-surface);
-            padding: 44px 24px;
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-        }}
-
-        .footer-links {{
             display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 14px;
-            flex-wrap: wrap;
+            flex-direction: column;
+            gap: 12px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.6;
         }}
 
-        .footer-link {{
-            color: #818cf8;
-            text-decoration: none;
-            transition: color 0.2s;
-        }}
-
-        .footer-link:hover {{
-            color: #c7d2fe;
+        .colophon a {{
+            color: var(--text-primary);
             text-decoration: underline;
+            text-underline-offset: 3px;
         }}
 
-        /* =================== MOBILE RESPONSIVE =================== */
+        /* Mobile Adjustments (375px~600px) */
         @media (max-width: 640px) {{
-            .hero {{
-                padding: 38px 16px 24px;
+            .page-container {{
+                padding: 0 16px 60px;
             }}
-            .hero-title {{
-                font-size: 1.7rem;
+            .masthead {{
+                padding: 40px 0 24px;
             }}
-            .origin-banner {{
-                flex-direction: column;
-                text-align: center;
+            .masthead-grid {{
+                grid-template-columns: 1fr;
+                gap: 12px;
             }}
-            .stats-dashboard {{
-                grid-template-columns: 1fr 1fr;
+            .masthead-number {{
+                font-size: 3.5rem;
+            }}
+            .session-entry {{
+                grid-template-columns: 1fr;
                 gap: 10px;
+                padding: 18px 14px;
             }}
-            .stat-card {{
-                padding: 12px;
+            .entry-index {{
+                font-size: 0.85rem;
+                border-bottom: 1px solid var(--border-subtle);
+                padding-bottom: 4px;
             }}
-            .stat-num {{
-                font-size: 1.4rem;
+            .control-strip {{
+                flex-direction: column;
+                align-items: stretch;
             }}
-            .sticky-toolbar {{
-                padding: 12px 16px;
+            .search-box {{
+                width: 100%;
             }}
-            .main-container {{
-                padding: 20px 14px 60px;
+            .action-cluster {{
+                flex-direction: column;
             }}
-            .grid-layout {{
-                grid-template-columns: 1fr;
-                gap: 16px;
+            .action-btn {{
+                width: 100%;
+                min-height: 44px;
             }}
-            .card-title {{
-                font-size: 1.05rem;
-            }}
-            .actions-grid {{
-                grid-template-columns: 1fr;
-            }}
-            .back-to-top {{
-                bottom: 20px;
-                left: 20px;
+        }}
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {{
+            *, *::before, *::after {{
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
             }}
         }}
     </style>
 </head>
 <body>
-
-<div id="scrollProgress"></div>
-
-<!-- HERO HEADER (總編修訂版) -->
-<header class="hero">
-    <div class="hero-inner">
-        <div class="brand-pill">
-            <span class="brand-dot"></span>
-            <span>HWDC 2026 · 55 場演講精華與官方簡報</span>
-        </div>
-        <h1 class="hero-title">
-            <span class="gradient-text">Hello World Dev Conference 2026</span><br>
-            演講簡報精華庫
-        </h1>
-        <p class="hero-desc">
-            55 場演講，每場整理成三件事：卡在哪、怎麼解、帶走什麼。簡報 PDF 一律連回 iThome 官方來源。
-        </p>
-
-        <!-- 總編直述橫幅 -->
-        <div class="origin-banner">
-            <span>📌</span>
-            <div>
-                下載連結直接指向 iThome 官方伺服器與講者原始教材，本站不轉存任何檔案。
-            </div>
-        </div>
-
-        <div class="stats-dashboard">
-            <div class="stat-card">
-                <span class="stat-num">{total_count}</span>
-                <span class="stat-label">演講精華總數</span>
-            </div>
-            <div class="stat-card">
-                <span class="stat-num" style="color: #818cf8;">{len(pdf_sessions)}</span>
-                <span class="stat-label">官方 PDF 簡報</span>
-            </div>
-            <div class="stat-card">
-                <span class="stat-num" style="color: #38bdf8;">{total_size_mb:.1f} <small style="font-size: 0.9rem;">MB</small></span>
-                <span class="stat-label">官方簡報總量</span>
-            </div>
-            <div class="stat-card">
-                <span class="stat-num" style="color: #34d399;">{len(ext_sessions)}</span>
-                <span class="stat-label">講者線上專題</span>
-            </div>
-        </div>
-    </div>
-</header>
-
-<!-- STICKY CONTROL TOOLBAR -->
-<aside class="sticky-toolbar">
-    <div class="toolbar-inner">
-        <div class="search-row">
-            <div class="search-wrapper">
-                <svg class="search-icon" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/>
-                </svg>
-                <input type="text" id="searchInput" class="search-input" placeholder="即時篩選題目、講者姓名、任職單位、精華關鍵字 (按 / 鍵聚焦)..." autocomplete="off">
-                <span class="shortcut-badge">/</span>
+    <div class="page-container">
+        <!-- Masthead -->
+        <header class="masthead">
+            <div class="masthead-meta">
+                <span>HWDC 2026 · ARCHIVE & DIGEST</span>
+                <button type="button" class="theme-toggle-btn" onclick="toggleTheme()" aria-label="切換深淺模式">
+                    {SVG_THEME}
+                    <span id="theme-btn-label">切換深色</span>
+                </button>
             </div>
             
-            <button type="button" class="theme-toggle-btn" id="themeToggle" title="切換深色 / 淺色主題">
-                🌓
-            </button>
-
-            <div class="results-count-chip">
-                顯示 <strong id="visibleCount">{total_count}</strong> / {total_count} 場
+            <div class="masthead-grid">
+                <div class="masthead-number">55</div>
+                <div class="masthead-content">
+                    <h1 class="masthead-title">Hello World 演講簡報編年紀要</h1>
+                    <p class="masthead-desc">
+                        收錄 55 場前瞻架構、Agentic 治理與工程實戰投影片。每場梳理核心痛點、技術解法與關鍵帶走，提供大會原網址直連下載。
+                    </p>
+                </div>
             </div>
-        </div>
 
-        <div class="filter-row">
+            <div class="origin-notice">
+                <strong>原網址直連聲明：</strong>
+                本站所有簡報下載均直接指向 iThome 官方伺服器（<code>ccms.ithome.com.tw</code>）與講者原教材，無第三方轉存。內文深度精要為人機協作整理。
+            </div>
+        </header>
+
+        <!-- Control Strip -->
+        <div class="control-strip">
             <div class="filter-group">
-                <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600; margin-right: 4px;">日程：</span>
-                <button type="button" class="pill-btn active" data-filter="date" data-val="all">全部會期</button>
-                <button type="button" class="pill-btn" data-filter="date" data-val="10/14">10/14 Day 1 ({day1_count})</button>
-                <button type="button" class="pill-btn" data-filter="date" data-val="10/15">10/15 Day 2 ({day2_count})</button>
+                <button class="filter-pill active" data-filter="all" onclick="setFilter('all', this)">全部 55 場</button>
+                <button class="filter-pill" data-filter="day1" onclick="setFilter('day1', this)">10/14 Day 1 (27)</button>
+                <button class="filter-pill" data-filter="day2" onclick="setFilter('day2', this)">10/15 Day 2 (28)</button>
+                <button class="filter-pill" data-filter="pdf" onclick="setFilter('pdf', this)">PDF 簡報 (43)</button>
+                <button class="filter-pill" data-filter="ext" onclick="setFilter('ext', this)">線上教材 (12)</button>
             </div>
 
-            <div class="filter-group">
-                <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600; margin-right: 4px;">格式：</span>
-                <button type="button" class="pill-btn active" data-filter="type" data-val="all">所有格式</button>
-                <button type="button" class="pill-btn" data-filter="type" data-val="pdf">📄 PDF 檔案 ({len(pdf_sessions)})</button>
-                <button type="button" class="pill-btn" data-filter="type" data-val="ext">🌐 線上教材 ({len(ext_sessions)})</button>
+            <div class="search-box">
+                {SVG_SEARCH}
+                <input type="search" id="search-input" placeholder="搜尋主題、講者、痛點關鍵字..." oninput="handleSearch(this.value)">
             </div>
         </div>
-    </div>
-</aside>
 
-<!-- MAIN CONTENT -->
-<main class="main-container">
-    <div class="grid-layout" id="cardsGrid">
-        {cards_rendered}
-        <div class="no-result" id="noResult">
-            <div class="no-result-icon">🔎</div>
-            <h4 class="no-result-title">未找到符合條件的演講簡報</h4>
-            <p class="no-result-desc">請嘗試輸入不同的關鍵字或重設篩選條件（可按 ESC 鍵清空搜尋）。</p>
+        <div class="results-summary" id="results-count">
+            顯示 55 場演講中的 55 場
         </div>
+
+        <!-- Timeline Entries -->
+        <main class="timeline-list" id="sessions-container">
+            {all_items_markup}
+        </main>
+
+        <!-- Colophon -->
+        <footer class="colophon">
+            <div>
+                <strong>HWDC 2026 Archive</strong> · 台灣 IT 專案架構師與工程團隊的前瞻技術縮影。
+            </div>
+            <div>
+                原始活動網站：<a href="https://hwdc.ithome.com.tw/2026/slide" target="_blank" rel="noopener noreferrer">HWDC 2026 官方大會簡報頁</a> · 
+                開放專案庫：<a href="https://github.com/lushinshang/hwdc-2026-slides" target="_blank" rel="noopener noreferrer">GitHub Repository</a>
+            </div>
+        </footer>
     </div>
-</main>
 
-<!-- BACK TO TOP BUTTON -->
-<button type="button" class="back-to-top" id="backToTop" onclick="scrollToTop()" title="返回頂部">
-    ↑
-</button>
+    <!-- Minimal Script for Filtering, Search, Drawer and Toast -->
+    <script>
+        let currentFilter = 'all';
+        let searchQuery = '';
 
-<!-- TOAST MESSAGE -->
-<div class="toast" id="toastMsg">
-    <span class="toast-icon">✓</span>
-    <span id="toastText">已複製分享資訊！</span>
-</div>
-
-<!-- FOOTER (總編修訂：誠實人機協作說明) -->
-<footer>
-    <div class="footer-links">
-        <a href="https://hwdc.ithome.com.tw/2026/slide" target="_blank" rel="noopener noreferrer" class="footer-link">大會官方簡報下載頁</a>
-        <a href="https://hwdc.ithome.com.tw/2026/agenda" target="_blank" rel="noopener noreferrer" class="footer-link">官方議程總表</a>
-        <a href="https://hwdc.ithome.com.tw/2026/speaker" target="_blank" rel="noopener noreferrer" class="footer-link">官方講者名單</a>
-    </div>
-    <p>© 2026 iThome · 簡報著作權屬講者與原著所有。</p>
-    <p style="margin-top: 6px; color: var(--text-dim);">精華摘要為人機協作整理，可能有誤，請以原簡報為準。下載連結均直連官方來源。</p>
-</footer>
-
-<script>
-    const searchInput = document.getElementById('searchInput');
-    const cards = Array.from(document.querySelectorAll('.slide-card'));
-    const visibleCountEl = document.getElementById('visibleCount');
-    const noResult = document.getElementById('noResult');
-    const filterBtns = document.querySelectorAll('.pill-btn');
-    const toast = document.getElementById('toastMsg');
-    const toastText = document.getElementById('toastText');
-    const themeToggle = document.getElementById('themeToggle');
-    const scrollProgress = document.getElementById('scrollProgress');
-    const backToTop = document.getElementById('backToTop');
-
-    let curDateFilter = 'all';
-    let curTypeFilter = 'all';
-
-    // 捲動進度與返回頂部
-    window.addEventListener('scroll', () => {{
-        const scrollTop = window.scrollY || document.documentElement.scrollTop;
-        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        const progress = (scrollHeight > 0) ? (scrollTop / scrollHeight) * 100 : 0;
-        scrollProgress.style.width = progress + '%';
-
-        if (scrollTop > 400) {{
-            backToTop.classList.add('visible');
-        }} else {{
-            backToTop.classList.remove('visible');
-        }}
-    }});
-
-    function scrollToTop() {{
-        window.scrollTo({{ top: 0, behavior: 'smooth' }});
-    }}
-
-    // 深色 / 淺色主題切換
-    function initTheme() {{
-        const saved = localStorage.getItem('hwdc_theme') || 'dark';
-        document.documentElement.setAttribute('data-theme', saved);
-        themeToggle.innerText = (saved === 'dark') ? '🌓' : '☀️';
-    }}
-
-    themeToggle.addEventListener('click', () => {{
-        const cur = document.documentElement.getAttribute('data-theme') || 'dark';
-        const next = (cur === 'dark') ? 'light' : 'dark';
-        document.documentElement.setAttribute('data-theme', next);
-        localStorage.setItem('hwdc_theme', next);
-        themeToggle.innerText = (next === 'dark') ? '🌓' : '☀️';
-        showToast(next === 'dark' ? '已切換為深邃科技暗黑模式' : '已切換為簡約高雅亮色模式');
-    }});
-
-    initTheme();
-
-    function runFilter() {{
-        const query = searchInput.value.trim().toLowerCase();
-        let visibleCount = 0;
-
-        cards.forEach(card => {{
-            const cardDate = card.getAttribute('data-date');
-            const cardType = card.getAttribute('data-type');
-            const cardText = card.innerText.toLowerCase();
-
-            const matchDate = (curDateFilter === 'all' || cardDate === curDateFilter);
-            const matchType = (curTypeFilter === 'all' || cardType === curTypeFilter);
-            const matchQuery = (!query || cardText.includes(query));
-
-            if (matchDate && matchType && matchQuery) {{
-                card.style.display = 'flex';
-                visibleCount++;
-            }} else {{
-                card.style.display = 'none';
-            }}
-        }});
-
-        visibleCountEl.innerText = visibleCount;
-        noResult.style.display = (visibleCount === 0) ? 'block' : 'none';
-    }}
-
-    filterBtns.forEach(btn => {{
-        btn.addEventListener('click', () => {{
-            const filterType = btn.getAttribute('data-filter');
-            const val = btn.getAttribute('data-val');
-
-            document.querySelectorAll(`.pill-btn[data-filter="${{filterType}}"]`).forEach(b => b.classList.remove('active'));
+        function setFilter(type, btn) {{
+            currentFilter = type;
+            document.querySelectorAll('.filter-pill').forEach(el => el.classList.remove('active'));
             btn.classList.add('active');
+            applyFilters();
+        }}
 
-            if (filterType === 'date') curDateFilter = val;
-            if (filterType === 'type') curTypeFilter = val;
+        function handleSearch(val) {{
+            searchQuery = val.trim().toLowerCase();
+            applyFilters();
+        }}
 
-            runFilter();
-        }});
-    }});
+        function applyFilters() {{
+            const entries = document.querySelectorAll('.session-entry');
+            let visibleCount = 0;
 
-    searchInput.addEventListener('input', runFilter);
+            entries.forEach(entry => {{
+                const day = entry.getAttribute('data-day');
+                const type = entry.getAttribute('data-type');
+                const text = entry.innerText.toLowerCase();
 
-    // 快捷鍵支援
-    window.addEventListener('keydown', (e) => {{
-        if (e.key === '/' && document.activeElement !== searchInput) {{
-            e.preventDefault();
-            searchInput.focus();
-            searchInput.select();
-        }} else if (e.key === 'Escape') {{
-            if (searchInput.value) {{
-                searchInput.value = '';
-                runFilter();
+                let matchesFilter = false;
+                if (currentFilter === 'all') matchesFilter = true;
+                else if (currentFilter === 'day1' && day === 'day1') matchesFilter = true;
+                else if (currentFilter === 'day2' && day === 'day2') matchesFilter = true;
+                else if (currentFilter === 'pdf' && type === 'pdf') matchesFilter = true;
+                else if (currentFilter === 'ext' && type === 'ext') matchesFilter = true;
+
+                let matchesSearch = !searchQuery || text.includes(searchQuery);
+
+                if (matchesFilter && matchesSearch) {{
+                    entry.style.display = 'grid';
+                    visibleCount++;
+                }} else {{
+                    entry.style.display = 'none';
+                }}
+            }});
+
+            const countEl = document.getElementById('results-count');
+            if (countEl) {{
+                countEl.textContent = `顯示 55 場演講中的 ${{visibleCount}} 場`;
             }}
         }}
-    }});
 
-    // 複製分享功能
-    function copyInfo(title, speaker, url) {{
-        const text = `【HWDC 2026 演講簡報精華】\\n題目：${{title}}\\n講者：${{speaker}}\\n官方下載：${{url}}`;
-        navigator.clipboard.writeText(text).then(() => {{
-            showToast('已複製議程與官方下載連結！');
-        }}).catch(() => {{
-            showToast('複製失敗，請手動選取');
-        }});
-    }}
+        function copySessionInfo(title, speaker, url) {{
+            const textToCopy = `${{title}} | ${{speaker}}\\n官方原始連結：${{url}}`;
+            navigator.clipboard.writeText(textToCopy).then(() => {{
+                showToast('已複製演講資訊與官方原網址！');
+            }}).catch(() => {{
+                showToast('複製失敗，請手動複製');
+            }});
+        }}
 
-    function showToast(msg) {{
-        toastText.innerText = msg;
-        toast.classList.add('show');
-        setTimeout(() => {{
-            toast.classList.remove('show');
-        }}, 2500);
-    }}
-</script>
+        function showToast(msg) {{
+            let toast = document.getElementById('editorial-toast');
+            if (!toast) {{
+                toast = document.createElement('div');
+                toast.id = 'editorial-toast';
+                toast.style.position = 'fixed';
+                toast.style.bottom = '24px';
+                toast.style.right = '24px';
+                toast.style.backgroundColor = 'var(--text-primary)';
+                toast.style.color = 'var(--bg-page)';
+                toast.style.padding = '10px 18px';
+                toast.style.borderRadius = 'var(--radius-editorial)';
+                toast.style.fontSize = '0.85rem';
+                toast.style.fontWeight = '600';
+                toast.style.boxShadow = 'var(--shadow-paper)';
+                toast.style.zIndex = '9999';
+                toast.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
+                document.body.appendChild(toast);
+            }}
+            toast.textContent = msg;
+            toast.style.opacity = '1';
+            toast.style.transform = 'translateY(0)';
+            setTimeout(() => {{
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateY(8px)';
+            }}, 2200);
+        }}
 
+        function toggleTheme() {{
+            const html = document.documentElement;
+            const current = html.getAttribute('data-theme') || 'warm';
+            const next = current === 'warm' ? 'dark' : 'warm';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('hwdc_theme', next);
+            updateThemeLabel(next);
+        }}
+
+        function updateThemeLabel(theme) {{
+            const label = document.getElementById('theme-btn-label');
+            if (label) {{
+                label.textContent = theme === 'warm' ? '切換深色' : '切換暖紙';
+            }}
+        }}
+
+        // Initialize Theme from localStorage or system preference
+        (function() {{
+            const saved = localStorage.getItem('hwdc_theme');
+            if (saved) {{
+                document.documentElement.setAttribute('data-theme', saved);
+                updateThemeLabel(saved);
+            }}
+        }})();
+    </script>
 </body>
 </html>
 """
-
     with open(OUTPUT_HTML, "w", encoding="utf-8") as f:
-        f.write(full_html)
+        f.write(html_content)
 
-    print(f"Successfully generated Polished V5 {OUTPUT_HTML} (Total {total_count} sessions)")
+    print(f"Successfully generated Warm Paper Editorial index.html (Total {total_count} sessions)")
 
 if __name__ == "__main__":
-    generate_polished_html()
+    generate_warm_editorial_html()
