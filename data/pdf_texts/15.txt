@@ -1,0 +1,354 @@
+Title: 讓工程師失業的 N + 1 道陰影
+Speaker: 高見龍
+Company: 五倍學院 負責人
+
+=== Page 1 ===
+讓工程師失業的 N + 1 道陰影
+五倍學院高見龍
+
+=== Page 2 ===
+高見龍 @ 五倍學院 
+๏程式開發 ≒ 30 年 / 教學經驗 ≒ 17 年 
+๏AI 顧問 / 專案開發 / 程式教學 / 作者 
+๏Anthropic Community Ambassador
+kaochenlong.com
+
+=== Page 3 ===
+10/17（六）
+8/21
+8/29
+We're 
+here!
+
+=== Page 4 ===
+互動 
+提問
+
+=== Page 5 ===
+Ecko 
+https://ecko.im
+
+=== Page 6 ===
+讓工程師失業的 N 道陰影 
+AI Agent 時代的開發者生存指南
+五倍學院高見龍
+2025 年
+
+=== Page 7 ===
+結論
+2025 年
+
+=== Page 8 ===
+Junior 工程師的求職空間被壓縮 
+因為這些工作正是 AI 最擅長的
+2025 年
+
+=== Page 9 ===
+九成的程式碼將會是 AI 寫的
+2025 年
+
+=== Page 10 ===
+我覺得我更像是 AI 寵物溝通師
+2025 年
+
+=== Page 11 ===
+讓工程師失業的 N 道陰影
+五倍學院高見龍
+2025 年
+
+=== Page 12 ===
+讓工程師失業的 N + 1 道陰影
+五倍學院高見龍
+2026 年
+
+=== Page 13 ===
+SDLC 本身並沒有太大變化 
+Software Development Life Cycle
+
+=== Page 14 ===
+Vibe Coding 本質上還是在 Coding
+
+=== Page 15 ===
+AI 世界一直生出新名詞 
+Prompt Engineering / Harness Engineering / Context Engineering  
+Loop Engineering / Evals
+
+=== Page 17 ===
+「控制」
+
+=== Page 18 ===
+AI 很厲害 
+要怎樣讓它乖乖聽話？
+
+=== Page 19 ===
+2025 年 6 月 
+我開始自己一個人 
+開發售票系統
+ezBundle 網站：https://ezbundle.cc/
+已申請商標
+
+=== Page 21 ===
+29 萬行
+
+=== Page 22 ===
+會員數 1,900 
+訂單數 1,600  
+營業額 440 萬
+成果
+
+=== Page 24 ===
+2026 年
+
+=== Page 26 ===
+但不得不說，當時開發的很辛苦...
+
+=== Page 27 ===
+程式碼越來越便宜 
+但「可信任」的程式碼越來越貴
+
+=== Page 28 ===
+SDD = Spec-Driven Development
+2026 年起
+
+=== Page 29 ===
+SDD = 先寫規格再寫程式
+
+=== Page 30 ===
+定義規格，讓 AI 照著做！ 
+在動工之前，先定義「完成」
+
+=== Page 31 ===
+SDD 的三個層次
+參考資料：https://kaochenlong.com/sdd-spec-driven-development
+
+=== Page 33 ===
+在寫程式之前先建立規格，然後用
+規格來引導 AI 生成程式碼。
+規格優先（Spec-first）
+LEVEL 1
+
+=== Page 34 ===
+你多久沒更新專案 README 了？
+
+=== Page 35 ===
+規格跟原始碼要對的起來。 
+規格文件要加進版本控制，團隊成
+員手上都有一份。
+規格錨定（Spec-anchored）
+規格就是
+文件
+LEVEL 2
+
+=== Page 36 ===
+只編輯規格而不編輯程式碼 
+程式碼只是由規格自動生成的產物
+規格即原始碼（Spec-as-source）
+參考資料：https://kaochenlong.com/sdd-spec-as-source
+理想
+LEVEL 3
+
+=== Page 37 ===
+講這麼多，所以規格長什麼樣子？
+
+=== Page 38 ===
+規格並沒有固定的寫法或格式 
+重點在於換另一個 AI 來解讀也不會誤會
+
+=== Page 39 ===
+既然 SDD 沒有固定寫法 
+我就自己來擬一套簡單的流程了
+
+=== Page 40 ===
+→  實作→  歸檔
+提案
+提案 = 跟 AI 討論，讓它撰寫提案 
+實作 = 就是字面上的意思 
+歸檔 = 留下紀錄備查
+
+=== Page 41 ===
+5xcamp.us/simple-sdd
+
+=== Page 42 ===
+SDD 流程 / 框架
+
+=== Page 43 ===
+Spectra
+
+=== Page 44 ===
+Spectra
+= SDD Prompts 
++ SDD Skills  
++ 圖形介面
+免費
+
+=== Page 46 ===
+事實上... 
+      Spectra 就是用 SDD 做出來的！
+
+=== Page 47 ===
+Spec = 文件 
+         = 整理過 & 壓縮的 Context 
+         = 可以交給它牌 Agent 執行
+
+=== Page 48 ===
+Spec 的隱藏好處：跨 AI 重現性
+
+=== Page 49 ===
+QA 時間
+
+=== Page 50 ===
+用 SDD 流程好像比較花 Token？
+問題
+
+=== Page 51 ===
+錢能解決的問題都是小問題
+
+=== Page 52 ===
+AI 寫的程式碼你看不看？ 
+怎麼 code review？
+問題
+
+=== Page 54 ===
+不看程式碼不是放任不管
+
+=== Page 55 ===
+Spec 比程式碼更該被 review！
+
+=== Page 56 ===
+重要功能我還是會看 
+而且該補的自動化測試都不能少
+
+=== Page 57 ===
+在 AI 時代 
+開發應該要比以前更有紀律
+
+=== Page 58 ===
+Git 是個好東西 
+不要讓 AI 幫你操作！
+
+=== Page 59 ===
+刪除
+
+=== Page 60 ===
+蛤？
+
+=== Page 61 ===
+AI 不是有幻覺嗎？
+
+=== Page 62 ===
+AI 有幻覺？ 
+你才有幻覺，你全家都有幻覺
+
+=== Page 63 ===
+人生三大幻覺 
+noun 
+Three recurring but usually mistaken beliefs: your phone just 
+vibrated, she likes you back, and you can still turn the fight 
+around. 
+三種反覆出現、通常事後證明只是錯覺的念頭：手機震動、她喜歡我，以及我能
+反殺。
+- 民明書房
+
+=== Page 64 ===
+你願意相信 AI 寫的程式碼 
+到什麼程度？
+
+=== Page 65 ===
+我們信任的不是「這是誰寫的」 
+而是「這是如何被驗證的」
+
+=== Page 66 ===
+Spec 檔案要進版控嗎？
+問題
+
+=== Page 67 ===
+Spec = 規格 = 文件
+
+=== Page 68 ===
+PR 裡有 proposal.md 
+可看到「要做什麼、不做什麼」 
+reviewer 先看到「要做什麼、不做什麼」
+
+=== Page 69 ===
+一次變更（change）做一次 commit
+
+=== Page 70 ===
+開發節奏 
+discuss → propose → apply → archive → commit
+
+=== Page 71 ===
+既有系統怎麼導入 SDD？
+問題
+
+=== Page 72 ===
+叫 AI 讀原始碼產生 Spec？
+
+=== Page 73 ===
+只編輯規格而不編輯程式碼 
+程式碼只是由規格自動生成的產物
+規格即原始碼（Spec-as-source）
+參考資料：https://kaochenlong.com/sdd-spec-as-source
+理想
+LEVEL 3
+
+=== Page 74 ===
+半對半錯的規格比沒有規格更刺激
+
+=== Page 75 ===
+既有系統導入 SDD
+๏Strangler Fig 
+๏絞殺榕從樹頂往下長，一圈一圈包住
+原本的大樹。一開始只佔一小部分，
+久了越長越粗，外表上你幾乎不會發
+現已經換了一棵樹。
+
+=== Page 76 ===
+Spec on change
+
+=== Page 77 ===
+結論
+
+=== Page 78 ===
+有規格之後 
+AI 似乎比較乖乖聽話了
+沒有 
+業配
+
+=== Page 79 ===
+「要做什麼」以及「不做什麼」
+
+=== Page 80 ===
+工程師的 AI 悲傷六階段
+
+=== Page 81 ===
+工程師的 AI 悲傷六階段
+階段
+名稱
+狀態
+1
+否認 Denial
+「這種東西寫出來的程式碼是能用喔？」
+2
+嘲諷與憤怒 Anger / Mockery
+「你看吧，AI 就是不行。」
+3
+討價還價 Bargaining
+「我只用它寫測試跟註解，核心邏輯還是我來。」
+4
+憂鬱與焦慮 Depression / Anxiety
+「那我的價值到底是什麼？」
+5
+接受與整合 Acceptance / Integration
+「我是那個提出對的問題的人。」
+6
+倡議與傳教 Advocacy
+「來，我教你怎麼用 AI 寫程式。」
+
+
+=== Page 82 ===
+AI 拿走的是我的鍵盤， 
+沒有拿走我的樂趣或工作
+
+=== Page 83 ===
+讓工程師失業的 N + 1 道陰影
+五倍學院高見龍

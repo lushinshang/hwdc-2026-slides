@@ -1,0 +1,950 @@
+Title: 初級工程師如何 AI 賦能的翻寫一個跟自己年紀差不多大的框架
+Speaker: Maple Kuo
+Company: Claude Taiwan 社群管理員 現職網站開發工程師
+
+=== Page 1 ===
+2026
+初級工程師
+如何 AI 賦能的翻寫一個
+跟自己年紀差不多大的框架
+2026/10/15
+Maple Kuo
+
+=== Page 2 ===
+經歷
+國立政治大學 英國語文學系
+2025 Hello World Dev Conference 講者
+衛生所「來學 AI 吧！數位轉型的第一步」講者
+Generative AI 年會小聚 講者
+台灣人工智慧學校小聚 講者
+Claude Taiwan 社團管理員
+Zeabur “Ship It” Hackathon 第三名
+一年從 0 開始和 AI 自學轉職（現職）軟體工程師
+
+=== Page 3 ===
+棘手的題目
+我打算給你一個棘手的題目
+看你能用 AI 做到什麼程度！
+老闆
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 4 ===
+Java EE (Vaadin / EJB)
+差不多大的框架是多大
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 5 ===
+差不多大的框架是多大
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+AI 調整後示意畫面
+
+=== Page 6 ===
+差不多大的框架是多大
+前台瀏覽器
+前台應用
+後台應用
+資料庫
+後台瀏覽器
+HTTPS
+EJB 遠端呼叫
+Stored Procedure
+Vaadin RPC
+外部系統
+AS2
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+Trigger
+
+=== Page 7 ===
+棘手的題目
+我
+英文系畢業
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 8 ===
+棘手的題目
+第一份工作
+英文系畢業
+我
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 9 ===
+棘手的題目
+第一份工作
+英文系畢業
+全跟 AI 學
+我
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 10 ===
+棘手的題目
+Java EE (Vaadin / EJB)
+我
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 11 ===
+棘手的題目
+Java EE (Vaadin / EJB)
+ASP.NET Core 
+Angular
+我
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 12 ===
+核心困難
+技術老舊
+部分源碼
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 13 ===
+分兩階段進行
+第一階段
+完全還原行為
+重新設計與擴充
+第二階段（進行中）
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 14 ===
+第一階段
+把黑盒系統變成有原始碼，並初步理解系統
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 15 ===
+第一階段
+把黑盒系統變成有原始碼，並初步理解系統
+不動資料庫，唯一要求是寫出來的行為要與原系統一致
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 16 ===
+第一階段
+我要怎麼知道行為與原系統一致?
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 17 ===
+第一階段
+我要怎麼知道行為與原系統一致?
+跟寫新程式碼一樣寫測試！
+ 同樣的操作 DB 狀態要一致
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 18 ===
+搭建測試環境
+舊系統
+新系統
+各自獨立的測試 DB
+→
+→
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 19 ===
+三層驗證
+對規格
+對邏輯
+對結果
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 20 ===
+三層驗證
+對邏輯
+對結果
+單元、整合、API 測試
+驗證新系統基本正確性
+對規格
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 21 ===
+三層驗證
+對規格
+對結果
+對邏輯
+讓兩家 AI 讀取新舊程式碼
+撰寫兩邊實作邏輯，對比差異
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 22 ===
+三層驗證
+對規格
+對邏輯
+對結果
+ 同一筆資料、同一個請求
+送進新、舊系統
+比回傳和資料表的變化
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 23 ===
+進行中的第二階段也有碰到一些困難...
+重新設計時，AI 被第一階段的程式碼影響
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 24 ===
+進行中的第二階段也有碰到一些困難...
+重新設計時，AI 被第一階段的程式碼影響
+資料不乾淨，不知道舊系統是否還寫入（歷史遺留?）
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 25 ===
+如何 AI 賦能的克服困難
+subagent
+Implementer
+subagent
+Test-reviewer
+subagent
+Reviewer
+/pm
+/arch
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 26 ===
+如何 AI 賦能的克服困難
+/arch
+subagent
+Implementer
+subagent
+Test-reviewer
+subagent
+Reviewer
+/pm
+負責釐清需求，力求這個功能背後的「為什麼」，
+並設定好 User Journey，驗收標準
+產出 PM 文件作為後續架構設計和審查的參考
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 27 ===
+如何 AI 賦能的克服困難
+/arch
+subagent
+Implementer
+subagent
+Test-reviewer
+subagent
+Reviewer
+/pm
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 28 ===
+如何 AI 賦能的克服困難
+subagent
+Implementer
+subagent
+Test-reviewer
+subagent
+Reviewer
+/arch
+/pm
+負責開發藍圖，探索盤點當前慣例、可重用的內容
+並根據 PM 文件設計測試寫法及內容，產出架構文件
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 29 ===
+如何 AI 賦能的克服困難
+subagent
+Test-reviewer
+subagent
+Reviewer
+subagent
+Implementer
+/arch
+/pm
+根據架構文件進行實作，帶有開發哲學的 system prompt
+「先讓改動變容易，再做那個容易的改動。」— Kent Beck
+「重複遠比錯誤的抽象便宜。」— Sandi Metz
+跟隨既有的開發風格
+命名要讓讀者不打開實作就知道這段程式在做什麼
+少寫一點 code，能重用就不新增，能移除就不保留
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 30 ===
+如何 AI 賦能的克服困難
+subagent
+Implementer
+subagent
+Test-reviewer
+subagent
+Reviewer
+/arch
+/pm
+根據 PM 文件進行檢查，帶有工程判準的 system prompt 
+是否有過度嵌套/競態條件
+是否忽略專案既有風格
+invariant 有沒有被新路徑繞過
+審查測試是否真的產生 confidence，抓到 regression
+有沒有偷改測試來掩蓋產品碼 bug
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 31 ===
+如何 AI 賦能的克服困難
+Agent
+/pm
+Implementer
+subagent
+subagent
+Test-reviewer
+subagent
+Reviewer
+QA
+context: fork
+subagent
+Start
+ No
+pass?
+/arch
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 32 ===
+修但幾勒
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+一個功能就要兩份文件
+一支 API 不就要有好多份
+
+=== Page 33 ===
+修但幾勒
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+一個功能就要兩份文件
+一支 API 不就要有好多份
+真的每份都有認真看嗎?
+
+=== Page 34 ===
+讓自己的關注點縮小
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+需要確認的東西讓 AI 提問，幫你分段
+
+=== Page 35 ===
+讓自己的關注點縮小
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 36 ===
+組成 workflow 的元件
+Subagent
+Skills
+Subagents
+Hooks
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 37 ===
+組成 workflow 的元件
+Subagent
+Skills
+Subagents
+Hooks
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 38 ===
+先認識 skills 的機制
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 39 ===
+先認識 skills 的機制
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 40 ===
+但 skills 其實可以做更多事
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 41 ===
+但 skills 其實可以做更多事
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 42 ===
+code-review: skills vs fork agent skills
+main session
+Context: 
+fork
+main session
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 43 ===
+code-review: skills vs fork agent skills
+Context: 
+fork
+main session
+污染上下文
+main session
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 44 ===
+code-review: skills vs fork agent skills
+main session
+比較燒 token
+Context: 
+fork
+main session
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 45 ===
+code-review: skills vs fork agent skills
+main session
+Context: 
+fork
+main session
+常用 prompt 的快捷鍵
+能力擴充 e.g., /wt, /reddit-search
+按需載入的背景知識擴充
+通用性的重複任務
+不在意過程只在意結果
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 46 ===
+組成 workflow 的元件
+Subagent
+Skills
+Subagents
+Hooks
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 47 ===
+如何 AI 賦能的克服困難
+Hooks = 當條件成立時自動發生的行為
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 48 ===
+如何 AI 賦能的克服困難
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 49 ===
+如何 AI 賦能的克服困難
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 50 ===
+如何 AI 賦能的克服困難
+撰寫測試時遵循規範
+採用 BDD 命名、適度參數化
+並為 Prod / QA 發現的錯誤補上防回歸註解
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 51 ===
+小結
+對於古蹟翻寫，建立測試環境與確保資料庫是首要
+善用 Hooks, Skills, MCP 等機制，來控制 AI 的輸出
+讓 AI 幫你拆分關注的東西，一次一件事確認
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 52 ===
+SDLC
+需求規劃
+系統設計
+程式開發
+測試驗證
+部署上線
+維運改善
+SDLC
+持續回饋
+持續改善
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 53 ===
+SDLC
+需求規劃
+系統設計
+程式開發
+測試驗證
+部署上線
+維運改善
+SDLC
+持續回饋
+持續改善
+維運改善
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 54 ===
+SDLC 中被犧牲的受害者...
+先這樣寫，以後再來重構
+改一行而已，應該不會壞
+這次先不寫測試也沒關係
+我這邊可以跑啊
+需求不會再改了
+這個很簡單
+重開就好了
+不可能有人這樣操作
+不會有空值
+快取清掉就好
+這段沒人會改
+先上線再說
+明天一定修得完
+升版應該相容
+測過一次就夠了
+文件之後補
+架構之後再想
+需求先做再確認
+審查先跳過
+資安之後再補
+監控等出事再加
+備份應該有吧
+交接口頭講就好
+回滾到時再想
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 55 ===
+快取清掉就好
+重開就好了
+改一行而已，應該不會壞
+需求不會再改了
+這個很簡單
+這段沒人會改
+先上線再說
+明天一定修得完
+文件之後補
+架構之後再想
+需求先做再確認
+審查先跳過
+資安之後再補
+監控等出事再加
+備份應該有吧
+交接口頭講就好
+回滾到時再想
+SDLC 中被犧牲的受害者...
+先這樣寫，以後再來重構
+我這邊可以跑啊
+這次先不寫測試也沒關係
+不會有空值
+升版應該相容
+不可能有人這樣操作
+測過一次就夠了
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 56 ===
+Agent 對 SDLC 的影響
+Source: “The AI-native SDLC playbook”
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 57 ===
+Agent 對 SDLC 的影響
+Source: “The AI-native SDLC playbook”
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 58 ===
+SDLC
+需求規劃
+系統設計
+程式開發
+測試驗證
+部署上線
+維運改善
+SDLC
+持續回饋
+持續改善
+維運改善
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 59 ===
+測試的初衷
+確保軟體的行為品質、可靠性和穩定性
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 60 ===
+測試的初衷
+確保軟體的行為品質、可靠性和穩定性
+自動化測試最根本的核心在於
+讓你能充滿信心地修改程式碼
+——《The Practical Test Pyramid》
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 61 ===
+如何 AI 賦能的克服困難
+Agent
+/pm
+Implementer
+subagent
+subagent
+Test-reviewer
+subagent
+Reviewer
+QA
+context: fork
+subagent
+Start
+ No
+pass?
+/arch
+可以在這個迴圈中納入重構
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 62 ===
+測試信心?
+怎麼確認 AI 寫的測試真的有用?
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 63 ===
+需求是 SSOT
+回歸需求規劃
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 64 ===
+提醒 AI 有這些方法（偏好）
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 65 ===
+提醒 AI 有這些方法（偏好）
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 66 ===
+提醒 AI 有這些方法（偏好）
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 67 ===
+RD 自己 SDLC
+/pm
+Implementer
+/arch
+Reviewer
+Test-reviewer
+QA
+需求規劃
+系統設計
+程式開發
+審查驗收及重構
+協調各階段
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 68 ===
+心法
+假設 AI 什麼都知道，但他也什麼都不知道
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 69 ===
+總結
+想像力就是超能力，描述目標與意圖，避免成為 AI 的限制器
+善用 Hooks, Skills, MCP 等機制，來控制 AI 的輸出
+SDLC 最常被忽略的測試，是 AI 時代最不該被忽略的
+透過撰寫測試，在開發後接著重構，維持程式品質
+AI 什麼（技術）都會，但他也什麼（需求、風格）都不會
+棘手的題目
+框架翻寫
+AI workflow
+Skills
+Hooks
+SDLC
+
+=== Page 70 ===
+AI 時代出身的軟體工程師
+Maple Kuo
+contact.maple.kuo@gmail.com
+感謝你！

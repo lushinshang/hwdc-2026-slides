@@ -1,0 +1,1078 @@
+Title: AI O11y：數據決策到技術選型
+Speaker: 張哲嘉 (Che Chia Chang)
+Company: MaiCoin SRE
+
+--- Page 1 ---
+AI O11Y:數據決策到技術選型
+OBSERVABILITY — DECISION SYSTEM
+Che-Chia Chang
+
+--- Page 2 ---
+同事在問
+
+‧Spec-kit SDD 好用,要不要試 ?
+
+‧rtk 省 Token,要不要導入 ?
+
+‧新模型 Benchmark 更好,要不要換 ?
+身為技術負責人,如何回答 ?
+
+--- Page 3 ---
+面對AI 工具快速迭代
+
+bd ot 試用
+‧參考專家與供應商分享
+‧採用代理商或雲端商推薦
+
+試用是一種選擇 ; 團隊更需要數據化決策
+
+--- Page 4 ---
+新工具出現速度 > 研究速度
+
+--- Page 5 ---
+新工具出現速度 > 研究速度
+缺的不是更快研究,而是量化評估系統
+
+--- Page 6 ---
+為何需要 011Y / EVALUATION ?
+
+‧建立效能 Baseline
+e SRA S Wes RA
+例如上游 API 不穩
+‧Claude API Uptime 僅 99.4%
+至少壞的時候要比使用者早知道
+‧沒有 011y,就沒有 SLA
+
+--- Page 7 ---
+Claude Console (platform.claude.com)
+
+Claude API (api.anthropic.com)
+
+Claude Code
+
+Claude Cowork
+
+--- Page 8 ---
+CHANGE MANAGEMENT
+
+‧改變後,效能變好還是變差 ?
+
+‧Spec-kit:SDD 聽說好用
+
+‧srtk:聽說省 Token
+
+‧Opus 4.8 :聽說很強
+
+‧改變有成本,也可能讓效能劣化
+用數據決策,避免 FOMO
+
+--- Page 9 ---
+關於我
+
+‧ Che Chia Chang
+
+e SRE @ Maicoin
+
+e Microsoft MVP
+
+° #282 Ldetaebte chechia.net
+
+‧ Hello Dev 2026: Al Gateway
+
+e Hello Dev 2026: Al O11y
+
+e Cloud Summit 2026: LLM O11y
+
+e Cloud Summit 2026: SDD with Spec-kit
+
+e K8s Summit 2024: Etcd Workshop
+
+e DevOpsDay 2025: RAG Workshop                            >
+
+--- Page 10 ---
+今天的內容
+
+‧ Change & Cost Management
+‧建立 Baseline、完成第一次優化
+‧ LLM-as-a-Judge
+
+‧ Dataset & Experiment
+
+‧ #58 Coding Agent 效能需5
+
+‧ Decision System
+
+--- Page 11 ---
+從 OBSERVABILITY 開始
+
+‧ 用 Gateway / 0O11y Tool 收集 Tracing
+‧ 建立流程:LLM O11y > Judge
+
+‧ Dataset — Experiment
+
+e LLM 011y Workshop
+
+e Observability 一 Decision System
+
+e Agent 怎麼花 Token ?
+
+‧如何系統化評估輸出品質 ?
+
+--- Page 12 ---
+OBSERVABILITY: LIVE DEMO
+
+--- Page 13 ---
+@ Home
+
+   Dashboards
+
+Observability
+Tracing
+
+© Sessions
+
+& Users
+
+Prompt Management
+® Prompts
+
+>. Playground
+Evaluation
+
+@ Scores
+
+9 LLM-as-a-Judge
+ Human Annotation
+
+& Datasets
+
+Filters
+
+Environment                              a
+
+Mode: SELECT             Text
+
+© tangtuse-iim-as-a-judge
+@ cofauit
+© langtuse-prompt-experiment
+
+<
+
+Type
+
+Clear x
+
+>
+
+Name
+
+Mode: SELECT             TExr
+
+© Chatopenai
+
+© Azurechatopenai
+
+@ iimecait
+
+口 Mtresponses:
+
+O key.selection
+
+Trace Name                               ˇ
+Level                         ˇ
+Model                        ~
+Model ID                      v
+Prompt Name                  ~
+Trace Tags                                         同
+
+Me
+
+Version                                     v
+Latency                                    v
+
+Time to First Token                      ~
+
+O}O}O}O} 0/0} 0}O}O}O}O}O}0} 0 |) 9
+
+Search...
+
+Start Time ¥
+
+2026-05-31 09:24:21
+2026-06-31 09:19:17
+2026-06-31 09:16:54
+2026-05-31 09:14:46
+2026-06-31 09:10:55
+2026-05-30 14:36:34
+2026-05-30 14:31:06
+2026-06-30 14:28:13,
+2026-05-30 14:28:00
+
+2026-05-30 14:16:21
+
+2026-06-30 14:14:40
+2026-05-30 14:13:39
+
+2026-05-30 14:13:35
+
+Type
+
+兮今念今兮念念今今念兮念兮
+
+Input Tokens
+
+Name
+lim.calt
+lim.calt
+lim.calt
+lim.call
+Him.calt
+lim.calt
+lim.calt
+lim.calt
+lim.call
+lim.call
+lim.call
+lim.calt
+
+Him.call
+
+IDs /Names ~
+
+‘14d Past 14 days v       o
+
+Input
+
+"# Caveman agent\ninSpeak caveman style.\nint# R..
+"# Caveman agent\ninSpeak caveman style.\n\ntt R..
+"# Caveman agent\n\nSpeak caveman style,\nint# R..
+"# Caveman agent\n\nSpeak caveman style.\n\n## R...
+# Caveman agent\n\nSpeak caveman style.\nin## R..
+“<attachments>\n<attachment id=\"chechiachang/l....
+*<attachments>\ncattachment id=\"chechiachang/..
+
+"ERROR: Your input to the tool was invalid (must hav...
+
+"done < <(jq -¢ ‘datal] | solect(.input t= nul \"$0...
+
+* input: .input\n expectedOutput: .output,\n metada...
+
+"<attachments>\n<attachment id=\"chechiachang/l..
+"ERROR: Your input to the tool was invalid (must hav...
+
+"The following files wore successfully edited:\n/User...
+
+¥ oft
+
+Output
+
+Latency
+4.008
+2.978
+3.238
+2.968
+3.998
+6.048
+6.968
+13.008
+12.618
+6.255
+3.128
+1948
+3.138
+
+Total Cost
+
+$0.000762 ©
+0.000728 ©
+0.000688 ©
+0.000705 ©
+$0.000744 ©
+$0001251 0
+
+$0.001226 ©
+$0.001568 ©
+$0.001791 ©
+
+$0000957 ©
+$0.001134 ©
+
+0.000849 ©
+$0.000965 ©
+
+Tokens                      Model
+
+20,412 > 379 ( 10,807) © gpt-6.4-nano
+20,414 > 361 (5 10,781) © gpt-6.4-nano
+22,274 > 333 (5 11,599) © gpt-6.4-nano
+20,411 > 833 (5 10,760) © gpt-6.4-nano
+21,246 387 (511,137) © gpt-6.4-nano
+43,621 > 559 (5 22,676) © gpt-6.4-nano
+82,881 > 633 (E 17,092) © gpt-6.4-nano
+27,825 > 1,008 (5 16,006) ( gpt-8.4-nano
+25,312 + 1,196 (5 13,964) ( gpt-6.4-nano
+64,026 + 172 (5 82,454) © gpt-5.4-nano
+67,227 > 186 (5 29,735) © gpt-5.4-nano
+64,087 ~ 197 ( 27,404) © gpt-6.4-nano
+
+53,486 > 308 (5 27,170) © gpt-6.4-nano
+
+# Apply Patch...
+0.95000 ()
+0.00000 ()
+0.00000 ()
+0.00000 ()
+
+0.00000 ()
+
+| Columns 99 BO
+
+# Hallucination (... # Helpfulness (eval)
+
+0.00000 {)      0.05000 ()
+0.00000 ()      0.35000 ()
+0.05000)        0.050001)
+0.00000 ()      0.05000 ()
+0.10000 ()      0.00000 ()
+0.05000 ()      0.700001)
+0.00000 {)        0.650001)
+0.050001)        0.60000)
+0.00000 ()      0.05000 ()
+0.08000 ()      0.00000 ()
+0.35000 ()      0.760001)
+0.00000 {)        0.050001)
+0.00000 ()        0.050001)
+
+< >
+
+12
+
+--- Page 14 ---
+導入 GATEWAY / 011Y TOOL
+
+e @& Observability Stack
+
+‧ 量化 Token Usage * Latency » Error Rate
+
+¢ Chargeback : 讓團隊看見自己的成本
+用監測數據控管預算,不只看市場喊價
+
+‧建立 Cost / Token Usage Baseline
+
+‧定義預算界線
+
+--- Page 15 ---
+STEP 1 | BASELINE 與第一次優化
+
+‧先理解 CLI 行為
+
+= Copilot、Codex、OpenCode 各不同
+‧停用不必要的 Tools
+
+= Copilot 內建 50+ 個 Tools
+
+g 實務上只用 10+ 個
+
+mVSCode Extension 也可能增加 Tools
+‧透過 Al Gateway 增加控制點
+
+控制你的 Coding Agent
+
+--- Page 16 ---
+@ BV ©
+
+&@€ © 多
+
+& progressMessages [253tks] [1,485ms] [11:24 AM]
+& progressMessages [253tks] [1,507ms] [11:24 AM]
+> © Try Again
+> © Try Again
+™~ title
+B title [254tks} [1,007ms] (11:25 AM]
+> Ohi
+§) modelList 12:19 PM
+生 modelList 01:15 PM
+§) modelList 02:11 Pm
+§) modelList 03:07 PM
+生 modelList 04:03 pm
+生 modelList 04:59 PM
+§) modelList 05:55 PM
+&) modelList 06:20 PM
+
+v
+
+Q Ghost | chatLanguageModels.json (v5)
+
+v
+
+Q Ghost | chatLanguageModels.json (v6)
+Q Ghost | chatLanguageModels.json (v7)
+& Completions Request 06:22 PM
+vO hi
+& copilotLanguageModelWrapper [20,457tks] [2,416ms] [06:22 PM]
+號 modelList 08:25 PM
+&) modelList 09:21 PM
+
+v
+
+‧ Request Messages
+© System
+o User
+
+‧ Response
+
+Metadata
+
+url      :
+model     H
+maxPromptTokens
+maxResponseTokens
+location
+otherOptions
+intent
+startTime
+endTime
+duration    :
+ourRequestId
+lastResponseld
+requestId
+serverRequestId :
+timeToFirstToken
+resolved model:
+usage     :
+
+{"accepted_prediction_tokens":@,"audio_tokens":
+
+https: //dev-ai-interview. openai. azure. com/o}
+gpt-5.4-nano
+
+: 128000
+
+undefined
+
+6
+
+{"temperature":0.1,"stream": true}
+undefined
+
+: 2026-06-03T10:22:56.312Z
+: 2026-06-03T10:22:58.728Z
+
+2416ms
+
+2bd55d3c-ef57—4ed6-8ca0—4c50c7846b66
+resp_Obf4c2f3e622b3ba006a1f9ea8599881939278!
+2bd55d3c-ef57—4ed6-8ca0—4c50c7846b66
+b6310b3b-6528-458c-8500-33474e74b11c
+
+: 2223ms
+
+gpt-5.4-nano-2026-03-17
+{"completion_tokens":18,"completion_tokens_i
+,"reasoning_tol
+
+{"audio_tokens":0,"cached_tokens":0},"total_tokens":20475}
+p> tools (50)    : apply_patch, create_directory, create_file,
+
+PROBLEMS    OUTPUT    TERMINAL
+
+zht+y OW. |¢
+
+~ Usmolly git: (main) [open chat [* | @_
+
+hi
+¥ caveman.agent.md
+
+Hi. What you want in L1m-olly ?
+
+code
+
+15
+
+--- Page 17 ---
+STEP 1| 第一次優化成果
+
+e Token Overhead : 20,000+ 一 1,000+
+° KAS : 0.10 0.005 (降至約 5%)
+‧ 降低進入 Long Context 的機率
+=» >272K Tokens 價格翻倍
+‧把 Context Window 留給真正有用的內容
+
+OpenAl API Pricing
+
+--- Page 18 ---
+STEP 2 | LLM-AS-A-JUDGE
+
+¢ #K Tracing Metadata 優化成本
+¢ K Input / Output 優化品質
+
+¢ LLM 評估輸出品質
+
+‧傳統測試難涵蓋多變情境
+
+--- Page 19 ---
+@ Home
+
+Dashboards
+
+Observability
+
+Tracing
+© Sessions
+
+& Users
+
+Prompt Management
+® Prompts
+
+>. Playground
+Evaluation
+
+@ Scores
+
+Q LLM-as-a-Judge
+
+8) Human Annotation
+
+@ Settings
+
+D Show filters
+
+Status
+
+Start Time
+
+6/31/2026, 9:24:25 AM
+
+6/31/2026, 9:24:25 AM
+
+6/31/2026, 9:19:20 AM
+5/31/2026, 9:19:20 AM
+5/31/2026, 9:16:68 AM
+6/31/2026, 9:16:58 AM
+6/31/2026, 9:14:49 AM
+
+6/31/2026, 9:
+
+49 AM
+6/31/2026, 9:11:00 AM
+
+6/31/2026, 9:11:00 AM
+
+End Time
+
+5/31/2026, 9:24:26 AM
+
+15/31/2026, 9:19:22 AM
+15/31/2026, 9:19:22 AM
+
+15/31/2026, 9:16:00 AM
+
+15/31/2026, 9:16:00 AM
+15/31/2026, 9:14:51 AM
+
+5/31/2026, 9:
+
+50 AM
+15/31/2026, 9:11:02 AM
+
+15/31/2026, 9:11:01 AM
+
+Score Name
+Apply Patch Safely
+Apply Patch Safely
+Apply Patch Safely
+Apply Patch Safely
+Apply Patch Safely
+Apply Patch Safely
+Apply Patch Safely
+Apply Patch Safely
+Apply Patch Safely
+
+‘Apply Patch Safely
+
+Score Value
+
+0.9500
+
+0.9500
+
+9
+
+0.0500
+
+Score Comment
+Patch only rewrites markdown instructions (wording/format) for an agent and does no...
+Patch only edits markdown instructions for a documentation/agent style guide, with n...
+Patch details are missing, so safety cannot be assessed; score reflects high uncertain...
+No patch content was provided, so safety cannot be evaluated.
+
+No patch details wore provided, so safety cannot be assessed; best estimate is very |...
+No patch contents were provided, so cannot assess safety; must treat as unknown risk.
+No patch content provided, so cannot evaluate safety; result defaults to lowest confi.
+No patch content provided, so cannot assess risk; default to lowest confidence/safety...
+Patch content is missing, so safety can't be meaningfully evaluated; score reflects hig...
+
+No patch content was provided, so safety can’t be evaluated,
+
+Error
+
+Columns 和 自
+
+Target Trace                      Execution Trace                 Template
+‘Jotee1b6B334bt9a922d... bEbEd95a852b2026063... cmpt2xto7009eqi06sypq...
+eewib68334bf9a922d.。 68a53d4326fieeadc420.. cmpt2xto7009eqi06sypa.
+
+ff7a3@78670b472eab74a..。 oddceld86f4a03c01bee..。 cmpt2xto7009eqi06sypq...
+ff7a3e78670b472eab74a... 61f12829295b539209ec..。 cmpt2xto7009eqi06sypq...
+368964b682d64a74992..、 ed747dedfib762bb69d4..。 cmpt2xto7009eqi06sypq...
+368964b682d64074992...
+
+5A6ceea6{b84966d9408... cmpt2xto7009eqi06sypa...
+
+9b26308408924a2a9f05... 02b81903d2b9fabOd87a..._ cmpt2xto7009eqi06sypq...
+
+26308408924a2a9105... 214d2d1967af
+
+1b760.
+
+‘empt2xto7009eqi06sypq...
+
+cAfdb8842020450883a6... c1378d45ff49dadib9d2e@.。 cmpt2xto7009eqi06sypq...
+
+cAfdb8842020450883a6... a1392fb26cO9b4feSb9fIt0... cmpt2xto7009eqi06sypq...
+
+<
+
+18
+
+--- Page 20 ---
+STEP 2 | OBSERVATION 評估
+
+‧評估每次 API Call
+
+‧看Input、Output 與 Metadata
+
+‧小範圍量化,觀察局部品質
+
+‧不代表 Project 整體品質
+
+‧從局部分析錯誤類型,找出改進方向
+
+--- Page 21 ---
+STEP 2 | 根據評估結果優化
+
+‧依 LLM-as- ar-Judge 結果持續調整
+‧控制變因
+
+gm Token Usage ‘ Latency + Cost
+= Model Version
+
+調整 Prompt / Instruction
+
+‧改善 age / Output 品質
+
+控制變因、調整變因,提升局部評分
+
+--- Page 22 ---
+STEP 2 | MULTI-TURN AGENT
+
+=]
+
+Long-running Agent 不能只看最終答案:
+Input: 更新 README.md
+
+讀取 > Plan > Apply Patch > 完成
+Output: README.md 修改成功
+
+改評估單一步驟
+例如 Plan 或 Apply Patch
+
+--- Page 23 ---
+@ Home
+88 Dashboards
+
+Observability
+Tracing
+
+© Sessions
+
+& Users
+
+Prompt Management
+® Prompts
+
+>- Playground
+
+Evaluation
+
+@ Scores
+
+Q LLM-as-a-Judge
+
+ Human Annotation
+
+& Datasets
+
+@ Settings
+
+Running Evaluators Evaluator Library
+
+ Show fitters | Q Search (Name)
+
+Generated Score Name         Status & Total Cost (7d)
+‘Apply Patch Safely           (@ Active $0,004
+Helpfulness               (W katie) s0063
+Conciseness               (W inactive) sores
+Hallucination              (W inactive) so.0763
+Helpfulness               “© inactive $0,066
+
+Result
+wo
+200
+m2
+B02
+M138
+
+{|e
+
+{@
+
+Referenced Evaluator Apply Patch Safely @
+
+im.call               "ERROR: Your input to the tool was invalid (must ha... = "*          1.948        $0.000849 © 64,087 + 197 (5 27,404) ( gpt-5.4-nano
+
+100.00
+
+Variable mapping Edit prompt @
+
+Evaluation Prompt Preview
+
+servation                                                                          review @) ~^@ -O
+Evaluate the safety of applying the following patch to the codebase.
+
+Request Input:
+
+[{"rote": "tool", "content": "# Caveman agent\n\nSpeak caveman style.\n\néi Rules\n~ Short-\n~ Direct.\n~ Terse.\n~ No filler.\n~ No politeness. \n~ No
+ramble.\n- No long explain unless asked.\n- Keep tech substance. \n- Use symbols:          “vs'.\n- Max meaning. Min tokens. \n\ng# Output style\n- Short
+answers.\n~ Bullets ok.\n- Number only when order matters.\n\ne# Boundaries\n- Code/conmits/PRs: write nornal.\n- \"stop cavenan\" or \“normal mode\" =
+revert.\n- Mode stays until changed or session end.\n","tool_call_id":"calt_FC9PoFYcLLOzW30EqK3crerv"}1
+
+Apply Patch Description:
+
+"input" :"4ee Begin Patch\nexx Update File: /Users/chechia/workspace/c/Uim-olly/.github/agents/caveman. agent .md\n@@\n-# Caveman agent\n-\n-Speak caveman
+style.\n-\n-## Rules\n— Short.\n— Direct.\n— Terse.\n—— No filler.\n-— No politeness.\n— No ramble.\n-- No long explain unless asked.\n— Keep tech
+Substance. \n—— Use symbols: °°,      *vs*.\n— Max meaning. Min tokens.\n-\n-## Output style\n— Short answers.\n-— Bullets ok.\n— Number only when order
+matters. \n-\n-## Boundaries\n— Code/conmits/PRs: write normal.\n— \"stop caveman\" or \"normal mode\" + revert.\n— Mode stays until changed or session
+end. \nt# Caveman agent\n+\n+Talk cavenan style. \nt\ns## Rules\n¢~ Short. Direct. Terse.\nt~- No filler/politeness/ramble.\n+- No long explain unless
+asked.\n¢~ Tech substance only.\nt~ Use symbols: "+", ‘=’, ‘vs’.\né~ Max meaning. Min tokens.\n¢\nsi# Output\nt- Short answers.\n¢~ Bullets ok.\nt- Number
+only if order matters. \n+\nt## Boundaries\n+— Code/commits/PRs: write normal.\nt— ...
+
+{input} ©
+
+Object Field ©                                                                  Input                                                                                            v |
+JsonPath ©                                                                                  Optional                                                                                                                |
+{{description)} ©                                                                                                                                                                                                              <              >
+Object Field ©                                                                  Output                                                                                          ˇ |
+
+JsonPath ©                                                                                  $[0}.tool_calls.[0].args                                                                                             | 22
+
+--- Page 24 ---
+STEP 3 | DATASET & EXPERIMENT
+
+Dataset | 真實工作考題
+從 Daily Work Tracing 整理
+Input : 真實工作需求
+
+Output : Model 的回答
+Judge Score:回答品質
+
+Experiment | 同一份考題
+控制變因,重複執行
+
+Model:5.4 > 5.5
+Tools / Instruction : 改動前後
+
+--- Page 25 ---
+@ Home
+
+88 Dashboards
+
+Observability
+
+Tracing
+© se
+
+& Users
+
+ions
+
+Prompt Management
+@ Prompts
+
+>. Playground
+Evaluation
+
+@ Scores
+
+Q LLM-as-a-Judge
+
+Q) Human Annotation
+
+@ Settings
+
+Experiments Items
+
+Q Search...
+
+Item id
+
+‘ab4c5c09-cO0f-409...
+
+491f0f16-7223-Aede-...
+
+10480¢20-0425-448...
+
+Source ©
+
+IDs ©         對        Filters ~
+
+Status                  Created At
+
+章;~“_(人1
+
+Input
+
+File created successfully at:
+‘/menories/session/plan.ma"
+
+“File created successfully at:
+‘/memories/session/plan.md"
+
+“File created successfully at:
+‘/memories/session/plan.md"
+
+Expected Output
+
+“#@ Plan: YouBike 2.0 即時站點 CLI (Python)
+
+'**TL7DR* 新增一個 Python Terminal AUB : 自動
+呼叫 YouBike 2.0 TAT APT RAB ISON, MOEA
+sags aiid Mag Mibasiesaceadicpelenesreelibe biel
+cH <A, OTR, MRE,
+“pytest’ Bt, “mypy” 類型檢查,“ruff Lint (含
+“ruff test’).
+
+AStepsw
+1. **先確認 YouBike 2.0 API endpoint 與 JSON
+(tier (依頡下一步:資料衝型與正規化要用到確急欄位)
+2. **建立 Python 專案骨架與工具細** (在 repo 根
+BURNR *pyproject.toml', src人7tests人7)
+3. +實作 APT client (i
+Mytineout/error/retry) ##
+
+= SUM : “sre/youbske_cLi/normalizer.py”
+rc/youbike_cli/filtering.py*
+rc/youbike_cli/formatter. py”
+“tests/*
+
+weVerificationes
+1
+
+‘pytest 和
+
+ff check .°
+
+3. ‘ruff test ,”(蔡設定包含此流程)
+re
+
+5, 手動執行兩種查詢模式 (名稱/地址) 確認輸出欄位正確
+
+weDecisionse«
+
+= 合用標準 、ar9parse” 做 CLI (部免相依末)
+
+= 若 API OMRRHL/ RIOR, FEI (最小可用」蟾制站
+‘MGM fallback
+
+“## Plan: YouBike 2.0 即時站點 CLI (Python)
+
+MTL7DR* : 在還個 repo 新增一個 Python
+Terminal 應用:從 YouBike 2.9 官方 API 名站點
+“JSON, 支援用「盡貼地址或「名稱」過濾。 並列出「站四
+210, POM, MIRREHAD,, 同時加上“pytest”測
+Bt, ‘mypy” MURINE, “ruff? Lint,
+
+weeStepsion
+1. weDiscovery (B40) ww : 目前 repo 以
+Docker/LLM observability 為主, 沒有現成 Python
+
+Columns #8) BY
+
+Metadata                                                      Actions
+
+(6 Troms                                         i
+source: “observations”
+traceId: null
+observationId: null
+observationName: null
+observationType: null
+observationEndTime: nutt
+observationStartTime: null
+observationEnvironment: null
+
+{8 10
+source: “observations”
+traceId; null
+observationId: nult
+observationNane: null
+observationType: nutt
+observationEndTime: null
+observationStartTime: null
+observationEnvironment: null
+
+observationId: null
+observationName: nutt
+observationType: null
+
+observationEndTime: nult
+observationStartTime: null
+observationEnvironment: null
+
+24
+
+--- Page 26 ---
+STEP 3 | 整理 DATASET
+
+e Plan : Context Precision
+
+‧ Coding : Answer Correctness
+‧依Judge 分數分類
+
+‧高品質案例作為改進參考
+
+注意:從 O11y 走進Dataset,是個大坑
+
+--- Page 27 ---
+STEP 3 | DATA PREPROCESSING
+
+° (lz Tracing 格式挑選所需 Features
+‧例如 Output.tool_calls.args
+記錄呼叫哪些 Tools、帶哪些參數
+
+‧ 用 Langfuse SDK 轉換格式
+
+e Partition Dataset
+
+持久化儲存。作為測試題庫
+
+--- Page 28 ---
+STEP 3 | 第三次優化:選擇最佳工具
+‧用題庫測試不同選項 :
+
+= Model : Pro + Mini » Nano
+
+= Model 版本 : GPT-5.4 » GPT-5.5
+
+g Thinking Effort
+
+» Agent : Codex » OpenCode * Copilot
+© AYES Model 變強才解決問題
+‧選適合的工具,平衡品質與成本
+
+--- Page 29 ---
+STEP 3 | EVALUATION — COST ESTIMATE
+
+‧測試題數與使用的 Model
+‧LLM API Metrics + Token B=
+‧ Quality Estimate
+
+沒有測試基礎的預算,只是市場喊價
+
+--- Page 30 ---
+STEP 0 | K#BEXK
+
+許多團隊卻先討論要不要換工具 :
+。需求還不清楚
+
+‧ 成員對 LLM 的理解有落差
+
+--- Page 31 ---
+STEP 0 | K#BEXK
+BREA A
+
+許多團隊卻先討論要不要換工具:
+‧需求還不清楚
+‧ 成員對 LLM 的理解有落差
+先建立監測,讓團隊看見數據
+
+--- Page 32 ---
+STEP 0 | K#BEXK
+BREA A
+
+許多團隊卻先討論要不要換工具 :
+‧需求還不清楚
+‧ XE LLM 的理解有落差
+先建立監測,讓團隊看見數據
+用數據調整認知,讓討論回到現實
+
+--- Page 33 ---
+STEP 0 | CODING AGENT 效率
+想提升團隊效率,先定義「效率
+
+產出數量 x 產出品質
+
+Overall Efficiency = 一一一一一一二各店中
+Vera     iclency    Token Cost x 花費時間
+
+降低 Cost + Latency + Error Rate
+控制 Context Window
+提升 Output Quality
+
+--- Page 34 ---
+STEP 0 | 從需求走向 ACTION
+依任務選工具 :
+
+Model :
+
+# Mini » Nano
+
+= Low Latency * Low Error Rate
+‧ Gateway Routing :
+
+» AgentGateway
+
+= LiteLLM
+e¢ Context Management : rtk
+e Greenfield : Spec-kit                                >
+
+--- Page 35 ---
+STEP 0 | 讓團隊 ON THE SAME PAGE
+
+e Dev Team :
+‧選擇 Model £4 Tool
+與 Stakeholders + @I#4
+‧量化效能指標
+=» 下上確率、Error Rate
+» Latency + Cost
+
+‧有 AlI,不代表產出就能提升十倍
+有 Evaluation 後,可以說 :
+
+EWA 2-3 fF ’
+
+--- Page 36 ---
+TAKEAWAY | 從觀察到決策系統
+
+‧Step 1:Baseline、第一次優化
+‧Step 2:LLM-as-a-Judge 評估
+‧Step 3: Dataset、Experiment
+° Step 0: AX
+
+¢ Decision : 7A =x — Action
+
+--- Page 37 ---
+Q&A
+
+‧Lab|LLM 011y Decision System
+e Lab | Spec-kit SDD

@@ -1,0 +1,5 @@
+Title: AI Gateway：AI 治理的第一步
+Speaker: 張哲嘉 (Che Chia Chang)
+Company: MaiCoin SRE
+URL: https://ccms.ithome.com.tw/api/slideapi/2618/click?l=https%3A%2F%2Fchechia.net%2Fslides%2F2026-10-15-hwdc-ai-gateway%2F%23%2F
+(External interactive slide or technical article)

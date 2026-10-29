@@ -1,0 +1,425 @@
+Title: 從 Sprint 到 Prompt：用 AIDD 從 0 打造 LINE Bot
+Speaker: Zona Wang
+Company: LINE 台灣 Tech Evangelist
+
+=== Page 1 ===
+用
+AIDD 
+用
+0 用用
+LINE Bot
+用
+AIDD 
+用
+Intent 
+用
+MVP 
+用用用用用用用
+Zona Wang
+用LINE Developer Relations
+
+=== Page 2 ===
+Zona Wang
+Lead of LINE Taiwan 
+Developer Relations
+Developer Relations 
+Project Management
+TECH FRESH Program
+LINE Technology Evangelist
+
+=== Page 3 ===
+用用用用用用
+AI 用
+Code
+用
+用用用用用用用用用用
+Human 
+用用用用
+AI 用用
+Code
+AI Coding
+Coding Assistant
+Vibe Coding
+用用用用用用
+AIDD
+用用用用用用
+用用用
+AI 用用用
+Code 
+用用用
+
+=== Page 4 ===
+Software Development 
+用
+用用用用
+Code
+AI AGENT 
+用用用用用用用用用用
+Implementation
+01
+Intent
+02
+Requirements
+03
+Design
+04
+Implementation
+用用
+AI 用用用用
+05
+Testing
+06
+Verification
+07
+Delivery
+08
+Operation
+
+=== Page 5 ===
+AIDD 
+用用用用
+AI -
+Driven Development
+AI 用用
+How — 用用
+用用用
+用用用
+Human 
+用用
+Why / What 
+— Intent 用Decision 用
+DoD
+AI 用用
+How 用
+Human 用用
+Why / What 
+/ Is it worth it?
+用
+
+=== Page 6 ===
+用用用用用用用用
+AIDD
+用
+用用
+AI 用用用用用用用用
+用用用
+用AI 用用用用
+Code 用用
+用用用
+用用用用
+AI 用用用用
+Development 
+Process 用用
+
+=== Page 7 ===
+用用用用用用用用用用
+Scrum Master 
+用
+AIDD
+用用用用用用用用用用
+Human 
+用用用用用
+QA Engineer
+用用用
+Scrum Master
+用
+Value 用用
+DevRel / AI 
+Coding
+AI 用用用用
+用用用用用
+Human 
+用用用用用
+
+=== Page 8 ===
+Scrum → AIDD
+用用用
+用用用用用用
+Cadence
+Intent → Build → Verify → Decision
+Collaboration
+Human + AI Agent
+Iteration
+Generate → Verify → Adjust
+Scrum ≠ AIDD
+。AIDD 。。。
+Scrum 
+Replacement
+。
+
+=== Page 9 ===
+用用
+Intent 
+用用用用用用用用用用用用用
+Bot
+INTENT
+用用用用
+→ 
+LINE Bot → 
+用用用用
+PROJECT ID
+261005 - lunch - decision - bot
+用用用用
+Codex CLI
+AWS aidlc
+- workflows
+LINE Messaging
+API
+Google Places 
+API
+
+=== Page 15 ===
+START AIDD
+►START
+2026 / 10 / 05
+17:00
+Intent 用261005 - lunch - decision - bot
+用用用用
+Intent
+Requirements
+Design
+Code
+Test
+用用用用用用用
+……
+用用用用用
+
+=== Page 16 ===
+用用用用
+…… 用用用用用用
+17:00 → 
+21:00
+AI 用用用用用用
+Code 用
+Webhook 
+用用
+Location
+用用
+…… 用用用用
+
+=== Page 17 ===
+用用用用用用用
+—— 用用用用用用用
+用用用
+AI 用用用
+API 用用用用用用用用用
+用
+用用用用用
+用用用用
+用用
+Requirements
+。。。。。。。。。。。
+Code
+
+=== Page 18 ===
+用用
+Code Generation……
+用用用用用
+用用用
+用用用用用用用
+用REQUIREMENTS
+用DESIGN
+用
+PLANNING 
+✓
+RABBIT HOLE 
+用用
+• Code Generation 
+→ 用用
+用
+• 用用用用用
+……
+。。。。。。。。。。。。。。
+
+=== Page 19 ===
+用用
+Scrum Master DNA 
+用用用
+用用用用用用用用用用用用用用用
+Value 用用用用用
+USER 用用用
+用用用用用用用用
+AI 用用用用用用用
+Lima VM Disk Persistence
+用用用
+SCRUM MASTER
+用用用用用用
+用
+Process ≠ Goal
+Artifact 
+≠ Goal
+Sprint ≠ Goal
+用用用用用用
+VALUE
+Complete ≠ Valuable → 
+。。
+AIDD Workflow
+
+=== Page 20 ===
+Turning Point
+用用用用用
+Definition of Done
+用用用用
+Time
+- to - MVP > 
+Infrastructure 
+Completeness
+Non - core → Timebox 
+15 用用
+Unresolved 
+→ Technical Debt
+Prioritize 
+→ End - to - End Journey
+Human 
+用用用用用用用用用用用用用用用用用
+
+=== Page 23 ===
+Human
+- in - the - Loop
+用
+Human 
+用用用用用用用
+用
+AI 。。
+。Analyze · Code · Test
+Human 
+。。
+。Intent · DoD · Value
+Human 
+用用用用用用用
+用
+Human 
+用用用用用用用
+用
+
+=== Page 24 ===
+Architecture 
+用用用用用
+BEFORE
+用OVER -
+ENGINEERED
+用
+6 。
+PostgreSQL
+・Lima / 
+VM
+→
+AFTER
+用MVP - FIRST 用
+4 。
+用
+DB 用用
+VM
+
+=== Page 25 ===
+用用用用用用用用用用用用用
+用用
+Bot
+用用用用
+Places 用用
+用用用用
++ 用用
+✓Webhook Verify
+✓Places 
+用用用用
+✓Reply Accepted
+
+=== Page 26 ===
+用用用用用用用用用
+19 /19
+AIDLC Stages Completed
+390
+Unit Tests Passed
+81
+MVP Tests Passed
+90.75
+%
+Code Coverage
+7/7
+Local CI Passed
+✓REAL LINE JOURNEY 
+用用用用用用用
+
+=== Page 27 ===
+Completed 
+≠ Production 
+Ready
+MVP COMPLETED 
+✓
+Tests 用390 Unit + 81 
+MVP 用
+Local CI
+用7/7用
+Demo
+PRODUCTION READY 
+✕
+Hosted CI
+Production SLO
+Legal Review
+19/19 Completed 
+用
+MVP 用用用用
+用用用
+Production 
+用用用用
+用
+
+=== Page 28 ===
+AIDD 
+用用用用用用用用
+Code
+用用用用
+用用用
+Evidence
+Requirements
+Code + Tests
+Final Report
+
+=== Page 29 ===
+用用用用用
+用用
+Spectrum
+Vibe Coding
+MVP - first AIDD
+Full AIDD
+
+=== Page 30 ===
+用用用用用用用用
+AIDD
+用My 
+AIDD Starter Kit
+Write the Intent
+Define Done
+Plan Before Code
+Start Small. Keep the Human in the Loop.
+
+=== Page 31 ===
+用用用用用用用用用用用
+Scrum 
+用用用用
+①AIDD
+②Scrum Master View
+③Start AIDD
+
+=== Page 32 ===
+Q&A 用用用用
+AIDD 
+用用用用用用用
+用
+zonawang/aidd
+- line - bot
+用用用
+Evidence
+用用用
+Repo 用用用
+Requirements + Design
+Code + Tests
+CI Evidence
+
+=== Page 33 ===
+Thank
+You
+LinkedIn
+GitHub
+Medium
+LINE

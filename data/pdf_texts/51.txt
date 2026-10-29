@@ -1,0 +1,5 @@
+Title: 都用AI寫Code了，工程師若再往前一步：Product Builder
+Speaker: 劉兆恭 (JUGG)
+Company: ProdSence 校長兼撞鐘
+URL: https://ccms.ithome.com.tw/api/slideapi/2613/click?l=https%3A%2F%2Fgamma.app%2Fdocs%2FAI-Code--u0unw46qfsyxfot%3Fmode%3Ddoc
+(External interactive slide or technical article)

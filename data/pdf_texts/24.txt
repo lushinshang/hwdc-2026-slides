@@ -1,0 +1,360 @@
+Title: 讓 Agent Skills 介入你的軟體開發的工作流
+Speaker: 吳俊毅 (Gelis)
+Company: Gelis 的程式設計訓練營 資深. NET技術顧問
+
+=== Page 2 ===
+讓Agent Skills 介入你的軟體
+開發的工作流
+講師：Gelis
+Gelis 程式設計訓練營
+軟體開發之路
+
+=== Page 3 ===
+吳俊毅(Gelis)
+• 顧問資歷：
+•
+鼎基資訊電腦- Claude Code 訓練講師
+•
+柏瑞投信- GitHub Copilot 代理人開發導入顧問
+•
+飛騰雲端- GitHub Copilot 顧問訓練講師
+•
+新安東京海上- Redis Cache 導入與執行顧問、系統架構顧問
+•
+新光產險- Redis Cache 導入、架構設計顧問
+•
+新竹科學園區旺宏電子- .NET 6 系統升級顧問、企業框架設計顧問
+•
+高雄一卡通- Unit Test 單元測試導入顧問
+•
+玉山銀行數金處- Unit Test 單元測試導入
+•
+裕隆汽車– 前端框架Vue 授課導入顧問
+• 講師資歷：
+•
+PCHome 導入Unit Test 教育訓練講師
+•
+GIGABYTE 技嘉– ASP.NET Razor Pages 訓練講師
+•
+資策會- IBM 授權教育訓練中心 - UML 課程講師
+•
+2015 集英信誠- 與大師對談講師
+•
+Microsoft Visual Studio Everywhere 2017 台北場講師
+•
+.NET Conf Taiwan 2018/2019/2020/2021/2022/2023 講師
+•
+HiSKIO 平台講師
+•
+Study4.TW 社群講師
+MVP (2011~2017)
+
+=== Page 4 ===
+Agenda
+• 如何駕馭AI 開發、AI 時代架構師的暖身運動
+• 從『規格至上』來探討Agent 驅動的規格分析與建模技巧
+• 你覺得你是在做Spec 驅動開發嗎？
+•
+不只是將prompts 變成可重複使用的命令
+• 重新定義AI 時代的SDLC 軟體開發
+• 用Agent Skills 來定義系統開發與設計流程方法(Methodology)
+•
+定義Sequence/Domain Modeling 與程式碼的Skills
+• Lab：Skill 就只做Skill 的事情
+•
+Skill 就是種技能：但又可讓AI 專注在特定Context 商業領域下
+
+=== Page 5 ===
+雖然AI 做投影片很快
+但是畫面雜訊太多!! 所以..我盡量少用
+今天.. 除持非真的需要... 或者AI 真的有表達到我
+想表達的內容～
+先用我的方式表達重點
+
+=== Page 6 ===
+你認為AI 寫的程式能不能
+100% 被相信呢？
+90%
+80%
+70%
+
+=== Page 7 ===
+我不是說AI 寫程式不行，
+其實AI 真的非常厲害
+但是.......
+我認為，
+不讀AI 寫的程式碼不單單一種決定、
+而是一種『能力』！
+
+=== Page 8 ===
+我不是說AI 寫程式不行，
+其實AI 真的非常厲害
+但是.......
+我認為，
+不讀AI 寫的程式碼不單單一種決定、
+而是一種『能力』！
+
+=== Page 9 ===
+下面有三種操作AI 的方式：
+(1). 一路交給AI 來完成所有事？？？
+分析需求(Analysis) -> 解釋與設計需求(Explain with Plan) -> 設計(Design) -> 撰寫程式(Coding) -> 測試(Testing)
+(2). 審核(介入) 軟體開發的每一個階段？？？
+分析需求(Analysis) -> 解釋與設計需求(Explain with Plan) -> 設計(Design) -> 撰寫程式(Coding) -> 測試(Testing)
+(3). Vibe Coding 憑感覺寫程式
+需求（prompts）只下提示詞-> 反覆對話Chat Window （prompts）-> 人工測試(Testing)
+Review
+Review
+Review
+Review
+你是哪一種呢？
+
+=== Page 10 ===
+如何駕馭AI 開發、
+AI 時代架構師的暖身運動
+
+=== Page 11 ===
+將軟體架構『最小化人力資源』的目標，應用到Context 設計上。
+Spec
+Spec
+
+=== Page 12 ===
+從『規格至上』
+來探討Agent 驅動的
+規格分析與建模技巧
+
+=== Page 16 ===
+你覺得你是在做
+Spec 驅動開發嗎？
+
+=== Page 17 ===
+SDD 的開發流程
+• 將prompts 需求上下文的收集➔到PRD 實現計畫=自動化
+
+=== Page 18 ===
+Spec-Kit 提供的命令(prompts)：
+• Spec-Kit 提供了如下主要參數：
+1.
+/speckit.constitution - 建立or 定義專案核心要求與開發原則
+2.
+/speckit.specify - 自動化規格的生成（What & Why）
+3.
+/speckit.plan - 建立開發的實作計畫
+4.
+/speckit.tasks - 產生可執行的開發工作項目
+5.
+/speckit.implement - 執行上述產生的開發工作項目
+6.
+/speckit.clarify - 需求釐清、可由AI 分析當前規格中存在的潛在模糊性或衝突
+7.
+/speckit.checklist - 進行品質把關審查，確保所有需求皆具備可測試性
+8.
+/speckit.analyze - 分析缺漏的功能性需求、tasks 與plan 是否存在不一致？
+
+=== Page 19 ===
+用OpenSpec 來維護Legacy System
+
+=== Page 20 ===
+用OpenSpec 來維護Legacy System(2)
+
+=== Page 21 ===
+用OpenSpec 來維護Legacy System(3)
+
+=== Page 22 ===
+但文件(Spec) 量能不能再更少一點？
+
+=== Page 23 ===
+我們來思考一個問題...
+訪談
+開發團隊
+• 專案開發是滿足使用者需要
+• 產品是滿足市場的需求
+Product
+User
+Plan
+全盤接受？
+不接受？重新來過？
+●
+●
+●
+●
+●
+Implement？
+AI
+原始
+需求
+(審核)
+
+=== Page 25 ===
+SDD 與AIDLC 兩者的關係
+• SDD 是一種AI 原生工程方法（AI-Native Engineering Approach）
+它工程師在專案裡用的「招式」（微觀）
+•
+它規定了您必須準備constitution.md、spec.md、plan.md 等文件
+•
+不是SDD 參考AIDLC，而是AIDLC 把SDD 納入為它在「開發階段」的核心方法論
+• AIDLC 是企業管理專案的「制度」（宏觀生命週期）
+•
+AIDLC（AI-Driven Development Lifecycle）則是一整套架構營運模式，它關注的是整個
+軟體工廠的流水線
+•
+它涵蓋了從一開始的AI 法律合規審查、AI 成本預算估算，到中間的程式碼生成（這
+一步就是採用SDD），再到最後的AI 自動監控與模型疊代
+•
+例如IBM 提出的AI-DLC 框架，其實就是方法論建立了完美的Harness Engineering
+（駕馭環境），讓SDD 的自動化驗證迴路（回饋控制）代替了人類的眼睛
+
+=== Page 26 ===
+我的意思是.. 不是不要相信AI
+• AI 很能寫Code 這是確定的!!!
+• 但是，人類自己要先想清楚，AI 才會做出對的事情。
+
+=== Page 27 ===
+重新定義AI 時代
+的SDLC 軟體開發
+
+=== Page 28 ===
+但是之前有一件事，
+一直很困擾著我！？
+就是.. AI 每次寫的Code 都不一樣？
+同一個需求、同一個功能
+
+=== Page 29 ===
+但.. 為什麼
+我又說我可以做到
+不去Review 我的AI 的產出呢？
+
+=== Page 30 ===
+方法論
+(Methodology)
+「以方法論為導向的自主開發
+（Methodology-Driven Autonomous 
+Development）」
+
+=== Page 31 ===
+AI-native SDLC Playbook
+• Anthropic 公司曾發布過一份重磅指南：《The AI-native SDLC 
+Playbook》（AI 原生軟體開發生命週期劇本）
+•
+規格與政策優先（Policy applied while the spec is written）：
+•
+在AI 開始編碼前，公司的「方法論政策與制度」必須先被定死，而不是等代碼寫
+完才來Review
+•
+制度代碼化（Institutional knowledge becomes files the agent reads）：
+•
+將人類工程師的「方法論、制度與架構知識」直接寫成檔案讓AI Agent 閱讀，並
+將防護欄（Guardrails）直接作為程式碼運行，這與我的「用方法論預期AI 代碼
+架構」的想法完全一致
+
+=== Page 32 ===
+實踐Harness Engineering
+• 矽谷主流工具實踐：Cursor Rules (.mdc) 與AGENTS.md
+• 從prompt 轉向到AIDLC （AI驅動開發生命週期）
+• 同時衍生出Eval-Driven Development（評估驅動開發）的概念
+• AI 行為與架構在開發前就定義
+
+=== Page 33 ===
+實踐Harness Engineering
+• 矽谷主流工具實踐：Cursor Rules (.mdc) 與AGENTS.md
+• 從prompt 轉向到AIDLC （AI驅動開發生命週期）
+• 同時衍生出Eval-Driven Development（評估驅動開發）的概念
+• AI 行為與架構在開發前就定義
+
+=== Page 34 ===
+實踐Harness Engineering
+• 矽谷主流工具實踐：Cursor Rules (.mdc) 與AGENTS.md
+• 從prompt 轉向到AIDLC （AI驅動開發生命週期）
+• 同時衍生出Eval-Driven Development（評估驅動開發）的概念
+• AI 行為與架構在開發前就定義
+
+=== Page 35 ===
+實踐Harness Engineering
+• 矽谷主流工具實踐：Cursor Rules (.mdc) 與AGENTS.md
+• 從prompt 轉向到AIDLC （AI驅動開發生命週期）
+• 同時衍生出Eval-Driven Development（評估驅動開發）的概念
+• AI 行為與架構在開發前就定義
+
+=== Page 37 ===
+AI 其實非常熟悉原有的軟體開發方法論
+• 以租車系統來說：
+只聚焦在『顧客可進行租車』服務
+聚焦➔主要事件流
+Basic Flow or Main Success Scenario
+現在要做的是事情與什麼有關？
+(領域物件➔程式碼)
+
+=== Page 38 ===
+AI 其實非常熟悉原有的軟體開發方法論
+• 以租車系統來說：
+只聚焦在『顧客可進行租車』服務
+聚焦➔主要事件流
+Basic Flow or Main Success Scenario
+確認租車
+1
+2
+3
+4
+1
+2
+3
+4
+
+=== Page 39 ===
+用Agent Skills 來定義
+統開發與設計流程方
+法(Methodology)
+
+=== Page 42 ===
+Lab 1：流程&
+方法展示
+(1).由AI 展示use case model到
+sequence 到domain class diagram
+的設計過程
+
+=== Page 43 ===
+Methodology
+這就是為什麼我說，
+重點還是在方法論？
+
+=== Page 44 ===
+調整ToRentalCar 方法的SPEC
+https://github.com/wugelis/EasyV2LabForAI4
+
+=== Page 45 ===
+Lab 2：建立
+ToRentalCar(RentalCarDTO) 方
+法
+(1). 完成前面投影片所有工作後
+(2). 開啟新的Claude 對話Session
+(3). 使用下面prompt：
+/application-rentalcar-rules 
+請參考增加的ToRentalCar (RentalCarDTO) 規則，並在
+@Application9.RentalCar9/RentalCarSerAppServices.c
+s  裡撰寫這個C# Method 
+@Domain9.RentalCar9/IVehicle.cs
+EasyV2Lab9
+https://github.com/wugelis/EasyV2LabForAI4
+
+=== Page 46 ===
+Q＆A
+
+=== Page 47 ===
+關於我
+FB 社團
+軟體開發之路
+粉絲團
+Gelis 程式設計訓練營
+部落格
+Gelis 技術隨筆-部落格
+
+=== Page 48 ===
+工商服務
+
+=== Page 49 ===
+工商服務
+
+=== Page 50 ===
+工商服務
+
+=== Page 51 ===
+工商服務

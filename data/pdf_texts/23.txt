@@ -1,0 +1,56 @@
+Title: 解構 Agentic AI 時代的系統架構：A2A、x402、AP2
+Speaker: 蕭兆洋 (Charles Hsiao)
+Company: NVIDIA Senior DGX Cloud Automation Engineer
+
+2026年10月14日
+Hello World Dev Conference 2026
+-
+解構 Agentic AI 時代的系統架構：A2A、x402、AP2
+以「一個 Agent 的完整旅程」為敘事主軸，剖析 A2A、x402、AP2 三大協定如何重新定義 AI Agent 時代的服務間通訊、支付執行與授權問責。
+臺北文創大樓 6 樓 (台北, 台灣)
+活動頁面
+A2A
+x402
+AP2
+Kubernetes
+Istio
+Ghost Pay
+Agentic Payment
+Agentic Economy
+AI Agent
+🖥️ 投影片
+Talk Summary
+當年 REST 與 gRPC 定義了微服務時代的服務間通訊，催生了 API Gateway、Service Mesh 與整個雲原生生態；如今，一組全新的協定正在重新定義 AI Agent 時代的系統架構：Google 的 A2A（Agent2Agent Protocol）讓 Agent 之間能互相發現與協作；Coinbase 主導的 x402 協定賦予 Agent 自主付費呼叫 API 的能力；而 Google 的 AP2（Agent Payments Protocol）則透過可驗證的授權鏈（Mandate Chain），回答了 Agent 交易中最棘手的問責難題。
+這場演講不是三個協定的規格導讀。我會以「一個 Agent 的完整旅程」作為敘事主軸：從透過 A2A 協商任務開始，到收到 402 Payment Required、以 x402 完成鏈上小額支付。這趟旅程將透過講者開源的 Kubernetes 支付基礎設施 Ghost Pay 現場實際演示：以 Istio mTLS 與 Envoy Lua Filter 構建「隱形支付攔截層」，當業務 Agent 遭遇外部 402 挑戰時，Envoy sidecar 自動攔截流量並委派給叢集內的 Paymaster Agent 簽署 EIP-3009 支付憑證，再交由外部 Facilitator 完成鏈上結算。業務 Pod 全程零感知、零程式碼修改，甚至不需要持有任何代幣支付 Gas 費。支付跑通之後，我們再面對下一個更難的問題：「誰授權這個 Agent 花這筆錢？」這正是 AP2 試圖回答的命題，也是 Agent 進入生產環境前無法迴避的最後一塊拼圖。
+聽完這場演講，你將理解：當 Agent 成為系統中的一等公民與交易主體，我們的系統架構設計、服務間通訊、身分授權與計費架構需要迎來哪些根本性的變革，以及哪些準備工作現在就必須開始。
+聽眾收穫
+AI Agent 正迅速從「會思考的工具」演變為「能自主行動的交易主體」，但大多數企業的系統架構仍停留在為「人類使用者＋傳統服務」設計的舊時代。本議程將協助聽眾打破瓶頸，提前佈局 Agent 經濟：
+建立 Agentic Protocol Stack 的心智地圖
+— 深刻理解 A2A、x402、AP2 三大協定如何各司其職（溝通協作／支付執行／授權問責），並如同微服務時代的 REST／gRPC 一樣，建構出下一代服務間通訊與商務的基礎分層。
+解決關鍵問責：「誰授權這個 Agent 花錢？」
+— 透過 AP2 的 Mandate 架構與 SD-JWT 授權鏈機制，掌握 Agent 交易的身分授權與稽核設計。這將是 Agent 進入生產環境時，資安與合規團隊必問的魔王級問題。
+帶走一個跑得起來的參考架構 Ghost Pay
+— 以「Payment as Infrastructure」為核心哲學，將 Agentic Payment（代理人自主支付）能力下沉至 Kubernetes 基礎設施層：以 Istio mTLS、Envoy Lua Filter 與 sidecar 委派 Paymaster Agent，組裝出讓業務 Pod 零感知、零程式碼修改即可調用外部付費資源的隱形支付攔截層。演講將坦誠分享這些架構決策背後的取捨與已知限制，會後可直接 clone 回去研究。
+相關文章
+【A2A 系列 #1】從對話到協作：為何 A2A (Agent to Agent) 是 AI 演進的終局之戰？
+【A2A 系列 #2】深入剖析 A2A：如何讓 AI Agent 彼此溝通與分工？
+【A2A 系列 #3】Task 狀態機與安全架構：讓多 Agent 協作真正可信賴
+【A2A 系列 #4】動手做：用 Google ADK 打造你的第一個 A2A 多 Agent 協作 Demo
+【Agentic Payment】Ghost Pay：Payment as Infrastructure，把 Agent 支付能力下沉到 Kubernetes 基礎設施層
+【Agentic Payment】Payment-as-a-Service 之戰：Self-hosted 還是 Managed？
+【Agentic Payment 系列 #1】HTTP 402 沉睡三十年後醒來：x402 如何讓支付成為網際網路的一等公民
+【Agentic Payment 系列 #2】信任的代價：AP2 授權機制、A2A 支付整合與三大協議戰場劃分
+【Agentic Payment 系列 #3】兆美元賽道：Agent 經濟的市場、合規與 Web 4.0 支付堆疊
+【Agentic Payment 系列 #4】從理論到實作：用 Golang 親手跑一遍 x402 支付流程
+【Agentic Payment 系列 #5】沒有人看到全貌：AP2 v0.2 用兩張 Mandate 重寫 Agent 的授權邊界
+相關實作
+charles-hsiao/ghost-pay
+charles-hsiao/x402-demo
+作者
+Charles Hsiao
+Automation Engineer，熱愛開源技術，專注於可觀測性、雲端架構與 AIOps。
+近期不小心掉進 AI 的深坑裡，時不時會出現在技術社群與大家交流經驗。
+GitHub
+LinkedIn
+查看完整介紹
+← 返回 Talks

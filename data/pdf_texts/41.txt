@@ -1,0 +1,925 @@
+Title: 當 AI 加入團隊：打造可審查、可驗證、會自我改善的 AI 開發工作流
+Speaker: 蔡景翔 (James Tsai)
+Company: 骨架資訊有限公司 Microsoft MVP
+
+=== Page 1 ===
+當AI 加入團隊
+打造可審查、可驗證、會自我改善的AI 
+開發工作流
+James Tsai (蔡景翔)
+Hello World Dev Conference 2026
+
+=== Page 2 ===
+James Tsai
+https://jamestsai.tw
+https://github.com/JamestsaiTW
+https://ithelp.ithome.com.tw/users/20126714/ironman
+https://mvp.microsoft.com/zh-TW/MVP/profile/57b5922b-
+e357-e511-810a-c4346bac0abc
+https://dotblogs.com.tw/jamestsai
+James’s Tech & Life Blog
+2 / 40
+
+=== Page 3 ===
+開場｜設計背景
+工程團隊問題處理的SOP 流程
+在AI 還沒開始介入前，一個問題是這樣被處理的
+1
+Jira
+開單
+問題與需求
+進到一張票
+›
+2
+Repo
+改程式
+工程師在本機
+分支上修改
+›
+3
+裝置驗證
+驗證
+模擬器或真機
+最終真機確認
+›
+4
+GitLab /
+GitHub
+MR / PR
+驗證過才送審
+同儕審查程式碼
+›
+5
+CI/CD
+自動檢查
+建置與測試
+擋住明顯錯誤
+›
+6
+發佈
+合併上線
+通過後合併
+進入發佈流程
+每一步都靠人
+知識在資深人員腦中·  驗證靠記憶·  交接靠口頭
+AIOrchestrations  ·  HWDC 2026
+3 / 40
+
+=== Page 4 ===
+開場｜設計背景
+工程團隊手上已經有的東西
+AI 還沒來之前，團隊就已經有這些…
+系統與工具
+Jira
+任務與缺陷的入口
+GitLab / GitHub
+程式碼、版本與MR / PR 審查
+CI/CD
+自動建置與測試
+測試裝置
+手上的真機，驗證行為
+模擬器+ 小工具
+搭配自動腳本測試
+自動化流程
+既有的腳本與排程
+人與知識
+資深人員的經驗
+只存在腦中與過往的人與人的對話裡
+SOP 與文件
+散落在各處、容易過期
+Log 與紀錄
+出事時才去翻
+工具都齊了；缺的是把「人與知識」變成可重複的流程
+AIOrchestrations  ·  HWDC 2026
+4 / 40
+
+=== Page 5 ===
+開場｜FDE 視角：沿著上一頁那條路
+怎麼把AI 接進去：沿用同一條路，只新增一步
+1
+Jira 票
+任務從票開始
+用自己的帳號
+短效cookie
+用完即刪
+›
+2
+載入指引
+AI 先讀規則
+放AGENTS.md
+指向規則的repo
+該檔被git 排除
+›
+3
+修改程式
+先不送MR
+AI 在產品repo 修改
+還在本機分支
+規則的改動另走MR
+›
+4
+驗證
+沿用原本的關卡
+模擬器或真機
+AI 透過skill 腳本做
+輸出附回票上
+›
+5
+MR + CI
+驗證過才送審
+驗證通過才開MR
+由人審查程式碼
+CI 跑自動檢查
+只多「載入指引」一步，其餘沿用上一頁的流程與關卡
+AIOrchestrations  ·  HWDC 2026
+5 / 40
+唯一新增的一步
+
+=== Page 6 ===
+開場
+這場你可以帶走這5 件事…
+AIOrchestrations  ·  HWDC 2026
+6 / 40
+1
+把個人Prompt 技巧，變成團隊可維護、可審查的工作流
+2
+讓AI 的「完成」可觀察、可驗證，不只是「看起來完成」
+3
+最小上下文、工具權限、敏感資料隔離的安全設計原則
+4
+「執行→ 驗證→ 反思→ 審核→ 演進」的 Loop (Human in the Loop)
+5
+一份用Git、文件、腳本就能立刻試行的最小導入藍圖
+
+=== Page 7 ===
+AIOrchestrations  ·  HWDC 2026
+7 / 40
+先舉個手
+你的團隊，AI 的Prompt 現在放在哪裡？
+A
+每個人的聊天視窗
+人走了就沒了
+B
+有共用文件，沒人
+維護
+越寫越過期
+C
+進Git，經PR 審查
+跟程式碼一樣被管理
+請舉手
+
+=== Page 8 ===
+開場
+讓團隊中每個成員都能用同一套方式進行工作
+AIOrchestrations  ·  HWDC 2026
+8 / 40
+用一個Git repo 就替AI 補上四項能力後加入團隊
+1
+路由
+找對規則
+入口manifest 讓AI 只載
+入這次任務需要的規則與
+知識
+aiorchestrations.json
+2
+行為契約
+完成要有證據
+先定完成條件；宣告完成
+時要附上指令與實際輸出
+，未驗證的要標示
+docs/operating-contract.md
+3
+安全邊界
+動作有邊界
+Skill 宣告允許的動作與副
+作用；憑證、log 等執行
+期資料留在repo 之外
+skills/  ·  scripts/
+4
+自我改善閉環
+經驗經人審核回流
+回顧只產生提案，由人核
+准後，才升級成共用的
+Knowledge 或Skill
+session-retrospective/
+全部是Git + Markdown + 腳本，每一次變更都能用Pull Request 審查
+
+=== Page 9 ===
+問題框架
+一個問題，為什麼阿爾法無法重現貝爾塔的成功？
+AIOrchestrations  ·  HWDC 2026
+9 / 40
+工程師貝爾塔（週一）
+• 一串很厲害的Prompt
+• 三兩下解掉棘手問題
+• 收工，關掉聊天視窗
+工程師阿爾法（週二）
+• 遇到類似的問題
+• 不知道貝爾塔怎麼問AI 的
+• 不知道參考了什麼資訊
+• 不知道怎麼確認修好
+不是AI 不夠聰明，是「經驗沒有被留下來」
+
+=== Page 10 ===
+問題框架
+工程團隊導入AI 大致會遇到這三類問題：
+AIOrchestrations  ·  HWDC 2026
+10 / 40
+三類問題不分先後，都是「治 理」問題，不是換更強的模型就能解決
+1
+經驗鎖在個人對話
+症狀
+Prompt 只活在聊天視窗
+後果
+不可複製、不可審查、人走就沒了
+2
+完成由AI 自己宣告
+症狀
+說「已完成、已驗證」卻沒跑檢
+查
+後果
+「看起來完成」≠「完成」
+3
+權限與資料沒有邊界
+症狀
+log、憑證、工具權限散落各處
+後果
+洩漏與誤操作的風險
+
+=== Page 11 ===
+AIOrchestrations  ·  HWDC 2026
+11 / 40
+問題不在模型不夠強
+而在AI 的行為缺乏可治理的框架
+
+=== Page 12 ===
+設計原則
+刻意輕量：用工程團隊已經會的工具
+AIOrchestrations  ·  HWDC 2026
+12 / 40
+刻意不引入
+✕常駐服務
+✕向量資料庫
+✕新的平台或框架
+只用三樣
+✓Git：版本與審查（PR）
+✓Markdown：流程與知識
+✓腳本：可重複的動作
+AI 協作= 一份可以被Pull Request 審查的工程資產
+
+=== Page 13 ===
+設計原則
+AIOrchestrations 概觀
+AIOrchestrations  ·  HWDC 2026
+13 / 40
+產品repo
+AGENTS.md 指標
+入口
+AGENTS.md ＋manifest
+①
+Workflow
+流程與完成條件
+Agent
+Skill
+Prompt
+Knowledge
+全流程共用的行為契約：先講完成條件
+·
+驗證要誠實
+·
+標記未驗證
+·
+失敗兩次換方法
+·
+依風險決定力度
+②
+Scripts：執行邊界
+AI 呼叫腳本，不讓AI 自己亂生指令
+③
+測試裝置
+模擬器或真機
+Runtime 資料
+repo 外
+回顧→ 提案→ 人工審核→ 修訂機制①整段執行流程
+④
+①路由（機制1）
+②行為契約（機制2）
+③安全邊界（機制3）
+④自我改善閉環（機制4）
+回到①：修訂整段流程
+
+=== Page 14 ===
+設計原則
+設計AIOrchestrations 時的取捨
+AIOrchestrations  ·  HWDC 2026
+14 / 40
+先選「可審查」，再視需要加「工具」
+選擇（得到）
+代價（付出）
+✓每一次變更都能Pull Request 審查
+換來
+檢索彈性不如向量資料庫
+✓零新增基礎設施與維運
+換來
+路由與文件品質需要人維護
+✓人與AI 讀同一份來源
+換來
+規模變大後要靠規範控制膨脹
+
+=== Page 15 ===
+設計原則
+AIOrchestrations 概觀– 機制1
+AIOrchestrations  ·  HWDC 2026
+15 / 40
+產品repo
+AGENTS.md 指標
+入口
+AGENTS.md ＋manifest
+①
+Workflow
+流程與完成條件
+Agent
+Skill
+Prompt
+Knowledge
+全流程共用的行為契約：先講完成條件
+·
+驗證要誠實
+·
+標記未驗證
+·
+失敗兩次換方法
+·
+依風險決定力度
+②
+Scripts：執行邊界
+AI 呼叫腳本，不讓AI 自己亂生指令
+③
+測試裝置
+模擬器或真機
+Runtime 資料
+repo 外
+回顧→ 提案→ 人工審核→ 修訂機制①整段執行流程
+④
+①路由（機制1）
+②行為契約（機制2）
+③安全邊界（機制3）
+④自我改善閉環（機制4）
+回到①入口
+
+=== Page 16 ===
+機制1｜分層與路由
+分層與路由：每個任務都有可走的歸屬
+AIOrchestrations  ·  HWDC 2026
+15 / 40
+目錄
+職責
+workflows/
+端到端流程：輸入→ 步驟→ 輸出→ 完成條件
+agents/
+需要協調多個能力的角色設定
+skills/
+單一、可重複使用的能力（含安全邊界）
+prompts/
+固定用途的提示樣板
+scripts/
+真正會被執行的輔助腳本
+knowledge/
+已審查、可重複使用的領域知識
+docs/  ·  schemas/
+給人與AI 的說明；驗證檔案格式的JSON Schema
+任何成員，無論是人還是Agent，不用讀完整個repo，就能發現該到哪找
+
+=== Page 17 ===
+機制1｜分層與路由
+全部讀進來，只徒增使用的Token 數
+AIOrchestrations ·  HWDC 2026
+16 / 40
+全部載入
+• 一個巨大的說明檔
+• 不相關規則互相干擾
+• 把A 平台的判斷套到B 平台
+Router 驅動
+• 入口manifest 先比對任務
+• 只載入最小必要上下文
+• 有意識地選擇，不是盡量少讀
+分層與路由的設計，亦可降低無關規則混入的風險
+
+=== Page 18 ===
+機制1｜分層與路由
+每次載入有預設額度：先讀少、視需要再加量讀
+AIOrchestrations  ·  HWDC 2026
+17 / 40
+1
+產品repo 的指引檔
+AGENTS.md 指標，只指路、不含規則
+1 份
+2
+AIOrchestrations 的AGENTS.md
+共用入口說明
+1 份
+3
+主要workflow 或skill
+這個任務要用的那一個
+1 份
+4
+次要知識文件
+需要時才加
+0～2 份
+5
+團隊記憶查詢（選用）
+只當參考，不取代審查
+最多5 筆
+額度是預設，不是上限
+•
+任務確實需要更多背景，就大方
+地多讀，不是一定。
+•
+重點是有意義，超過要有理由。
+
+=== Page 19 ===
+機制1｜分層與路由｜案例
+採用後Token 用量顯著降低
+AIOrchestrations  ·  HWDC 2026
+18 / 40
+題目：發生ATM 機台(Windows 平台) 無法正常出鈔問題，AI 透過指示進行問題排除。
+A｜採用分層與路由設計
+190k
+輸入token
+（3 次平均）
+AGENTS.md 約4 KB，入口manifest 路由
+✓3/3 抵達正確結論
+✓3/3 沒載入無關平台的skill、都標示未驗證
+B｜未採用：全量載入對照
+300k
+輸入token
+（3 次平均）
+AGENTS.md 約80 KB，每次請求都帶著
+✓3/3 抵達正確結論
+✓3/3 沒載入無關平台的skill、都標示未驗證
+答案一樣正確；路由載入的輸入token 少約37%
+註：1 個題目、1 個模型、各跑3 次樣本（約144 KB）；不能推論到更大的repo 或更難的題目
+
+=== Page 20 ===
+機制1｜分層與路由｜案例剖析
+A 是怎麼走到答案的？
+同一題「ATM-W 的機台無法出鈔」：入口設計不同，知識進上下文的方式也不同。
+A｜採用分層與路由設計載入
+1
+AGENTS.md 約4 KB：指向入口manifest
+2
+manifest 路由到相關workflow／skill
+3
+按需讀取知識；需要時再讀樣本log
+IsDispenseEnabled=0｜gate suspected
+硬體未驗證
+B｜未採用：本次全量載入對照
+1
+移除入口manifest
+2
+全部Markdown 合併為單一AGENTS.md（約80 KB）
+3
+每次請求都帶整份指引，再找本題內容
+相同結論：IsDispenseEnabled=0
+硬體未驗證
+本次兩邊都得到相同結論；差異是「按需載入」與「每次帶入整份指引」
+註：B 是本次自建的未採用對照（全量AGENTS.md），不代表一般作法；僅1 題、1 模型、各3 次
+AIOrchestrations  ·  HWDC 2026
+19 / 40
+
+=== Page 21 ===
+機制1｜分層與路由
+每次載入有預設額度：先讀少、視需要再加量讀
+AIOrchestrations  ·  HWDC 2026
+20 / 40
+1
+產品repo 的指引檔
+AGENTS.md 指標，只指路、不含規則
+1 份
+2
+AIOrchestrations 的AGENTS.md
+共用入口說明
+1 份
+3
+主要workflow 或skill
+這個任務要用的那一個
+1 份
+4
+次要知識文件
+需要時才加
+0～2 份
+5
+團隊記憶查詢（選用）
+只當參考，不取代審查
+最多5 筆
+額度是預設，不是上限
+•
+任務確實需要更多背景，就大方
+地多讀，不是一定。
+•
+重點是有意義，超過要有理由。
+對照該案例
+那題讀了約10 個檔，超過額度；理
+由是要樣本log 才能下結論。
+
+=== Page 22 ===
+設計原則
+AIOrchestrations 概觀– 機制2
+AIOrchestrations  ·  HWDC 2026
+21 / 40
+產品repo
+AGENTS.md 指標
+入口
+AGENTS.md ＋manifest
+①
+Workflow
+流程與完成條件
+Agent
+Skill
+Prompt
+Knowledge
+全流程共用的行為契約：先講完成條件
+·
+驗證要誠實
+·
+標記未驗證
+·
+失敗兩次換方法
+·
+依風險決定力度
+②
+Scripts：執行邊界
+AI 呼叫腳本，不讓AI 自己亂生指令
+③
+測試裝置
+模擬器或真機
+Runtime 資料
+repo 外
+回顧→ 提案→ 人工審核→ 修訂機制①整段執行流程
+④
+①路由（機制1）
+②行為契約（機制2）
+③安全邊界（機制3）
+④自我改善閉環（機制4）
+回到①入口
+
+=== Page 23 ===
+機制2｜行為契約
+行為契約：五條規則
+AIOrchestrations  ·  HWDC 2026
+22 / 40
+1  先講完成條件
+動手前先定義可觀察、可測試的「完成」，
+不是「感覺可以了」
+2  驗證要誠實
+沒跑過的檢查不能宣稱已驗證；指令成功≠問
+題真的解決
+3  標記未驗證
+查不到的事實明確標成Unverified，不當成
+已知
+4  失敗兩次就換方法
+同一做法失敗兩次，停下來重新界定問題
+5  依風險決定驗證力度
+小事輕量驗證、高風險才走完整流程；失敗一次就升級
+
+=== Page 24 ===
+AIOrchestrations  ·  HWDC 2026
+23 / 40
+猜猜看
+案例測試：AI 說測了4 種情境，全部「被回收」
+你會怎麼回覆AI？
+Scenario                        Collected
+S1 XAML Style animation            yes
+S2 C# RunAsync + Token             yes
+S3 C# RunAsync, no Token           yes
+S4 XAML, IsVisible=false           yes
+A
+沒有洩漏，可以結案
+B
+先確認「動畫真的有在跑」
+C
+再多跑幾次再說
+請舉手
+
+=== Page 25 ===
+機制2｜行為契約
+全數回收，不代表動畫已驗證
+AIOrchestrations  ·  HWDC 2026
+24 / 40
+Scenario                              Ran
+Collected
+S1 XAML Style animation               NO
+yes
+S2 C# RunAsync + CancellationToken
+NO
+yes
+S3 C# RunAsync, no CancellationToken
+NO
+yes
+S4 XAML, IsVisible=false              NO
+yes
+Ran = 動畫真的有跑嗎？
+只看 Collected 會得到
+「全部都被回收，沒有洩漏」
+但Ran 欄顯示：測試中沒有觀察到動
+畫執行。
+原因：Headless 進行測試時，無UI 啟
+動，因此無法驗證UI 動畫。
+①完成條件：動畫必須實際執行
+②驗證要誠實：Ran=NO，不可宣稱已驗證沒有洩漏
+③標記未驗證：UI 是否啟動執行動畫，Headless 無法判定（Unverified）
+
+=== Page 26 ===
+AIOrchestrations  ·  HWDC 2026
+25 / 40
+猜猜看
+同一招，已經失敗兩次了。第三次，你（或AI）會……
+A
+再試一次，也許只
+是運氣
+B
+加個特例，先讓它
+過
+C
+停下來，寫出失敗
+原因X（證據）
+請舉手
+
+=== Page 27 ===
+機制2｜行為契約
+同一招失敗兩次，就停止
+AIOrchestrations  ·  HWDC 2026
+26 / 40
+AI 要重試前，必須能填完這句話：
+•  填不出「證據」→ 先蒐證，不要再試一次
+•  兩次嘗試失敗的方式不同→ 前提可能是錯的，重新推導
+•  為了保護目前做法而一直加特例→ 該重新設計的訊號
+失敗原因是X（證據：……），
+修改Y 會修正X，因為Z。
+
+=== Page 28 ===
+機制2｜行為契約
+依風險決定驗證的等級，再用檢查表收尾
+AIOrchestrations  ·  HWDC 2026
+27 / 40
+等級
+什麼時候
+LIGHT
+≤2 個檔案、小而可逆、有機械式檢查
+STANDARD
+預設：完整契約
+FULL
+共用規則、不可逆、或對外可見的動作
+檢查表（節錄）
+☐輸出真的存在
+☐每條準則有證據
+☐原本失敗的檢查重跑通過
+☐未驗證項目已列出
+☐敏感暫存檔已清理
+LIGHT 失敗一次，就升級為STANDARD
+每個任務開始前，請AI 先評估影響、可逆性與出錯後果，再標定要執行的風險等級；高風險先請人確認。
+
+=== Page 29 ===
+機制2｜行為契約｜情境推演
+任務：查測試機台近48 小時有無運作錯誤
+情境推演：AI 先初評風險；高風險操作執行前必須由人確認。
+⑤開始前｜AI 先評估風險
+範圍：單一測試機台× 近48 小時
+操作：只讀查詢，不改機台設定
+AI 先評估漏報影響，再決定查證力度
+做法：交叉核對log／告警，註明來源與時間
+若要重啟或改設定，先請人確認
+④執行中｜同一查法失敗兩次
+停手：不再重試同一查詢方式
+改查其他資料來源，或補足存取條件
+本例對應：③查不到標記Unverified
+④同一方法失敗兩次就停手
+⑤依風險決定驗證力度
+AIOrchestrations  ·  HWDC 2026
+28 / 40
+③查不到→ 標記Unverified
+不能把「查不到」回報成「沒有錯誤」
+
+=== Page 30 ===
+設計原則
+AIOrchestrations 概觀– 機制3
+AIOrchestrations  ·  HWDC 2026
+29 / 40
+產品repo
+AGENTS.md 指標
+入口
+AGENTS.md ＋manifest
+①
+Workflow
+流程與完成條件
+Agent
+Skill
+Prompt
+Knowledge
+全流程共用的行為契約：先講完成條件
+·
+驗證要誠實
+·
+標記未驗證
+·
+失敗兩次換方法
+·
+依風險決定力度
+②
+Scripts：執行邊界
+AI 呼叫腳本，不讓AI 自己亂生指令
+③
+測試裝置
+模擬器或真機
+Runtime 資料
+repo 外
+回顧→ 提案→ 人工審核→ 修訂機制①整段執行流程
+④
+①路由（機制1）
+②行為契約（機制2）
+③安全邊界（機制3）
+④自我改善閉環（機制4）
+回到①入口
+
+=== Page 31 ===
+機制3｜安全邊界
+Skill 先宣告邊界，再談能力
+AIOrchestrations  ·  HWDC 2026
+30 / 40
+•  允許的動作
+•  會有哪些副作用
+•  是否需要人工核准
+•  明確不可碰的資料
+## Safety boundary
+- Scope: [target / environment]
+- Allowed: [actions / read-only]
+- Inputs: [required; user-supplied]
+- Side effects: [none / exact impact]
+- Needs approval: [action / approver] (write actions: yes/no)
+- Never touch: [credentials / protected data]
+- Validation: [observable check; unseen = Unverified]
+
+=== Page 32 ===
+機制3｜安全邊界
+規則訂在Repo 中，但處理過程中所產出資料不准進
+AIOrchestrations  ·  HWDC 2026
+31 / 40
+AIOrchestrations repo（可審查）
+workflows · agents · skills
+prompts · knowledge · scripts
+docs · schemas
+不進repo（runtime）
+artifacts · downloads · logs
+workspaces
+config/user.local.json
+•  不在對話裡貼密碼、Token、金鑰
+•  只匯出短效憑證，用完即刪；可提交脫敏後的範例讓AI 之後可進行CoT (思維鏈) 處理
+
+=== Page 33 ===
+機制3｜安全邊界
+越靠近底層，護欄會越具體
+AIOrchestrations  ·  HWDC 2026
+32 / 40
+•  腳本是AI 的執行邊界：AI 呼叫腳本，而不是讓AI 自己拼指令執行
+•  參數明確化、輸入做引號處理，拒絕夾帶其他指令的原始參數
+•  高風險動作：先核准→ 執行→ 回讀驗證
+•  現場出過的問題，要回頭改寫Skill 的安全設計
+
+=== Page 34 ===
+設計原則
+AIOrchestrations 概觀– 機制4
+AIOrchestrations  ·  HWDC 2026
+33 / 40
+產品repo
+AGENTS.md 指標
+入口
+AGENTS.md ＋manifest
+①
+Workflow
+流程與完成條件
+Agent
+Skill
+Prompt
+Knowledge
+全流程共用的行為契約：先講完成條件
+·
+驗證要誠實
+·
+標記未驗證
+·
+失敗兩次換方法
+·
+依風險決定力度
+②
+Scripts：執行邊界
+AI 呼叫腳本，不讓AI 自己亂生指令
+③
+測試裝置
+模擬器或真機
+Runtime 資料
+repo 外
+回顧→ 提案→ 人工審核→ 修訂機制①整段執行流程
+④
+①路由（機制1）
+②行為契約（機制2）
+③安全邊界（機制3）
+④自我改善閉環（機制4）
+回到①入口
+
+=== Page 35 ===
+機制4｜自我改善閉環
+會自我改善的Loop
+AIOrchestrations  ·  HWDC 2026
+34 / 40
+執行
+驗證
+反思
+提案
+人工審核
+修訂機制①
+整段流程
+核准修訂後，後續任務就能依更新後的機制①載入與執行
+AI 只能協助「提案」，由人把關MR / PR 與確認修訂
+觸發時機：有值得沉澱的任務完成時，再啟動回顧流程
+
+=== Page 36 ===
+機制4｜自我改善閉環
+提案寫出來，不等於規則
+AIOrchestrations  ·  HWDC 2026
+35 / 40
+①人提出整理指示
+Session 中明確提出
+幫我整理成可進入
+AIOrchestrations 的處理
+②人審核提案
+AI 草擬，供人判斷
+逐項判斷是否採納
+未核准，不改共用檔
+③核准後才更新
+依核准結果走更新流程
+修改共用檔案
+審查通過才成為規則
+AI 負責整理與草擬；人負責判斷與決定
+
+=== Page 37 ===
+導入
+最小導入藍圖
+AIOrchestrations  ·  HWDC 2026
+36 / 40
+Day 1
+讓AI 找對規則
+AGENTS.md 入口檔
+一頁行為契約
+Week 1
+把重複任務流程化
+Workflow + Skill
+含安全邊界
+Month 1
+讓流程持續可檢查
+回顧提案流程
+一致性檢查（CI）
+全部都是Git、文件、腳本，不需要新平台。
+
+=== Page 38 ===
+AIOrchestrations  ·  HWDC 2026
+37 / 40
+三件事，帶回去
+①把Prompt 變成資產
+②完成，要有可觀察的證據
+③演進，由人把關
+延伸閱讀：iT 邦幫忙2026 鐵人賽《當AI 加入團隊》30 篇
+掃描QR code 延伸閱讀
+https://ithelp.ithome.com.tw/users/20126714/ironman/9668
+
+=== Page 39 ===
+38 / 40
+Thank you !
+
+=== Page 40 ===
+AIOrchestrations  ·  HWDC 2026
+Q & A
+39 / 40
+
+=== Page 41 ===
+設計原則｜補充｜現成技術
+現成技術或工具，能再多做哪些？
+Azure AI Search
+搜尋／索引
+關鍵字＋向量混合檢索；補搜尋彈性
+仍需管理索引更新與權限
+Atlassian Rovo
+企業知識搜尋／Agent
+跨Atlassian 與已連接的資料來源
+能力受連接器與平台生態影響
+CI Pipeline
+GitHub Actions／GitLab CI/CD
+PR／MR 自動檢schema、路徑、連結
+攔結構錯誤；語意仍需人工審查
+服務能接手搜尋、索引與機械檢查；規則取捨與核准仍由人把關。
+官方文件：Azure AI Search · Google Agent Search · Atlassian Rovo · GitHub Actions · GitLab CI/CD
+AIOrchestrations  ·  HWDC 2026
+Google Agent Search
+原Vertex AI Search｜企業搜尋／RAG
+代管企業資料搜尋與RAG grounding
+仍要治理資料來源、權限與成本
+40 / 40

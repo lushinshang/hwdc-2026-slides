@@ -1,0 +1,4 @@
+Title: 產出的人不能驗自己：AI 時代的驗收設計
+Speaker: 楊騏 (Ci)
+Company: WaCare 數位健康 Tech Lead
+

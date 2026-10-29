@@ -1,0 +1,5 @@
+Title: 為 Agentic AI 設計前端狀態機與即時回饋介面
+Speaker: 何剛 (Michael Ho)、Sunny Wu
+Company: 鈦創軟體資訊有限公司 full stack engineer；Senior Full-Stack Engineer
+URL: https://ccms.ithome.com.tw/api/slideapi/2638/click?l=https%3A%2F%2Fdocs.google.com%2Fpresentation%2Fd%2F1BsRICqoyCiwbfOTRPqnYhtRjAvrxhwq2brUSkMWq6x0%2Fpreview%3Fslide%3Did.p3
+(External interactive slide or technical article)

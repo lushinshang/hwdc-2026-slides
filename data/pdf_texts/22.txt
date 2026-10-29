@@ -1,0 +1,1021 @@
+Title: 當 Secret 不再是秘密
+Speaker: 邱繼平 (山姆大叔)
+Company: 架構師
+
+=== Page 1 ===
+\               Bty,727
+
+> Secret 不再是秘密 ~
+
+> ALS  Ses Azure Keyvault 如何重塑機敏資5 治理<
+講者:印繼平 (山姆大叔 )          ase
+
+s-,                        B ietes
+CS  Es n>   QS ie)     =O           @ ult ea
+
+NOTE            Tac / PR          Pe MS
+
+8
+
+nl              理解需求       以程式碼定義     政策‧權限        集中管理   人
+產生 Tac       與審核     HH OR      HERE   Bes       :
+全程稽核      Inderstandin.  — DevOps 系列  1
+
+=== Page 2 ===
+S2             71’
+
+盟 講者 介 47 -
+把治理做成開發者願意使用的產品
+邱繼平 (山姆大叔)
+
+&  13+ 年金融業資訊經驗,近年聚焦 Plotform Engineering / DevOps
+Q  Microsoft MVP | Azure DevOps | Kubernetes | Key Vault | Kong
+
+(eg  主題:自助服務、治理、Golden Path + Developer Experience
+
+&司  曾於 Hello World » DevOpsDays Toipei、Plotform Engineering Day 分享
+
+字
+
+一我心的不是把流程變多,而是讓治理真正被使用。 一
+————
+
+=== Page 3 ===
+RAG Fel ? 我 Aa. ~
+
+4% Slido 留下你的問題,最後我會挑幾題回答,也送出幾本
+
+g
+°
+
+四 TE
+ a E (7834)
+
+pelea
+
+Slido 現場提問
+
+=== Page 4 ===
+=, Understanding-Driven DevOps ~
+
+DEV - MANY REPOS, BRANCH ‘CHAOS,
+
+CI - BUILD (CLASSIC PIPELINE)
+
+的全局、ˋ
+
+CD - HIDDEN LOGIC, MANY CONNECTIONS
+
+\
+(So ay        Azure De                        g Release Pipeline                          a
+Bi aa           1                          (Classic)                         erable Gps Cary)
+\                                     !
+release/*                                                                     i             PowerShell Ser
+ae                        | Cobar                                      (Goer vand)
+ar                                  二一                                        = Read Buld #20354
+aster                               i       fees                                            ~ Generate Deployment YAML
+Configap                            li Ceuta                   Build                        Sc hae
+| et              TH                nt PowerShell Script
+i           了                                                                 (Assemble ConfigQap)
+| (Deer Ba                    Aa  Rit            = Reed Build #20354
+和
+!                                     !
+   Docker Image i pe ee ae et
+!                                     i
+Push                                                                                        i;       [ Azure Kubernetes
+aie               HI 人      Ja) | Seen SS
+\ (I Stored PowerShell Scripts     4              i      | | | Gest) [sg    ‘a
+foray                        H                   teeta see ||| eee    和
+ae                        \                                           r
+fins                1 Aaure Container Stil with plactbelders.. | | (Se-@5- Ped) (Se-08-Pea) (Se- aso Ja:     AeaRERS:
+Se                         | Registry       Wil berpecd nod” {|                                     S/"ows
+1 (Net really                    SC- KS - Der} (Se 005 - Sty    e
+BB Aaure Repos                     | that important)                       hee                                    =a
+SECRETS - MANUAL & OUT OF BAND                                        so
+ea                   |x fet                        a coe.
+$0 mony caters.                         ae                                                           Secrets are NOT part
+ae               set | set                                            of CI/CD.
+mat              Whee                                kabectt Amazon EKS
+3            =a                         erry -f | os,          Humans do it manually.
+=a                                                                     ss
+SRE Team                                                                               由                   了
+
+Many Kubernetes Secrets
+
+=== Page 5 ===
+~ aes ee DevOps <
+#%              N
+
+@  DEV - TRUNK BASED            @  CI - PRODUCE ARTEFACTS                   !       CD - DEPLOY WITH GOVERNED IDENTITY
+Jaa LS                     —                       !
+Azure                                                  A;    Pipelines      .                ”          \
+Azure Rey                  Pipeli                                   1        aed oles lines      4      Machine Identity (Governed) |
+wma ag                         主     at          Azure Container Registry | |           hame          ‘         Y Least Privilege         !
+(rut)             Checkout                           (acR)              Se       acral           |
+ay                                                                            Deployment Evidence       !        Y No Human Secrets |
+°        O-    >          Build                                        er             《
+VW Trunk-based Development                                                                      Nanos
+Y Clean & Simple                   va Ta                                      P|          Untegry 7 Poy)
+Y_ Everything in Git                        :                        Pas
+Developer           =       =             一二一        /         4               +            Get Secrets                          DEV Secrets
+£ 國 azure-pipetines.yml     :      (“hen 二                                                   from Azure Key Vault                  SIT Secrets
+canal           i           7 Kustomize Bake             me a)             UAT Secrets
+a               i       Kustomize Bake                                               inject Secrets
+Raley              i                    J >| B) Deployment                         into Manifest @                PROD Secrets
+|              B service                       ——_ 一一一              入
+1                 B Confightap                           入                S       stored       wa
+sw主                 Secrets ae sored ONL in Ka Vt
+點 Kustomize Structure                       at Evidence            B_Secret Template (vo reat secret)         ep time
+1 bose                                           ¥                                                        Verify Deployment Only in memory
+ent.yank                                                                                     iy
+2                                      Deployment Evidence (Delivery Documents)                  es         S Never in Git
+‘configmap. yor                          gt                                                                 Ricord| Evdance               > Never in CI Artifact
+Secret "Aamplate yam (no real secret) |           DEV            ‘SIT            UAT           PROD
+1 overtays/               i    Stages tas || 7 image 23 | |v tmage 2a | |v tage: 123
+i      [+ devs        eustomization.yaml |      Y Manifest Hash | | 7 Manifest Hash | | 7 Manfest Hash | | 7 Manifest Hah
+Ler     a Yat 1 | |[S paopthece” || Roope” || reyroeat” || tat cet
+ae        erat me      2 tee        2 tte        o tate        2 tat
+CO pred      tistetaston yond |      serve (J)] | serve (A)| | arrnoven (A)} | semove> (A)
+
+“Delivery Observability Dashboard
+
+人
+nt  il  5  :   thy
+
+we tL gua || 95% |] 23 dere || 45min |] 100%
+
+1   Oil All   (@
+
+We enable teams
+
+=== Page 6 ===
+“Secret 該如何流動與治理呢?
+
+先想想 : 在你的公司,Secret 是怎麼流動的?
+
+Azure k ?  > KeyVoult 7 7     re
+Pipelines “\. 9177 S~-~    aes
+
++2
+
+Azure
+Kubernetes Service
+(AKS)
+
+Developer     eee>                              at
++ 需要用到 Secret                                                DBA
+“但不彈道去哪裡申請?             ‧部署與維運需要 Secret           。密碼的擁有者?
+oe ee                       + (2 BOF a ATS AR        “權限在哪 ?
+
++ BARA?
+
+=== Page 7 ===
+a!
+
+i}
+
+我        s> BRR      aa
+我們以為這是密碼同是
+其實,它一
+我們常聽到的建議       ca
+pt en  我需要一組  a OS
+V 不要把密碼放 Git fo ;
+
+V 不要把密碼寫死              5
+V 不要把密碼寄 Email
+
+這些都沒有錯,
+但不是我們真正卡住的原因 。
+
+Secret 34
+
+=== Page 8 ===
+規模化放大了混亂的程度
+
+錯綜複雜的數千次協作.
+
+1000+
+“&              Pipelines
+
+100+                                                                           100s
+
+10+
+
+Kubernetes
+Secrets
+
+-               E
+
+ao
+
+Azure DevOps
+Projects
+
+Azure Key Vaults
+
+Project A
+
+Project B
+
+一一
+規模化的
+混亂
+
+Project C
+
+Project N
+
+Cloud —
+
+re    當每段協作都有自己的方法,整個組織就沒有答案
+
+=== Page 9 ===
+Secret  到底在哪裡?
+
+能存在所有 你想得到的地方 。 | gerne...
+
+號   rary 才是
+Excel
+Sa    a                           應該是放在 fa Vault »
+入         ae                           我們說了 fa !
+@   aa  i
+(2) (am? anita!)  間誰? 我知道啊 !
+
+Azure DevOps
+Library
+
+Repository
+
+Variable Group
+
+oe
+
+Secret
+到底在哪裡?
+?
+
+ss,                     但當你問,,.
+v                                                 2     -
+Email        個人筆記       Chat 記錄                                      @    aaannnes
+rel             bs
+ped         C3
+es      ose       也                       每個人都有不同答案,
+
+而且都很有自信 !
+
+[等段協作換手的混亂造成7四散的 Secret - |
+
+=== Page 10 ===
+傳說中有些
+
+等等,
+
+所以公司其實
+真的有用過
+Key Vault ?
+
+| 線索一: 真的有正確使用的案例
+
+這是一個 Azure Data Factory 專案,
+
+曾由微軟顧問協助導入。
+Ea HQ  Le
+Azure          ATR AAR
+Data "rectory Key Vault       Nines
+
+‧從 Key Vault 取得必要的 Secret
+‧* 由 Data Factory 的軌行環境使用
+
+系統有用 Azure Key wult ?
+
+eos secret.yaml 是什麼 ?
+
+@ ietttnee      \ |"
+但不是 K8S 的佈署路徑。    3
+
+Ne   -
+
+真正辛若的是 SRE,                  2,
+|圖      夾在開發者、DBA 與 Cloud Infra 的摩擦中。~
+
+5 a
+線索二: KIS 專案走的是另一條路       我後來理解:
+K8S 專案的變數與 Secret 管理,是另一套流程 ,.,     sell
+secret. yaml              -
+ey                   C5)         不是企業沒有
+Library         nae
+on  Sa - k=) &  Key Vault »
+:        Reet keane ‘gp || 而是正確使用的
+Azure DevOps Library i SRE 手工更新               經驗,
+aa        Gg                   bo    沒有成為K8S 專案
+=                                  ARRAS «
+
+研究企業傳說就跟福爾摩斯探案一樣難。
+
+=== Page 11 ===
+一開始,我要治理的是 Pipeline
+
+交付流程的重構其實涉及多個角色邊界
+
+ae                                                        組織目標
+
+我不      做                                                              =
+
+Secret Management 的,                Ke Fi >                      aed
+
+我是來治理 Pipeline 的。         從 Classic Pipeline         每次部署都能留下            Pipeline 不再是
+轉成 Pipeline os Code     完整交付證拼      少數人懂的黑盒子
+
+我的想法: 可觀測、可追湖的交付
+
+DevOps           制品管理         運維 / SRE        使用者 / 業務
+一一~一一一~-~-~--~1                                                                                                       a
+k              )                                                                                                             a
+上 [Am              H                      (=f)                                     及
+Kustomize |                        :                                Deploy to
+_ es _}                Artifact                      Kubernetes                   penta
+
+!     Ris OF eghny             RSET...                    ‘
+}               cae          =         真正的大魔王, ~ Ge
+|       @    Pipeline 的重構而已。              FERRER... “EN
+
+=== Page 12 ===
+Artifoct 應該證明交付內容
+
+HOR Pipeline 是一條交付流程 , 最後一定要留下證據 °
+
+|    CN. 我突然發現.,.
+@ 我真正需要重新設計的,
+不只是 Pipeline,而是 Secret_Workflow。
+
+apiVersion: apps/v1
+kind: Deployment
+
+我要留下「真正                                Pipeline 流程 (帶著 Kustomize )
+ote.) @-B- BEI
+而不是「猜測或口述」。    L                  '   ‘     =|
+Source     Kustomize   !」 最終 YAML |     Pipeline      Deploy to
+(Repo)                 Build               (ERENS)|               Artifact                  Kubernetes
+如何產生 Artifact       最終 YAML (機器可部署)  直到... RAH RH Secret
+來源內容(人可讀)           er1             “iN |!
+| pala :      ! 保存成           x  A  Secret Value 不該被呈現 一
+                       netadata:                    ts
+1 [E) contatep | Kustomize | “Nin appcontig |—-Pipeline             X QD LF te Mit Git Repository
+Build   | data:          | Artifact                 和
+haifa         \_, 人國             X OD eras Artifact
+i
+
+| fy Patch   ‘>
+
+(                       Va xereniey Secret Value pi, & iii ib 6 4-26
+
+Kael
+
+=== Page 13 ===
+Secret 不能進 Repository _
+
+事實是不進開發者 Repo’ mi J SRE Repo
+
+工程師的共同原則          RMF HH IoC...              以前的做法
+Secret 不應該進 Gtt          一切都可以被版本化、審查、追路          291  有人把密碼傳給你
+
+--> FY 2  ft xt
+
+ Cea
+
+:   t
+
+|   '
+
+這幾乎是一條       ConfigMap。 Deployment。。 Ingress Usow |
+大家都遵守  人
+
+| Secret. 成了一個很榴炊的存在。 |
+
+真正的問題不是..        真正的問題是,,
+
+“eo Git cS Ca Cm Q° QP Qe es
+
+誰建立 ?  誰填值 ?  MER? WILRA? BARRE? 追蹤與稽核?
+
+這其實不是技術問題,而是組織的問題。    ]
+
+=== Page 14 ===
+> 建立一組連線,需要找多少人?
+
+原始
+
+台流程設
+
+設計讓各角色協作混亂
+
+Ser 有一次,一位開發者只是想建立某個服務的一組連線,需求其實很單純:需要幾組 Secret。
+
+(要下來發生的事情,、、」
+
+@ 開發者提出需求
+
+@ 找 Cloud Infra
+
+© 我 p8A
+
+我可以提供密碼,
+
+我需要幾組                 這個 Secret
+Secret 建立    =»  >          但是不是我建立
+一組連線。                                          Secret 。
+L                     加
+@ 器去找 SRE           © 再找 DBA 要值
+好的,                  ere                       總算可以
+我來建立      =»        ere                      設定完成了
+Secret 。‧                  i                  p
+L                                 (e807  —         L   Y
+x       花了一個禮拜              ->        =>         ~}       .
+fd        才完成!               aA     rn       an        A  >
+
+@        (每一個人都認為沒有做錯,因為每個人都完成了自己的工作。
+
+=== Page 15 ===
+a. SRE IRAN 138 1B RAT! !
+
+ait         雙方都沒有錯 |       SRE 的立場
+
+以前 : Ai aad
+
+這些密碼其實是我們                                    我們只是負責部署     (
+負責的(業務資料庫、                                 rine         1? ag  a      2
+Ha RATS)                                 1 2 RAR? OS    {
+i                             全
+(SRE)                    1 2 wR?  8  et
+真正的衝突,不是密碼,                              ! ? 誰負責使用? |
+BE: MORAMED! ee ERSJ Secret #7 FRM M
+來回流動,效率低、風險高
+1
+~  ¥                  清楚定義角色與責任,讓 Secret 流動起來
+密碼持有者 |        密碼管理者“|       密碼使用者“|        移核與治理者
+asa               >    a  (Owner) >       (Manager) >        (User)        a (Auditor / Governance)
+不應該是 Secret, A Be           擁有並產生密碼         管理 Secret 的生命週期 | 使用 Secret 存取應用或服務 | 制定規範、監控、稽核
+決定密碼內容與輸著 | 建立、更新、搬銷          (例如 : 應用程式       確保合規與風險可控
+(例如:DBA)           (例如:持秘者或專職管理者)           Service Account) | (例如:InfoSec / GRC)
+
+C@ 結論: RRA BAKE > Secret 才能安全、可控、有效率地流動。
+
+=== Page 16 ===
+\                     BB 4             a.                                /
+3       問題從來不是放在哪裡
+大家最常討論的「存放位置」,其實都太後面了...
+UF
+(Gy 真正應該先回答的,是這五個關鍵問題 (順序很重要 )                     Ga
+@ anuse?   @ #ex      O war      [ore  Oxsneen?| | 沒有答案,
+con          Secret Container ?    真正的 oa
+)  B  »   fall   » @ an           @%  »        @ = Secret 放在哪裡,
+3)             cif                                    其實沒有太大差別。
+建立 Secret 的容器
+明太二需求與用這        cot OEE ll 提供並填入真正的 | |確認正確性、合規性|| 在 Runtime RARE
+‘Vault KE an   | 8a (88-884) | | Ra        etnen a
+As» Hie VAM 2 :                                                  ae      1
+這
+過去: 當成一條工作流,           lagi
+把 Secret 當成一個物件,  lal  » ras ae              我們重新設計了
+儲存在某個系統裡。                     B-8B-8B-8       整個治理模型。
+
+*  結論: Secret Management 的本質,不是「放在哪裡」, 而是「誰、在什麼時機、
+
+用什麼流程 」 來處理它。
+
+=== Page 17 ===
+-  開發者不需要知道密碼  <
+
+但仍然可以完成工作
+開發者: 定義 Secret Name 與使用方式 | 將 Secret Name H Secret Vale MRAM 」| 持密者: 壩入真正的 Secret Value
+anv:                                           a=a,i
+= name: DB_HOST       @ ZA Secret 2%      oP aca Nias     Seeeee Vala ,      O 提供/產生真正的密碼
+
+valueFrom:
+secretKeyRef:
+
+© 定義需要的 Key  >!  (公開資訊)    (敏感資訊)  ‘> © HAMM E Key
+}
+
+OG 縮保密碼的正確性與安全性
+
+'
+'
+|
+'
+|
+'
+H
+retKeyRef:                            \              |
+key: password             Cam | 直人 Rak Git”           (YAML)
+‘Su.       人        2                                |
+
+name: app-db-secret
+key: host
+
+O 描述如何在程式中     4
+- n'y "oo aia        使用    @
+Pipeline : 部署時才組合兩者                                            這樣的設計 , 讓每個人都更安全, 也更專注
+
+QA Mat: 專注在功能與定義,不碰朋密碼
+QA #84: 掌控密碼生命週期與輪夫
+© swre: cone aman aad
+
+部署過程中, Secret Value
+/ 只在受控環境中存在,
+@ 不被記錄、不被保存。
+
+[2] > [a) = CA) >
+
+取得 Manifest 取得 Secret Value 組合並產生       部署到
+(含 Secret Name) (從受控系統)     最終 YAML      Kubernetes
+
+| 寅開發者不需要知道密碼,也可以完成部署。因為每個人只知道自己應該知道的事情。
+
+=== Page 18 ===
+重新畫出角色拓樸
+不是工具的最佳實踐,而是角色的最佳協作
+Developer                     Reviewer             Azure DevOps Pull Request          Secret Owner                  Runtime
+需求描述者             變更理解者            檢查與建立者            ~             \ _®
++ ERR                、閱讀與理解變更     ~~
+“定義 Secret Name            * 檢查合理性           審查流,
+“指定使用方式             、確認安全與合規     六汪                  只                  gO
++ 政策檢查(Policy)                   Secret Value
+{| Bielad               Bia irae        ‧自動化檢查 ey              ‧填入對應的Key             cs
+a Secret Value            secret Value      eesti               “2s qian    + EME MIA Secret
++ 自動化建立資源                   “檢視存取者          Fae tem
+最小化權限存取
+
+| 負責: 描述需求與使用方式
+
+(ak: 理解即將發生的變更||||「員責: 提供治理與建立能力]| | (Ri ARM REM Soret]
+
+{HAE PEA Secret)
+
+端到端工作流
+
+@ suse    © #x Pr    © tise     QO HA Secret vaus Q HERA     O #exn    @ 多使用
+(a ot ae                     ie if onset
+=     > (9 > Azz»     >@>    .
+fe ae            De eS                                                        i<@
+定義 Secret Name       將變更提交          Reviewer 審查           Secret Owner 填入        Runtime 在部署時                          應用程式
+與使用方式         到 Pull Request       + Policy / Lint / Scan           KEW Secret          從 Key Vault 取得                        安全地使用 Secret
+
+© 治理與稽核 每個步驟都有清楚的責任人、可追蹤、可稽核、可回溯。
+
+=== Page 19 ===
+Step 1: 宣告需求                              <
+=                                        Ppli- Ba          4                                   é
+Q 整個工作流的第一步,不是建立 Key Vault» 而是「宣告需求」。
+我們希望把需求變成一份可理解、可審查、可追蹤的描述。
+@ ceKx     @ #x Pr     © #188    @ 出持密者填值 © wena    @ sxe @ etna
+一                              a
+J °°? G*A* GS? O° 買
+PARA : 4k HR (A Bicep Param)       AI Skill: 訪談與整理         產出: 需求描述(Bicep Param)
+我需要這些 Secret。                   BAIDU EER      eee, aly        這份檔案的意義
+在這個 Key Vault 中,                    並產生符合規範的                  圖       ,                    Go tad
+s          提供給我的應用程式使用                  Bicep Param 檔案。            人pm "Databese carmection string’       eae:
+開發者需要提供的資訊                 AL 訪談範例問題                       } description: ‘API client secret for third party’     ivy 可被稽核
+© 使用的 Key Vault 名稱或 ID          © 這些 Secret 要用在哪個應用程式?                                SO THER
+
+人@ 需要的 Secret Name 清單
+人 應用程式名稱 / 環境
+
+© EEG Secret ? 分別是什麼用才?
+| © 在哪些環境需要? (UAT / Prod)
+
+param environment string = ‘UAT’
+param application string = ‘OrderService’
+
+paronsmainbceproran
+(tH Git )
+
+=== Page 20 ===
+> _Step 2 :讓變更可以被理解 ~
+}          Pull Request #9849 » AR Code Review »
+而是讓整個變更被理解、被驗證、被審核。
+(由持密者填值 © 部堵取得    © 部畫完成    @ 安全使用
+
+© 建立容器
+ined
+
+1? @A* @? @ > fd.
+
+Pipeline 在 PR 階段自動執行
+
+1. Validate (驗證語法與架構)
+
+| © Bicep 格式是否正確
+‧* 參數是否完整
+* 資源是否存在依賴問題
+‧ 權限與參考是否有效
+
+變更類型
++ 建立(
+~ 刪除 (Delete )
+
+Create )
+
+~ Rift ( Modify)
+
+= 保持不變 (No Change ) | |
+
+Reviewer 審核的不只是程式 ,
+而是基礎設施即將發生的變化
+
+我可以清楚看到 :
+‧ 新增了什麼 ?
+
+‧ 更新了什麼?
+
+帶來的改變
+
+O 規則迭代化
+
+人 變更透明化 :
+他 風險可控化 :
+O 溝通清楚化 :
+他 責任明確化 :
+
+所有改動一目了然
+
+在 Merge 前發現問題
+用事實而非猜測討論
+每一次變更都有紀錄
+
+: 持續演進自動檢查項目
+
+=== Page 21 ===
+> Step 3 :先建立容器,再放內容
+
+PR 通過後,Pipeline 會先建立「 容器」,
+真正的 Secret Value ,則交由持密者填入。
+
+@ 提交 PR      © #188     Oureena © sane     © 部點完成      @ 交全使用
+> [() > ge > A®   =»   > [2@
+Pipeline 執行 : 建立 Secret Container (只有 Nome ,沒有 Value )        此時並沒有發生的事
+Azure Key Vault               (x)  A :   沒有任何 Secret Value
+@  kv-app-uAT-001                        (沒有密碼被產生 )
+x)        平台沒有拿到密碼
+oeeel eee                   (SRE 不知道 Volue )
+Secret Container ( F               ‘|| @ Q_ 開段才沒有拿到密碼
+pete tae tees “|         IE] (Dev 不知道 Value )
+i     ‘onnection-String      pi-Client-Secret | |                  4      ;
+|                             bet         > 程式碼庫沒有存密碼
+|    (#4)        (gm) ft   x)  (Repo 安全無密碼 )
+| Name: Db-Connection-String   Name: Api-Client-Secret |   4
+RAR Name 建立,        ter =         Vile =      ne x)      暫時無法被應用程式使用
+不包含任何 Volue                 (BARA Value )
+安全與職責已經分離完成! |
+
+| Oawke:seews OHA Secret waren, |
+
+容器建立 # 密碼提供 |
+
+=== Page 22 ===
+> Step4:由真正的持密者填值 <
+
+大    容器建立完成後,由真正的持密者填入 Secret Volue。
+每個人只接觸自己該接觸的資訊,協作更安全、更高效。          生
+
+【1 rene      @ 頁交 PR      建立容器      @@ 由持密者填值| @ wena      O 部點完成      @ «208A
+
+a»  > § > 2@? O°
+
+@ Developer 建立工作項目(Azure Boards) || @@持密者打開連結,填入 Secret Value         ‘\fe 填值完成,自動記錄與通知
+
+eae oleae
+FY Azure Boards               |     Cony  持寐者(例如 DBA)     | 透過連結開啟 Azure Key Vault       自動記錄 (Audit Trail)
+
+i       re                我以需要把真正的害碼
+時   Ren                     pe           (seiner or BB}| | MHA (User / Service Principal)
+已建立 Key Vault 與 Secret Container »                                         (己驗證身分與權限)             @ #A%4M (Timestamp)
+
+請 DBA 提供連線密碼。               |
+
+QO BAH Secret 名稱
+
+Key Vault : kv-app-uAT-001                   Azure Key Vault
+
+Secret 名稱:                              Vault :  kv-app-uAT-001                            |    @ KF IP / Client
++ Db-Connection-String            r                     一一                 ~
++ Api-Client-Secret             |     Secret Name       Value                      狀態         @ 操作 (Set Secret Value)
+Secret 連結 (只有得到名稱,看不到值)                 Db-Connection-Sting | [sereeeeeeSane  @) Geen
+
+1G Azure Key Vault 連結
+
+https://kv.azure.net/secrets?vault=kv-app-uAT-001    Api-Client-Secret  新
+
+L   (需要在組織內身分驗證才能開啟 )        J)                                  ;
+Developer AFBI Secret Name +         |   |         只負責填和 Value ,       道其他資訊。   |       所有交接都有記錄可追蹤、可稽核。
+i) peso ae ms           |   QO 持密者只負責填人 Value , 不需要知道其他資訊     傅
+aa
+
+=== Page 23 ===
+> Step5:系統取得,不是人取得 <
+
+部署的時候,讓「系統」自己取得 Secret,
+
+而不再需要任何人拿到真正的密碼。
+
+@ #x PR       © #288     O sateen   Ir) 部暑取得      O 部署完成        @ 交全使用
+>? @G* ©? cs @ 9?
+CD Pipeline : 在部署時才取得 Secret                               誰會接觸到 Secret ?
+
+運作流程圖                                                 Q Developer     © 475
+|   (S)  Reviewer       @ 看不到
+
+透過       Rit                     | — 1 RE ee || | -<------------=+-+-----+---+----
+ise        i       >              t=          GO) CDFipaine (A) 人@ 時二到
+有    *                                          ipeline (系;
+CD Pipeline | Connection | 愛控身分    ‘Azure Key Vault                   nen    Anas
+
+(Service Principal) kv-app-uAT-001                        (含真實值) (Runtime )   @ Runtime (應用程式) QD 執行時使用
+Q Hee (ok/sE/ka) @ RARE
+
+QO 系統完成原本需要 | @ 交人性提升, | @ tenz-
+人完成的事               風險大幅降低          流程可追蹤、可稽核
+
+@ MRT RRA | @ 人 sea
+
+=== Page 24 ===
+\\
+
+>           完整的Secret Workflow            4
+
+把前面所有內容收斂成一張泳道                sade al
+而是每一次交接都知道
+
+描述 Key Vault /
+Developer            =    aaa           提交         建立 Arure Boards       附上            =     2
+te            ld                                                ee i                  Pull Request           上  工作項目                  On 連結                       tai               =
+
+@  AL Skill      [人
+
+Azure DevOps     |     Valuet | 一|     What-If | 一|      Merge 後建立
+PR / Pipeline     9 aay,       Q           pee
+
+$------4-4
+
+(只有 Name "沒有 Value)
+
+|      sf 2 Secret Container   F
+
+人可理解            可審查
+
+:              tk
+
+g  Reviewer       理解即將發生的變更  [ena |
+
+(69) Secret Owner
+3    (DBA / SRE)
+
+CD Pipeline /                                                         ARENT /            BER            Replace             wan
+re aa                        Peon     sere | >| LE} mee || SOF ieee!
+
+被術與治理並重,
+EER Hit
+
+從需求到部署。
+
+o 可以被理解、 可以被治理
+都有記錄可追溯
+
+=== Page 25 ===
+> 從意圖到 Pull Request <
+Al Skill 協助工作,而不是取代工作
+#0 (anes) @ AI skit 對話式詢問 jens, (Q haar devops Serie (Repo) | (G ARBRREE |
+
+see
+
+=
+我要在 東亞 Prod                                           1 建立 Bronch                     Azure Repos (Git)                    審查程式碼
+建立一個 Key Vault »    |                                |           feature/kv-prod-eastasio-db-ap                                                      % What-lf
+裡面需要存放                                    ay                          infra/                        eae
+|  (+)    DB 與 API 的連線字車|                                            2. 產生 Bicep Param              asi
+並加上成本中心Ta9 |      AI Skill                ( bicepparam )            Leonid                     檢視權限與
+ri <>]                         |                                                     - 586MM                        ad                                 安全設定
+Developer                 Al: 我需要再確認幾件事 :       | aaa                  crossassabeameam| Security
+H                     @ Task 建了嗎?                              ir
+y         D| © Branch 本人度7說(90人       saa        i"  Qe  Pees
+Developer 不需要       @ Stage 是哪個?                  與說明文件
+@ 圖家 / 區域?        \              > Secret Owner (74 PR #)
+x BB Bicep 語法                    ‘                                        Pull Request            4
+ah             ® Namespace 是什麼?       C 同 4. Push                      ci                 4
+x ALR        © 需要哪些 Secret ?      MO © gsi Repository      a             一一一一一
+4                                                                        + Title
+x 記住目錄結構           @ S848 Teg?            4                          + Description                ra |    Soha mT
+x 記得 PR 流程           © 成本中心是?                 5, 建立 Pull Request         + Change Summary (What-If)                WH Key Vault
+a                          @ 其他備註?                          包含描述與變更概要  eves ‘tte        Azure DevOps 和與 secret Container
+Developer : 逐一回答..        Ll                        e,                                   Pipeline
+AL 做了什麼?                   人與流程仍然負責                                       |
+~ 理解需求 Vv 產生檔案        |           VY RERER V COREE   |  AL 的定位: 降低理解成本,提前完成準備工作,加速,而不越權。
+v WMA Vv 準備 PR              VY RAR V 治理與追蹤
+
+=== Page 26 ===
+AI 降低理解成本
+
+讓每個人更容易理解,做出更好的決策
+Al    :
+Ka   輸入 : 需求與情境   omer or 真正的價什
+
+AI 可以取代工程師?      + 我要建立 Key Vault       my           ZS       © 符合規範的參數       把大家腦中的知識,
+Al 會自己決定?            + 所在圖家 / Stage                                     。 清楚的 What-f        轉成每個人都能理解的
+Al 可以自己部署?         + Namespace          區^                      md   + 風險與影響說明       工作流。
+BRN Secret                                    。 建議與提醒          Al 不是治理模型 ,
+L X 答案 : 不是       * Tag / 成本中心                                          而是理解的加速器。 |
+決策與責任,仍然在人                                           ~
+
+Developer    |            Reviewer         |            Security |            Secret Owner           Platform / SRE
+rele    |               理解變更                      檢視權限 |               HA Secret Value |              維護平台規範
+[) ween |                 審核風險與影響                 與安全設定                   管理機密內容 |               與基礎設施
+
+EAMNBAEA 、審核的人是人、授權的人是人、最終負責的人仍然是人 |
+
+“AL 帶來的 自  更容易理解                    ig       |    更高效團隊
+將規範轉成                                                                流程透明、可追蹤、            專注在決策與
+| 正向影響                               TAR       上 價值創造
+
+統一命名、標籤、
+結構、權限邏輯
+
+可理解的語言
+
+=== Page 27 ===
+自助化建立 Azure Keyvault 解放雲端基礎設施管理員 <
+
+逐件審查、規則與護欄加高到最終全自助建立
+
+已有基本的自動化檢查,但仍震人工審查。 || 加入更多檢查與規則,降低人工判斷 |了         ~ | 所有檢查通過後,自動建立 Key Vault »
+eT        Reviewer 只需確認全部為綠燈。         (© +ean  不再需要任何人工審查。
+一一             Wit Pipeline (RSNA)       L
+C)      E  Beepnran  @     2 回 se ©        fo Rees |   C)
+ia      re                       A, Pee depioment vaidate @      (0) Gea HAD)
+are Deployment 八       [a                                         ia
+Dine a          Validate             一       人 Ave Deployment what 1F          必備 Tag     人
+per ||                      Developer                    GasePaig) Developer | | @         |   Azure
+提出         Azure Deployment @     提出    | rare Policy AT @      L        | me |         J) | Key Vault
+Pull Request | NA What-If        J}, PulRemuest Po saetann nino @      if 98      -) | Pull Request
+ls             el          What IF                          sth
+Azure Pipeline 檢查命名規則         站                             一
+ =  ee     A, iss tt      Cod              7
+aa OS
+°            =         三:
+been [errs 檢查通過, '但仍需     ener   ee              Approver / Reviewer eee
+3                     He     Re
+ALOE                     」 確認全部檢查通過                  移除 Approver / Reviewer 流程| 轉為規則與護欄維護者
+
+ 2026/09/15 移除 Reviewer 流程,只要符合所有檢查規則即可自行建立“三
+
+=== Page 28 ===
+> 第-條價值流 <
+
+從需求到「Key Vault Ready
+
+Before          我要建立          ae                             Metric          Before         Self-Service
+需要換手   A  Keyvault !    y RHR
+°                                                                 ;                                       "
+Fog         ERE     (Co?      建立完成                    Leod Time         ~1 day           ~7 min
+Bs <> /     =)        BYA/          Azure Key Vault, | Human Touch       ~30 min           ~5 min
+Developer             Infrastructure        Key Vault Ready ~ |_
+Queue / Wait      ~1 day             =0
+After     我自己來!                   iE
+不再換手   同     幾分鐘就好了 !                                       Handoff       Developer > Infra          0
+No
+PR+ 人               ®                      .                i
+Festa                                                   Key Nettie ~
+
+從過去換手的摩擦,改善為全自助的流程 ,
+“@    可以看見價值順暢的交付。
+
+=== Page 29 ===
+> 從找人,變成走流程 <
+
+一一一一 我們不是把 Secret 管得更安全 ,而是把工作流變得更順 一一一
+
+一
+
+(Before: 到處找人,充滿不確定 )
+
+After : 走流程,每個人都知道下一步
+
+我到底該找誰 ?
+
+Key Vault                 Key Vault
+mere | ae
+a
+DBA
+Secret Value
+7 tee
+Access Policy
+on
+Tag / Cost Center
+Sl ae
+
+[全需求
+
++ 每一次建立環境 , 都像解題
+
++ 大量重複溝通,依賴個人記憶與經驗
++ 進度不透明, 容易遺漏與延誤
+
++ 缺乏紀錄,難以追蹤與治理
+
+2. 理解變更 || 3. 建立容器 || 4. 填入 Secret || 5. 完成部署
+ 了  ao +路!  Se   1 @
+Developer        Reviewer           Pipeline         Secret Owner         Pipeline
+描述需求 || Whot-If || Pipeline 建立 || 透過 Boards |] 受控身分取得
+Al 協助產生      理解影響       Key Vault 與 || 填入 Secret Value       Secret
+bicepparam || iB tr i#4K || Secret Container] (不在PR 中) || 完成部點
+a-sunen| @ #一以|他) s-se0ne      體流程透明可視
+V 清紅的角色分工, 明確的責任邊界 | V 透明可視的進度, 降低風險與中沁
+V 標準化流程, 減少重複溝通與等待 | V 有紀錄、可追蹤、可移核、可治理
+
+減少溝通成本
+
+S 帶來的
+專注在創造價值的事
+
+正向改變
+
+交付更快
+
+流程更順暢
+
+)
+
+團隊信任工作流
+
+風險可控
+
+i
+安全可治理        而不是互相信任 |
+
+=== Page 30 ===
+從 bee Vault im 4 Bi "Secret Ready 」
+全 Vault Ready — Secret Ready
+
+SG 權責分離
+G 安全合規
+
+G 必要的換手
+OG 更順暢的協作
+
+= «
+
+協作 / RF                       pe siete) Secret Value
+
+® Key -                         a/—  (DR ——@$ arr Key Vout
+Secret oe
+
+Keyan Rosey              Developer                        (OBA / SRE / Operator)                       Seeret Ready
+
+Metric                         Before                                Golden Path
+Lead Time                                     ~2 days                        DEV/SIT : 數分鐘 ; UAT/PROD : 約 2 days
+Human Handoff                              Developer > DBA/SRE                                      仍然存在
+Developer preparation                       Work Item x 2                                 Contract / YAML
+Secret Owner execution              解讀需求 一 找位置 一 填值                         依 Contract 執行
+DEV/SIT Self-Service                                0%                                               100%
+UAT/PROD                                        人工換手                                     刻意保留職責分離
+
+清楚的職責分離與流程的改善 , 兼顧了機敏資訊治理與換手暢流設#     圖
+
+=== Page 31 ===
+Developer
+
+Sei ear Pid
+能完成工作
+
+只 也能 流程,才值得被自動化。
+
+不是讓更多人知道密碼,
+
+而是讓每個人只接觸自己該接觸的資訊。 寢
+XN
+
+最後仍然能把價值安全地送出去。
+
+dp Poth                Ceana)
+ned @ Self-Service
+
+0     ?      Go     eS)      Secret Owner         Runtime / ai
+
+Policy IAM Guardrail Audit     HX Secret Value          自動取得 Secret
+(只在此處)          (不需開發者知道)
+
+FASTER
+
+SAFER
+
+es
+7 司
+
+日三一一EE         a     Magy
+Sh on -8 區加男生2
+
+Users / Business
+
+=== Page 32 ===
+Audience Q&A
+
+@   Presenting with animations, GIFs or speaker notes? Enable our Chrome extension

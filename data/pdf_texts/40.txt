@@ -1,0 +1,563 @@
+Title: 別讓 Agent 瞎掰：用 Semantic Layer 打造可信賴的企業 AI
+Speaker: 林士凱 (Danny)
+Company: Amazon Web Services Solutions Architect
+
+=== Page 1 ===
+© 2025, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+Danny Lin
+Solutions Architect, AWS
+別讓Agent 瞎掰：
+用Semantic Layer 打造可信賴的企業AI
+H E L L O  W O R L D  D E V  C O N F E R E N C E  2 0 2 6
+
+=== Page 2 ===
+Agents with Enterprise data – Top 3  challenges
+Top models achieve 86% on academic SQL benchmarks but drop to ~40-59% on realistic enterprise schemas without 
+business context and semantic grounding
+1
+Schema Ambiguity
+Hundreds of tables, overlapping column 
+names, undocumented joins. Agent 
+cannot determine which "customer_id" is 
+canonical.
+2
+No Shared Metric Definitions
+"Revenue," "churn," "margin" calculated 
+differently per team. Agent invents its 
+own logic or picks a stale definition.
+3
+Missing Business Context
+Rules live in people's heads. "Promo ROI 
+excludes returns" cannot be inferred 
+from schema alone.
+Sources: Spider 2.0 benchmark · Promethium "State of Text-to-SQL" (2025) ·
+AI Trust Gap – Inconsistent Answers and Lack of Explainability
+
+=== Page 3 ===
+Two Ways to Reach an Answer
+Businesses don’t run on probability.
+HOW AN LLM WORKS
+Runs on probability
+Predicts the next most-probable token. The output is fluent 
+and often impressive — “that’s powerful” — but it is a 
+probability distribution, not a guarantee.
+When the cost of being wrong is high:
+Fluent Guessing
+isn’t good enough.
+HOW A BUSINESS RUNS
+A deterministic chain
+1
+Definitions   what each term means
+2
+Rules   what must happen
+3
+Constraints   what cannot happen
+4
+Consequences   what follows
+
+=== Page 4 ===
+Semantic Layer: The Grounding Layer
+You can’t automate what you can’t clearly articulate.
+Language
+ambiguous, human
+Semantic Layer
+explicit shared model
+Meaning
+what the business runs on
+Semantic layer encodes the same logic the business already runs on — and makes it available to AI:
+Definitions
+Rules
+Constraints
+= grounded AI
+The takeaway:  Semantic layer converts the LLM’s probable guess into an answer checked against a deterministic model — correct, 
+auditable, and safe to act on when the cost of being wrong is high.
+
+=== Page 5 ===
+© 2025, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+What a Semantic Layer Is?
+
+=== Page 6 ===
+What is our promo ROI for Q1 across EMEA, by category?
+Agent response:
+Q1 EMEA Promo ROI by Category:
+  Beverages: 3.2x  |  Snacks: 2.1x  |  Personal Care: 4.7x
+Source: S3 + Nielsen (unified via semantic layer)
+Metric: Standardized promo_roi_v3 (governed definition)
+Lineage: SAP.promo_spend + Nielsen.incremental_sales
+Same Data, Two Understandings
+
+=== Page 7 ===
+Human practitioners navigate enterprise complexity because they carry institutional understanding —
+how the business works, where information lives, what rules govern decisions.
+AI agents lack this implicit context — they see data but not meaning.
+What Practitioners Know
+• Business rules and exceptions
+• Entity relationships across systems
+• Which metrics matter and how they're 
+calculated
+• Compliance constraints and boundaries
+• Historical context and institutional memory
+What Agents See Without Semantic Layer
+• Raw columns and tables with no meaning
+• Disconnected data silos
+• No business rules or constraints
+• No relationship semantics
+• No governed metric definitions
+Without shared semantic, every agent independently reconstructs business logic → inconsistency, inaccuracy, and 
+ungovernable outcomes
+What is Semantic Layer for Agentic AI & Why It Matters
+
+=== Page 8 ===
+Consolidated Semantics
+SOURCES
+Technical &
+Business Catalog
+Glue, Redshift, 3P catalogs
+BI Systems
+Quick Sight, Tableau, Looker
+Application, Proprietary
+Systems
+Wikis, logs, ERP systems
+© 2026, Amazon Web Services, Inc. or its affiliates.
+Semantics from across the stack available via AWS
+1
+2
+3
+4
+Workflow Metadata
+In platform prompts/queries/code – Amazon SageMaker Notebooks, Query Editor
+Business Metadata
+Glossaries, Custom forms, policies – Glue Catalog Business Context
+Technical Metadata
+Schemas, partitions, lineage - AWS Glue Catalog, Lake Formation
+Object Metadata
+S3 tags, labels, properties - Amazon S3
+
+=== Page 9 ===
+The knowledge graph: your data estate, connected
+Every data asset becomes a navigable node — agents traverse relationships to find what they need
+What the graph does for agents
+Linking heterogeneous data sources together, 
+provide governed data relationships,
+business rules, and domain knowledge
+at runtime.
+Skills attach to data assets — markdown
+files with domain-specific instructions
+(e.g., "Electronics: 30-day returns").
+The graph learns from how agents
+actually use data.
+© 2026, Amazon Web Services, Inc. or its affiliates.
+
+=== Page 10 ===
+Query to Governed Answer — Semantic layer in Action
+👤  "What is our promo ROI for Q1 across EMEA, by category?"
+Promotion
+SAP
+Market
+EMEA
+Category
+Time
+Q1
+Channel
+applies_in →
+← targets
+← runs_during
+executes_via →
+✅ promo_roi_v3
+Governed Metric
+98
+%
+100
+%
+100
+%
+94
+%
+Nielsen
+S3
+Agent Response
+Q1 EMEA Promo ROI by Category
+Beverages
+3.2x
+Snacks
+2.1x
+Personal Care
+4.7x
+Ontology traversal: 340ms
+SOURCES
+S3 + Nielsen — unified via
+semantic layer
+LINEAGE
+SAP.promo_spend +
+Nielsen.incremental_sales → promo_roi_v3
+GOVERNANCE
+Standardized metric: promo_roi_v3 ✓
+Definition enforced across all agents
+
+=== Page 11 ===
+© 2025, Amazon Web Services, Inc. or its affiliates. All rights reserved. Amazon Confidential and Trademark.
+12
+Technical Architecture: High Level
+AI Agents / Applications
+▼  MCP / Data Layer APIs  ▼
+Enterprise Semantic Layer
+Knowledge Graph
+Business Rules
+& Constraints
+(SHACL)
+Governed Metrics
+& Context Assembly
+Ontology
+Induction &
+Management
+▼  Ingests from  ▼
+Existing Customer Investments
+Data Catalog
+Glue • SageMaker • Collibra
+Existing Semantic
+dbt • Looker • AtScale • Metrics
+Unstructured Content
+Policies • Contracts • SOPs (S3)
+Structured Data: Redshift • S3 Tables • RDS • Athena
+Security: Lake Formation ,AuthNZ • SQL Firewall • Bedrock Guardrails
+Context does not replace — your existing data catalog and BI investments
+
+=== Page 12 ===
+© 2025, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+DEMO
+
+=== Page 13 ===
+One integration serves every agent — no per-app context engineering
+Agent asks
+a question or sends 
+a task
+Context resolves
+via graph search 
+and traverse
+Graph returns
+governed paths, 
+nodes, query results
+Agent acts
+with confidence and 
+data security
+Any framework:
+•
+Bedrock AgentCore
+•
+LangChain
+•
+Custom MCP client
+•
+Search knowledge graph
+•
+Resolves entities
+•
+Traverse through edges
+•
+Applies identity scope
+Output through API/MCPs
+•
+Low level API for Search 
+and Traverse
+•
+High level API/MCP for 
+agentic query
+•
+Correct answer
+•
+No hallucination
+•
+Auditable trace
+•
+Reusable across agents
+API + MCP: agents consume context the same way regardless of platform. Build once, serve every agent.
+How Agents Use the Graph
+
+=== Page 14 ===
+What a formal ontology really is
+A formal ontology is a mathematically precise 
+model of a business domain that a machine can 
+reason over. It is defined using formal logic with 
+precise semantics and rigorous rules, commonly 
+represented with standards such as OWL on RDF.
+It is not a glossary or a tag list. It states facts such 
+as “every laptop is a computer” and “every 
+computer is electronics,” so a system can follow 
+the chain and draw conclusions.
+Classes, relationships, and rules a machine can follow.
+Electronics
+30-day returns
+Computer
+is a
+Laptop
+is a
+Gaming Laptop
+is a
+rule lives on the class
+
+=== Page 15 ===
+© 2025, Amazon Web Services, Inc. or its affiliates. All rights reserved. Amazon Confidential and Trademark.
+17
+© 2025, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+AWS Context: The Full Stack 
+Agents Reason Over
+
+=== Page 16 ===
+Introducing AWS Context
+AWS Context is the full stack that agents reason over: consolidated semantics, knowledge graph, and formal 
+ontologies. Users can start anywhere in the stack, so agents find the right data and reason over it correctly.
+AWS CONTEXT
+Consolidated 
+Semantics
+Collection of catalogs, 
+glossaries, tags, and skills
+Knowledge graph
+Cross-source, always-on, 
+HIL to disambiguation
+Formal ontologies
+RDF/OWL.., rigorous rules 
+Agent / 
+Applications
+searches + reasons
+Usage 
+Analysis and 
+Feedback
+
+=== Page 17 ===
+Architecture: How AWS Context works
+CONS UM PT ION
+Amazon Bedrock AgentCore
+Applications
+MCP-compatible frameworks
+CONT E X T
+INT E LLIGE NCE
+AWS Context  ·  Search/Retrieval API/MCP
+Knowledge graph     Skills     Context curation     Governance      Formal Ontology
+M E T AD AT A
+Technical and Business Data Catalogs  +  BYO Ontology  
+D AT A
+S OURCE S
+AWS, non-AWS data sources
+Unstructured Data
+Data lakes & 
+warehouses
+Databases & streams
+SaaS & systems of 
+record
+
+=== Page 18 ===
+A Flywheel of the Context Intelligence
+© 2026, Amazon Web Services, Inc. or its affiliates.
+Example: Customer Trend Insights
+Day 1:
+Add two datasets, agent finds path: revenue → 
+customer_dim via account_id
+Agent only see limited context, can only conclude 
+on local information. Confidence 40% (dashed, 
+uncertain)
+Day 3:
+Steward linked 40 more datasets, confirms join 
+keys + WBR and marketing reports to guide KPI 
+definition.
+Agent understand product vision and access to 
+more organization data estate – confidence 85%
+Day 30
+47 agents built on this context instance – with Active 
+Daily user of 683.
+Company executive provides more guidance through 
+the internal tool; updated emails and market report 
+synced into the context. 76 new skills attached and 
+resulted conflicts – confidence 94%
+
+=== Page 19 ===
+Who uses AWS Context
+The graph builds itself — these personas govern and consume it.
+Data platform teams
+Author and promote the graph
+Review inferred relationships in draft
+Promote correct ones to production
+Attach business definitions and Skills
+Monitor how agents use the graph
+“I have to be the human API for my own 
+data.”
+Agent builders
+Integrate and consume the graph
+Connect agents via API and MCP
+Agents read governed relationships at 
+runtime
+No per-app context engineering
+One integration serves every agent
+“Every agent I build needs to re-learn how 
+our data works.”
+Data stewards
+Define and govern meaning
+Define glossary terms and classifications
+Govern business definitions centrally
+Set usage rules and access policies
+Ensure consistent meaning across teams
+“I have no governed, central place to define 
+what our data means.”
+
+=== Page 20 ===
+Core Values
+Always-on, self-
+learning graph
+Contexts from the 
+sources are 
+continuously being 
+ingested to the graph. 
+The graph then is 
+evolving based on 
+signals and usages 
+across sources.
+No Lock-in, 
+It’s Open.
+Context will be stored 
+as open table format 
+in your S3. Query it 
+with any compatible 
+engines. You own it.
+Identity-aware 
+governance
+Agents only see what 
+user’s identity 
+authorizes them to 
+access. Every 
+interaction is auditable 
+through the controls 
+you already use.
+Compounded 
+Knowledge
+Memory and signals 
+from agent trace, 
+together with 
+teammates’ 
+clarifications and 
+thumb-ups will be 
+compounded as shared 
+knowledge
+
+=== Page 21 ===
+RETAIL / CPG
+Promo ROI & Demand Sensing: From Weeks to Hours
+A global retailer with 2,000+ stores needed to unify promotional effectiveness across channels, replacing 
+fragmented spreadsheets with a single source of truth.
+CHALLENGE
+●
+Promotional data siloed across 5 ERPs and 12 
+regional planning tools
+●
+6 to 8 week lag between promo execution and 
+ROI visibility
+●
+No shared ontology for product hierarchy, store 
+clusters, or promo types
+●
+Demand sensing models running on stale, 
+inconsistent inputs
+SOLUTION WITH CONTEXT & SEMANTIC LAYER
+●
+Unified ontology mapping product, store, and 
+promo hierarchies across all source systems
+●
+Semantic agents reconcile actuals vs. forecast daily, 
+surfacing anomalies automatically
+●
+Allocation recommendations to shift spend mid-
+campaign
+●
+ROI visibility reduced from weeks to hours
+
+=== Page 22 ===
+AUTOMOTIVE / MANUFACTURING
+Agentic Search over the 20 PB Enterprise Data Lake
+A global automotive manufacturer needed AI agents to discover and reason over a petabyte-scale data lake, without years 
+of manual curation or platform lock-in.
+CHALLENGE
+•
+Hundreds of thousands of tables and millions of columns 
+spread across business domains
+•
+Cryptic table and column names with little business 
+documentation
+•
+Manual curation at this scale would take years of data 
+steward effort
+•
+Custom agents could see the data but not its meaning, 
+and the team refused vendor lock-in
+SOLUTION WITH CONTEXT & SEMANTIC LAYER
+•
+AI-inferred semantics auto-generate business descriptions 
+from schemas and metadata
+•
+Knowledge graph links data assets, domains, and business 
+terms
+•
+Agents on Amazon Bedrock find the right datasets through 
+natural-language search
+•
+Open, customer-owned architecture usable from any agent 
+framework, now in production
+
+=== Page 23 ===
+© 2025, Amazon Web Services, Inc. or its affiliates. All rights reserved. Amazon Confidential and Trademark.
+25
+© 2025, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+Takeaways
+
+=== Page 24 ===
+1
+A semantic layer is a reusable context layer, not just a data-access path.
+2
+A semantic layer makes every AI answer accurate, consistent, and explainable (ACE).
+3
+Semantic layer is the new infrastructure for GenAI.
+24
+
+=== Page 25 ===
+Metadata Is Where the Journey Begins
+CONS UM PT ION
+Amazon Bedrock AgentCore
+Applications
+MCP-compatible frameworks
+CONT E X T
+INT E LLIGE NCE
+AWS Context  ·  Search/Retrieval API/MCP
+Knowledge graph     Skills     Context curation     Governance      Formal Ontology
+M E T AD AT A
+Technical and Business Data Catalogs  +  BYO Ontology  
+D AT A
+S OURCE S
+AWS, non-AWS data sources
+Unstructured Data
+Data lakes & 
+warehouses
+Databases & streams
+SaaS & systems of 
+record
+
+=== Page 26 ===
+TAKEAWAY
+Start Today with Context Ontology Accelerator
+Before AWS Context becomes available, you can already give your AI agents business context with the open-source version, 
+built on the same ontology-based approach.
+01
+Open Source
+Apache 2.0 licensed. Deploy it in your 
+own AWS account and own every piece 
+of your business logic.
+02
+Open W3C Standards
+Built on OWL, RDF, and SHACL. Your 
+ontology stays portable, with no 
+proprietary lock-in.
+03
+Any Agent, via MCP
+Serve context to Amazon Bedrock, 
+Strands, LangChain, or any MCP-
+compatible agent framework.
+Get started:  github.com/aws/context-ontology-accelerator
+
+=== Page 27 ===
+Thank You

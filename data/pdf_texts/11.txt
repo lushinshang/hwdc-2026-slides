@@ -1,0 +1,335 @@
+Title: LLM Wiki：企業內部知識問答系統的架構演進
+Speaker: 張維峻 (Justin)
+Company: 國泰金控 助理架構師
+
+=== Page 1 ===
+HELLO WORLD DEV CONFERENCE 2026
+ARCHITECTURE TALK
+LLM Wiki
+企業內部知識問答系統的架構演進
+張維峻 Justin 2026.10.14
+一份作業規範更新之後，哪些答案該改，哪些該留？
+
+=== Page 2 ===
+合成情境｜2030-03-02
+全職員工、公司管理筆電、已註
+冊自助復原，且確認帳戶鎖定。
+第一步？
+舊版 SRC-03 作業規範
+先透過 ExampleDesk
+送服務台
+新版 SRC-07 作業規範
+（2030-03-01 生效）
+符合特定資格者，
+先嘗試自助復原
+新文件不等於舊文件全面作廢。真正的問題是：這個人、這個時間、這個事件，究竟落在哪條規則上？
+1
+
+=== Page 3 ===
+知識架構演進
+05–06 月
+知識結構化
+核心工程問題：
+如何讓零散知識成為可
+維護的內容？
+做出的架構選擇：
+Wiki 頁面、索引、OKF 結構
+07 月
+來源可追溯
+核心工程問題：
+摘要更新後，如何追回
+原始依據？
+做出的架構選擇：
+原件與來源歸檔分離
+08 月
+企業治理
+核心工程問題：
+有了來源，是否代表可
+以直接納入？
+做出的架構選擇：
+資料分類、PII、Git 准入與 
+CI
+10 月
+更新可驗證
+核心工程問題：
+來源更新後，如何知道
+哪些答案受到影響？
+做出的架構選擇：
+變更提案、回歸評測問題
+、維護審查
+從人工維護Wiki 到Agent 協助更新
+從讓知識能整理、能追溯、能治理，走向讓知識更新可以被驗證。
+（本次合成案例驗證，非正式部署）
+2
+
+=== Page 4 ===
+RAG 與知識編譯
+OFFLINE｜建立索引
+ONLINE｜查詢與回答
+Ingest
+Chunk
+Index / Embedding
+Query
+Retrieve
+Rerank (Optional)
+Generate
+不同方法的知識處理時機
+Effective Date｜生效日期
+Eligibility｜適用資格
+Supersession｜局部取代
+Fallback｜例外與失敗退路
+傳統 RAG
+查詢時整合檢索結果
+版本與規則感知RAG
+查詢時利用版本與規則判斷適用性
+知識編譯
+來源更新時，先整理可審查的知識產物
+自動生成 Wiki 已非新技術；我們更關心知識更新後，回答行為能否被驗證。
+3
+
+=== Page 5 ===
+知識庫的三層結構
+RAW - 來源證據層
+raw/originals/
+raw/sources/
+來源歸檔
+WIKI - 知識產物層
+wiki/sources/
+wiki/concepts/
+wiki/entities/
+wiki/queries/
+wiki/index.md
+wiki/log.md
+知識組織
+OPS - 操作治理層
+ops/purpose.md
+ops/review-queue.md
+治理與審查
+Raw 保留原始依據，Wiki 組織可重用知識，Ops 管理更新與審查責任。
+4
+
+=== Page 6 ===
+SRC-07 作業規範來源
+Concept / Query
+測試問題
+2030-03-01 生效
+已確認鎖定
+三項資格皆符合
+局部取代第一步
+Concept
+帳戶復原規則、資格、生效日期
+Query
+帳戶鎖定時的適用路徑與第一步
+SYN-01｜新規第一步
+符合新規 → 自助復原
+SYN-04｜歷史保留
+生效前事件，依 SRC-03
+ → ExampleDesk
+結果稍後揭曉
+5
+
+=== Page 7 ===
+先定義驗證標準，再讓模型作答
+v1｜10 題凍結評測問題
+6 份合成來源
+(Sources)
+18 頁知識草稿
+(Drafts)
+17 項來源主張
+(Claims)
+凍結的 10 題測試問題
+(10-Question Contract)
+測試問題檢查什麼？
+v1 Baseline：8/10 題通過整題評測問題，不代表整體準確率。
+01
+回答、追問或無法回答
+02
+第一步是否正確
+03
+必要內容與禁止事項
+04
+來源與引用是否符合要求
+6
+
+=== Page 8 ===
+作業規範適用條件與分流
+Event Date
+Confirmed Lock
+Full-time
+Managed Laptop
+Self-service Recovery Enrolled
+SRC-07
+（2030-03-01 生效）
+Policy Applicability Check
+Date + Eligibility + Outcome
+符合新規 → 自助復原
+生效前 → 歷史基準
+資格不符 → ExampleDesk 服務台
+條件未知 → 先追問釐清
+自助失敗／結果不明 → 轉交服務台
+作業規範更新是條件式局部取代，不是把舊流程全面作廢。
+7
+
+=== Page 9 ===
+Blast Radius Map
+模型初稿：修改 4、增加 1，待覆核
+index
+（索引）
+account-state
+（概念）
+ExampleDesk
+（角色）
+account-locked
+（問答）
+SRC-07
+（新增來源摘要）
+5 份無關 Q&A
+Bytes unchanged
+6 份既有來源摘要
+Bytes unchanged
+還有一份範圍設定：
+ops/purpose.md 是否也
+要更新？
+影響分析不只找出要改的，也要驗證指定保留的內容沒有被改動。
+Modified × 4｜待修改既有頁面
+8
+未變更驗證 ｜ 5 Q&A · 6 Source Summaries
+
+=== Page 10 ===
+範圍設定的維護審查
+原始模型提案
+真實 Purpose 差異節錄
+{
+  "path": "ops/purpose.md",
+  "decision": "retain"
+}
+註記：模型認為範圍描述不需要修改。
+模型漏掉了 Active Scope 的同步更新；後續維護 Agent 發現並修正，人審仍待完成。
+這就是為什麼系統不能完全自動放行。
+更新前
+更新後
+SRC-01 ～ SRC-06
+SRC-01 ～ SRC-07
+舊版知識範圍
+新版 Active Scope
+舊情境基準
+情境日期 2030-03-02
+9
+
+=== Page 11 ===
+作業規範更新前後的回答
+SYN-01｜v2 Baseline｜2030-02-01
+回答原文節錄
+SYN-01｜v2 Updated｜2030-03-02
+回答原文節錄
+請透過 ExampleDesk 提交帳戶復
+原請求
+第一步是嘗試自助復原
+觀察：「第一步符合預期，但適用資格與作業規範生效門檻，是否充分說明？」
+10
+
+=== Page 12 ===
+第一次回歸驗證
+Updated Candidate | 19 頁：DRAFT
+Impact
+Assessment
+（影響評估）
+✓
+Mutation
+Proposal
+（更新提案）
+✓
+Structural
+Lint
+（結構檢查）
+✓
+Agent
+Review
+（維護者覆核）
+✓
+Answer
+Regression
+（答案回歸）
+✕
+Human
+Review
+（人審待辦）
+Pending
+Publish
+（發布）
+未執行
+首次 Updated 回歸未通過：19 頁知識草稿未通過回歸；人工審查待辦，因此暫不發布。
+後續修復與重測
+於 P14 說明
+11
+
+=== Page 13 ===
+評測問題與 Model Judge 也需要審查
+SYN-07 情境更新
+一次評測，發現兩種不同的品質問題
+歷史問題｜v1
+評測修訂｜v2
+評測問題： SYN-07只問 Branch，卻強制要求 HQ。
+Judge 問題： 把來源摘錄誤判成使用者可見回答。
+SYN-07 聚焦 Branch；
+新增 SYN-11 獨立檢查 HQ／Branch 比較，
+Baseline、Updated 皆 PASS。
+回答需要驗證，評測問題與 Model Judge 也需要驗證。
+12
+
+=== Page 14 ===
+修復後，重新驗證
+v2 凍結評測問題｜Baseline 10/11 → Updated 9/11 → Revised 11/11
+Baseline
+▤10/11
+更新前基準
+Updated
+!
+9/11
+首次回歸失敗
+Revised
+✓11/11
+同評測問題重測通過
+›
+›
+1
+Update
+2
+Detect
+3
+Diagnose
+4
+Repair
+5
+Revalidate
+!
+失敗原因
+• SYN-01：適用條件與生效日說明缺漏
+• SYN-06：公司網路不可用時的服務台退路缺漏
+✓
+修復方式
+• 僅修訂 ops/purpose.md 通用規則
+• 原 11 題、情境日期與模型設定不變
+同題評測問題下修復驗證 11/11；未做獨立未見題驗收，人工核可仍待完成。
+13
+
+=== Page 15 ===
+KNOWLEDGE CHANGE PR
+COMPILE
+Source
+知識來源確認
+Scope
+變更範圍界定
+VALIDATE
+Impact
+影響評估
+Regression
+回歸測試
+REVIEW
+Approval
+審核流程
+Release Gate
+發布關卡
+該改的有依據，不該改的能驗證，未通過就不發布。
+本次合成演練：Updated 9/11 → Revised 11/11；待內容負責人核可，未發布。
+14

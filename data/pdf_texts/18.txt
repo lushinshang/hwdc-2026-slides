@@ -1,0 +1,399 @@
+Title: 穩才是快 ～ 以 OKF 打造 Agentic AIOps 治理閉環
+Speaker: 許庭魁 (Jerry Hsu)
+Company: 華碩電腦 infra Lead
+
+=== Page 1 ===
+穩才是快～
+以OKF 打造Agentic AIOps 治理閉環
+Room BC  (15:15 – 15:45) 2026.10.14
+Jerry Hsu
+
+=== Page 2 ===
+EMPLOYEES ARE 
+MOTIVATED BY:
+ASUSTek infra lead
+Expertise
+Problem solving 
+SQL Server Performance 
+tuning
+CDN / WAF optimization
+Hybrid cloud solution
+Design Thinking coach
+現為華碩電腦資深基礎架構主管，帶領
+SRE團隊負責華碩電腦官網、AI雲端服務、
+全球會員系統、資料中台、ROG電競官
+網...等架構規劃、建置與維運。過去三年，
+專注於解決複雜的基礎架構需求、安全合
+規、效能議題，確保全球數千萬用戶能夠
+穩定且高效地存取華碩電腦提供的數位服
+務。
+同時為台灣SQL PASS社群志工，對SQL
+效能調教、Azure SQL雲端架構、資料整
+合方案有興趣。
+
+=== Page 3 ===
+Conference Speaking Highlights 
+MSSQL 雲端遷移 Leading VLDBs Elegantly Toward Autonomy
+2026 Cloud Summit – iThome
+Building MCP-Driven AIOps: vibe SQL Management
+2026 SQLPASS TW
+讓SQL Server 聽你說話- MCP 驅動的AIOps
+2025 Hello World Dev Conference – iThome
+從雲原生架構看AI 助理系統的效能、擴展性與韌性設計
+2025 Cloud Summit – iThome
+Arc-enabled SQL Server 延伸管理、無限可能
+2024 SQL Summit TW
+Think as SQL optimizer, then code for it.
+2023 SQLPASS TW
+SQL Server Tuning from the beginning
+2022 SQL Summit TW
+Performance tuning from 35% to 4% 
+with Read/Write split & SARGable statement
+2021 SQL Saturday Taipei
+從效能到高效益- 資料庫雲端遷移後FinOps 治理與AIOps 演進
+2026  台灣資料治理年會- TDAMA
+Modernization with Confidence 全球服務雲端現代化
+DevDays Asia 2026
+
+=== Page 4 ===
+Insight report: AI loss of control incidents are worsening
+The Centre for Long-Term Resilience
+The severity of loss of control 
+incidents is worsening.
+
+=== Page 5 ===
+穩才是快～ 以OKF 打造Agentic AIOps 治理閉環
+https://www.longtermresilience.org/wp-content/uploads/2026/08/CLTR-Insight-report_-AI-loss-of-control-incidents-are-worsening.pdf
+
+=== Page 6 ===
+AI Agent 能做多少，與企業敢讓它做多少，是兩回事
+效率與風險的新平衡
+ISO 31000 風險管理標準，風險管理是「在決策中協調和指導組織各項活動，
+以應對不確定性的過程」。其核心目標不僅是防禦，更包含價值創造。
+
+=== Page 7 ===
+Invite AI Agent to the table 之前，我們可以思考的點
+複雜的企業環境與合規議題，真正該在意的一直都沒變
+Agent 是否理解系統架構、歷史變更與維運脈絡？
+多個專業Agent 如何共享知識、協作與決策？
+安全邊界該怎麼管
+… 企業內部規範
+「團隊成員」是否理解系統架構、歷史變更與維運脈絡？
+多個專業「團隊成員」如何共享知識、協作與決策？
+安全邊界該怎麼管
+… 企業內部規範
+
+=== Page 8 ===
+穩才是快～ 以OKF 打造Agentic AIOps 治理閉環
+
+=== Page 9 ===
+Slido vote
+
+=== Page 10 ===
+Agenda
+治理觀點～可迭代、可回滾、可稽核的AIOps 閉環
+Case Study: Agent Observability Dashboard
+讓Agents 合群合規，OFK + USF + SOP
+建造 AIOps Agents 團隊Architect / SRE / DB / Audit
+全球服務維運的挑戰
+
+=== Page 11 ===
+Site Reliability Engineering: How Google Runs Production Systems
+40–90% of the total costs of a system 
+are incurred after birth
+
+=== Page 12 ===
+當用戶來自全球各地
+橫跨24 個時區
+維運團隊面臨的難題
+全球DDoS 防禦與Bot 惡意流量治理
+多區域架構與資料一致性
+服務可觀測性
+穩才是快～ 以OKF 打造Agentic AIOps 治理閉環
+效能與異常分析
+….
+瓶頸其實是理解、協調、治理與執行
+
+=== Page 13 ===
+我們想搭建的解決方案，不只是讓AI 看懂Monitoring、分
+析log、回答複雜問題
+而是讓Agent 安全地進入企業IT Operations 的閉環
+協助突破維運瓶頸
+
+=== Page 15 ===
+穩才是快～ 以OKF 打造Agentic AIOps 治理閉環
+欲解決的核心問題
+問題
+風險
+這個架構的思維模式
+需求理解不一致
+聊天紀錄與口頭交接容易遺失條件
+OKF + Structured Handoff
+Agent 自行越權
+LLM 可能選錯工具或產生危險命令
+USF + Agent Identity + Tool Allowlist + Execution Identity
+高風險異動不可追溯
+批准內容與可能與實際執行版本不一致
+Script hash / artifact version / approval ID / immutable evidence
+告警風暴
+同一事件建立大量重複 RCA
+Event normalization + dedup + correlation + incident aggregation
+網路區域隔離
+需開放連線 Server / DB Zone
+Outbound-only Zone Worker + task pull + result push
+無法衡量 Agent 效率
+只知道 Agent 做了，不知道是否真正改善
+Agents Observability Dashboard + traces
+
+=== Page 16 ===
+穩才是快～ 以OKF 打造Agentic AIOps 治理閉環
+架構目標
+把既有 Architect / SRE / DB / Audit 經驗固化成可重複、可審核、可量測的 Agent SOP
+經驗固化為 SOP
+將既有 Architect、SRE、DBA、Audit 經驗固化
+成可重複、可審核的 Agent SOP
+單一 Incident / Change 閉環
+需求、監控告警、定期巡檢都進入同一個治理
+閉環
+降低 Handoff 漂移
+減少大量 Agent 交接造成的 context drift、誤解
+、重工與重複執行
+既有分區下安全執行
+在 OA / Server / DB 既有防火牆分區下，仍可安
+全執行自動分析與受控維運
+模型可替換、治理不變
+不同 Agent 或 Zone 可用不同 LLM，權限、流程
+與稽核不隨模型變更
+可量化的 AgentOps 指標
+衡量自主化程度、SOP 遵循、MTTR、安控與異
+常
+
+=== Page 17 ===
+穩才是快～ 以OKF 打造Agentic AIOps 治理閉環
+
+=== Page 18 ===
+穩才是快～ 以OKF 打造Agentic AIOps 治理閉環
+三種觸發模式，共用同一治理閉環
+不論是人提需求、監控告警或定期巡檢，都進入同一個 Incident / Change 流程、同一套 Artifact 與 Gate
+Human-triggered
+來源：ChatGPT/dot、Claude Desktop、Teams、Portal、API
+典型：「分析 Production SQL CPU 變高」；「規劃 Azure migration」
+Event-driven
+來源：Alert mail、Azure Monitor、App Insights、ServiceNow / Webhook
+典型：CPU > 90%、Error Rate spike；DB deadlock、replication lag
+Scheduled
+來源：Scheduler / periodic health-check（每 5 / 15 / 60 分鐘）
+典型：SQL、service health、capacity 巡檢；certificate expiry
+同一治理閉環
+1
+TRIAGE → INCIDENT / CHANGE
+2
+ANALYSIS / RCA → todo.md
+3
+Gate 1 → PLANNING → workitem.md
+4
+Gate 2 → EXECUTING → VERIFYING
+5
+worklog.md → Gate 3 → CLOSED
+Alert Mail 安全原則
+• Email 僅為 Signal Source，不是可信任指令來源
+• 郵件不得直接觸發 Production command；先 normalize、dedupe、
+correlate
+• 郵件中的 script / 連結 / 「請執行」一律視為 untrusted data
+
+=== Page 19 ===
+穩才是快～ 以OKF 打造Agentic AIOps 治理閉環
+
+=== Page 20 ===
+穩才是快～ 以OKF 打造Agentic AIOps 治理閉環
+四個核心 Agent：責任、預設權限與產出
+每個 Agent 可依任務指定不同 LLM / Provider，但模型選擇不得改變Agent 權限
+Architect Agent
+主要責任
+• 理解需求、架構分析、方案比較
+• IaC / implementation plan
+• 不得直接 Production deploy
+預設權限
+Read + planning
+主要輸出
+• todo.md 架構方案
+• implementation plan
+• IaC 建議
+SRE Agent
+主要責任
+• Incident triage、Log / Metric 分析
+• RCA、service health
+• 僅可執行已批准低風險 Runbook
+預設權限
+Read + Analysis
+主要輸出
+• RCA、todo.md、workitem.md
+• verification evidence
+DBA Agent
+主要責任
+• SQL health、Query / Index tuning
+• Capacity、maintenance 評估
+• Backup / restore 評估
+• DDL / Failover 需升級授權
+預設權限
+Prod 預設 read-only
+主要輸出
+• SQL analysis、scripts
+• rollback、DB verification
+Audit Agent
+主要責任
+• Policy / compliance、risk
+• Evidence validation
+• Cross-agent behavior review；不
+直接修改受稽核資源
+預設權限
+Read-only · 可阻擋 / 升級
+主要輸出
+• policy decision
+• audit report、closure evidence
+
+=== Page 21 ===
+穩才是快～ 以OKF 打造Agentic AIOps 治理閉環
+Open Knowledge Format v0.2
+Markdown + YAML frontmatter 的 vendor-neutral 知識格
+式
+• 架構、SOP、Runbook、服務相依、已驗證 RCA、
+lessons learned 的共享知識底座
+• Operational artifacts 與長期 Knowledge 分開管理
+• 只有經 review 的內容進入長期知識
+• Git + object storage + OKF index：版本、review、
+bundle、provenance
+---
+artifact_type: todo | workitem | worklog
+schema_version: "1.0"
+change_id: CHG-2026-0001
+owner_agent: sre | dba | architect | audit
+environment: production
+status: proposed | approved | ...
+risk_tier: L0 | L1 | L2 | L3
+revision: git:<commit-sha>
+---
+OKF 標準化Agent 記憶
+OKF（Open Knowledge Format）是Google 於2026 年6 月在
+GitHub 開源推出的一套標準化文字檔案格式。
+為開放式、對人和智慧體都友善的知識表示格式：涵蓋了資料和系統
+相關的元資料、上下文和精選見解。OKF 的設計宗旨是：由人編寫，
+由智能體生成，跨組織交換，並供兩者使用。刻意追求極簡：一個包含
+Markdown 和YAML 的目錄。
+透過OKF，建立Agent 能理解並延續的知識與記憶框架，讓AI 不再每
+次從零開始分析。
+https://github.com/GoogleCloudPlatform/knowledge-
+catalog/blob/main/okf/SPEC.md
+
+=== Page 22 ===
+穩才是快～ 以OKF 打造Agentic AIOps 治理閉環
+OWASP Universal Skill Format v1.0
+跨平台 Skill manifest（permissions、network、tools、
+risk_tier、signature、hash），作為企業 Skill Registry 
+的 metadata 基礎
+name: sql-performance-diagnostics
+version: 1.0.0
+description: Read-only SQL perf diagnostics
+permissions:
+  network:
+    allow: [sql-mcp.internal.example]
+    deny: "*"
+  shell: false
+tools: [sql_query_readonly,
+        query_store_read, wait_stats_read]
+risk_tier: L1
+scan_status:
+  scanner: approved-skill-scanner
+  result: pass
+content_hash: sha256:<hash>
+signature: ed25519:<signature>
+USF 制定安全規範
+OWASP USF（Universal Agentic Skill Format）是由OWASP 基金
+會制定的YAML 描述標準。
+引入Universal Skill Format 的安全治理思維，透過最小權限、執行限
+制、風險分級與完整性驗證，讓Agent 的自主能力建立在可控的安全
+邊界之內。
+https://owasp.github.io/www-project-agentic-skills-top-10/universal-skill-format
+
+=== Page 23 ===
+Workflow first — Agent 是可替換 worker，Workflow State 才是 system of record；任何一階都不可跳過
+todo.md
+WHAT / WHY
+REQUEST / EVENT
+TRIAGE → INCIDENT (optional)
+ANALYSIS / RCA
+TODO_READY
+Gate 1 · Decision
+必要條件
+需求 / Impact、候選方案、Risk、Recommendation、
+owner、open questions 完整
+失敗行為
+回到 ANALYSIS；不得產生具執行效力的變更
+workitem.md
+HOW / CONTROL
+PLANNING
+WORKITEM_READY
+（scripts + rollback + approval）
+Gate 2 · Execution
+必要條件
+Approved workitem revision、script hash、precheck、
+rollback / recovery、risk policy、approver、maintenance 
+constraints
+失敗行為
+拒絕或 pending approval；任何 script 變更使 approval 
+失效
+worklog.md
+ACTUAL / EVIDENCE
+EXECUTING
+VERIFYING
+WORKLOG_READY
+CLOSED → reviewed knowledge 
+update
+Gate 3 · Closure
+必要條件
+實際 execution record、before / after metrics、error check
+、rollback status、Audit evidence
+失敗行為
+維持 VERIFYING 或 ESCALATED，不得標 completed
+SOP 工作流程：三份Artifact、三道Gate
+穩才是快～ 以OKF 打造Agentic AIOps 治理閉環
+
+=== Page 24 ===
+Slido vote
+
+=== Page 25 ===
+穩才是快～ 以OKF 打造Agentic AIOps 治理閉環
+
+=== Page 26 ===
+穩才是快～ 以OKF 打造Agentic AIOps 治理閉環
+身分隔離— 人員身分、Agent 身分與執行身分彼此獨立
+技能治理— 透過OWASP USF 控制Agent 的能力、權限與風險層級
+可信知識— 透過OKF 提供版本化、可審核且一致的架構知識、維運紀錄
+政策驅動核准— 執行前由Policy Engine 依風險進行判斷與核准
+區域隔離執行— Production 變更僅由Zone Worker 執行，Agent 不直接操作
+端到端可稽核— 從請求、分析、核准、執行、驗證到稽核皆可完整追蹤
+AIOps Agents Security Architecture 
+Agents 不持有人類或Production Admin 身分、不是Prompt 說可以就可以、真正執行發生在Zone Worker
+
+=== Page 27 ===
+穩才是快～ 以OKF 打造Agentic AIOps 治理閉環
+
+=== Page 28 ===
+穩才是快～ 以OKF 打造Agentic AIOps 治理閉環
+
+=== Page 29 ===
+Case Study
+
+=== Page 30 ===
+Slido vote
+
+=== Page 31 ===
+Key Takeaway
+先把流程釐清，再談Agent 自動化— Incident、Change、Approval、Execution、Verification 都走同一套治理流程
+知識要能累積，也要能被審核— OKF 標準化知識 、SOP 遵循流程、Runbook 與已驗證RCA，避免每次從零開始
+Agent 不能做什麼，要有明確邊界— USF 安全規範、身分與工具權限控制能力，不讓模型自己決定權限
+Production 執行必須受控、可回滾、可追溯— 透過Artifacts、Approval、Zone Worker 與稽核，來控制變更
+成效量測— Agent Observability Dashboard 看Incident、Workflow、Agent 狀態、SOP 遵循與自動化成效
+
+=== Page 32 ===
+Thank You

@@ -1,0 +1,706 @@
+Title: 把「做完了」寫下來：90 分鐘做出一份機器能檢查的驗收清單
+Speaker: 楊騏 (Ci)
+Company: WaCare 數位健康 Tech Lead
+
+=== Page 1 ===
+HWDC 2626.工作坊
+
+產出的人
+不能驗日己
+
+SDD十Harness 實作
+一 現場做一個抽書小程式
+
+楊騏Ci
+
+WaCare 數位健康.Tech Lead
+
+=== Page 2 ===
+我是 Ci,專注讓
+AI 驅動開發在團隊落地
+
+WaCare 數位健康。Tech Lead
+軟體工程師,投入開發十餘年
+
+j Ag
+(Al 驅動開發:從 Prompt 到 Loop)       i
+
+=== Page 3 ===
+今天一個半小時怎麼走
+
+現場 demo
+開場                    濃縮演講                  十抽書                 pilot 結果            寫你的 Story           收尾十間答
+【              全              【              ©              ©              @
+16:00-3 分      16:03 -17 分     16:20 - 40 分      17:00-5 分      17:05-15 分     17:20:10 分
+
+03
+
+=== Page 4 ===
+demo 最後,
+用這套步驟做的程式
+抽一位送書。
+
+demo 一開始就放報名 QR,用手機填暱稱就好。
+
+=== Page 5 ===
+Claude Code BA best practices
+
+ 看起來做完了」
+是唯一的訊號。
+
+"looks done" is the only signal available, and you become the verification loop.
+
+code.claude.com/docs/en/best-practices
+
+05
+
+=== Page 6 ===
+/ 23
+
+寫 code 的同一個 session BAS
+
+業界個人實驗: 2個PR、12 次review、單一作者
+出處:(@tvykruta 公開實驗 (單一作者、2 個 PR)
+
+同一批問題
+
+全新的 reviewer
+
+/23
+
+=== Page 7 ===
+它說都測過了。
+審查者列了五件,先看兩件。
+
+同一個使用者再次進入 (App 重新交握) ,已經
+勾好的內容會被清掉。
+
+oreo TR 「換人重置已測過」; 把那段程式拿掉,
+“測試照樣全過。
+
+實作的 agent 修好、補上測試,再派一個
+沒看過過程的 agent 複驗。
+
+審查列了 5 個中嚴重度問題,這頁挑 2個。
+
+=== Page 8 ===
+今天只講一件事
+
+SDD 先講好
+eR SE
+Harness 讓 AI
+交出可核對證據
+
+Harness 做得好,你才敢放手。
+
+=== Page 9 ===
+前情: COSCUP
+
+SDD :  UE bSinci asa) ©  再讓 AT iit
+
+規格                   計畫/任務                   實作                        驗證                   交付/歸檔
+Ls                                  +                                 =i                                 了                                  +                                  +                                  4
+D6                                 說需求                                                                                                                                                          人收貨
+需求與取捨                  回答待落清                                                                                                                                                歸檔前確認
+(0)                            (en)
+AI+Skills              Explore                      Story                 Plan > Tasks             Implement                  Verify                     Archive
+prospec 的步驟            找現況                 為什麼改十AC             怎麼做、拆步                 改程式                    對照規格              回寫規格/知識
+
+這裡,等一下疊上 Harness
+
+兩個缺口:Story 寫完不一定停;Verify 只對照規格,不跑測試。                      99
+
+=== Page 10 ===
+全景:SDD x Harness
+
+多  CE  中間交給 AI 跑
+
+規格                   計畫/任務                   實作                        驗證                   交付/歸檔
+上                             +                             +                             +                             +                             +                             4
+說需求                           A 1
+—     apes ty    人看story+AC   補上 Story &O
+AI+Skills              Explore                      Story                 Plan > Tasks                                                      i                        Archive
+prospec 的步驟    我現況     為什麼改十AC    怎麼做、拆步                i      回寫規格/知識
+
+Harness
+疊在每一站下面
+
+原始需求                                                                                    | 本地真環境 E2E |
+
+人的原話,照存                                                       i 跨repo 整條跑 ;
+驗證者先讀需求和 AC,自己判斷
+
+| 擋AI自己確認 Story 自動鬧門 (hook) 寫檔後馬上檢查 沒證據不淮停。
+
+Constitution (專案規矩) : 每條寫明誰來查
+
+實線框:在用 ] 虛線框:還在試 AM 銅金箭頭.交出去的東西 灰細線:這站的 Harness 人這站對照規矩_亮底:人不用盯           10
+
+=== Page 11 ===
+Harness:讓AI交出
+
+我現在的分工: Claude Code RF 5
+
+可核對證據的整套東西                           葡六給一個沒看過過程的agent。
+
+規矩、檢查、驗證者、報告。
+
+=== Page 12 ===
+今天只用 5 個詞
+
+AC
+怎樣算做完
+
+Constitution
+
+專案規矩
+
+AN
+
+前後端說好的格式
+
+驗證者
+
+沒看過過程的檢查員
+
+自檢報告
+
+交貨單
+
+12
+
+=== Page 13 ===
+今天的地圖
+
+三層 X ABBA X 一塊地基           這是我現在的整理今天挑AC、測試、報告三站講。
+
+規格層:做什麼、怎樣算對                                   Afi 1: A@ Story+Ac
+
+, 需求al OAc | 6 Qa -------                                                          BRR / Fe
+ser Story
+
+>
+:       { @Prototype
+
+:  j Settee
+
+; [執行層 :誰做
+
+te                                                       file agent                                             後端agent
+
+                                                         實作+自己的測試                                           實作+自己的測試
+
+; |驗證層:誰證明
+
+i                                                                                                    © Code review
+
+4                                                                                                       reviewer agent
+
+i>                                                                                                          ©
+
+H 4                                                  地基:Constitution (專案規矩) 十自動閘門 (hook/檢查腳本) 一一 三層都查
+
+OC 實線框:在用 CL 虛線框:還在試 (@O@b) © 菱形: AM © 小圓章 :不是寫的人在驗 (6%)    ““”負金虛線:地基查三層         13
+
+=== Page 14 ===
+每段結尾,我會問一次
+
+這段
+誰不能驗自己?
+
+C
+a7,
+(=)
+
+=== Page 15 ===
+User Story 長這樣
+
+As a 每天使用 App 回報狀況的使用者
+
+I want 每天勾選今天的狀況並送出,必要時寫備註
+
+So that 團隊每天都拿得到我的紀錄
+
+優先度:P1l
+
+Independent Test :用一個今天還沒回報的測試帳號,從頭跑一次
+
+15
+
+=== Page 16 ===
+[#]
+
+送出要有防呆。
+
+WHEN/THEN十具體值十怎麼驗
+
+WHEN 一項都沒勾就按送出
+
+THEN 無法送出,今天仍然是「未回報
+怎麼驗:機器驗,確認沒有發出任何寫入請求
+
+16
+
+=== Page 17 ===
+有邊界、看得到、
+寫得出怎麼驗
+
+有邊界          寫具體值,剛好等於門檻那一格也要寫。
+
+看得到          結果從畫面、API 或資料看得到,不是 [內部要
+正確J。
+
+som        附一個指令或一件要看的東西,標「機器驗」或
+
+「人看1。
+
+=== Page 18 ===
+AC > 檢查
+
+先看到紅,再做到斷
+
+AC-1:本島、小計
+
+999 元一 運費 60 元               寫 test_ac1,跑:紅   「 |       寫剛好夠的程式       I  跑:綠;全部再跑一
+
+下一條AC
+
+問自己:換一個合理但錯的寫法,這個測試還會過嗎 ? 程式本來就對時,改壞一處,測試要變紅。
+
+R
+
+18
+
+=== Page 19 ===
+不知道,就寫不知道
+
+只填備註、一項都沒勾:依決定字面應該擋下
+一 NEEDS CLARIFICATION :要請負責人確認
+送出失敗 (例如網路中斷) : prototype 沒有後端,沒有失敗狀態可參考
+
+— NEEDS CLARIFICATION
+
+=== Page 20 ===
+錯了收得回來,才放手
+
+不可逆
+
+人一定在迴圈裡
+
+可逆十低風險
+
+放手讓 AI 做
+
+低風險
+
+=== Page 21 ===
+驗收分兩層
+
+上層
+
+規格 AC
+
+下層
+
+E2E 情境
+
+=== Page 22 ===
+報告交給驗證者,不是交給你
+
+2                 人收貨 :看兩個結果
+寫入方的自檢報告        BP pape oh raretca        (報告提交/功能驗收) ,
+5                 並親自看抽到的那一條
+
+報告提交:成功 / 不完整
+功能驗收:PASS / PASS-待人看/ FAIL
+
+pass || PAss-待人看」| FAIL
+
+=== Page 23 ===
+有一次,AI BRPAAMPSA
+
+留紅不算失敗,
+Beth RN BRA HE °
+
+Am Aim im, A, A (am am
+
+全綠的那份,藏著一個會覆寫
+使用者手寫 CLAUDE.md 的 bug。
+
+=== Page 24 ===
+整條責任鏈                                                                                                                                                6枚印章 : (DGy4)aG)b(S)(@)
+
+每個交接,都安排了一個不是寫的人在驗
+
+規格層:做什麼、怎樣算對                                   Afi 1: A@ Story+Ac
+
+需求                                AA                                                              回寫規格/ 知識
+
+User Story
+
+id
+
+!       i @Prototype
+
+:  i ] 產品元件+自己驗
+
+; [執行層 :誰做
+
+Hes
+
+; |驗證層:誰證明
+
+i                                                                                                    ® Code review
+
+1                                                                  revieweragent
+
+圖                                                                   ©                     CO) #8
+
+:             測                                         \2 review           © 驗證者+人收發
+疾變臉證者                               wines    ARD2: AK
+
+‘|                        3% : Constitution (專案規矩) 十自動閘門 (hook/檢查腳本) 一一 三層都查
+
+OC 實線框:在用 【--虛線框:還在試 (GX3X4)b) 念 BH: AM @ 小圓章 :不是寫的人在驗 (6 枚)    ““”負金虛線:地基查三層         24
+
+=== Page 25 ===
+現場 demo.40 分鐘
+
+我用 sdd-harness
+照步驟跑一遍給你看。
+
+每一步的提示詞都在投影捂上; 停在人閘時,我們一起看。
+
+=== Page 27 ===
+demo 1/ 11.約 2 分鐘
+
+放QR,觀眾開始報名 (正式版)
+
+提示詞
+https: //hwdc-book-draw. jason21131.workers.dev/
+
+人要看的                                                                                                         預期結果
+講者頁重新整理,人數有在增加                                                    觀眾用手機報名已部署的正式版 ; 一直開放到最後一步
+
+=== Page 28 ===
+fit QR °
+SETAE AU
+
+demo 最後就用這份名單抽書。
+
+=== Page 29 ===
+demo 2/11.約 2 分鐘
+
+裝包、開 Claude Code
+
+台上我打的
+Claude --model sonnet --setting-sources
+project, local --strict-mcp-config
+--plugin-dir ~/hwdc-pack
+
+claude plugin marketplace
+add ci-yang/sdd-harness
+Claude plugin install
+sdd-harness@sdd-harness
+
+輸入 /sdd 看得到四個 /sdd-harness:
+指令 ;不載入個人設定與外掛
+
+=== Page 30 ===
+demo 3/11.約 1 分鐘
+
+裝地基
+
+提示詞
+/sdd-harness:start
+
+人要看的
+測試指令是 npm test,健檢通過
+
+預期結果
+建好sdd/、AGENTS.md、CLAUDE.md,叫你下一步用
+/sdd-harness:story (agent試跑 10 秒)
+
+=== Page 31 ===
+demo 4/11.約 3 分鐘
+
+寫 Story All AC
+
+提示詞
+/sdd-harness:story 照 需求便條.md 寫。拆成兩
+個 Story: signup (#%%) » draw (抽獎) 。
+
+每條AC 有沒有具體值:小明、剛好
+20 字、21 F + <b>x</b> > HHH 3K
+可抽人數 3一2一1
+
+Ane ae
+
+兩個 Story 各7條AC;AI停下來問不
+確定的地方 (agent 試跑時間了
+admin key 怎麼帶、QR 怎麼產生)
+(agent試跑 67 秒)
+
+wo
+2
+
+=== Page 32 ===
+demo 5/11.約 7 分鐘
+
+AR 1 (上):親手寫兩行、回答問題                        人開
+
+提示詞
+停下來,人要看的
+.                   填好了。兩個問題的答案 : admin key 照你暫定
+先在兩個 STORY.md 既有的 「- 我檢查         的做 (BABA key > HttpOnly cookie ;
+
+的邊界例子:」「-我找到的遺漏:」 B       les alk Authorization: Bearer) °QR
+號後面接著寫 (不要另起新行) : 一個自    eink
+
+己算過的邊界例子 (跟 AC 一致才算) 9          (https: //cdnjs.cloudflare.com/ajax/1l
+.                                     ibs/qrcodejs/1.0.0/qrcode.min.js) 在本
+一個AC 沒寫到的遺漏。狀態先不改               機畫 QR,報名網址不送給第三方。路徑
+/stage/cLose、/stage/draw 可以。講者登
+
+入框用 type=password、
+autocomplete=off °
+
+預期結果 Al 把遺漏補成 AC (agent BiH : signup 多一條人看的「375px 手機畫面」,draw 多一條「連按兩下不重複中獎」) > BS—R (agent
+試跑 52 秒)
+
+=== Page 33 ===
+demo 6/ 11.約 4 分鐘
+
+人閑1 (下):確認、開始做
+
+停下來,人要看的
+遺漏有被接住 ; 我自己把兩個 STORY.md
+的(狀態:草稿」改成 狀態:已確認」
+
+預期結果 逐條先紅後斷,npm test 全綠 (agent 試跑 14 個) ,AI 說還沒 commit (agent 試跑 127 秒)
+
+=== Page 34 ===
+demo 7/11.約 2 分鐘
+
+commit > EA PRA (AB)
+
+提示詞
+! git add -A; git commit -qm『「實作 signup + draw"
+npx wrangler@4 dev
+
+人要看的                                                               預期結果
+第二行在另一個終端機分頁跑 ; 瀏覽器開                         本機觀眾頁、講者頁能用;正式報名不受影響
+http://localhost:8787/ 。不部署
+
+=== Page 35 ===
+demo 8/11.約 4 分鐘
+
+交貨:驗證者對質
+
+提示詞
+/sdd-harness: done
+
+人要看的
+兩個結果分開看:報告提交、功能驗
+收
+
+PASS- 待人看 > BY FAIL © agent 試跑
+BS draw 判 FAIL: 驗證者把「可抽人
+數2」改成7,測試還是綠,判定測試
+太弱 (agent試跑 159 秒)
+
+=== Page 36 ===
+demo 9/11.約 4 分鐘
+
+FAIL 時:看剩餘時間決定要不要修
+
+提示詞
+
+修這兩處。修完幫我 commit,然後跑 /sdd-harness:done。
+
+人要看的                                                                      預期結果
+看剩餘時間決定要不要修;FAIL 本身可以拿來講;不管修        agent 試跑修第一次後,新驗證者又抓到 QR 內容沒被
+不修,抽書都用已部署在 hwdc-book-draw 的版本                 驗;修第二次才 PASS-待人看 (agent 試跑 115 秒)
+
+=== Page 37 ===
+上台前 agent 跑一思:兩次 FAIL
+
+驗證者把「可抽人數 2」改成顯示 7,
+測試照樣綠:斷言被報名號 2騙過。
+
+修完。
+換新的驗證者
+
+兩次都是測試的問題功能程式三輪沒改;第三輪 PASS-待人看。
+
+頁面本來就印了網址,
+測試證明不了 QR 裡面是什麼。
+
+=== Page 38 ===
+demo 19/ 11.約 5 分鐘
+
+All 2: $f HUMAN.md
+
+停下來。,人要看的
+
+先在兩個 HUMAN.md 填 「符合/不
+TH > 抽查那條自己跑一次指令 ;
+AB) AC 開 http://localhost:8787/
+
+切手機寬度親眼看。沒看過不填
+
+預期結果 兩個都是:報告提交成功、功能驗收 PASS
+
+提示詞
+
+! python3 sdd/check.py report
+sdd/stories/signup && python3
+sdd/check.py report sdd/stories/draw
+
+=== Page 39 ===
+demo 11/11-      分鐘
+
+截止 抽書、 看證據(正式版)
+
+正式講者頁:按 !「截止報名」> He hf) > 開
+https: //hwdc-book-
+draw. jason21131.workers.dev/result
+
+人要看的
+得獎者手機上的報名號跟大字一致;
+
+結果頁有時間、報名號、暱稱、可抽
+人數
+
+結果頁任何人都看得到這筆紀錄 (時
+fiz UTC)
+
+=== Page 40 ===
+pilot 正式結果.限制先講
+
+看數字之前,先講五條限制
+
+口 每格只跑 3 次,沒有統計檢定 ;不推論到其他題目、模型
+
+人閑是腳本代填的,只會蓋章 :量到的是包的下限
+
+判讀與裁決都由 Al 完成,不是我 ;組別遮不住,裁決時對照了組別
+五條判讀歧義規則是看過資料後才定的,不是預先登記
+
+兩組品質都滿分 :包有沒有提高品質,這次根本沒測到
+
+口
+
+口
+
+口
+
+口
+
+=== Page 41 ===
+pilot 正式結果.24 次
+
+品質:全部滿分
+留白點:報名4-6/8、營業6/7
+寫成問題交給人 : 0/6 次
+
+留白點、提問只來自不附答覆的 12 次。品質、留白點都分不出差距 ; TER API 估算。
+
+品質:全部滿分
+花費 6.1-7.0 倍、耗時4.9-5.4 倍
+
+留白點:報名5-8/8、營業 6-7/7
+寫成問題交給人        R
+
+MB RIRR > #
+
+=== Page 42 ===
+需求有留白,
+才值得用包
+
+用包              需求有留白、需要人判斷、要放手讓它跑很久
+
+直接做          小題目、需求寫清楚
+
+=== Page 43 ===
+現在,換你的專案
+寫一條 Story
+
+挑一件一兩天做得完、有規則的小事。
+寫到可以給人確認就好,現在不用開Al。
+
+| 想不到題目:寫你最近修過的一個bug。
+
+=== Page 44 ===
+範本.寫 8 分鐘
+
+照這個格式寫
+
+誰/要什麼/為什麼/不做的事
+
+###AC-1<短標題>
+
+- WHEN <條件,含具體值>
+
+- THEN <結果,含具體值>
+
+-怎麼驗:<一個指令,或一件人要看的東西>
+-驗法:機器驗/人看
+
+NEEDS CLARIFICATION :<要問誰什麼>
+
+=== Page 45 ===
+自己當一次人剛
+
+交給 AL 之前:三間十兩行
+
+讀的人能判是非嗎 ? 「效能良好」不行
+
+有具體值嗎 ? 門檻那一格、0、空值、時區、跨日
+說得出怎麼驗嗎 ? 一個指令,或一件人要看的東西
+我檢查的邊界例子:挑一條AC,自己算一次
+我找到的遺漏:找一個 AC 沒寫到的情況
+
+口
+
+口
+
+o
+
+[|
+
+口
+
+45
+
+=== Page 47 ===
+Harness 做得好,
+才能放手給 AI ©
+
+楊騏Ci 謝謝
+恭喜今天抽中的人
+
+=== Page 48 ===
+Harness包
+
+github.com/ci-yang/sdd-harness
+
+Discord 社群
+
+discord.com/invite/SFXK37uDgt
+
+prospec (開源)
+
+github.com/ci-yang/prospec
+
+Threads
+
+threads.net/@ci.fullstack
+
+tenlong.com.tw/products/9786267889688
+
+範例題
+
+回jw回
+
+sdd-harness repo 的 examples/

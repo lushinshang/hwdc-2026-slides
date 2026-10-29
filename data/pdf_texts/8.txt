@@ -1,0 +1,5 @@
+Title: 讓 AI Agent、MCP Server、CLI 安全登入的實作工作坊
+Speaker: 吳柏毅 (appleboy)
+Company: Mediatek 工程師
+URL: https://ccms.ithome.com.tw/api/slideapi/2657/click?l=https%3A%2F%2Fblog.wu-boy.com%2F2026%2F10%2Fai-agent-mcp-cli-secure-login-workshop-zh-tw%2F
+(External interactive slide or technical article)

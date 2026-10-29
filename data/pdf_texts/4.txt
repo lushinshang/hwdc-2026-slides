@@ -1,0 +1,5 @@
+Title: AI 工具爆發時代的企業身分認證治理實戰
+Speaker: 吳柏毅 (appleboy)
+Company: Mediatek 工程師
+URL: https://ccms.ithome.com.tw/api/slideapi/2656/click?l=https%3A%2F%2Fblog.wu-boy.com%2F2026%2F10%2Fai-identity-auth-governance-zh-tw%2F
+(External interactive slide or technical article)

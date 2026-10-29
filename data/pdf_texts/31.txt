@@ -1,0 +1,170 @@
+Title: Google AI Studio X Antigravity 驗收實戰
+Speaker: 陳佳新 (佳新哥)
+Company: 奇步應用 執行長
+URL: https://ccms.ithome.com.tw/api/slideapi/2661/click?l=https%3A%2F%2Fspeakerdeck.com%2Fjarsing%2Fgoogle-ai-studio-x-antigravity-yan-shou-shi-zhan-2026-hwdc
+(External interactive slide or technical article)
+
+=== Extracted Slide Text ===
+
+--- Page 1 ---
+
+--- Page 2 ---
+GDG Changhua Organizer
+--- Page 3 ---
+LINE API Expert 聊天機器⼈專家
+
+--- Page 4 ---
+2014年回到故鄉彰化開了⼀家軟體公司
+--- Page 5 ---
+在彰化⽤到不錯的LINE都是我們家做的
+彰化縣政府愛玩彰化
+--- Page 6 ---
+2026.8.27 《爌⾁之城》 發佈記者會
+--- Page 7 ---
+2026.8.27 《爌⾁之城》 部位篇餐桌
+--- Page 8 ---
+今⽇互動⼩禮物
+--- Page 9 ---
+LINE Biz-Solutions Awards 最佳在地⾏銷 銀獎
+--- Page 10 ---
+
+--- Page 11 ---
+
+--- Page 12 ---
+
+--- Page 13 ---
+
+--- Page 14 ---
+Antigravity四⼤天王•Google Antigravity 是整體 Agent-ﬁrst 開發平台。1.Antigravity 2.0：Agent 任務指揮中⼼2.Antigravity IDE：程式開發⼯作環境3.Antigravity CLI 終端機交辦入⼝4.Antigravity SDK 產品整合入⼝
+
+--- Page 15 ---
+你也有 AI 焦慮嗎？ 
+🤔
+--- Page 16 ---
+程式⾼⼿說他Vibe Coding
+
+--- Page 17 ---
+程式素⼈也說他Vibe Coding
+
+--- Page 18 ---
+知名技術專家和講師這麼說
+
+--- Page 19 ---
+知名技術專家和講師這麼說
+
+--- Page 20 ---
+試試這帖良藥吧！ 
+💊
+--- Page 21 ---
+當然就是Google AI Studio（起點）
+https://ai.studio/
+--- Page 22 ---
+AI Studio幾乎免費，⽽且模型很新！
+
+--- Page 23 ---
+我可以在AI Studio裡Vibe Coding嗎？
+部署
+
+--- Page 24 ---
+左側選單，切換到Build模式
+
+--- Page 25 ---
+Google I/O 2026之後的歡迎⾴ (1/5)
+觀看介紹影片
+
+--- Page 26 ---
+Google I/O 2026之後的歡迎⾴ (2/5)
+連結 Google 應⽤程式
+
+--- Page 27 ---
+Google I/O 2026之後的歡迎⾴ (3/5)
+可以建立 Android App
+
+--- Page 28 ---
+Google I/O 2026之後的歡迎⾴ (4/5)
+⾃動幫你建立 Gemini API ⾦鑰
+
+--- Page 29 ---
+Google I/O 2026之後的歡迎⾴ (5/5)
+幫你緊盯使⽤量和費⽤
+
+--- Page 30 ---
+Google I/O 2026 Keynote怎麼說？
+任何點⼦ 都能成真
+免信⽤卡免費部署2個Apps
+--- Page 31 ---
+開始憑感覺（Vibe）寫程式（Coding）
+https://ai.studio/
+--- Page 32 ---
+接著燃燒 token ⼩宇宙 
+🔥
+
+--- Page 33 ---
+⏳ 3～5分鐘過後…
+
+--- Page 34 ---
+發佈吧，開放給親朋好友使⽤～
+1
+--- Page 35 ---
+Publish your app按下去 
+🚀
+2
+--- Page 36 ---
+⏳ 1分鐘過後…
+造訪
+重新發佈
+取消發佈3
+--- Page 37 ---
+網站服務粉墨登場 
+🎉
+https://aio-ai-84057892112.us-west1.run.app
+--- Page 38 ---
+Vibe Coding的真諦⼈⾃⼰不改Code，都讓AI幫忙改
+--- Page 39 ---
+Human in the loop之重要性不能盡信AI，⼈⼀定要⾃⼰測試過
+--- Page 40 ---
+今⽇⼯作坊⽬標 
+🎯
+今天會做今天不強迫今天帶走⽤ AI Studio 做出網站雛形不從零學完整開發環境：不要求安裝桌⾯ IDE，也不逐⾏教 HTML／CSS。⼀份⾃⼰的網站草稿⽤ Antigravity 提出驗收證據不加入不必要的複雜度：不做資料庫、會員、⾦流，也不深入 SDK／多 Agent 開發。⼀套三問驗收⽅法由⼈選擇修改，再回 AI Studio 實作與重新驗收不以⼈⼈正式上線為唯⼀成果：也不把 AI 說「完成」當成驗收通過。⼀套可重複使⽤的回饋流程
+--- Page 41 ---
+步驟⼩抄和學習資源，準備開始！
+chibu.app/20261015
+--- Page 42 ---
+可以做什麼？台南⽜⾁湯美食地圖
+https://service-84057892112.us-west1.run.app/
+--- Page 43 ---
+可以做什麼？醫療器材公司官網
+
+--- Page 44 ---
+可以做什麼？網站弱點掃描⼯具
+
+--- Page 45 ---
+可以做什麼？苗栗露營區＆⺠宿官網
+
+--- Page 46 ---
+👩💻 今⽇學員現場作品賞析 
+🧑💻
+
+--- Page 47 ---
+👩💻 今⽇學員現場作品賞析 
+🧑💻
+--- Page 48 ---
+👩💻 今⽇學員現場作品賞析 
+🧑💻
+--- Page 49 ---
+👩💻 今⽇學員現場作品賞析 
+🧑💻
+--- Page 50 ---
+👩💻 今⽇學員現場作品賞析 
+🧑💻
+--- Page 51 ---
+👩💻 今⽇學員現場作品賞析 
+🧑💻
+--- Page 52 ---
+🥰 歡迎與我聯繫 
+🥰
+陳佳新https://facebook.com/jarsing.7816奇步應⽤https://facebook.com/chibuapp
+Jia-Sin Chenhttps://www.linkedin.com/in/jarsingChiBuApp Inc.linkedin.com/company/chibuapp
+
+--- Page 53 ---
+感謝聆聽。敬請指教

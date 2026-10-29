@@ -1,0 +1,790 @@
+Title: 同一個 Prompt 為什麼差這麼多？——從踩坑到 Harness Engineering
+Speaker: 許舜雯 (Olivia Shiu)
+Company: Amazon Web Services Solutions Architect
+
+=== Page 1 ===
+Olivia Shiu
+Solutions Architect
+Amazon Web Services
+同一個Prompt 為什麼差這麼多？
+——從踩坑到Harness Engineering
+H W D C  2 0 2 6
+
+=== Page 2 ===
+S P E A K E R  ·  先認識一下
+Olivia Shiu
+Solutions Architect · Amazon Web Services
+T H E N
+工程師
+從 UEFI 韌體到 K8s、AWS 雲端服務、專案經理
+N O W
+架構師
+幫企業設計架構、發想策略，也是聆聽者
+本人
+E N G I N E E R  → A R C H I T E C T
+✦
+天馬
+行空
+</> 寫過UEFI
+企業架構設計
+策略發想 ↗
+AI 梗圖製造機
+跨產業客戶
+電信
+串流媒體
+製造
+機器人
+「它平常不會這樣」
+「它好貴」
+K8s · AWS
+© 2026, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+1 / 8
+
+=== Page 3 ===
+•
+Prompt Engineering
+—— 學會「怎麼問」AI
+•
+Context Engineering 
+—— 給AI 對的資訊，且在對的時間點
+•
+Harness Engineering 
+——當AI 開始「自己動」需要控制AI 的方向
+Agenda
+
+=== Page 4 ===
+同一個 Prompt，為什麼差這麼多？--馬鈴薯事件
+原圖
+ChatGPT · GPT-4o
+Claude 3.7 Sonnet · SVG
+圖片為 2025.05.05 講者實際試用結果 · Claude 3.7 Sonnet 當時無原生生圖能力
+3 / 8
+
+=== Page 5 ===
+C H A P T E R  ·   0 1
+Prompt Engineering
+學會「怎麼問」——AI Engineering 的第一步
+
+=== Page 6 ===
+D E F I N I T I O N  ·  2  O F  2
+什麼是 Prompt Engineering？
+“Prompt engineering 是引導生成式AI 產出預期結
+果的過程”
+“Prompt engineering is the process where you guide generative AI 
+solutions to generate desired outputs.”
+— aws.amazon.com/what-is/prompt-engineering
+透過設計與優化 prompt，引導 AI 產出更精
+準、更符合預期的結果
+這是一種可被學習、可被工程化的過程
+I T E R A T I V E  R E F I N E M E N T  L O O P
+① Draft
+② Test
+③ Evaluate
+④ Refine
+Prompt
+Engineering
+
+=== Page 7 ===
+好 Prompt vs 壞 Prompt
+✓
+清晰、有結構
+可重現、可驗證
+輸入、處理邏輯、輸出格式都寫清楚，產出就
+會穩定可重現；GenAI 被引導去做結構化推理
+，整條鏈路都可控、可驗證。
+✕
+模糊、無結構
+A I  自由發揮
+沒講清楚要什麼時，AI 會自己補細節——結果
+常常是幻覺、每次不一致，無法重現也無法驗
+證。
+
+=== Page 8 ===
+好 Prompt 的三大要素
+缺一不可——這是把「問問題」變成「工程」的最小可行結構。
+I
+Input
+給 A I  看什麼
+備齊要處理的資料與告訴 AI 背景
+資料、指定它扮演什麼角色、劃
+出可做不可做的界線，再附上幾
+個範例讓它照著走。
+P
+Process
+要 A I  怎麼想
+把思考過程拆成可驗證的步驟，
+訂下每步該遵守的規則，遇到分
+岔時給出明確的決策依據，不要
+讓它自己猜。
+O
+Output
+讓 A I  交什麼
+指定要交出的格式（表格、JSON
+、Markdown），列出必要欄位、
+設定長度上限，並說明期望的產
+出與風格。
+
+=== Page 9 ===
+D E M O  ·  1 a
+S T A B I L I T Y  T E S T
+旅平險比較 — 跑三次看穩定度
+✕ U n c l e a r  P R O M P T
+U s e r
+幫我比較一下旅平險。
+R u n  1
+列出 3 家
+R u n  2
+列出 5 家
+R u n  3
+離題
+產出發散、欄位不一、難以比較。
+✓ S T R U C T U R E D  P R O M P T
+U s e r
+[Input] 比較 A/B/C 三家旅平險，10 天歐洲行。
+[Process] 依保額、自負額、除外條款逐條比對。
+[Output] Markdown 表格 + 推薦理由 ≤ 100 字。
+R u n  1
+表格 + 結論
+R u n  2
+表格 + 結論
+R u n  3
+表格 + 結論
+三次結果一致，可重現、可驗證。
+
+=== Page 10 ===
+D E M O  ·  1 a
+S T A B I L I T Y  T E S T
+旅平險比較 — 跑三次看穩定度
+✕ U n c l e a r  P R O M P T
+✓ S T R U C T U R E D  P R O M P T
+
+=== Page 11 ===
+Legacy Code 分析 — 簡單 prompt 容易發散
+✕ O N E - L I N E R
+U s e r
+幫我看一下這段 COBOL。
+A s s i s t a n t
+// 推測為 1990s 銀行系統…
+// 假設使用 DB2（未驗證）
+// 提到不存在的 paragraph：CALC-VAT
+→ AI 編造細節、發散，無法信任。
+✓ S T R U C T U R E D  P R O M P T
+U s e r
+[Input] COBOL 檔案 + JCL job 設定
+[Process] 1) 列 paragraph 2) 標 I/O 3) 找未用變數
+[Output] JSON：{paragraphs, io, dead_vars}
+A s s i s t a n t
+{ "paragraphs": ["MAIN-RTN", "READ-FILE"],
+"io": [{"file":"CUST.DAT","mode":"IN"}],
+"dead_vars": ["WS-TEMP-2"] }
+→ 結構化、可驗證、可被下游程式消費。
+D E M O  ·  1 b
+H A L L U C I N A T I O N  T E S T
+
+=== Page 12 ===
+Legacy Code 分析 — 簡單 prompt 容易發散
+✕ O N E - L I N E R
+✓ S T R U C T U R E D  P R O M P T
+D E M O  ·  1 b
+H A L L U C I N A T I O N  T E S T
+
+=== Page 13 ===
+T H E  C E I L I N G
+Prompt Engineering 的天花板
+寫得再好，也有 prompt 解不了的情況。
+公司內部文件：LLM 沒看過
+即時資訊：今天的股價、最新匯率
+新版 API：訓練截止後才發布
+個人化資料：行事曆、訂單
+R O O T  C A U S E
+問題不在 prompt 寫得好不好——
+而是 LLM 根本沒有這些知識。
+K N O W L E D G E   ·   W H A T  T H E  L L M  H A S  S E E N  V S .  W H A T  I T  H A S N ' T
+Pre-training corpus
+LLM 已經訓練過且知道的一切
+LLM 不知道的領域知識
+內部文件 · 即時資料 · 新版 API · 個人化資料
+T R A I N I N G  C U T O F F
+P A S T
+N O W  &  B E Y O N D  
+→
+
+=== Page 14 ===
+W H A T ' S  N E X T
+把正確的知識，在正確的時間，
+交給 LLM。
+C O M I N G  U P  I N  
+C H A P T E R  2
+Context Engineering →
+
+=== Page 15 ===
+C H A P T E R  ·   0 2
+Context Engineering
+給AI 對的資訊——且在對的時間點
+
+=== Page 16 ===
+D E F I N I T I O N  ·  1  O F  2
+什麼是 Context？
+“Context 指的是LLM 在生成回應時，實際納入計算
+的所有token ——也就是上下文內容”
+“Context refers to the set of tokens included when sampling from a 
+large-language model.”
+— anthropic.com/engineering/effective-context-engineering
+也就是 LLM 在回答時，「實際看到」的所有
+資訊
+不只是 prompt——包括系統指令、檢索結果、工
+具回傳、歷史訊息等等
+C O N T E X T  W I N D O W  —  W H A T  L L M  S E E S
+System prompt
+User Prompt
+Related Data
+Knowledge Bases
+Tool Results / MCP Output
+LLM
+C O N T E X T
+W I N D O W
+
+=== Page 17 ===
+D E F I N I T I O N  ·  2  O F  2
+什麼是 Context Engineering？
+“為LLM 動態組裝執行任務所需最佳資訊的系統化
+實踐”
+“The practice of designing systems that dynamically assemble the 
+optimal set of information for an LLM to perform a given task.”
+— anthropic.com/engineering/effective-context-engineering
+不是把所有資料丟給 AI——而是動態組裝最
+適合當前任務的資訊。
+把它想成 AI 的「工作記憶體管理」。
+D Y N A M I C  C O N T E X T  A S S E M B L Y
+Documents
+Databases
+APIs
+User History
+Tools / MCP
+Context
+Engine
+LLM
+S O U R C E S
+C U R A T O R
+M O D E L
+
+=== Page 18 ===
+T H E  C O S T  O F  D O I N G  I T  W R O N G
+為什麼要做 Context Engineering？
+↑
+Token 爆炸
+Context window 一旦塞滿，LLM 容易
+「忽略中間段」（lost-in-the-middle）
+$$$
+成本上升
+Token 越多，費用越高，回應越慢。每
+次請求都在燒錢
+↓
+準確度下降
+無關資訊干擾推理，反而稀釋了真正重
+要的訊號
+M u l t i - d o c  Q A  ·  Li u  e t  a l .  2 0 2 3  
+(a r X i v : 2 3 0 7 . 0 3 1 7 2 )
+50%
+75%
+100%
+oracle · 88.3%
+closed-book · 56.1% (no docs)
+75.7%
+52.9%
+76.0%
+1st
+10th (middle)
+20th
+↓ 中間位置比不給文件還糟
+把20 份文件全塞給LLM，答案在中間時準確度52.9% —— 比完全不給文件還差（56.1%）。證明context 不是越多越好，位置和篩選才是關鍵。
+即使是 1M context 的最新模型，lost-in-the-middle 依然存在——多篇研究指出這是 transformer attention 的結構性問題，不是靠訓練量或更大 context 就能消除。  
+(arXiv:2502.01951 · 2508.07479 · 2510.10276)
+
+=== Page 19 ===
+T H E  N A I V E  A P P R O A C H
+最直覺的做法——直接餵文件
+要讓 LLM 擁有 domain knowledge？
+把整份文件貼進 prompt，複製貼上就能
+demo，不用建infra、不用寫RAG
+直覺、有效、最快可以驗證——也是大多數 PoC 的起點
+B U T …   第 2 份、第 10 份、第 100 份文件呢？ 
+Demo 能跑，但不具可擴展性，難以應用在Production
+p r o m p t . t x t   ·   H R - a s s i s t a n t  
+# System
+You are an HR policy assistant.
+Answer strictly from the handbook below.
+# Handbook (pasted)
+"""
+第一章
+總則……
+第二章
+工作時間……
+第三章
+請假辦法……
+…（整份 200 頁員工手冊貼在這裡）…
+第八章
+離職與交接……
+"""
+# Question
+育嬰假怎麼申請？
+
+=== Page 20 ===
+D E M O  ·  
+2 a
+把文件當 Context 餵給 LLM
+U S E R  P R O M P T
+# System
+你是 HR policy assistant，根據HR 手冊回答問題。
+我是到職1 年3 個月的員工，明年計劃：3 月結婚（請幫我規劃蜜月旅行的休假）、6 月太太
+預產期、8
+月想帶父母出國旅遊10 天、11 月父親預計住院手術需要陪病。請幫我規劃整年度的休假計畫，
+告訴我每項假別可以請幾天、薪資怎麼算、需要什麼文件、多久前要申請。最後算出我總共會
+被扣多少薪水（如果有）。
+# Handbook (40k tokens)
+「員工手冊 2026 版」全文…
+R E S U L T
+A S S I S T A N T
+✓ 根據員工手冊，以下是你明年（2027年）的完整休
+假規劃：
+ 滿 1 年 享 7 天⋯⋯
+D E M O  ·  2 a
+D O C U M E N T  A S  C O N T E X T
+
+=== Page 21 ===
+T H E  P R O B L E M  W I T H  N A I V E  A P P R O A C H
+直覺，但無法 scale。
+★
+手動操作
+每次都要找對檔案、整份貼進來。
+↗
+無法擴展
+100 份文件、跨系統資料怎麼辦？
+○
+沒有時效性
+文件版本一更新就過期。
+❖
+context 沒被設計
+不是組裝出來的，是被「堆」上去。
+→ 我們需要更系統化的方式來管理 context。
+
+=== Page 22 ===
+T H E  N O R T H  S T A R
+在對的時間，給對的資訊，
+到對的模型。
+這就是 Context Engineering 的核心——同時優化準確度與成本。
+
+=== Page 23 ===
+系統化管理 Context 的兩個概念
+M
+MCP
+拿到什麼資料
+Model Context Protocol 是一套開放標準協
+定——以統一介面的方式連接資料庫、SaaS
+  API、檔案系統，並且可跨 LLM 重複使用
+S
+Skill
+怎麼用這些資料
+Skill 是寫給 AI 看的操作手冊——將「觸發條
+件、執行步驟、工具呼叫、輸出格式」封裝成
+可複用模板，由AI 依情境動態載入
+
+=== Page 24 ===
+M E C H A N I S M  ·  0 1  ·  M C P
+什麼是 MCP？
+“MCP 是一套開放標準，讓AI 以統一語言與外
+部資料源、工具與服務溝通”
+“MCP is an open standard that creates a universal language 
+for AI to communicate with external data sources, tools, and 
+services.”
+— aws.amazon.com/blogs/machine-learning
+不用重複為每個資料源客製化寫Connector
+一次寫好 MCP server，所有 LLM 都能用
+M C P  —  U N I V E R S A L  A D A P T E R  F O R  A I
+LLM
+C L I E N T
+MCP
+Open Standard
+Resources
+Tools
+Prompts
+P R O T O C O L
+Database
+SaaS API
+Filesystem
+Internal Tools
+S E R V E R S
+
+=== Page 25 ===
+M E C H A N I S M  ·  0 2  ·  S K I L L
+什麼是 Skill？
+“Agent Skills 是一種輕量、開放的格式，以專業知
+識與工作流程擴展AI Agent 的能力”
+“Agent Skills are a lightweight, open format for extending AI agent 
+capabilities with specialized knowledge and workflows.”
+— agentskills.io
+把「如何完成一項任務」封裝為可動態載入的程序性知識
+模組，讓GenAI 能依情境隨需呼叫
+s k i l l s / c h e c k _ c a l e n d a r / S K I L L . m d
+---
+name: check_calendar
+when: 使用者問行程相關問題
+---
+# Steps
+1. 取得使用者時區
+2. 呼叫 calendar.list(today)
+3. 回傳：時間 + 標題 + 地點
+
+=== Page 26 ===
+M C P  V S  S K I L L
+不是二選一——兩者互補
+M C P
+S K I L L
+核心職責
+拿到什麼資料
+怎麼用這些資料完成任務
+技術定義
+連接外部服務的 標準協定
+封裝任務流程的 知識手冊
+適用情境
+需要外部資料 / 工具
+需要重複執行特定流程
+載入時機
+啟動CLI 時連線常駐可用
+依情境動態載入
+
+=== Page 27 ===
+I F  W E  W A N T  M O R E  A U T O M A T I O N . . .
+把 Context、MCP、Skill ——
+全部裝進一個 Agent。
+讓它自主規劃、執行、完成複雜任務。
+
+=== Page 28 ===
+D E F I N I T I O N
+什麼是 Agent？
+“Agent 是一種軟體程式，能與環境互動、蒐集資
+料，並運用這些資料自主執行任務，以達成預定
+目標。“
+“An agent is a software program that can interact with its 
+environment, collect data, and use that data to perform self-
+directed tasks that meet predetermined goals.”
+— aws.amazon.com/what-is/ai-agents
+A G E N T  L O O P
+
+=== Page 29 ===
+單一Agent 無法包辦所有任務
+✓
+範圍清楚、單一專業
+S I N G L E  A G E N T  W O R K S  W H E N …
+當任務是單一資料源的查詢、或輸入輸出格式
+明確的處理，一個 agent 就能穩定交付，不需
+要協作。
+✕
+跨專業、長流程任務
+S I N G L E  A G E N T  B R E A K S  W H E N …
+要同時寫程式、測試、部署，或需要多種協作
+任務時，單一 agent 的 context 會滿、產出會
+發散、品質難以收斂。
+
+=== Page 30 ===
+M U L T I - A G E N T  C O L L A B O R A T I O N
+什麼是 Multi-Agent？
+“Multi-Agent 是一種協作模式——多個自主
+Agent 各具不同的角色、專長或目標，透過分
+工解決複雜任務”
+“A pattern in which multiple autonomous agents, each with 
+a distinct role, specialization, or objective, negotiate to 
+solve complex tasks.”
+— aws.amazon.com/prescriptive-guidance
+把一個大任務拆成小任務，並交由多個專
+業 Agent 分工協作。
+M U L T I - A G E N T  C O L L A B O R A T I O N
+Orchestrator
+routes & coordinates
+Researcher
+gather facts
++ retrieval
+Builder
+draft solution
++ tools
+Reviewer
+verify & critique
++ tests
+Shared Context · Memory · Outputs
+each agent reads the slice it needs
+
+=== Page 31 ===
+T H E  C E I L I N G
+Context Engineering 的天花板
+Agent 動起來了。但你會發現——
+同樣 context，時好時壞
+手動執行成功，自動化卻不穩定
+出錯時，不知道哪一步壞了
+R O O T  C A U S E
+我們只關注了「給 AI 什麼」——
+卻沒有設計「如何控制 AI」。
+S A M E  I N P U T ,  T H R E E  R U N S   ·   W H Y  C O N T E X T  A L O N E  I S N ' T  E N O U G H
+R U N  1
+✓ S U C C E S S
+✓  plan
+✓  retrieve docs
+✓  call tool
+✓  final answer
+R U N  2
+△ P A R T I A L
+✓  plan
+✓  retrieve docs
+△  tool timeout
+△  answer incomplete
+R U N  3
+✗ F A I L
+✓  plan
+✗  wrong doc retrieved
+✗  hallucinated answer
+?  no trace, can't debug
+同樣的 input、同樣的 context——結果卻每次不同。這是 context engineering 無法解決的問題。
+
+=== Page 32 ===
+W H A T ' S  N E X T
+從「給對的資訊」，
+到「建好控制系統」。
+C O M I N G  U P  I N  
+C H A P T E R  3
+Harness Engineering →
+
+=== Page 33 ===
+C H A P T E R  ·   0 3
+Harness Engineering
+當AI 開始「自己動」——你需要韁繩、儀表板、與流程，才能控制
+AI 的方向
+
+=== Page 34 ===
+D E F I N I T I O N  ·  1  O F  2
+什麼是 Harness Engineering？
+“Harness 如今已成為業界通稱，泛指AI Agent 中除
+模型以外的所有組件——一句話概括：
+Agent = Model + Harness”
+“The term harness has emerged as a shorthand to mean 
+everything in an AI agent except the model itself - Agent = Model + 
+Harness.”
+— martinfowler.com/articles/harness-engineering.html
+Prompt 教 AI 怎麼說。Context 給 AI 看什麼
+Harness 決定 AI 能做什麼、做錯了怎麼辦
+https://www.langchain.com/blog/the-anatomy-of-an-agent-harness
+
+=== Page 35 ===
+D E F I N I T I O N  ·  2  O F  2
+為什麼叫 “Harness”？
+Harness (馬具)，用來駕馭強大、但無法完全預
+測的動物
+如同LLM 能力強大，但需要一套控制系統才能
+穩定駕馭方向
+LLM 本質上具備不確定性，因此在Production
+環境時，我們需要圍繞它來建立控制系統
+
+=== Page 36 ===
+T H E  T H R E E  L A Y E R S
+完整的 AI Engineering 心智模型
+由
+下
+而
+上
+構
+築
+LAYER 3
+Harness
+建構控制系統，讓 AI 能上線運行
+Orchestration
+Eval
+Observability
+Recovery
+LAYER 2
+Context
+動態組裝資訊，讓 AI 擁有正確知識
+RAG
+MCP
+Skills
+Agents
+Multi-agent
+LAYER 1
+Prompt
+設計明確的指令，讓 AI 聽得懂
+Structured I/O
+Logic
+Process
+
+=== Page 37 ===
+Harness 的六大核心
+對應 Anthropic 的 Planner · Generator · Evaluator 三階段 loop。
+持
+續
+迭
+代
+Planner
+規劃流程
+Prompt & Context
+上下文工程
+Tools System
+工具系統
+Generator
+執行產出
+Orchestration
+執行編排
+State & Memory
+狀態與記憶
+Evaluator
+檢驗結果
+Observability
+可觀測性
+Verify & Recover
+驗證與恢復
+
+=== Page 38 ===
+P I L L A R  0 1   ·   P R O M P T  &  C O N T E X T
+上下文工程——給 AI 看對的資訊
+Harness 的第一層核心——AI 看到什麼，決
+定它能做什麼。
+System Prompt：定義角色、邊界、I/O
+Knowledge Bases：給予正確的文件與資料
+Conversation History：對話歷史資料
+提供LLM 正確的資訊，並讓它在可控的邊
+界內思考
+C O N T E X T  A S S E M B L Y
+System prompt
+Knowledge Bases
+Conversation 
+history
+Context
+Window
+LLM
+
+=== Page 39 ===
+P I L L A R  0 2  ·  T O O L S  S Y S T E M
+工具系統——讓 AI 能存取外部的能力
+Harness 的第二層核心——賦予AI 與外部
+資訊互動、調用的能力
+Tools：包含調用API、Web search 等等能力
+MCPs：存取內外部資料源
+Skills：動態載入正確知識
+提供LLM 執行所需的工具，讓它擁有足夠
+的知識與能力
+A G E N T
+G A T E W A Y
+R O U T I N G
+Agent
+MCP Client
+Agent
+Gateway
+Tool 1
+Tool 2
+/mcp
+Tool 3
+APIs, tools, 
+resources
+List tools,
+Invoke tool,
+Search
+
+=== Page 40 ===
+P I L L A R  0 3   ·   O R C H E S T R A T I O N
+執行編排——規劃AI 每一步該做什麼
+Harness 的第三層核心——編排AI 的任務
+串接流程，決定工作的先後順序與分支
+Flow control：任務流程順序與分支條件
+Retry：錯誤重試與中斷條件
+Human-in-the-loop：高風險動作需要人類核准
+編排Agent 的執行流程，讓它擁有穩定可
+控的行為路徑
+O R C H E S T R A T I O N
+E X A M P L E  F L O W
+Request
+LLM
+retry 3×
+Circuit breaker
+trip after 5 fails
+Human review
+
+=== Page 41 ===
+P I L L A R  0 4   ·   M E M O R Y
+&
+S T A T U S
+狀態與記憶——讓AI 記得發生過什麼
+Harness 的第四層核心——賦予AI 能延續
+過往對話與任務，並回復進度的能力
+Short-term memory：紀錄目前任務的資訊與狀態
+Long-term memory ：紀錄跨任務的資訊與狀態
+Execution Status：紀錄任務執行的進度與資料
+紀錄Agent 任務狀態與記憶，讓它擁有延
+續脈絡與累積經驗的能力
+M E M O R Y
+F L O W
+
+=== Page 42 ===
+P I L L A R  0 5   ·   O B S E R V A B I L I T Y
+可觀測性——讓AI 任務可追蹤除錯與監控
+Harness 的第五層核心——賦予AI 在任務
+執行被追蹤、診斷、修正的能力
+Sessions：任務的完整上下文脈絡
+Traces：單次request-response 的執行路徑
+Spans：每一個operation 的起迄與狀態
+記錄Agent 每一步的行為與狀態，讓它擁
+有可被追蹤、診斷、除錯的透明度
+O B S E R B I L I T Y
+F L O W
+Metrics：紀錄任務執行的監控指標
+Logs：紀錄任務執行的日誌
+
+=== Page 43 ===
+P I L L A R  6   ·   V E R I F Y
+&
+R E C O V E R
+驗證與恢復——確保AI 產出可信任、失敗可恢復
+Harness 的第六層核心——賦予AI 上線前
+被評測、出錯後被恢復的能力
+Verification：以單元、整合測試驗證內容的正確性
+Evaluation：以LLM-as-a-Judge 評分agent 的品質
+Recovery：自動重試、回滾與跳脫的機制
+確保LLM 的正確性、品質與韌性，保障生
+產環境的品質
+E V A L U A T I O N
+F L O W
+
+=== Page 44 ===
+T H E  R O A D M A P
+Harness — AI Engineering Roadmap
+THE JOURNEY · 三段旅程
+01 Prompt Engineering
+學會「怎麼問」
+↓
+02 Context Engineering
+對的資訊，對的時間點
+↓
+03 Harness Engineering
+建立控制系統
+HARNESS
+Prompt & Context
+上下文工程
+Tools System
+工具系統
+Orchestration
+執行編排
+State & Memory
+狀態與記憶
+Observability
+可觀測性
+Verify & Recover
+驗證與恢復
+BUILD & RUN · 實作路徑
+開發 Harness Agent
+↓
+安全、可擴展地部署與運行
+Planner →Generator →Evaluator
+
+=== Page 45 ===
+Prompt決定AI怎麼說
+Context決定AI看到什麼
+Harness決定AI能做什麼、做錯了怎麼辦
+
+=== Page 46 ===
+Thank you!
+https://pulse.amazon/survey/AKJWGPNM

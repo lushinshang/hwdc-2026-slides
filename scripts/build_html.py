@@ -5,7 +5,7 @@ import os
 META_FILE = "data/slides_meta.json"
 OUTPUT_HTML = "index.html"
 
-def generate_awwwards_html_v3():
+def generate_awwwards_html_v4():
     with open(META_FILE, "r", encoding="utf-8") as f:
         meta = json.load(f)
 
@@ -40,10 +40,16 @@ def generate_awwwards_html_v3():
         cover_url = s.get("cover_url") or "https://hwdc.ithome.com.tw/2026/img/slides.jpg"
         orig_url = s.get("orig_slide_url", "")
         is_pdf = s.get("is_pdf", False)
-        local_path = s.get("local_path", "")
         filesize_str = s.get("filesize_str", "")
 
-        # 主題標籤生成
+        # 內容精華摘要
+        summary = html.escape(s.get("summary", ""))
+        pain_point = html.escape(s.get("pain_point", ""))
+        solution = html.escape(s.get("solution", ""))
+        takeaways = s.get("takeaways", [])
+        takeaways_li = "".join([f"<li>{html.escape(t)}</li>" for t in takeaways])
+
+        # 主題標籤
         topic_tags = []
         t_lower = title_raw.lower()
         if any(k in t_lower for k in ["agent", "agentic", "skill", "mcp"]):
@@ -76,35 +82,15 @@ def generate_awwwards_html_v3():
             """)
         speakers_markup = "".join(speaker_chips)
 
-        # 按鈕配置：直連原網址為第一優先
+        # 格式徽章與主下載按鈕
         if is_pdf:
             format_badge = f'<span class="badge badge-pdf"><span class="badge-dot"></span>PDF · {filesize_str}</span>'
-            btn_primary = f'''
-                <a href="{html.escape(orig_url)}" target="_blank" rel="noopener noreferrer" class="card-btn btn-primary" title="連至 iThome 大會官方伺服器下載原始檔案">
-                    <svg class="btn-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
-                    <span>官方原網址下載</span>
-                </a>
-            '''
-            btn_secondary = f'''
-                <button type="button" class="card-btn btn-secondary" onclick="openPreview('{html.escape(local_path)}', '{title}', '{html.escape(orig_url)}')" title="在頁面內開窗預覽或備用下載">
-                    <svg class="btn-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/></svg>
-                    <span>即時預覽 / 備份</span>
-                </button>
-            '''
+            btn_text = "官方原網址下載 PDF"
+            btn_icon = '''<svg class="btn-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>'''
         else:
-            format_badge = '<span class="badge badge-ext"><span class="badge-dot"></span>線上投影片/專題</span>'
-            btn_primary = f'''
-                <a href="{html.escape(orig_url)}" target="_blank" rel="noopener noreferrer" class="card-btn btn-external" title="直連講者公開原網址教材">
-                    <svg class="btn-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>
-                    <span>原作者線上簡報</span>
-                </a>
-            '''
-            btn_secondary = f'''
-                <a href="{html.escape(orig_url)}" target="_blank" rel="noopener noreferrer" class="card-btn btn-secondary" title="新分頁開啟原始教材">
-                    <svg class="btn-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
-                    <span>開啟原專文</span>
-                </a>
-            '''
+            format_badge = '<span class="badge badge-ext"><span class="badge-dot"></span>講者線上專題</span>'
+            btn_text = "開啟講者原網址專文"
+            btn_icon = '''<svg class="btn-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>'''
 
         card = f"""
         <article class="slide-card {'day1' if is_day1 else 'day2'} {'type-pdf' if is_pdf else 'type-ext'}" 
@@ -136,25 +122,43 @@ def generate_awwwards_html_v3():
                 <div class="speakers-container">
                     {speakers_markup}
                 </div>
+
+                <!-- 內容精華說明區塊 -->
+                <div class="digest-box">
+                    <div class="digest-summary">
+                        <span class="digest-icon">📌</span>
+                        <p class="digest-text">{summary}</p>
+                    </div>
+
+                    <div class="digest-details">
+                        <div class="digest-section">
+                            <span class="digest-label label-pain">🎯 核心痛點</span>
+                            <p class="digest-desc">{pain_point}</p>
+                        </div>
+                        <div class="digest-section">
+                            <span class="digest-label label-sol">🛠️ 關鍵解法</span>
+                            <p class="digest-desc">{solution}</p>
+                        </div>
+                        <div class="digest-section">
+                            <span class="digest-label label-takeaway">💡 關鍵帶走</span>
+                            <ul class="digest-list">
+                                {takeaways_li}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
                 
+                <!-- 底部按鈕區：單一官方下載主按鈕 + 複製分享 -->
                 <div class="card-footer">
-                    <div class="url-notice">
-                        <span class="notice-dot"></span>
-                        <span>原網址：直連大會官方原始檔案點</span>
-                    </div>
                     <div class="actions-grid">
-                        {btn_primary}
-                        {btn_secondary}
-                    </div>
-                    <div class="sub-actions">
-                        <button type="button" class="sub-btn" onclick="copyInfo('{title}', '{speaker_display}', '{orig_url}')" title="複製分享文字">
-                            <svg class="sub-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"/><path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z"/></svg>
+                        <a href="{html.escape(orig_url)}" target="_blank" rel="noopener noreferrer" class="card-btn btn-primary" title="直連大會官方原始檔案來源">
+                            {btn_icon}
+                            <span>{btn_text}</span>
+                        </a>
+                        <button type="button" class="card-btn btn-share" onclick="copyInfo('{title}', '{speaker_display}', '{orig_url}')" title="複製標題、講者與官方原網址">
+                            <svg class="btn-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"/><path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z"/></svg>
                             <span>複製分享</span>
                         </button>
-                        <a href="{html.escape(orig_url)}" target="_blank" rel="noopener noreferrer" class="sub-btn origin-link" title="開啟大會原始下載點">
-                            <svg class="sub-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clip-rule="evenodd"/></svg>
-                            <span>官方原始網址</span>
-                        </a>
                     </div>
                 </div>
             </div>
@@ -169,13 +173,13 @@ def generate_awwwards_html_v3():
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>HWDC 2026 簡報檔案庫與知識索引 | 官方原網址下載</title>
-    <meta name="description" content="完整收錄 55 場 Hello World Dev Conference 2026 投影片，全數提供官方原網址直連下載，支援本地即時預覽與多維度檢索。">
+    <title>HWDC 2026 演講簡報精華庫 | 官方原網址直連下載</title>
+    <meta name="description" content="收錄 55 場 Hello World Dev Conference 2026 簡報內容深度精華（核心痛點、架構解法與帶走清單），直連官方原網址下載。">
     <meta name="theme-color" content="#080c14">
     
     <!-- Open Graph Metadata -->
-    <meta property="og:title" content="HWDC 2026 簡報檔案庫與知識索引 | 官方原網址下載">
-    <meta property="og:description" content="全會期 55 場前瞻架構、AI Coding、Agentic 治理演講投影片，提供直連大會官方原網址下載與線上預覽。">
+    <meta property="og:title" content="HWDC 2026 演講簡報精華庫 | 官方原網址直連下載">
+    <meta property="og:description" content="全會期 55 場前瞻架構、AI Coding、Agentic 治理演講投影片深度精華，提供直連大會官方原網址下載。">
     <meta property="og:type" content="website">
 
     <!-- Fonts: Inter + JetBrains Mono -->
@@ -187,8 +191,9 @@ def generate_awwwards_html_v3():
         :root {{
             --bg-base: #080c14;
             --bg-surface: #0e1422;
-            --bg-card: rgba(18, 26, 43, 0.72);
-            --bg-card-hover: rgba(24, 35, 58, 0.92);
+            --bg-card: rgba(18, 26, 43, 0.75);
+            --bg-card-hover: rgba(24, 35, 58, 0.95);
+            --bg-digest: rgba(10, 16, 28, 0.6);
             --border-subtle: rgba(255, 255, 255, 0.08);
             --border-hover: rgba(99, 102, 241, 0.45);
             --border-active: #6366f1;
@@ -217,8 +222,9 @@ def generate_awwwards_html_v3():
         [data-theme="light"] {{
             --bg-base: #f8fafc;
             --bg-surface: #ffffff;
-            --bg-card: rgba(255, 255, 255, 0.9);
+            --bg-card: rgba(255, 255, 255, 0.95);
             --bg-card-hover: #ffffff;
+            --bg-digest: #f1f5f9;
             --border-subtle: #e2e8f0;
             --border-hover: #6366f1;
             --border-active: #4f46e5;
@@ -236,7 +242,6 @@ def generate_awwwards_html_v3():
             -webkit-tap-highlight-color: transparent;
         }}
 
-        /* 捲動進度指示條 */
         #scrollProgress {{
             position: fixed;
             top: 0;
@@ -352,7 +357,6 @@ def generate_awwwards_html_v3():
             line-height: 1.7;
         }}
 
-        /* 核心提醒公告：說明原網址為真實原始網址 */
         .origin-banner {{
             max-width: 820px;
             margin: 0 auto 30px;
@@ -611,7 +615,7 @@ def generate_awwwards_html_v3():
 
         .grid-layout {{
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
             gap: 24px;
         }}
 
@@ -629,13 +633,11 @@ def generate_awwwards_html_v3():
             transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
                         border-color 0.25s, 
                         box-shadow 0.25s;
-            transform-style: preserve-3d;
-            perspective: 1000px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }}
 
         .slide-card:hover {{
-            transform: translateY(-5px);
+            transform: translateY(-4px);
             border-color: var(--border-hover);
             box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.4), 0 0 24px -5px rgba(99, 102, 241, 0.25);
         }}
@@ -657,7 +659,7 @@ def generate_awwwards_html_v3():
         }}
 
         .slide-card:hover .card-cover-img {{
-            transform: scale(1.05);
+            transform: scale(1.04);
         }}
 
         .cover-overlay {{
@@ -803,12 +805,7 @@ def generate_awwwards_html_v3():
             font-weight: 700;
             line-height: 1.45;
             color: var(--text-heading);
-            margin-bottom: 14px;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            min-height: 3.3em;
+            margin-bottom: 12px;
             letter-spacing: -0.015em;
         }}
 
@@ -816,8 +813,7 @@ def generate_awwwards_html_v3():
             display: flex;
             flex-direction: column;
             gap: 10px;
-            margin-bottom: 20px;
-            flex-grow: 1;
+            margin-bottom: 16px;
         }}
 
         .speaker-chip {{
@@ -882,40 +878,107 @@ def generate_awwwards_html_v3():
             text-overflow: ellipsis;
         }}
 
-        .card-footer {{
+        /* =================== 內容精華說明區塊 =================== */
+        .digest-box {{
+            background: var(--bg-digest);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: 14px;
+            margin-bottom: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }}
+
+        .digest-summary {{
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed var(--border-subtle);
+        }}
+
+        .digest-icon {{
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            line-height: 1.4;
+        }}
+
+        .digest-text {{
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text-heading);
+            line-height: 1.5;
+        }}
+
+        .digest-details {{
             display: flex;
             flex-direction: column;
             gap: 10px;
+        }}
+
+        .digest-section {{
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }}
+
+        .digest-label {{
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            display: inline-flex;
+            align-items: center;
+            width: fit-content;
+            padding: 1px 6px;
+            border-radius: 4px;
+        }}
+
+        .label-pain {{ color: #f87171; background: rgba(239, 68, 68, 0.12); }}
+        .label-sol {{ color: #38bdf8; background: rgba(56, 189, 248, 0.12); }}
+        .label-takeaway {{ color: #34d399; background: rgba(16, 185, 129, 0.12); }}
+
+        .digest-desc {{
+            font-size: 0.82rem;
+            color: var(--text-body);
+            line-height: 1.55;
+        }}
+
+        .digest-list {{
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            margin-top: 2px;
+        }}
+
+        .digest-list li {{
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            position: relative;
+            padding-left: 14px;
+        }}
+
+        .digest-list li::before {{
+            content: "•";
+            position: absolute;
+            left: 2px;
+            color: #34d399;
+            font-weight: bold;
+        }}
+
+        /* 卡片底部按鈕區 */
+        .card-footer {{
+            margin-top: auto;
             padding-top: 14px;
             border-top: 1px solid var(--border-subtle);
-            margin-top: auto;
-        }}
-
-        .url-notice {{
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 0.72rem;
-            color: #38bdf8;
-            font-weight: 600;
-            margin-bottom: 2px;
-        }}
-
-        .notice-dot {{
-            width: 5px;
-            height: 5px;
-            background: #38bdf8;
-            border-radius: 50%;
-            box-shadow: 0 0 6px #38bdf8;
-        }}
-
-        [data-theme="light"] .url-notice {{
-            color: #0284c7;
         }}
 
         .actions-grid {{
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 2fr 1fr;
             gap: 8px;
         }}
 
@@ -924,9 +987,9 @@ def generate_awwwards_html_v3():
             align-items: center;
             justify-content: center;
             gap: 6px;
-            padding: 10px 12px;
+            padding: 11px 14px;
             border-radius: var(--radius-md);
-            font-size: 0.82rem;
+            font-size: 0.85rem;
             font-weight: 600;
             text-decoration: none;
             cursor: pointer;
@@ -941,7 +1004,7 @@ def generate_awwwards_html_v3():
             flex-shrink: 0;
         }}
 
-        /* 官方原網址下載按鈕（醒目主色） */
+        /* 唯一主按鈕：直連官方原網址下載 */
         .btn-primary {{
             background: linear-gradient(135deg, #4338ca 0%, #6366f1 100%);
             color: #ffffff;
@@ -954,198 +1017,25 @@ def generate_awwwards_html_v3():
             transform: translateY(-1px);
         }}
 
-        .btn-secondary {{
+        .btn-share {{
             background: rgba(255, 255, 255, 0.05);
             color: var(--text-body);
             border-color: var(--border-subtle);
         }}
 
-        [data-theme="light"] .btn-secondary {{
+        [data-theme="light"] .btn-share {{
             background: #f1f5f9;
         }}
 
-        .btn-secondary:hover {{
+        .btn-share:hover {{
             background: rgba(255, 255, 255, 0.1);
             color: var(--text-heading);
             border-color: rgba(255, 255, 255, 0.2);
             transform: translateY(-1px);
         }}
 
-        [data-theme="light"] .btn-secondary:hover {{
+        [data-theme="light"] .btn-share:hover {{
             background: #e2e8f0;
-        }}
-
-        .btn-external {{
-            background: linear-gradient(135deg, #059669 0%, #10b981 100%);
-            color: #ffffff;
-            box-shadow: 0 2px 10px rgba(16, 185, 129, 0.3);
-        }}
-
-        .btn-external:hover {{
-            background: #047857;
-            box-shadow: 0 4px 16px rgba(16, 185, 129, 0.5);
-            transform: translateY(-1px);
-        }}
-
-        .sub-actions {{
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }}
-
-        .sub-btn {{
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            font-size: 0.75rem;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            padding: 4px 6px;
-            border-radius: 4px;
-            text-decoration: none;
-            transition: color 0.2s;
-        }}
-
-        .sub-btn:hover {{
-            color: var(--text-heading);
-        }}
-
-        .origin-link {{
-            color: #818cf8;
-            font-weight: 500;
-        }}
-
-        .origin-link:hover {{
-            color: #c7d2fe;
-            text-decoration: underline;
-        }}
-
-        .sub-icon {{
-            width: 14px;
-            height: 14px;
-        }}
-
-        /* =================== MODAL PREVIEW =================== */
-        .modal-backdrop {{
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(12px);
-            z-index: 999;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 24px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }}
-
-        .modal-backdrop.active {{
-            display: flex;
-            opacity: 1;
-        }}
-
-        .modal-container {{
-            background: var(--bg-surface);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-xl);
-            width: 100%;
-            max-width: 1000px;
-            height: 90vh;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
-        }}
-
-        .modal-header {{
-            padding: 16px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid var(--border-subtle);
-            background: var(--bg-surface);
-            gap: 12px;
-        }}
-
-        .modal-title-wrap {{
-            display: flex;
-            flex-direction: column;
-            min-width: 0;
-        }}
-
-        .modal-title {{
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--text-heading);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }}
-
-        .modal-subtitle {{
-            font-size: 0.75rem;
-            color: #38bdf8;
-            margin-top: 2px;
-        }}
-
-        .modal-header-actions {{
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-shrink: 0;
-        }}
-
-        .modal-orig-btn {{
-            background: var(--primary);
-            color: #ffffff;
-            padding: 6px 12px;
-            border-radius: var(--radius-sm);
-            font-size: 0.78rem;
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }}
-
-        .modal-orig-btn:hover {{
-            background: #4338ca;
-        }}
-
-        .modal-close-btn {{
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid var(--border-subtle);
-            color: var(--text-muted);
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-            transition: all 0.2s;
-        }}
-
-        .modal-close-btn:hover {{
-            background: rgba(255, 255, 255, 0.15);
-            color: var(--text-heading);
-        }}
-
-        .modal-body {{
-            flex-grow: 1;
-            width: 100%;
-            height: 100%;
-            background: #090e17;
-        }}
-
-        .modal-iframe {{
-            width: 100%;
-            height: 100%;
-            border: none;
         }}
 
         /* =================== TOAST NOTIFICATION =================== */
@@ -1310,10 +1200,6 @@ def generate_awwwards_html_v3():
             .actions-grid {{
                 grid-template-columns: 1fr;
             }}
-            .modal-container {{
-                height: 95vh;
-                border-radius: var(--radius-lg);
-            }}
             .back-to-top {{
                 bottom: 20px;
                 left: 20px;
@@ -1330,30 +1216,30 @@ def generate_awwwards_html_v3():
     <div class="hero-inner">
         <div class="brand-pill">
             <span class="brand-dot"></span>
-            <span>HWDC 2026 ARCHIVE · OFFICIAL ORIGIN LINKS</span>
+            <span>HWDC 2026 ARCHIVE · 55 SESSIONS EXECUTIVE SUMMARY</span>
         </div>
         <h1 class="hero-title">
             <span class="gradient-text">Hello World Dev Conference 2026</span><br>
-            大會簡報精選與官方原網址索引
+            演講簡報精華庫與官方原網址直連
         </h1>
         <p class="hero-desc">
-            全會期完整收錄 55 場前瞻架構、AI Coding、Agentic 治理與效能監測之演講教材。
-            所有下載連結直連 iThome 大會官方伺服器與講者原始教材，同時提供本地即時預覽與備援鏡像。
+            全會期完整收錄 55 場前瞻架構、AI Coding、Agentic 治理與效能監測之深度內容精華。
+            每場皆解析<strong>核心痛點、關鍵解法與實踐結論</strong>，直連 iThome 大會官方原網址下載。
         </p>
 
         <!-- 官方原始網址聲明橫幅 -->
         <div class="origin-banner">
             <span class="origin-banner-icon">📌</span>
             <div>
-                <strong>原網址保證：</strong>
-                本站所有卡片的主按鈕<strong>「官方原網址下載」</strong>均直連 iThome HWDC 2026 大會伺服器或原講者公開專題（非第三方修改檔）；本地儲存僅作為即時預覽與離線備援。
+                <strong>官方原網址直連保證：</strong>
+                本站所有卡片的主按鈕<strong>「官方原網址下載」</strong>均 100% 直連 iThome HWDC 2026 大會伺服器或講者原始教材，絕非第三方修改檔；精華說明供讀者在下載前快速掌握技術乾貨。
             </div>
         </div>
 
         <div class="stats-dashboard">
             <div class="stat-card">
                 <span class="stat-num">{total_count}</span>
-                <span class="stat-label">收錄議程總數</span>
+                <span class="stat-label">演講精華總數</span>
             </div>
             <div class="stat-card">
                 <span class="stat-num" style="color: #818cf8;">{len(pdf_sessions)}</span>
@@ -1361,11 +1247,11 @@ def generate_awwwards_html_v3():
             </div>
             <div class="stat-card">
                 <span class="stat-num" style="color: #38bdf8;">{total_size_mb:.1f} <small style="font-size: 0.9rem;">MB</small></span>
-                <span class="stat-label">備援鏡像總量</span>
+                <span class="stat-label">官方簡報總量</span>
             </div>
             <div class="stat-card">
                 <span class="stat-num" style="color: #34d399;">{len(ext_sessions)}</span>
-                <span class="stat-label">講者線上教材</span>
+                <span class="stat-label">講者線上專題</span>
             </div>
         </div>
     </div>
@@ -1379,7 +1265,7 @@ def generate_awwwards_html_v3():
                 <svg class="search-icon" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/>
                 </svg>
-                <input type="text" id="searchInput" class="search-input" placeholder="即時篩選題目、講者姓名、任職單位、關鍵字 (按 / 鍵聚焦)..." autocomplete="off">
+                <input type="text" id="searchInput" class="search-input" placeholder="即時篩選題目、講者姓名、任職單位、精華關鍵字 (按 / 鍵聚焦)..." autocomplete="off">
                 <span class="shortcut-badge">/</span>
             </div>
             
@@ -1427,28 +1313,6 @@ def generate_awwwards_html_v3():
     ↑
 </button>
 
-<!-- PDF PREVIEW MODAL -->
-<div class="modal-backdrop" id="previewModal" onclick="closePreviewOnBackdrop(event)">
-    <div class="modal-container">
-        <div class="modal-header">
-            <div class="modal-title-wrap">
-                <span class="modal-title" id="modalTitle">簡報預覽</span>
-                <span class="modal-subtitle">備援鏡像預覽模式 · 如需原始權威檔案請點右方官方下載</span>
-            </div>
-            <div class="modal-header-actions">
-                <a id="modalOrigBtn" href="" target="_blank" rel="noopener noreferrer" class="modal-orig-btn">
-                    <span>官方原網址下載</span>
-                    ↗
-                </a>
-                <button type="button" class="modal-close-btn" onclick="closePreview()" title="關閉預覽 (ESC)">✕</button>
-            </div>
-        </div>
-        <div class="modal-body">
-            <iframe id="modalIframe" class="modal-iframe" src=""></iframe>
-        </div>
-    </div>
-</div>
-
 <!-- TOAST MESSAGE -->
 <div class="toast" id="toastMsg">
     <span class="toast-icon">✓</span>
@@ -1463,7 +1327,7 @@ def generate_awwwards_html_v3():
         <a href="https://hwdc.ithome.com.tw/2026/speaker" target="_blank" rel="noopener noreferrer" class="footer-link">官方講者名單</a>
     </div>
     <p>© 2026 iThome 電週文化事業股份有限公司 · 簡報與專案著作權全數歸講者與原著所有</p>
-    <p style="margin-top: 6px; color: var(--text-dim);">本站主下載點 100% 直連官方原網址；本地檔案僅作學術研習與即時瀏覽預覽備援之用。</p>
+    <p style="margin-top: 6px; color: var(--text-dim);">本站主按鈕 100% 直連官方原網址；精華整理供社群技術研討與快速索引之用。</p>
 </footer>
 
 <script>
@@ -1474,10 +1338,6 @@ def generate_awwwards_html_v3():
     const filterBtns = document.querySelectorAll('.pill-btn');
     const toast = document.getElementById('toastMsg');
     const toastText = document.getElementById('toastText');
-    const previewModal = document.getElementById('previewModal');
-    const modalIframe = document.getElementById('modalIframe');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalOrigBtn = document.getElementById('modalOrigBtn');
     const themeToggle = document.getElementById('themeToggle');
     const scrollProgress = document.getElementById('scrollProgress');
     const backToTop = document.getElementById('backToTop');
@@ -1570,9 +1430,7 @@ def generate_awwwards_html_v3():
             searchInput.focus();
             searchInput.select();
         }} else if (e.key === 'Escape') {{
-            if (previewModal.classList.contains('active')) {{
-                closePreview();
-            }} else if (searchInput.value) {{
+            if (searchInput.value) {{
                 searchInput.value = '';
                 runFilter();
             }}
@@ -1581,7 +1439,7 @@ def generate_awwwards_html_v3():
 
     // 複製分享功能
     function copyInfo(title, speaker, url) {{
-        const text = `【HWDC 2026 精選簡報】\\n題目：${{title}}\\n講者：${{speaker}}\\n官方原網址：${{url}}`;
+        const text = `【HWDC 2026 演講簡報精華】\\n題目：${{title}}\\n講者：${{speaker}}\\n官方原網址：${{url}}`;
         navigator.clipboard.writeText(text).then(() => {{
             showToast('已複製議程與官方原網址！');
         }}).catch(() => {{
@@ -1596,45 +1454,6 @@ def generate_awwwards_html_v3():
             toast.classList.remove('show');
         }}, 2500);
     }}
-
-    // PDF 預覽彈窗
-    function openPreview(pdfPath, title, origUrl) {{
-        modalTitle.innerText = `📄 備用預覽：${{title}}`;
-        modalOrigBtn.href = origUrl;
-        modalIframe.src = pdfPath;
-        previewModal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }}
-
-    function closePreview() {{
-        previewModal.classList.remove('active');
-        modalIframe.src = '';
-        document.body.style.overflow = '';
-    }}
-
-    function closePreviewOnBackdrop(e) {{
-        if (e.target === previewModal) {{
-            closePreview();
-        }}
-    }}
-
-    // 3D 視差傾斜微互動 (Hover 3D Tilt)
-    cards.forEach(card => {{
-        card.addEventListener('mousemove', (e) => {{
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            const rotateX = ((y - centerY) / centerY) * -5;
-            const rotateY = ((x - centerX) / centerX) * 5;
-            card.style.transform = `perspective(1000px) rotateX(${{rotateX.toFixed(2)}}deg) rotateY(${{rotateY.toFixed(2)}}deg) translateY(-4px)`;
-        }});
-
-        card.addEventListener('mouseleave', () => {{
-            card.style.transform = '';
-        }});
-    }});
 </script>
 
 </body>
@@ -1644,7 +1463,7 @@ def generate_awwwards_html_v3():
     with open(OUTPUT_HTML, "w", encoding="utf-8") as f:
         f.write(full_html)
 
-    print(f"Successfully generated V3 Awwwards-grade {OUTPUT_HTML} (Total {total_count} sessions, primary button = official origin download)")
+    print(f"Successfully generated V4 Awwwards-grade {OUTPUT_HTML} (Total {total_count} sessions with full executive digests)")
 
 if __name__ == "__main__":
-    generate_awwwards_html_v3()
+    generate_awwwards_html_v4()

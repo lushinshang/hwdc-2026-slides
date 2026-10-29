@@ -1,0 +1,5 @@
+Title: 讓 AI 讀懂你的系統 with knowledge graph
+Speaker: Neo Hsu
+Company: TXOne Networks Staff Software Engineer
+URL: https://ccms.ithome.com.tw/api/slideapi/2637/click?l=https%3A%2F%2Fshare.neohsu.dev%2Fgraphify-workshop
+(External interactive slide or technical article)

@@ -1,0 +1,731 @@
+Title: 透過 ACP 解放 Terminal：打造 Coding Agent 的協作模式
+Speaker: Neo Hsu
+Company: TXOne Networks Staff Software Engineer
+
+=== Page 1 ===
+>_
+OpenAB：解放 Terminal 的工作模式 / 經驗敘事版
+>_
+OpenAB
+讓 Agentic Coding
+更接近解放 Terminal 的工作模式
+如何把 Coding Agent 從 Terminal 帶進真正隨時協作的工程流程
+Neo Hsu
+01   開場
+
+=== Page 2 ===
+>_
+OpenAB：解放 Terminal 的工作模式 / 經驗敘事版
+我要解放的，不只是輸入指令的地方
+不只是
+在手機上
+輸入 Terminal 指令
+而是
+隨時交代工作
+過程可見、工作可接續
+02   去年的接法
+1/7
+
+=== Page 3 ===
+>_
+OpenAB：解放 Terminal 的工作模式 / 經驗敘事版
+去年：自己寫 adapter，把聊天接到 CLI
+CHAT ENTRY
+聊天入口
+Telegram
+Discord
+MY ADAPTER
+我的 adapter
+我自己維護的接線
+CODING CLI
+Coding CLI
+Headless / -p
+›   可以丟任務、看結果，再繼續追問。
+03   去年的接法
+2/7
+
+=== Page 4 ===
+>_
+OpenAB：解放 Terminal 的工作模式 / 經驗敘事版
+聊天室是連續的，呼叫卻是一輪一輪
+CHAT ENTRY
+聊天入口
+Telegram
+Discord
+MY ADAPTER
+我的 adapter
+我自己維護的接線
+#1  第 1 輪呼叫
+#2  第 2 輪呼叫
+#3  第 3 輪呼叫
+!   這是我當時的 one-shot 接法，不是所有 headless 的限制。
+04   去年的接法
+3/7
+
+=== Page 5 ===
+>_
+OpenAB：解放 Terminal 的工作模式 / 經驗敘事版
+要接續工作，adapter 就得懂得越來越多
+CHAT ENTRY
+聊天入口
+Telegram
+Discord
+MY ADAPTER
+我的 adapter
+Session 對應
+Resume・訊息整理
+#1  第 1 輪呼叫
+#2  第 2 輪呼叫
+#3  第 3 輪呼叫
+›   接得通不難；接成同一項持續的工作，才是負擔。
+05   去年的接法
+4/7
+
+=== Page 6 ===
+>_
+OpenAB：解放 Terminal 的工作模式 / 經驗敘事版
+第一個難題：工作對話怎麼延續？
+01
+延續
+02
+互動
+03
+例外
+Session lifecycle
+怎麼建立、接續、結束？
+Context 邊界
+哪些交給 Agent 管理？
+›   先把工作對話與上下文的責任分清楚。
+06   去年的接法
+5/7
+
+=== Page 7 ===
+>_
+OpenAB：解放 Terminal 的工作模式 / 經驗敘事版
+第二個難題：執行中的互動怎麼表達？
+01
+延續
+02
+互動
+03
+例外
+Streaming
+過程如何即時回來？
+Tool / permission
+事件與決策怎麼表達？
+›   互動不該全部被壓成最後的一段 stdout。
+07   去年的接法
+6/7
+
+=== Page 8 ===
+>_
+OpenAB：解放 Terminal 的工作模式 / 經驗敘事版
+第三個難題：中斷、恢復、失敗怎麼接回來？
+01
+延續
+02
+互動
+03
+例外
+Cancel / resume
+停止之後，如何再接續？
+Error handling
+失敗應回到哪段工作？
+›   換一個 CLI，這些接法又可能要重新整理。
+08   去年的接法
+7/7
+
+=== Page 9 ===
+>_
+OpenAB：解放 Terminal 的工作模式 / 經驗敘事版
+我需要的，是共同的互動方式
+ENTRY
+入口
+減少個別接線
+CONTRACT
+共同互動契約
+延續
+互動
+例外
+AGENTS
+不同 Agent
+保留各家的實作
+›   共同介面，讓入口與後端能分開演進。
+09   從個別接法到共同協定
+1/6
+
+=== Page 10 ===
+>_
+OpenAB：解放 Terminal 的工作模式 / 經驗敘事版
+難的不是呼叫 API，而是整理行為差異
+01
+能力範圍
+有哪些可用能力？
+02
+事件與時機
+什麼時候能呼叫？
+03
+工具與權限
+怎麼執行？何時要求決策？
+›   呼叫可以很快接通，行為的一致性仍要整理。
+10   從個別接法到共同協定
+2/6
+
+=== Page 11 ===
+>_
+OpenAB：解放 Terminal 的工作模式 / 經驗敘事版
+不重做 Agent，工程化它工作的環境
+YOU DESIGN
+我來設計工作環境
+入口、執行環境與協作方式
+入口
+執行環境
+協作方式
+REUSE
+沿用既有 Agent
+各家的工具、能力
+與 context 管理
+›   不是 SDK 做不到，而是我的整合與維護取捨。
+11   從個別接法到共同協定
+3/6
+
+=== Page 12 ===
+>_
+OpenAB：解放 Terminal 的工作模式 / 經驗敘事版
+ACP：把持續互動納入協定
+CLIENT
+Client
+協作入口
+AGENT
+Agent runtime
+執行工作
+ACP
+Agent Client Protocol
+›   不是另一個 Agent，也不是單純多包一層 CLI。
+12   從個別接法到共同協定
+4/6
+
+=== Page 13 ===
+>_
+OpenAB：解放 Terminal 的工作模式 / 經驗敘事版
+同一個 session，可以有多輪工作互動
+CLIENT
+Client
+協作入口
+AGENT
+Agent runtime
+執行工作
+SESSION
+同一個 session
+Prompt 1
+更新
+Prompt 2
+更新
+Prompt 3
+更新
+›   初始化與能力協商後，再進入工作對話。
+13   從個別接法到共同協定
+5/6
+
+=== Page 14 ===
+>_
+OpenAB：解放 Terminal 的工作模式 / 經驗敘事版
+Context 留在 Agent runtime，入口管理工作對應
+CLIENT
+Client
+聊天討論串
+工作對應
+AGENT
+Agent runtime
+Context
+歷史・內部狀態
+SESSION
+同一個 session
+Prompt 1
+更新
+Prompt 2
+更新
+Prompt 3
+更新
+Context 不由接線層重做
+›   共同協定，不會自動搬移不同 Agent 的內部記憶。
+14   從個別接法到共同協定
+6/6
+
+=== Page 15 ===
+>_
+OpenAB 6431a1b / 靜態文件與原始碼核對；圖解不代表本次實機驗證
+今年四月 / 我的發現與嘗試
+OpenAB
+Open Agent Broker
+把共同協定，放進實際協作與執行環境。
+外部開源專案  github.com/openabdev/openab
+ENTRY
+BROKER
+AGENT
+15   OpenAB：協作入口與執行底座
+1/10
+
+=== Page 16 ===
+>_
+OpenAB 6431a1b / 靜態文件與原始碼核對；圖解不代表本次實機驗證
+OpenAB 不只接聊天，也管理工作如何運行
+ENTRY
+協作入口
+團隊工作的地方
+BROKER
+OpenAB
+入口・連線・回報
+AGENT RUNTIME
+Coding Agent
+各家已有的能力
+訊息
+ACP
+›   Open Agent Broker：入口、連線與 Agent 之間的橋接層。
+16   OpenAB：協作入口與執行底座
+2/10
+
+=== Page 17 ===
+>_
+OpenAB 6431a1b / 靜態文件與原始碼核對；圖解不代表本次實機驗證
+入口可以是 Discord、Slack 或 Custom Gateway
+ENTRY
+協作入口
+Discord／Slack
+Custom Gateway
+BROKER
+OpenAB
+入口・連線・回報
+AGENT RUNTIME
+Coding Agent
+各家已有的能力
+訊息
+ACP
+›   進入既有協作環境；各平台能力仍可能不同。
+17   OpenAB：協作入口與執行底座
+3/10
+
+=== Page 18 ===
+>_
+OpenAB 6431a1b / 靜態文件與原始碼核對；圖解不代表本次實機驗證
+後端保留各家的 Coding Agent
+ENTRY
+協作入口
+Discord／Slack
+Custom Gateway
+BROKER
+OpenAB
+入口・連線・回報
+AGENT RUNTIME
+Coding Agent
+Claude Code / Codex
+需相容的 ACP 接法
+訊息
+ACP
+›   版本、登入、工作目錄與 ACP 接法仍要配置。
+18   OpenAB：協作入口與執行底座
+4/10
+
+=== Page 19 ===
+>_
+OpenAB 6431a1b / 靜態文件與原始碼核對；圖解不代表本次實機驗證
+Thread 對上 session，pool 管理工作連線
+ENTRY
+協作入口
+Thread A
+工作討論串
+BROKER
+OpenAB
+Thread → session
+Session pool
+AGENT RUNTIME
+Coding Agent
+Session A
+Agent process
+訊息
+ACP
+›   建立、重用、回收工作連線；不等於隔離檔案。
+19   OpenAB：協作入口與執行底座
+5/10
+
+=== Page 20 ===
+>_
+OpenAB 6431a1b / 靜態文件與原始碼核對；圖解不代表本次實機驗證
+過程回得來，不只最後一段文字
+ENTRY
+協作入口
+進度回報
+平台訊息
+BROKER
+OpenAB
+事件轉換
+訊息投遞
+AGENT RUNTIME
+Coding Agent
+文字串流
+工具事件
+訊息
+ACP
+所查版本：ACP client 會自動回應權限
+!   有權限協定，不等於聊天室每次都等待人工批准。
+20   OpenAB：協作入口與執行底座
+6/10
+
+=== Page 21 ===
+>_
+OpenAB 6431a1b / 靜態文件與原始碼核對；圖解不代表本次實機驗證
+能取消、能回報錯誤；恢復則有條件
+ENTRY
+協作入口
+工作對應
+保留在入口
+BROKER
+OpenAB
+取消與錯誤回報
+嘗試載入舊 session
+AGENT RUNTIME
+Coding Agent
+恢復能力
+由後端決定
+訊息
+ACP
+取消 ≠ 回滾
+恢復需要保存狀態
+也需要後端支援
+!   恢復可能失敗，不保證永遠保有完整記憶。
+21   OpenAB：協作入口與執行底座
+7/10
+
+=== Page 22 ===
+>_
+OpenAB 6431a1b / 靜態文件與原始碼核對；圖解不代表本次實機驗證
+讓 Agent 有明確的執行環境
+執行環境：檔案／憑證／網路邊界
+ENTRY
+協作入口
+Discord／Slack
+Custom Gateway
+BROKER
+OpenAB
+入口・連線・回報
+AGENT RUNTIME
+Coding Agent
+原生 ACP
+或相容 adapter
+訊息
+ACP
+›   Container / sandbox 策略，是需要配置的邊界。
+22   OpenAB：協作入口與執行底座
+8/10
+
+=== Page 23 ===
+>_
+OpenAB 6431a1b / 靜態文件與原始碼核對；圖解不代表本次實機驗證
+需要時，再加入 Kubernetes 與持久化
+執行環境：檔案／憑證／網路邊界
+Container / Kubernetes
+部署與資源管理
+PVC / Persistent storage
+保存掛載路徑中的資料
+ENTRY
+協作入口
+Discord／Slack
+Custom Gateway
+BROKER
+OpenAB
+入口・連線・回報
+AGENT RUNTIME
+Coding Agent
+原生 ACP
+或相容 adapter
+訊息
+ACP
+!   保存資料 ≠ 自動恢復對話；也不必一開始就上 Kubernetes。
+23   OpenAB：協作入口與執行底座
+9/10
+
+=== Page 24 ===
+>_
+OpenAB 6431a1b / 靜態文件與原始碼核對；圖解不代表本次實機驗證
+管理、恢復、隔離，是三件不同的事
+可管理
+OpenAB
+入口與工作連線
+條件式恢復
+Agent runtime
+能力與保存狀態
+依配置隔離
+執行環境
+檔案、憑證、網路
+›   這是運行基底，不是「裝好就全部成立」的保證。
+24   OpenAB：協作入口與執行底座
+10/10
+
+=== Page 25 ===
+>_
+OpenAB 6431a1b / 靜態文件與原始碼核對；圖解不代表本次實機驗證
+Bot-to-bot messaging，讓交接進到協作環境
+BOT
+Bot A
+Main agent A
+MCP / Skills
+memory / local config
+訊息
+BOT
+Bot B
+Main agent B
+MCP / Skills
+memory / local config
+訊息
+BOT
+Bot C
+Main agent C
+MCP / Skills
+memory / local config
+依團隊的交接指示點名，接收端也必須允許
+›   各 Bot 對應自己的 workflow，再透過訊息交接。
+25   Workflow 之間的協作
+1/5
+
+=== Page 26 ===
+>_
+OpenAB 6431a1b / 靜態文件與原始碼核對；圖解不代表本次實機驗證
+Thread session：讓訊息有工作歸屬
+THREAD  同一個 thread：共同協作位置，不是共同記憶
+BOT
+Bot A
+Main agent A
+MCP / Skills
+memory / local config
+訊息
+BOT
+Bot B
+Main agent B
+MCP / Skills
+memory / local config
+訊息
+BOT
+Bot C
+Main agent C
+MCP / Skills
+memory / local config
+›   同串可協作，各 Bot 仍有自己的 session 與狀態。
+26   Workflow 之間的協作
+2/5
+
+=== Page 27 ===
+>_
+OpenAB 6431a1b / 靜態文件與原始碼核對；圖解不代表本次實機驗證
+Allowlist 與 turn cap：界定訊息互動邊界
+THREAD  同一個 thread：共同協作位置，不是共同記憶
+BOT
+Bot A
+Main agent A
+MCP / Skills
+memory / local config
+訊息
+BOT
+Bot B
+Main agent B
+MCP / Skills
+memory / local config
+訊息
+BOT
+Bot C
+Main agent C
+MCP / Skills
+memory / local config
+Allowlist：誰可以參與
+Turn cap：連續 Bot 回合上限
+!   降低互相叫醒的風險，不是完整的流程或安全保證。
+27   Workflow 之間的協作
+3/5
+
+=== Page 28 ===
+>_
+OpenAB 6431a1b / 靜態文件與原始碼核對；圖解不代表本次實機驗證
+OpenAB 提供協作零件，不替你決定流程
+PROVIDED BY OPENAB
+OpenAB 的協作零件
+訊息
+thread
+來源限制
+回合上限
+回覆關聯
+DESIGNED BY YOUR TEAM
+團隊的流程規則
+誰接手？
+何時算完成？
+失敗怎麼辦？
+何時要人決定？
+!   不是開啟 bot-to-bot，就得到完整的 workflow orchestrator。
+28   Workflow 之間的協作
+4/5
+
+=== Page 29 ===
+>_
+OpenAB 6431a1b / 靜態文件與原始碼核對；圖解不代表本次實機驗證
+少寫部分串接腳本，不是省掉所有流程責任
+可以交給 OpenAB
+部分訊息轉送、對話連線與回報接線
+仍需另外設計
+可靠重試、去重
+交付規則與高風險控制
+›   把可共用的接線交給工具，把工程責任留清楚。
+29   Workflow 之間的協作
+5/5
+
+=== Page 30 ===
+>_
+OpenAB：解放 Terminal 的工作模式 / 經驗敘事版
+從聊天入口，走向可接續的工程工作
+執行環境：檔案／憑證／網路邊界
+Container / Kubernetes
+部署與資源管理
+PVC / Persistent storage
+保存掛載路徑中的資料
+ENTRY
+協作入口
+Discord／Slack
+Custom Gateway
+BROKER
+OpenAB
+入口・連線・回報
+AGENT RUNTIME
+Coding Agent
+原生 ACP
+或相容 adapter
+訊息
+ACP
+›   可管理 ／ 條件式恢復 ／ 依配置隔離 ／ 由規則串接
+30   總結
+1/3
+
+=== Page 31 ===
+>_
+OpenAB：解放 Terminal 的工作模式 / 經驗敘事版
+ACP：把持續互動納入協定
+OpenAB：把協定放進協作與執行環境
+不重做每個 Agent，
+用共同協定把它接進團隊的協作與執行環境。
+協作入口
+訊息
+OpenAB
+ACP
+Coding Agent
+31   總結
+2/3
+
+=== Page 32 ===
+>_
+OpenAB：解放 Terminal 的工作模式 / 經驗敘事版
+Q&A
+問題與討論 ／ 3 分鐘
+Neo Hsu▌
+OpenAB   github.com/openabdev/openab
+ACP   agentclientprotocol.com
+32   總結
+3/3
+
+=== Page 33 ===
+>_
+OpenAB 6431a1b / 靜態文件與原始碼核對；圖解不代表本次實機驗證
+Headless 不等於沒有 session 或 streaming
+CLI 仍可能支援
+續聊與指定 session
+結構化輸出與串流
+我的整合痛點
+跨 CLI 的接法與行為
+仍需要整理與維護
+Claude Code：-p + --continue / --resume / --output-format stream-json
+›   SDK 也能重用 Agent 能力；這是取捨，不是能力二分。
+A1   備用資料 / 問到再展開
+
+=== Page 34 ===
+>_
+OpenAB 6431a1b / 靜態文件與原始碼核對；圖解不代表本次實機驗證
+ACP：方法名稱與能力邊界
+initialize
+版本與能力協商
+session/new
+建立工作對話
+session/prompt / session/update
+提交一輪 / 回報事件
+session/request_permission
+向 client 要求權限回應
+session/cancel
+要求中止，不是回滾
+session/load / session/resume
+依版本與能力宣告；語意不同
+›   ACP v1 參考；OpenAB 所查核心 client 以 session/load 嘗試恢復。
+A2   備用資料 / 問到再展開
+
+=== Page 35 ===
+>_
+OpenAB 6431a1b / 靜態文件與原始碼核對；圖解不代表本次實機驗證
+OpenAB 的能力，要連同條件一起說
+權限
+所查 ACP client 自動回應，不是每次人工批准。
+恢復
+要有保存狀態與後端支援；可能失敗或新開。
+隔離
+Session pool 不等於獨立檔案系統或 sandbox。
+Bot 回合
+Turn cap 受配置影響；不是可靠交付保證。
+定向回覆
+Discord／Feishu 有實作；Slack 行為不同。
+!   版本、平台、Agent、設定一起核對，不只看功能名稱。
+A3   備用資料 / 問到再展開
+
+=== Page 36 ===
+>_
+OpenAB 6431a1b / 靜態文件與原始碼核對；圖解不代表本次實機驗證
+Workflow handoff，先定義這五件事
+1
+INPUT
+接手者需要的
+任務、限制
+與上下文
+2
+ARTIFACT
+成果放在哪裡，
+接手者是否
+拿得到
+3
+VERSION
+如何識別這次
+交接的版本
+4
+READY
+達到什麼條件
+才交接，交給誰
+5
+FAILURE
+失敗、重試、
+停止與人類
+介入責任
+›   這是團隊的設計清單，不是 OpenAB 內建工作流格式。
+A4   備用資料 / 問到再展開
+
+=== Page 37 ===
+>_
+OpenAB 6431a1b / 靜態文件與原始碼核對；圖解不代表本次實機驗證
+多 Bot 部署，不等於共享所有狀態
+共同頻道／討論串
+DEPLOYMENT
+Bot A / Deployment
+OpenAB + Agent A
+ConfigMap / Secret / PVC
+DEPLOYMENT
+Bot B / Deployment
+OpenAB + Agent B
+ConfigMap / Secret / PVC
+›   Helm 多 Agent 模式：各自的 Pod 與狀態，成果存取另設計。
+A5   備用資料 / 問到再展開
+
+=== Page 38 ===
+>_
+OpenAB 6431a1b / 靜態文件與原始碼核對；圖解不代表本次實機驗證
+使用者提供的概念總覽
+!   使用者提供的概念原圖：相容、恢復與隔離皆有條件，不作功能驗證證據。
+A6   備用資料 / 問到再展開

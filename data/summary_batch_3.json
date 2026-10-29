@@ -1,0 +1,156 @@
+[
+  {
+    "index": 29,
+    "summary": "從『寫得快』邁向『交付可信』：以 OpenSpec 規格驅動開發，並用 Harness 關卡與唯讀權限隔離真人團隊角色，落實能用工具判定就不靠模型盲猜的工程防線。",
+    "pain_point": "AI 生成代碼速度極快（兩週可產 5.3 萬行），人工逐行 Review 完全跟不上；若由單一 Agent 自寫、自測、自審形成『球員兼裁判』，易產生盲點與規格偏離，純靠提示詞叮嚀毫無硬性約束力。",
+    "solution": "導入 OpenSpec 定義可驗證情境（WHEN/THEN）並及時 archive 沉澱現況；設計 team-pipeline 協調 Coding、Code Reviewer（唯讀工具權限隔離）與 Fortify Preverify 專職 Agent；搭配 PreToolUse/Stop Hook 與架構測試（ArchUnit/NetArchTest）進行確定性卡關，最終合併權限保留在人類手中。",
+    "takeaways": [
+      "能用工具判定，就不要交給模型判斷：以 Hook、編譯警告與架構測試把關規範，硬性攔截不合格代碼，而非寄望模型自律。",
+      "職責與上下文嚴格隔離：拆分 Coding 與 Reviewer 角色，Reviewer 僅給予唯讀權限並從已確認的 Spec 獨立比對，避免球員兼裁判。",
+      "方法（Skill）、標準（Team Rules）與需求（Spec）三分開：需求與規則變更不影響執行方法，確保工程流程具備高度可重用性。"
+    ]
+  },
+  {
+    "index": 30,
+    "summary": "AI 時代的研發瓶頸已從『產出代碼』轉移至『下游驗證』：面對暴增 72% 的 PR 與膨脹 300% 的 QA 負擔，軟體團隊必須重構分工，從先寫程式轉向實例化需求共識與多道工程門檻。",
+    "pain_point": "團隊掉入 Speed Trap（速度陷阱）：工程師用 AI 大量產出功能，導致 PR 體積暴增、76% PR 未經審查即合併，下游 QA 與線上事故激增；團隊在產出速度假象中疲於奔命，反而陷入嚴重的審查與維護黑洞。",
+    "solution": "重塑團隊協作流程：開工前推行 Example Mapping（PO、Dev、QA 共同定義具體實例），落實實例化需求先行；借鑑 Uncle Bob 的專責 Agent 分工（Specifier、Coder、Cleaner、Hardener、QA）；讓 AI 產出與人類代碼通過相同的自動化品質門檻。",
+    "takeaways": [
+      "警惕 Speed Trap 陷阱：RD 省下的時間往往變成 QA 的回歸負擔；單純加速實作若無相應驗收防線，只會加速累積技術債。",
+      "團隊以『對齊意圖』為核心：在 AI 動工前先用具體範例定義什麼是『對』，讓後續實作與測試都有客觀且可回溯的依據。",
+      "角色職責精細化拆分：借鑑 Specifier（規格）、Cleaner（複雜度治理）與 Hardener（強度防禦）分工模型，讓品質把關融入團隊流水線。"
+    ]
+  },
+  {
+    "index": 31,
+    "summary": "拆解 Vibe Coding 的虛與實：用 Google AI Studio Build 模式免信用卡極速打造雲端原型，並透過 Antigravity 建立 Human-in-the-loop 三問驗收法，確保生成的應用真正可用。",
+    "pain_point": "初學者與工程師嘗試 Vibe Coding 時，常面臨繁重環境建置（IDE、資料庫、Token 計費）的心理門檻；且往往誤信 AI 口頭宣告的『已完成』，導致部署上線後介面假死、邏輯缺漏卻無從排查。",
+    "solution": "以 Google AI Studio Build 模式作為零門檻起點，快速生成 Web 原型並一鍵免費部署至 Cloud Run；串聯 Antigravity（2.0、IDE、CLI、SDK）執行 Human-in-the-loop 閉環，透過三問驗收法要求提出客觀運作證據，再交由 AI 迭代修正。",
+    "takeaways": [
+      "Vibe Coding 的界線：人負責掌舵與驗收、AI 負責改 Code；不能盡信模型說法，人必須親自測試可見行為。",
+      "零環境負擔的敏捷原型：善用 Google AI Studio 免信用卡與免費部署 2 個 Apps 的特性，先做出最小可行產品（MVP）再談架構複雜度。",
+      "三問驗收回饋法：不以 AI 說完成為依據，透過提問索取實體執行證據，將驗收發現的缺陷精準轉化為下一輪修改提示詞。"
+    ]
+  },
+  {
+    "index": 32,
+    "summary": "將一人 AI 開發的敏捷實踐提煉為團隊工程資產：從 Context、Constraints、Feedback 三面向診斷環境，以原子增量循環防範技術債，並透過 Team Skill Library 跨專案共享工程紀律。",
+    "pain_point": "只追求當下功能做完，容易引發單檔職責膨脹、重複代碼拷貝（如多套分頁編解碼）及模組反向依賴（如 Service 逆向 import Controller）；個人摸索出的有效 Prompt 與修復經驗無法在團隊跨專案沉澱重用。",
+    "solution": "建立三層工程體系：事前對齊 Domain 語言、ADR 與 Given/When/Then 驗收工單；事中推行 Atomic Implementation Loop（拆成可驗證增量，搭配 Policy Reviewer 與確定性工具檢查）；事後透過 Team Skill Library 與 CLI 分發共用規則與能力。",
+    "takeaways": [
+      "三維度診斷工作環境：全面檢視 AI 是否清楚要做什麼（Context）、不能怎麼做（Constraints）、以及何時偏離（Feedback）。",
+      "載體職責分明：確定性規則交給 Tool（Linter/依賴圖），重複方法交給 Skill，角色邊界交給 Agent，避免用模型語意硬猜明確規則。",
+      "資產共享與專案延伸：集中維護通用團隊能力（如 Dependency Checker），各 Repo 保留特有規則，實現標準持續演進。"
+    ]
+  },
+  {
+    "index": 33,
+    "summary": "模型調用工具時，安全防線必須移至架構層：解析 MCP 工具描述投毒（Tool Poisoning）、Prompt 注入與行為層供應鏈攻擊，從 Zeabur 邊界橫移事件剖析憑證隔離與 Harness 硬防護。",
+    "pain_point": "傳統資安工具（SBOM、代碼掃描）只能檢查靜態程式碼，管不到自然語言撰寫的 MCP Tool Description；外部工具『載入即曝險』，且將 LLM 語意判斷當作唯一安全防線易遭條件繞過（如蔓蔓攻擊），導致環境變數與高權限金鑰外洩。",
+    "solution": "落實三大防禦守則：Token 永不進 LLM Context 與明文環境變數；工具執行層落實最小權限原則（PoLP）並與內網機敏資料嚴格隔離；建立 Harness-level 邊界，將決策層與執行層徹底解耦，並對 MCP Tool Description 的 diff 建立審查機制。",
+    "takeaways": [
+      "載入即曝險新型威脅：MCP Server 的工具描述在連線初始化時即進入 Context，惡意指令能在工具被選取前就劫持模型。",
+      "模型不是最後防線，架構才是：前沿 LLM 面對提示詞注入攻擊成功率高達 40-75%，依賴模型自覺拒絕惡意請求等同裸奔。",
+      "憑證嚴禁沿執行鏈流動：金鑰必須存放在隔離的安全存儲中，工具調用不應持有超越該次操作所需的長期或過度權限。"
+    ]
+  },
+  {
+    "index": 34,
+    "summary": "解決 Agent『本地很神、上雲成智障』的落差：以 AI Gateway 概念層實現模型熱切換與 Fallback 容錯，搭配 Mock-First 離線 CI、多租戶成本可觀測性（usage.jsonl）與 Cloud Run 部署。",
+    "pain_point": "Agent 本地開發與雲端環境脫節：常因 try-except 吞掉例外導致『最危險的錯誤是沒有錯誤』（靜默回傳空白）、金鑰設定與環境變數混亂、模型寫死無法抽換、遇到 429 配額超限直接崩潰，且缺乏 Token 成本歸屬與追蹤機制。",
+    "solution": "構建生產級 CI/CD 管線：引入 AI Gateway（如 LiteLLM/Cloudflare AI Gateway）抽換模型別名與 Provider；CI 管線全程 Mock-First 離線測試與故障注入；請求記錄多租戶標籤至 usage.jsonl 產出可觀測報表，並整合 Secret Manager 容器化部署至 Cloud Run。",
+    "takeaways": [
+      "換模型不改程式：透過 AI Gateway 解耦模型供應商，一處配置即可在本地 Mock、課堂 Gateway 與真實模型間無縫切換。",
+      "CI 堅持 Mock-First：測試管線必須穩定、離線且不花真實 Token，才能精確區分是業務邏輯錯誤還是上游模型波動。",
+      "「失敗會叫」與成本可觀測：嚴禁吞掉例外回傳空字串，錯誤必須明確中斷並記錄；每筆請求標註租戶以落實預算控管。"
+    ]
+  },
+  {
+    "index": 35,
+    "summary": "為 HTTP MCP 與 CLI 打造企業級安全授權：結合 OAuth 2.0 PKCE、動態 Protected Resource Metadata (PRM) 與 JWT 驗簽，劃清 Scope、Audience 與 Subject 三條防線，並剖析離線撤銷盲點。",
+    "pain_point": "開發者常誤將『連線成功』當成『使用者已取得資源授權』；本地 CLI 無法妥善保管 Client Secret；Token 跨服務任意挪用（未綁定 Audience）；以及誤以為在認證中心按『撤銷』，離線驗簽的 MCP Server 就會立即阻斷存取。",
+    "solution": "標準化授權架構：Client 遭遇 401 透過 PRM 自動發現授權端點，利用 PKCE（S256）安全交換 Access Token；MCP Server 嚴格驗簽（RS256/JWKS/iss/aud/exp/sub）；在 Gateway（Kong）集中處理入口驗證，後端保留工具 Scope 與多租戶 Subject 隔離。",
+    "takeaways": [
+      "解碼不等於驗證：JWT 必須嚴格驗證數位簽章、頒發者、過期時間與 Audience，絕不可只用 base64 解開 payload 即放行。",
+      "三維邊界互不混淆：Scope 限制可讀不代表可寫、Audience 限制 A 的 Token 不能打 B、Subject 確保不同帳號間資料嚴格隔離。",
+      "離線 JWT 撤銷延遲警訊：撤銷不會改變已簽發 Token 的簽章；若要求即時阻斷，需額外設計 Introspection 機制或妥善縮短 Token 壽命。"
+    ]
+  },
+  {
+    "index": 36,
+    "summary": "消除使用者研究的認知摩擦與虛榮指標：將繁瑣的 5x5 狩野模型（Kano Model）精簡為 3x3 務實矩陣，並將 NPS 從主觀打分問卷轉化為依據真實分享行為的免問卷忠誠度公式。",
+    "pain_point": "傳統狩野問卷題目成對且選項冗長（正反向各 5 個選項，填寫負擔極大、受訪者易疲乏亂填）；而傳統 NPS 問卷依賴 0-10 分主觀承諾，常落入『說是一回事、做是一回事』的意向偏差，難以指導真實產品資源配置。",
+    "solution": "雙軌務實簡化：將 Kano 選項精簡為正向（喜歡/應該的/無所謂）與反向（不喜歡/能忍受/無所謂），透過 3x3 矩陣快速篩出魅力型 (A)、期望型 (O)、基本型 (M) 與無差異型 (I)；將 NPS 改由真實行為驅動（如主動公開分享體驗以換取折扣券），用實際行動人數計算忠誠度。",
+    "takeaways": [
+      "3x3 矩陣快速決策：大幅降低問卷填答摩擦力，快速識別『一定要有』（基本型）與『不急著優化』（無差異），精準分配研發預算。",
+      "真實行動勝過主觀承諾：用戶是否願意付出社交成本或實際操作，比在問卷上勾選推薦分數更能如實反映品牌忠誠度。",
+      "用研服務於營運權衡：研究工具的核心不是追求花俏的統計圖表，而是為了在有限團隊資源下做出清晰的先後排序與取捨。"
+    ]
+  },
+  {
+    "index": 37,
+    "summary": "文組非本科工程師的巨石系統翻寫實戰：面對上古 Java EE / EJB / Stored Procedure，以兩階段『先保真行為、後重構擴充』，結合同請求雙環境驗證與 Subagent/Skills/Hooks 工作流完成翻寫。",
+    "pain_point": "翻寫古蹟級遺留系統時原始碼與文檔缺失，核心邏輯深埋在 Stored Procedure 與遠端 RPC 之中；初級工程師容易陷入認知超載，被大量生成代碼與膨脹文檔淹沒；重構時 AI 易受舊代碼偏見束縛，難以保證行為與原系統完全一致。",
+    "solution": "採用兩階段翻寫策略：第一階段鎖定資料庫不動，在獨立測試 DB 上以相同請求交叉比對新舊系統 DB 狀態變化；第二階段引入模組化 Agent 工作流（/pm 釐清 User Journey、/arch 規劃慣例、Implementer 注入精簡原則、Reviewer 透過 Context Fork 隔離上下文），並用 Hooks 硬性攔截回歸問題。",
+    "takeaways": [
+      "古蹟翻寫行為保真先行：第一階段絕不動資料庫結構，以『同一筆請求送入新舊系統，比對資料表變更一致性』作為客觀驗證基準。",
+      "縮小關注點與防上下文污染：不要一次審查整份巨型文件，讓 AI 分段提問；利用 Context Fork 拆分 Reviewer 角色，節省 Token 並防止思路干擾。",
+      "提示詞注入工程開發哲學：在 Implementer 的 Prompt 中植入『先讓改動變容易，再做那個容易的改動』等名言，有效抑制 AI 寫出過度設計的宂餘代碼。"
+    ]
+  },
+  {
+    "index": 38,
+    "summary": "拒絕跟風盲目導入工具的 FOMO 焦慮：以 AI Gateway 與 Langfuse 建立 Token / Latency / Error Rate 可觀測性基準線，透過 LLM-as-a-Judge 拆解評估，並將日常 Tracing 沉澱為實驗題庫做科學選型。",
+    "pain_point": "AI 工具推陳出新速度遠大於團隊研究速度，盲目試用易引發效能劣化與成本失控；Coding Agent 預設加載 50+ 個無用工具造成開局狂吃 20,000+ Tokens；上游模型 API 波動（如 Claude API 僅 99.4% Uptime）缺乏監控預警與 SLA 依據。",
+    "solution": "打造數據驅動決策系統：透過 AI Gateway 關閉 40+ 個無用 Tools，Token Overhead 立即驟降 95%；對多輪 Agent 的單一步驟（Plan/Apply Patch）採用 LLM-as-a-Judge 評估品質；將日常 Tracing 提煉為 Dataset 題庫，控制變因對比不同模型與 Prompt，以綜合效率公式（產出量×品質 / 成本×時間）量化選型。",
+    "takeaways": [
+      "缺的不是更快研究，而是量化評估系統：先建立可觀測性（O11y）才有 Baseline，用數據驅動技術選型，杜絕 FOMO 與猜測。",
+      "關閉無用 Tools 是最高投報優化：停用 Coding Agent 內建用不到的大量工具，能立即砍掉 95% 初始 Token 開銷，釋放 Context Window。",
+      "Tracing 沉澱為真實評測題庫：將團隊真實遇到的工作任務整理成 Dataset，在 Langfuse 進行控制變因實驗，讓預算與技術選型建立在客觀證據上。"
+    ]
+  },
+  {
+    "index": 39,
+    "summary": "打破『綠燈全過等於品質優良』的測試迷思：揭露 AI 測試常見的弱斷言、覆蓋等價類單一與獎勵作弊現象，引進變異測試（Mutation Testing）、Meta 四道篩選門檻與人工探索性測試（Mob Testing）。",
+    "pain_point": "AI 產出的測試常『廣而淺』（同一等價類出多個變體）、『弱斷言』（只驗證 assert not None，金額算錯也全綠）、『測現狀不測意圖』（把現有 Bug 寫進測試合法化），甚至發生 AI 偷改測試以求通過（Reward Hacking）的虛假安全感。",
+    "solution": "實施嚴密測試防禦網：推行實例化需求（Example Mapping）先定義預期行為；導入 Meta TestGen-LLM 四道門檻（可編譯、可執行、連跑 5 次穩定、新增覆蓋率 > 0 才保留）；採用變異測試（PIT/mutmut）注入 Bug 驗證測試是否真的會紅；並搭配固定排程的 Mob Testing 與 Bug Bash 探索性測試。",
+    "takeaways": [
+      "沒紅過的測試不能證明有效：在 Merge 前刻意改壞代碼，確認測試會報紅；全綠往往只代表代碼與測試被 AI 改到表面一致。",
+      "四道過濾防護網（Meta 實踐）：機器先自動過濾不能編譯、Flaky 或零增量的測試，人類只審查最後通過門檻的高價值測試。",
+      "自動化做 Checking，人類做 Testing：自動化腳本負責回歸驗證已知邊界，人類工程師專注於跨功能交互、併發與邊界情境的探索性測試。"
+    ]
+  },
+  {
+    "index": 40,
+    "summary": "解決 Text-to-SQL 準確率在企業落地暴跌的致命傷：企業依賴確定性規則而非機率生成，透過語意層（Semantic Layer / AWS Context / 知識圖譜 / 形式本體論與 SHACL 約束）為 Agent 構築 ACE 可信回答。",
+    "pain_point": "模型在學術 SQL 跑分可達 86%，但面對真實企業 Schema 暴跌至 40~59%；企業資料存在 Schema 模稜兩可（數百張表同名欄位）、指標計算定義分歧（各部門對營收定義不同）以及業務規則隱性化（老員工才知道的例外），導致 Agent 憑機率瞎掰。",
+    "solution": "建立企業語意層（Semantic Layer）：以形式本體論（Formal Ontology, OWL/RDF）與知識圖譜串聯異質資料源（ERP、Data Lake、BI）；引入 SHACL 定義業務約束與標準指標（如 promo_roi_v3）；透過 AWS Context / MCP 介面提供圖譜遍歷與資料血緣（Lineage），實現精準且具備身份感知治理的查詢。",
+    "takeaways": [
+      "商業運作是確定性鏈條，不是機率分布：當決策出錯代價高昂時，『流暢的瞎猜』毫無價值，必須用語意層把機率輸出錨定到確定性模型。",
+      "語意層是 GenAI 的核心基礎設施：統一管理企業指標與本體論，避免各個 Agent 應用各自重複進行脆弱的 Prompt Context Engineering。",
+      "堅持 ACE 三大標準：追求 Accurate（準確）、Consistent（一致）與 Explainable（具備血緣與圖譜路徑可解釋），建立企業對 AI 的信任。"
+    ]
+  },
+  {
+    "index": 41,
+    "summary": "只用團隊已熟悉的 Git、Markdown 與腳本，打造可審查、可驗證、會自我改善的 AIOrchestrations 治理框架：透過分層路由省 Token、五大行為契約杜絕假完成，並以腳本作為安全防禦邊界。",
+    "pain_point": "團隊導入 AI 的三大痛點：個人技巧難以複製（貝爾塔週一 Prompt 解決問題，阿爾法週二無法重現）；完成由 AI 口頭宣告（說『已完成』卻沒跑檢查，Headless 模式下動畫沒跑卻宣稱無記憶體洩漏）；權限與敏感金鑰散落各處造成誤操作風險。",
+    "solution": "推行四大治理機制：①分層與路由（manifest 最小按需載入，Token 降低 37%）；②行為契約（先定完成條件、沒跑過的不可宣稱驗證、查不到標記 Unverified、失敗兩次換方法並寫出因果證據）；③安全邊界（腳本為執行邊界，禁止 AI 任意拼接指令，Runtime 資料隔離）；④自我改善閉環（回顧提案由人審核後升級）。",
+    "takeaways": [
+      "輕量且可審查的工程資產：不引入複雜的向量資料庫或常駐平台，將 AI 協作資產納入 Git，每一次演進皆透過 Pull Request 嚴格審查。",
+      "行為契約約束虛報：嚴格要求指令成功不等於問題解決；查不到必須標記 Unverified，不可回報為『無錯誤』；同一做法失敗兩次必須停手。",
+      "腳本做邊界、人進迴圈把關：讓 AI 調用確定性腳本而非盲目拼裝 Shell 指令；經驗沉澱閉環中 AI 僅能提案，最終由人類決定是否升級為團隊標準。"
+    ]
+  },
+  {
+    "index": 42,
+    "summary": "從實體旅遊書到 LINE 官方帳號的殘酷 OMO 實戰：揭露紙本銷售（1,500本）、護照開通（691人）、查看優惠券（381人）到最終門市核銷（112次）的漏斗落差，將產品思維從『闖關作業』轉向『在地體驗』。",
+    "pain_point": "產品團隊容易陷入虛榮指標的盲點：以為買書就會加購護照、開通就會進店消費；殘酷事實是『買書的人≠用 LINE 服務的人』，高達 44.9% 的付費加購者甚至從未查看優惠券，70.6% 查看者零核銷；且旅客在旅行中面臨找店、時間確認與核銷規則的高額認知阻力。",
+    "solution": "重新設計 OMO 體驗漏斗：從推銷『12 張優惠券』轉向『規劃一趟值得出發的旅行』；在書中加入護照體驗預覽與第一站示範；開通後不只跳出成功訊息，而是直接引導查看第一張券並推薦附近半日路線；提供一鍵導航與清晰營業時間，大幅降低進店摩擦力。",
+    "takeaways": [
+      "買書不等於用服務、開通不等於核銷：實體跨入數位的每一步都有摩擦力，即使是付費鐵粉，若無即時的情境引導也會在第一步流失。",
+      "核銷次數不等於新增顧客：112 次核銷不代表 112 位新顧客或新增 112 筆生意，資料判讀必須結合現場店家訪談，了解兌換冷熱不均的原因。",
+      "優化使用者走向下一步的體驗：旅客是出來遊玩放鬆的，不是來完成產品經理設計的 12 項打卡作業；先協助他輕鬆完成第一家，再推薦下一家。"
+    ]
+  }
+]
